@@ -1,0 +1,1 @@
+Live Preview, Close HTML/XML tag, Image Preview, Tag Inserter, HTMLHint y CSScomb

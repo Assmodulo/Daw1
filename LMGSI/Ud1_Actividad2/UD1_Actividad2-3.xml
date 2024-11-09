@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Ciclo_formativo>DAM
+    <Modulo_Profesional>LMSGI
+        <Datos_modulo>
+            <Horas_lectivas_semanales>4</Horas_lectivas_semanales>
+            <Forma_de_estudios>Presencial Obligatoria</Forma_de_estudios>
+            <Fecha_inicio>15/09/2010</Fecha_inicio>
+            <Fecha_fin>30/06/2011</Fecha_fin>
+        </Datos_modulo>
+        <Alumnos_matriculados>2
+            <Alumno>0001
+                <Nombre>Alejandro Sainz</Nombre>
+                    <Datos_Personales>
+                        <Direccion>Calle la Pradera 75</Direccion>
+                        <Fecha_Nacimiento>01/01/1990</Fecha_Nacimiento>
+                        <Dni>13456789a</Dni>
+                        <Email>suemail@pepemail.com</Email>
+                    </Datos_Personales>    
+            </Alumno>
+            <Alumno>0002
+                <Nombre>Antonio Pedraza</Nombre>
+                    <Datos_Personales>
+                        <Direccion>Avenida la calle, 4 7-A</Direccion>
+                        <Fecha_Nacimiento>28/02/1990</Fecha_Nacimiento>
+                        <Dni>46123789b</Dni>
+                        <Email>esteemail@internet.com</Email>
+                    </Datos_Personales>    
+            </Alumno> 
+        </Alumnos_matriculados>           
+    </Modulo_Profesional>
+</Ciclo_formativo>

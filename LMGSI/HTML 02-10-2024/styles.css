@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #444;
+}
+
+.product {
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin: 20px;
+    background-color: #fff;
+}
+
+.product img {
+    border-style:dashed;
+    border-color:black;
+    max-width: 10%;
+    height: 20%;
+}
+
+.product h2 {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style:italic;
+    font-size: 1.5em;
+    margin-top: 10px;
+    color: #333;
+}
+
+.product p {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1em;
+    color: #666;
+}
+
+.product1 {
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin: 20px;
+    background-color:green;
+    border-style:dashed;
+    border-color:crimson;
+}
+
+.product1 img {
+    border-style:dotted;
+    border-color:lightyellow;
+    max-width: 10%;
+    height: 20%;
+}
+
+.product1 h2 {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style:oblique;
+    font-size: 1.5em;
+    margin-top: 10px;
+    color: lightyellow;
+}
+
+.product1 p {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1em;
+    color:lightyellow;
+}
+
+.product2 {
+    border-style:double;
+    border-width: 15px;
+    border-color: yellowgreen;
+    padding: 20px;
+    margin: 20px;
+    background-color:blueviolet;
+}
+
+.product2 img {
+    border-style:dashed;
+    border-color:lightgrey;
+    max-width: 10%;
+    height: 20%;
+}
+
+.product2 h2 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style:initial;
+    font-size: 1.5em;
+    margin-top: 10px;
+    color:lightgrey;
+}
+
+.product2 p {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1em;
+    color: lightgrey;
+}
+
+.product3 {
+    border: 2px solid #ddd;
+    padding: 20px;
+    margin: 20px;
+    background-color:lightskyblue;
+    border-style: dashed;
+    border-color: orange;
+    border-width: 25px;
+}
+
+.product3 img {
+    border-style:groove;
+    border-color:orange;
+    max-width: 10%;
+    height: 20%;
+}
+
+.product3 h2 {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style:unset;
+    font-size: 1.5em;
+    margin-top: 10px;
+    color: #333;
+}
+
+.product3 p {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1em;
+    color: #666;
+}

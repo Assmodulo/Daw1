@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Aquí hago el link con la hoja de estilos-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Yo he considerado que lo que se propone en el ejercico podria se considerado como una barra de navegación-->
+    <!--También consideré que pudiese ser un footer, y que esto apareciese al final de la página como información-->
+    <!--Preferí dejarlo como nav ya que quizá se pudiese usar como botones para desplazarse por las diferentes
+    secciones al hacer un pedido-->
+    <nav>
+        <!--De primeras, para organizarlo todo consideré una unordered list y luego incluso una tabla. Pero al editar
+        con CSS siempre daba problemas para dar a todos los elementos las formas redondeadas dentro de sus espacios o 
+        dentro incluso de las celdas cuando probé con una tabla. Al seguir probando decidí probar con diferentes divs, cuyos
+        contenidos fuesen las diferentes partes y fue la forma en la que mejor me funcionó finalmente.-->
+
+        <div class="contenedor"> <!--Este es un div que contiene cada icono con su numero de forma independiente a los demás-->
+                <!--Cree una clase contenedor genérica para identificarlo más facil en el CSS con selectores
+                En un primer intento cree un div independiente sólo para el párrafo que contenia el número
+                pero al editar el estilo nunca conseguia que quedase superpuesto con el icono y su fondo
+                al sacarlo del div fue cuando funcionó como creo que se quería en el ejercicio-->
+                <p>1</p>
+            <div class="fondoIcono">
+                <!--Las imágenes o iconos si que necesitaba incluirlas sí o sí en su propio div, para poder darle
+                estilo redondeado y su propio color de fondo. Aquí indiqué un tamaño inicial con el que poder jugar al 
+                editar el estilo.-->
+                <img class="icono" src="./Iconos/tarjeta-de-regalo.png" width="60px" height="60px">
+            </div>
+        </div>
+        <!--Al principio hice todas las pruebas sólo con dos elementos hasta que más o menos quedaban como queria.
+        Después simplemente añadí los tres restantes-->
+        <div class="contenedor">
+            <div class="numero">
+                <p>2</p>
+            </div>
+            <div class="fondoIcono">
+                <img class="icono" src="./Iconos/en-todo-el-mundo.png" width="60px" height="60px">
+            </div>
+        </div>
+        <div class="contenedor">
+            <div class="numero">
+                <p>3</p>
+            </div>
+            <div class="fondoIcono">
+                <img class="icono" src="./Iconos/corazon.png" width="60px" height="60px">
+            </div>
+        </div>
+        <div class="contenedor">
+            <div class="numero">
+                <p>4</p>
+            </div>
+            <div class="fondoIcono">
+                <img class="icono" src="./Iconos/camion-de-envio.png" width="60px" height="60px">
+            </div>
+        </div>
+        <div class="contenedor">
+            <div class="numero">
+                <p>5</p>
+            </div>
+            <div class="fondoIcono">
+                <img class="icono" src="./Iconos/transferir.png" width="60px" height="60px">
+            </div>
+        </div>
+        <!--En la sección de párrafos no estoy muy seguro de que esté bien estructurado del todo. Lo dejé así despues
+        de hacer pruebas con el código html y con el css. Lo explico en el archivo de css-->
+        <div class="bloqueTexto">
+            <div class="parrafos">
+                <p>Elige el regalo que quieres enviar y personalizalo con globos, peluches, chocolate...</p>
+                <p>Haz tu pedido a traves de nuestra tienda online o por teléfono.</p>
+                <p>Indica los datos de la persona que recibirá el regalo, dedicatoria y fecha de entrega</p>
+                <p>Selecciona el transportista que prefieres</p>
+                <p>Realiza el pago con tarjeta de crédito, transferencia o Paypal</p>
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>

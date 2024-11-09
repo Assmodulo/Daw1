@@ -1,0 +1,95 @@
+/* Lo primero que hago es indicar que el borde de la tabla colapsa y que es 1px de ancho */
+
+table {
+    border-collapse: collapse;
+    border:solid 1px;
+    
+    
+}
+
+/* Luego voy dando dimensiones adicionales a las diferentes celdas, un border radius simplemente para jugar un poco con el interior
+Si no uso border collapse, con border radius las celdas quedan redondas, si uso border colapse, el borde se mantiene y lo que se redondea
+es el color de fondo, pero bueno, he ido jugando con ello simplemente por probar y como el ejercicio pedia que habia que usar border collapse
+lo he dejado incluido
+Alineo el texto horizontalmente y verticalmente al centro de las celdas */
+
+table th, table td {
+    border: solid 1px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    padding:10px;
+}
+
+
+/* Aqui simplemente voy jugando con diferentes fondos y bordes para diferenciar los diferentes elementos de la tabla que he ido definiendo con clases */
+.dias_semana{
+    border:solid 3px;
+    background-color: aquamarine;
+    border-color: brown;
+    
+}
+
+/* La clase platos se corresponde con las celdas normales, las que incluyen los platos de menu
+Cambio letras, su tamaño, estilo, doy otro borde para probar, etc
+Fui cambiando los diferentes borders para ver como funcionan con el collapse, siempre hay dos que prevalecen, que son el derecho y el inferior, así que 
+al final sólo dejé definidos esos dos */
+.platos{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+    font-style: oblique;
+    border:dashed 2px;
+    border-right-color: black;
+    border-bottom-color:chartreuse;
+    
+    
+}
+
+/* En el orden de los platos más de lo mismo, probando diferentes bordes, diferentes tamaños para ver como quedan y cambian */
+.orden_platos{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    border:dotted 4px;
+    border-color: blueviolet;
+}
+
+
+/* Aqui en el menú mas de lo mismo, aunque creo que el border collapse limita más a la hora de crear diferentes estilos de celda dentro
+de la misma tabla */
+.menu{
+    border-radius: 50%;
+    border:solid 3px;
+    border-radius:50px;
+    background-color: crimson;
+    border-color: blue;
+}
+
+
+/* Con esta función vamos dando colores alterno a las filas, el problema es que no he encontrado nada para las columnas. Algunas de las
+cosas que he visto incluyen usa JS, así que en principio solo para las filas */
+tr:nth-child(even){
+    background-color: coral;
+}
+
+
+/* Aquí, usando td:hover es para cambiar simplemente el aspecto de cada celda cuando paso el ratón por encima.
+El cambio de dimensiones lo he exagerado algo, cambia la tabla entera cuando paso por encima de uno, pero bueno
+lo resalta que es lo que quería probar */
+td:hover{
+    width: 150px;
+    height: 150px;
+    box-shadow: 15px 15px 10px lightblue;
+    border:none;
+    color:white;
+    background-color: red;
+    border-radius: 50px;
+}
+
+
+/* El único problema que encuentro es que no he conseguido el último punto, que es que las columnas cambien si coincide con el día de la semana, si es que he 
+leido bien */
+
+
+

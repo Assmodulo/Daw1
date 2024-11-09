@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+    <html lang="es">
+        <head>
+            <!--Creo el link con el documento de estilos-->
+            <link rel="stylesheet" href="style.css">
+            <title>Padle21</title>
+        </head>
+        <header>
+            <!--Defino un h1 que tendrá el título de la página y un p con una breve descripción del club-->
+            <h1>Padle21</h1>
+            <p>En nuestro club disponemos de las instalaciones mas modernas posibles. Ven y disfruta de nuestras pistas.</p>
+        </header>
+
+        <body>
+        <!--Creo un div, que va a contener todas las tarjets, de cada pista, lo llamo contenedor para identificarlos más fácil luego en la hoja de estilos
+        Dentro de este contenedor voy a incluir después cada una de las tarjetas necesarias-->
+            <div class="contenedor">
+                <!--Dentro de contenedor creo otro div, que se llama tarjeta. En un principio creo sólo 1 que luego iré modificando hasta que quede
+                como me guste y luego iré añadiendo el resto-->
+                <div class="tarjeta">
+                    <!--Dentro de cada tarjeta creo un h6 para el nombre de la pista y un p que indicará si la pista está disponible o no-->
+                        <h6>Pista 1</h6>
+                        <p>Disponible</p>
+                        <!--Dentro del div tarjeta creo otro, este está vacio. Pense en añadir una foto dentro pero decidí usar la imagen
+                        como background después en css y jugar con ella para ver como quedaba, y al final lo dejé de esta manera.
+                        Aunque el espacio dentro del div este vacio me sirve para poder delimitar después su tamaño-->
+                        <div class="pista">
+                        </div>
+                        <!--Tras el div de pista cree después los botones, y les di una clase diferente a cada uno para modificar su comportamiento después-->
+                        <button class="reservar" type="button">Reservar</button>
+                        <button class="anular" type="button">Anular Reserva</button>
+                </div>
+                <!--Una vez acabé con el primer elemento, fuí creando los siguientes, modificando algunos con otra clase, tarjetaReservada, para las
+                pistas que ya estuviesen reservadas editarlas de otra forma distinta-->
+                <div class="tarjetaReservada">
+                        <h6>Pista 2</h6>
+                        <p>Reservada</p>
+                        <div class="pista">
+                        </div>
+                        <button class="reservar" type="button">Reservar</button>
+                        <button class="anular" type="button">Anular Reserva</button>
+                </div>
+                <div class="tarjeta">
+                        <h6>Pista 3</h6>
+                        <p>Disponible</p>
+                        <div class="pista">
+                        </div>
+                        <button class="reservar" type="button">Reservar</button>
+                        <button class="anular" type="button">Anular Reserva</button>
+                </div>
+                <div class="tarjetaReservada">
+                        <h6>Pista 4</h6>
+                        <p>Reservada</p>
+                        <div class="pista">
+                        </div>
+                        <button class="reservar" type="button">Reservar</button>
+                        <button class="anular" type="button">Anular Reserva</button>
+                </div>
+                <div class="tarjeta">
+                        <h6>Pista 5</h6>
+                        <p>Disponible</p>
+                        <div class="pista">
+                        </div>
+                        <button class="reservar" type="button">Reservar</button>
+                        <button class="anular" type="button">Anular Reserva</button>
+                </div>
+                <!--Añadí las 5 tarjetas requeridas-->
+
+            </div>
+
+        </body>
+        <!--Creo una etiqueta footer, en ella añado tres etiquetas p para añadir texto que pide el enunciado-->
+        <footer>
+            <p>Club Padel 21</p>
+            <p>Calle Sin Numero 123</p>
+            <p>Horarios: 10:00 a 15:00 y de 17:00 a 21:00</p>
+        </footer>
+    <!--Con esto hecho, terminé el esqueleto de la página y pasé a ir editando el archivo css-->
+    </html>

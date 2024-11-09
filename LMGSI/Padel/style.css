@@ -1,0 +1,214 @@
+
+/*Lo primero que hago es editar el body de la página, dandole un valor al ancho del mismo y un background*/
+body{
+    width: 95%;
+    background:linear-gradient(0deg, black, darkgrey);
+
+}
+
+/*Indico que el texto del título debe de quedar centrado, el color de la letra y una sombra para que resalte
+un poco*/
+h1{
+    text-align: center;
+    color:red;
+    text-shadow: 0 0 10px black, 5px 5px 15px darkviolet;
+}
+
+/*El párrafo le dejé tal cula, simplemente me aseguré que quedase centrado*/
+header p{
+    text-align: center;
+}
+
+/*Esta es una de las partes que más trabajo me dió. Lo primero cambiar el background para trabajar a partir de ahi
+le indiqué que debía de ocupar el 90% del ancho de pantalla*/
+/*Indico que todo lo que esté en su interior se comporte según la regla flex, y añado el valor wrap para que se muestre
+              en varias filas si es necesario*/
+/*Luego fui jugando con la estética del mismo y me asegure que todo se mostrase centrado*/
+.contenedor{
+    background:linear-gradient(45deg,darkred,red,darkorange,lightcoral);
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px auto auto;
+    border-radius: 50px;
+    box-shadow:15px 15px 15px darkgreen;
+    border-top-style: solid;
+    border-left-Style: solid;
+    border-left-color:darkgreen;
+    border-top-color:darkgreen;
+    justify-content: center;
+}
+
+
+/*Para la tarjeta le di un alto fijo, el ancho fui probando diferentes medidas. Al final me decante por usar un valor
+porcentual para que ocupasen un ancho relativo dentro del div*/
+/*Fui jugando con el estilo para que resaltasen un poco*/
+.tarjeta{
+    height: 250px;
+    width: 25%;
+    background:linear-gradient(-135deg,darkgreen,lightgreen);
+    border-radius:40px;
+    margin:10px 20px;
+    box-shadow: 5px 5px 5px darkgreen;
+}
+
+/*Una vez creé la primera tarjeta, añadí el resto, algunas de las cuales tenian que ser reservadas
+Hice lo mismo que en las otras pero cambiando ligeramente el estilo*/
+.tarjetaReservada{
+    height: 250px;
+    width: 25%;
+    background:linear-gradient(45deg, #131361, skyblue);
+    border-radius:40px;
+    margin:10px 20px;
+}
+
+/*Fui jugando con los diferentes valores de position para que quedasen como yo quería y luego jugué un poco con el estilo
+del texto*/
+.tarjeta h6{
+    position:relative;
+    left:40%;
+    top:0;
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: center;
+    width: 50px;
+    margin-top:2px;
+    margin-bottom:0;
+}
+
+
+/*Repetir esto mismo para las tarjetas reservadas*/
+.tarjetaReservada h6{
+    position:relative;
+    left:40%;
+    top:0;
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: center;
+    width: 50px;
+    margin-top:2px;
+    margin-bottom:0;
+}
+
+/*Ir jugando con el elemento p para darle estilos distintos y que quedase alineado donde yo queria*/
+.tarjeta p{
+    color:gold;
+    text-shadow:1px 1px 1px red;
+    width:50px;
+    font-size: 0.5em;
+    text-align: center;
+    position:relative;
+    left:40%;
+    top:0;
+    margin-top:2px;
+    margin-bottom: 0;
+}
+
+.tarjetaReservada p{
+    color:red;
+    text-shadow: 1px 1px 1px lavender;
+    width:50px;
+    font-size: 0.5em;
+    text-align: center;
+    position:relative;
+    left:40%;
+    top:0;
+    margin-top:2px;
+    margin-bottom: 0;
+}
+
+/*Para el elemento pista usé la imagen que yo quería como fondo, le dí un tamaño específico y le di la propiedad cover
+para que ocupase el tamaño del div creado para ello. Con position relative fui jugando hasta que quedó más o menos centrada*/
+.pista{
+    background-image: url("pistapadel2.webp");
+    height: 60%;
+    width: 60%;
+    background-size: cover;
+    position: relative;
+    top:10px;
+    left:20%;
+    border-radius: 50px;
+    border:solid 1px black;
+    background-position: center;
+}
+
+
+/*Como las pistas reservadas tenían que quedar distintas lo único que hice fue lo mismo que en las otras pero añadiendo
+un valor de escala de grises, para dar sensación de que estaban deshabilitadas*/
+.tarjetaReservada .pista{
+    background-image: url("pistapadel2.webp");
+    filter: grayscale(100%);
+    height: 60%;
+    width: 60%;
+    background-size: cover;
+    position: relative;
+    top:10px;
+    left:20%;
+    border-radius: 50px;
+    border:solid 1px black;
+    background-position: center;
+}
+
+/*Dar tamaño a los botones y jugar con su posición y su aspecto*/
+button{
+    width: 40%;
+    position: relative;
+    top:30px;
+    left:22px;
+    font-size:0.6em;
+    border-radius: 25px;
+    background-color: #3e8e41;
+    border-color:white;
+    box-shadow: 0 4px darkgrey;
+}
+
+/*Cambiar el aspecto cuando el ratón pasé por encima de cualquier boton*/
+button:hover{
+    background-color: yellow;
+}
+
+/*Cuando se hace clic en el botón que cambie de color y haga el efecto de que se está moviendo al clickar sobre el*/
+button:active{
+    background-color: darkgoldenrod;
+    box-shadow: 0 2px black;
+    transform:translateY(3px);
+}
+
+.reservar{
+    background-color: #3e8e41;
+
+}
+
+/*En las tarjetas de pistas libre me aseguro que el aspecto del botón anular sea diferente y no se pueda hacer click en el*/
+.tarjeta .anular{
+    opacity:0.4;
+    pointer-events: none;
+}
+
+/*De la misma forma que el paso anterior me aseguro que el botón reservar quede deshabilitado en las pistas que ya están reservadas*/
+.tarjetaReservada .reservar{
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/*Edito el footer para darle un estilo*/
+footer {
+    display:flex;
+    border-top:2px solid black;
+    margin-top:10px;
+    justify-content: center;
+
+}
+
+/*Juego con el posicionamiento y el estilo de los párrafos dentro del footer*/
+footer p{
+    font-size: 0.4em;
+    font-style: italic;
+    font-weight: bolder;
+    margin:5px 10%;
+    color:lightgreen;
+}
+
+
+

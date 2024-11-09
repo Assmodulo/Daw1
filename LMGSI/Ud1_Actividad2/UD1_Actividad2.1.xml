@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Guia_telefonica>
+    <Contacto>Alex
+        <Informacion_Personal>
+            <Nombre>Alejandro Sainz Sainz</Nombre>
+            <Direccion>Mi calle</Direccion>
+        </Informacion_Personal>    
+        <Numeros_telefono>
+            <Telefono_fijo>942667864</Telefono_fijo>
+            <Telefono_movil>621456798</Telefono_movil>
+            <Telefono_trabajo>942365487</Telefono_trabajo>
+        </Numeros_telefono>
+    </Contacto>
+
+    <Contacto>Pepe
+        <Informacion_Personal>   
+            <Nombre>Jose Garcia</Nombre>
+            <Direccion>Su calle</Direccion>
+        </Informacion_Personal>
+        <Numeros_telefono>
+            <Telefono_fijo>942478264</Telefono_fijo>
+            <Telefono_movil>65431987</Telefono_movil>
+            <Telefono_trabajo>942123456</Telefono_trabajo>
+        </Numeros_telefono>
+    </Contacto>
+
+    <Contacto>Paco
+        <Informacion_Personal>
+            <Nombre>Francisco Perez</Nombre>
+            <Direccion>Nuestra calle</Direccion>
+        </Informacion_Personal>    
+        <Numeros_telefono>
+            <Telefono_fijo>942987654</Telefono_fijo>
+            <Telefono_movil>698123456</Telefono_movil>
+            <Telefono_trabajo>942555555</Telefono_trabajo>
+        </Numeros_telefono>
+    </Contacto>
+</Guia_telefonica>

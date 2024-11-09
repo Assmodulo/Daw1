@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Libro_cocina>
+    <Plato>Pasta
+        <Numero_comensales>4</Numero_comensales>
+        <Tiempo_preparacion>35 min</Tiempo_preparacion>
+        <Ingredientes_principales>
+            <I1>350 gramos pasta</I1>
+            <I2>125 gramos queso rallado</I2>
+            <I3>125 gramos panceta ibérica</I3>
+            <I4>100 ml de nata</I4>
+        </Ingredientes_principales>
+        <Ingredientes_secundarios>
+            <Is2>Un chorro de aceite</Is2>
+            <Is2>Sal</Is2>
+            <Is3>Laurel</Is3>
+            <Is4>Pimienta Negra  molida</Is4>
+        </Ingredientes_secundarios>
+        <Preparacion>
+            <Paso1>Cocer la pasta en agua hirviendo a la que se le ha añadido aceite y sal</Paso1>
+            <Paso2>Saltear la panceta cortada en dados en la sarten con aceite</Paso2>
+            <Paso3>Rallar el queso y verter la nata con el y hacerlo al fuego lento en otra sartén</Paso3>
+            <Paso4>En la sarten de la panceta, echar la pasta cuando este hervida y añadirse la salsa de queso</Paso4>
+        </Preparacion>
+    </Plato>
+
+    <Plato>Entrecot de novilla
+        <Numero_comensales>1</Numero_comensales>
+        <Tiempo_preparacion>40 minutos</Tiempo_preparacion>
+        <Ingredientes_principales>
+            <I1>350 gramos de entrecot</I1>
+            <I2>150 gramos de patatas</I2>
+            <I3>2 pimientos de piquillo</I3>
+        </Ingredientes_principales>
+        <Ingredientes_secundarios>
+            <Is2>Aceite</Is2>
+            <Is2>Sal</Is2>
+            <Is3>Mantequilla</Is3>
+            <Is4>Pimienta</Is4>
+        </Ingredientes_secundarios>
+        <Preparacion>
+            <Paso1>Echar el entrecot a la sarten, dejandole hacer 2 minutos por cada lado</Paso1>
+            <Paso2>En una sarten aparte freir las patatas, mientras tanto terminar los pimientos en el horno</Paso2>
+            <Paso3>Usar la mantequilla en la sarten de la carne, e integrarlo todo. Servir con las patatas y pimientos</Paso3>
+        </Preparacion>
+    </Plato>
+
+    <Plato>Pure de patata
+        <Numero_comensales>2</Numero_comensales>
+        <Tiempo_preparacion>30 minutos</Tiempo_preparacion>
+        <Ingredientes_principales>
+            <I1>250 gramos de patatas</I1>
+            <I2>80 gramos de Mantequilla</I2>
+        </Ingredientes_principales>
+        <Ingredientes_secundarios>
+            <Is2>Sal</Is2>
+            <Is2>Aceite</Is2>
+            <Is3>Pimienta</Is3>
+        </Ingredientes_secundarios>
+        <Preparacion>
+            <Paso1>Cocer las patatas. Una vez terminadas, las pelamos</Paso1>
+            <Paso2>Juntamos las patatas con la mantequilla. Lo machacamos todo hasta que se integre</Paso2>
+            <Paso3>Vamos concinando la pasta anterior añadiendo agua o leche para que la mezcla se haga suave o gruesa al gusto</Paso3>
+            <Paso4>Una vez terminado añadimos sal y pimienta al gusto</Paso4>
+        </Preparacion>
+    </Plato>
+</Libro_cocina>

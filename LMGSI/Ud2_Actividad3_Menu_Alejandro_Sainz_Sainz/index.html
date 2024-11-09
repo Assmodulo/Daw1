@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <!-- creamos la tabla, primero consideré crearla en un div, pero al final decidi crearla simplemente dentro del body -->
+        
+        <table>
+
+            <!-- Aqui vi cosas en las guías de html sobre las columnas o grupos de columnas que pense que me servirian
+             pero al pasar al css como mucho para cambiar el color de fondo y jugar algo con las dimensiones de las columnas
+             pero nada que no pudiese hacer con las filas, así que las dejo comentadas -->
+            <!-- <colgroup>
+                <col class="indices">
+                <col class="menu_lunes">
+                <col class="menu_martes">
+                <col class="menu_miercoles">
+                <col class="menu_jueves">
+                <col class="menu_viernes">
+                <col class="menu_sabado">
+                <col class="menu_domingo"> 
+            </colgroup> -->
+
+            <!-- Voy definiendo diferentes filas y les asigno una clase que quizá luego necesite en el css -->
+            <tr class="linea_encabezados">
+                <th class="menu">Menu Semanal</th>
+                <th class="dias_semana">Lunes</th>
+                <th class="dias_semana">Martes</th>
+                <th class="dias_semana">Miercoles</th>
+                <th class="dias_semana">Jueves</th>
+                <th class="dias_semana">Viernes</th>
+                <th class="dias_semana">Sábado</th>
+                <th class="dias_semana">Domingo</th>
+            </tr>
+
+            <!-- Sigo añadiendo filas y diferentes clases según me hacen falta, a cada fila le he asignado su propia clase, pero creo que al final 
+             no voy a necesitarlas todas, las dejo simplemente por si acaso probando alguna cosa me valen de algo -->
+            <tr class="entrante">
+                <th class="orden_platos">Entrante</th>
+                <td class="platos">Rabas</td>
+                <td class="platos">Croquetas</td>
+                <td class="platos">Día Libre</td>
+                <td class="platos">Gambas Ajillo</td>
+                <td class="platos">Fritos Variados</td>
+                <td class="platos">Paté de gambas</td>
+                <td class="platos">Pincho de Morcilla</td>
+            </tr>
+
+            <tr class="platoPrincipal">
+                <th class="orden_platos">Plato Principal</th>
+                <td class="platos">Risotto de hongos</td>
+                <td class="platos">Arroz negro de calamares</td>
+                <td class="platos">Día Libre</td>
+                <td class="platos">Sopa de Pescado</td>
+                <td class="platos">Alcachofas confitadas</td>
+                <td class="platos">Ensalada de tomate y ricotta</td>
+                <td class="platos">Milhojas de berenjena</td>
+            </tr>
+
+
+            <!-- seguimos añadiendo filas y clases, las más usadas son las de orden platos y platos, ya que platos es el tipo de celda que mas se usa
+             para modificar en este caso -->
+            <tr class="segundoPlato">
+                <th class="orden_platos">Plato Principal</th>
+                <td class="platos">Lubina Horno</td>
+                <td class="platos">Lomo de bacalao</td>
+                <td class="platos">Día Libre</td>
+                <td class="platos">Entrecot de Novilla</td>
+                <td class="platos">Carrilleras estofadas</td>
+                <td class="platos">Tataki de atún</td>
+                <td class="platos">Canelón de pato</td>
+            </tr>
+            
+            <tr class="postres">
+                <th class="orden_platos">Postre</th>
+                <td class="platos">Tarta de queso</td>
+                <td class="platos">Tiramisú de sobao</td>
+                <td class="platos">Día Libre</td>
+                <td class="platos">Carpaccio de piña</td>
+                <td class="platos">Torrija artesana</td>
+                <td class="platos">Helados variados</td>
+                <td class="platos">Semifrío de maracuyá</td>
+            </tr>
+        </table>
+        <!--Termino la tabla y cierro body y html-->
+    </body>
+</html>

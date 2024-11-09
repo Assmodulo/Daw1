@@ -1,0 +1,28 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
+    <mxGraphModel dx="880" dy="532" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9xy-FeyhlqwEeGtFLG6o-1" value="SEDES" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="163" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="9xy-FeyhlqwEeGtFLG6o-2" value="&lt;b&gt;&lt;u&gt;Cod. Sede&lt;/u&gt;&lt;/b&gt;&lt;div&gt;Dirección&lt;/div&gt;&lt;div&gt;Localidad&lt;/div&gt;&lt;div&gt;Teléfono&lt;/div&gt;&lt;div&gt;Email&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="9xy-FeyhlqwEeGtFLG6o-1">
+          <mxGeometry y="50" width="163" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="9xy-FeyhlqwEeGtFLG6o-3" value="Empleados" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="10" width="160" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="9xy-FeyhlqwEeGtFLG6o-4" value="&lt;b&gt;&lt;u&gt;Núm. Matrícula&lt;/u&gt;&lt;/b&gt;&lt;div&gt;DNI&lt;/div&gt;&lt;div&gt;Núm. SS&lt;/div&gt;&lt;div&gt;Nombre Completo&lt;/div&gt;&lt;div&gt;Fecha Nacim.&lt;/div&gt;&lt;div&gt;Teléfono&lt;/div&gt;&lt;div&gt;Email&lt;/div&gt;&lt;div&gt;Especialidad&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="9xy-FeyhlqwEeGtFLG6o-3">
+          <mxGeometry y="50" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="9xy-FeyhlqwEeGtFLG6o-5" value="Departamentos" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="10" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="9xy-FeyhlqwEeGtFLG6o-6" value="&lt;u&gt;Cod. Departamento&lt;/u&gt;&lt;div&gt;Departamento&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="9xy-FeyhlqwEeGtFLG6o-5">
+          <mxGeometry y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
