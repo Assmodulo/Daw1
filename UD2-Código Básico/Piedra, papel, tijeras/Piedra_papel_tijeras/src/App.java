@@ -305,7 +305,7 @@ public class App {
         
         //Creo un array, de el va a coger sus opciones la CPU
 
-        String cpu[] = {"P" , "L" , "T"};
+        String[] cpu = {"P" , "L" , "T"};
         
         //Ahora la cpu hace su elección
 
@@ -313,10 +313,13 @@ public class App {
         System.out.println("QUE ELEGIRÉ ESTA VEZ? DEJAME PENSAR");
         System.out.println();
 
-        //Uso el metrodo Math.random para generar un número aleatorio entre 0 y 2 y hacer que la jugadaCpu sea igual a la letra en esa posición
+        //Uso el metodo Math.random para generar un número aleatorio entre 0 y 2 y hacer que la jugadaCpu sea igual a la letra en esa posición
         //de su array
 
-        return cpu[(int)(Math.random()*2)];
+        //En un inicio se me fue la olla y no se porque puse sólo Math*2 y tijeras no salía nunca, pero en principio
+        //ya esta
+
+        return cpu[(int)(Math.random()*3)];
     }
 
     /*En este método se reciben dos parámetros, el primero la elección del jugador, el segundo, la elección de la cpu, en ese orden
@@ -378,12 +381,20 @@ public class App {
     }
 
     public static void evaluacionRondas(){
-        if(vicJug == (rondas / 2) + 1){
+
+        //Después de unos días, al darme cuenta de que las rondas pueden acabar en empate, me di cuenta también de que
+        //este código lo habia hecho mal, pues podia ser que al mejor de N tambien acabase en empate, asi que cambie
+        //los terminos en los que se evalua
+
+        if(vicJug > vicCpu){
             System.out.println("NOOOOOOOO..... IMPOSIBLE..... COMO HAS PODIDO?");
-        }else if (vicCpu == (rondas / 2) + 1){
+            System.out.println();
+        }else if (vicCpu > vicJug){
             System.out.println("CREIAS QUE PODIAS GANAR?...DE VERDAD?.... TU?");
+            System.out.println();
         }else{
             System.out.println("Y DE TODAS MANERAS NO HEMOS CONSEGUIDO DICTAMINAR UN VENCEDOR");
+            System.out.println();
         }
 
         System.out.println("SEA COMO SEA, SIEMPRE PODEMOS JUGAR OTRA PARTIDA CUANDO QUIERAS. TE ANIMAS?");
