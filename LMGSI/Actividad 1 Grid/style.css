@@ -155,7 +155,7 @@ lo que he aprendido en ejercicios anteriores*/
 }
 
 /*Buscando por ahí encontre como redimensionar las imágenes al hacer hover, simplemente por modificar algo*/
-.galeria img:hover{
-    -webkit-transform:scale(2.5);
+.galeria img:active{
+    transform:scale(3.0) translateX(-35px);
 }
 
