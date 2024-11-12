@@ -6,20 +6,88 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!--Lo primero creo el contenedor grid y le doy una clase para identificarlo más rápido-->
     <div class="container-grid">
-        <div class="Logo"></div>
-        <div class="Titulo"></div>
-        <div class="Titulo"></div>
-        <div class="Titulo"></div>
-        <div class="Producto1"></div>
-        <div class="Producto2"></div>
-        <div class="Producto3"></div>
-        <div class="Visor"></div>
-        <div class="Producto4"></div>
-        <div class="Producto5"></div>
-        <div class="Producto6"></div>
-        <div class="Visor"></div>
-    </div>
+        <!--Luego comienzo con la división de las celdas. Estas, están hechas en CSS pero aquí hay que darles etiqueta
+        y clase. Una vez creada la matriz luego ya voy añadiendo las cosas que necesite-->
+        <div class="Logo">
+            <!--En la parte que sería para un logo le he añadido una imagen y un texto para un nombre-->
+            <img src="recursos/logo-gundam_54889-222.avif">
+            <p>BattleStation.net</p>
+        </div>
+        <!--Título en principio va vacía, tengo pensado añadirle un background img-->
+        <div class="Titulo">
 
+        </div>
+
+        <!--Según el ejercicio cada "expositor" de artículos debe tener una serie de elementos. Los voy añadiendo-->
+        <div class="Producto1">
+            <div class="product">
+                <img src="recursos/gunpla1.webp"></img>
+            </div>
+            <h2>Unicorn</h2>
+            <p>Versión básica, 46 piezas</p>
+            <span>55€</span>
+        </div>
+        <div class="Producto2">
+            <div class="product">
+                <img src="recursos/gunpla2.jpg"></img>
+            </div>
+            <h2>Unicorn Hunter</h2>
+            <p>Version Intermedia, 91 piezas</p>
+            <span>97€</span>
+        </div>
+        <div class="Producto3">
+            <div class="product">
+                <img src="recursos/gunpla3.webp"></img>
+            </div>
+            <h2>Banshee</h2>
+            <p>Versión básica, 60 piezas</p>
+            <span>59€</span>
+        </div>
+
+        <!--El apartado visor es para el producto mas destacado. Le añado diferentes elementos y más imágenes que
+        a los demás productos-->
+        <div class="Visor">
+            <h4>Producto destacado</h4>
+            <p>Nuestro Gunpla mejor valorado</p>
+            <div class="imagen"></div>
+            <p>Maqueta Perfect Grade, nivel avanzado, 520 piezas</p>
+            <span>285€</span>
+            <div class="galeria">
+                <img src="recursos/gunpladestacado1.png">
+                <img src="recursos/gunpladestacado2.jpg">
+                <img src="recursos/gunpladestacado3.png">
+                <img src="recursos/gunpladestacado4.jpg">
+                </img>
+            </div>
+        </div>
+        <div class="Producto4">
+            <div class="product">
+                <img src="recursos/gunpla4.jpg"></img>
+            </div>
+            <h2>Unicorn XO</h2>
+            <p>Módelo básico para iniciarse, 51 piezas</p>
+            <span>80€</span>
+        </div>
+        <div class="Producto5">
+            <div class="product">
+                <img src="recursos/gunpla5.jpg"></img>
+            </div>
+            <h2>Unicorn Ex</h2>
+            <p>Versión avanzada, nivel medio</p>
+            <span>96€</span>
+        </div>
+        <div class="Producto6">
+            <div class="product">
+                <img src="recursos/gunpla6.jpg"></img>
+            </div>
+            <h2>Unicorn Elite</h2>
+            <p>Versión avanzada, 211 piezas</p>
+            <span>141€</span>
+        </div>
+
+    </div>
+<!--Todos los "expositores" añadidos y creada la estructura paso al css-->
 </body>
 </html>
