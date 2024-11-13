@@ -1,0 +1,71 @@
+/*body{
+    background-color: black;
+    width: 95%;
+    height: 100vh;
+    border: 2px solid white;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+} */
+
+.gridIzquierdo{
+    width:65%;
+    height: 80vh;
+    margin:2.5%;
+    background-color: orange;
+    border:2px solid white;
+    display:grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr 1fr;
+    grid-template-areas:
+                        "secciones1 secciones2 secciones3 secciones4"
+                        "producto1 cantidad1 unidad1 total1"
+                        "producto2 cantidad2 unidad2 total2"
+                        "producto3 cantidad3 unidad3 total3";
+
+}
+
+/*.gridDerecho{
+    width:20%;
+    height: 80vh;
+    margin:2.5%;
+    background-color: dodgerblue;
+    border:2px solid white;
+}*/
+
+.secciones1, .secciones2, .secciones3, .secciones4 {
+    text-align: center;
+    border-bottom:1px solid black;
+    height: 10vh;
+    align-content: center;
+    font-size:0.8em;
+    font-style: italic;
+}
+
+.cantidad1{
+    display:flex;
+    flex-direction: row;
+    border: 1px solid white;
+    align-items: center;
+}
+
+button{
+    text-align: center;
+    vertical-align: center;
+    width: 25px;
+    height: 25px;
+    margin: auto;
+    border-radius: 50%;
+    background-color:transparent;
+    border:none;
+}
+
+h4{
+    text-align: center;
+    vertical-align: central;
+    width: 25px;
+    height: 25px;
+    border: 1px solid white;
+    margin: auto;
+}
+
