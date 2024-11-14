@@ -1,18 +1,21 @@
 //Como algunos métodos en esta clase van a necesitar datos por teclado necesito importar la clase Scanner
-import java.util.Scanner;
 
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class CuentaBancaria {
     private String iban;
     private String titular;
     private double saldo;
-    private Movimientos[] movimientos = new Movimientos[100];
+    private Movimientos[] movimientos;
 
     public CuentaBancaria(String iban, String titular) {
         this.iban = iban;
         this.titular = titular;
         this.saldo = 0;
+        this.movimientos = new Movimientos[100];
     }
 
     public String getIban() {
@@ -36,6 +39,8 @@ public class CuentaBancaria {
     }
 
     public String mostrarInformacion(){
+        System.out.println("ESTOS SON LOS DATOS DE LA CUENTA BANCARIA EN CUESTIÓN");
+
         String info = "Nº Cuenta : " + getIban() + "\n"+
                 "Titular: " + getTitular() + "\n" +
                 "Saldo: " + getSaldo();
@@ -43,42 +48,36 @@ public class CuentaBancaria {
         return info;
     }
 
-    //Creamos un método para el menu de movimientos
-    public void menuMovimientos(){
-        //Voy a crear un nuevo menú aquí, por lo tanto necesito las variables normales que uso otras veces para hacer
-        //un menu
-        String opcion;
+    public static String insertarIban(){
         Scanner teclado = new Scanner(System.in);
+        Pattern p = Pattern.compile("[A-Z]{2}[0-9]{22}");
+        Matcher m;
+        String iban;
 
-        //Como también tengo que definir un tipo de operación necesito una variable String para almacenar ese caso
-        char tipoOperacion;
+        do{
+            System.out.println("INTRODUZCA UN NÚMERO CORRECTO IBAN\nINTRODUZCA PRIMERO DOS LETRAS Y LUEGO 22 DÍGITOS\n"+
+                    "SI EL FORMATO NO ES CORRECTO EL PROGRAMA SE LO VOLVERÁ A PEDIR");
+            iban = teclado.nextLine();
+        }while(!p.matcher(iban).matches());
 
-        //Vamos mostrando al usuario lo que tiene que hacer
-        System.out.println("ELIJA LAS OPCIONES NECESARIAS");
-        System.out.println("*****************************\n");
+        System.out.println("IBAN INTRODUCIDO CORRECTO");
 
-        do {
-            System.out.println("1. Depositar\n2. Retirar\n3. Salir");
-            opcion = teclado.nextLine();
-
-            switch (opcion) {
-                case "1":
-                    tipoOperacion = 'D';
-                    break;
-                case "2":
-                    tipoOperacion = 'R';
-                    break;
-                case "3":
-                    System.out.println("HASTA EL SIGUIENTE SABLAZO.... DIGO... MOVIMIENTO");
-                    System.out.println("*************************************************\n");
-                    break;
-                default:
-                    System.out.println("OPCION NO VALIDA");
-                    break;
-            }
-
-        }while(!"3".equals(opcion));
-
-
+        return iban;
     }
+
+    public static String insertarTitular(){
+        Scanner teclado = new Scanner(System.in);
+        String titular;
+
+        System.out.println("AHORA NECESITAREMOS EL NOMBRE DEL TITULAR DE LA CUENTA BANCARIA");
+        System.out.println("INTRODUZCA ESE DATO AHORA");
+        titular = teclado.nextLine();
+
+        return titular;
+    }
+
+
+
+
+
 }
