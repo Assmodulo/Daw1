@@ -28,9 +28,9 @@ public class Main {
             //Muestro el primer menú y las opciones a elegir
             System.out.println("ELIJA UNA OPCIÓN ACORDE A LO QUE LE MUESTRA EL MENÚ");
             System.out.println("1. - DAR DE ALTA UNA CUENTA NUEVA\n"+
-                    "2. - MOSTRAR INFO DE LA CUENTA\n"+
-                    "3. - REALIZAR MOVIMIENTO SOBRE LA CUENTA\n"+
-                    "4. - SALIR");
+                                "2. - MOSTRAR INFO DE LA CUENTA\n"+
+                                "3. - REALIZAR MOVIMIENTO SOBRE LA CUENTA\n"+
+                                "4. - SALIR");
 
             //Hay que indicarlo por teclado, asi que se pide el dato necesario
             opcion = teclado.nextLine();
