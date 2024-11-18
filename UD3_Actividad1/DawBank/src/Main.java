@@ -7,9 +7,15 @@ public class Main {
         System.out.println("BIENVENIDO A DAWBANK. TE SANGRAMOS IGUAL QUE LOS DEMÁS, PERO MÁS MAJOS");
         System.out.println("**********************************************************************\n");
 
+
+
         menu1();
 
     }
+
+    //Declaro una variable de la clase CuentaBancaria. La defino aquí porque para que funcione bien todo lo static
+    //no puedo definirla dentro de main, por el scoope
+    static CuentaBancaria c = new CuentaBancaria();
 
     public static void menu1(){
         //Voy a definir un objeto de la clase Scanner
@@ -21,8 +27,7 @@ public class Main {
         //Para el menú voy a tener que crear un bucle do while que se repita constantemente hasta que se seleccione
         //la opción de salir
 
-        //Declaro una variable de la clase CuentaBancaria
-        CuentaBancaria c;
+
 
         do{
             //Muestro el primer menú y las opciones a elegir
@@ -37,13 +42,16 @@ public class Main {
 
             switch (opcion){
                 case "1":
-                    String dato1, dato2;
-                    dato1 = CuentaBancaria.insertarIban();
-                    dato2 = CuentaBancaria.insertarTitular();
-                    c = new CuentaBancaria(dato1, dato2);
-                    c.mostrarInformacion();
+                    String iban, titular;
+                    iban = CuentaBancaria.insertarIban();
+                    titular = CuentaBancaria.insertarTitular();
+                    c = new CuentaBancaria(iban, titular);
+                    System.out.println(c.mostrarInformacion());
+                    System.out.println();
                     break;
                 case "2":
+                    System.out.println("ESTA ES LA INFORMACIÓN DE LA CUENTA EN CUESTIÓN");
+                    c.mostrarInformacion();
                     break;
                 case "3":
                     menu2();
@@ -69,6 +77,9 @@ public class Main {
         //Como también tengo que definir un tipo de operación necesito una variable String para almacenar ese caso
         String tipoOperacion;
 
+        //Para la cantidad necesito crear una variable double
+        double cantidad;
+
         //Vamos mostrando al usuario lo que tiene que hacer
         System.out.println("ELIJA LAS OPCIONES NECESARIAS");
         System.out.println("*****************************\n");
@@ -79,10 +90,14 @@ public class Main {
 
             switch (opcion) {
                 case "1":
+                    System.out.println("REALIZAR UN DEPÓSITO EN LA CUENTA");
                     tipoOperacion = "DEPOSITO";
+                    cantidad = c.obtenerCantidad();
                     break;
                 case "2":
+                    System.out.println("REALIZAR UN REINTEGRO DESDE LA CUENTA");
                     tipoOperacion = "REINTEGRO";
+                    cantidad = c.obtenerCantidad();
                     break;
                 case "3":
                     System.out.println("HASTA EL SIGUIENTE SABLAZO.... DIGO... MOVIMIENTO");

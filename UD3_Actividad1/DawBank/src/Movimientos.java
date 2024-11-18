@@ -6,10 +6,14 @@ public class Movimientos {
 
     private int idMov;
     private String fecha;
-    private char tipo;
+    private String tipo;
     private double cantidad;
 
-    public Movimientos(char tipo, double cantidad) {
+    public Movimientos() {
+
+    }
+
+    public Movimientos(String tipo, double cantidad) {
         this.idMov = cont;
         this.fecha = LocalDateTime.now().toString();
         this.tipo = tipo;
@@ -29,7 +33,7 @@ public class Movimientos {
         return fecha;
     }
 
-    public char getTipo(){
+    public String getTipo(){
         return tipo;
     }
 

@@ -11,6 +11,10 @@ public class CuentaBancaria {
     private double saldo;
     private Movimientos[] movimientos;
 
+    public CuentaBancaria() {
+
+    }
+
     public CuentaBancaria(String iban, String titular) {
         this.iban = iban;
         this.titular = titular;
@@ -76,7 +80,27 @@ public class CuentaBancaria {
         return titular;
     }
 
+    public static void movimiento(String tipo, double cantidad){
+        Movimientos m = new Movimientos();
 
+        switch(tipo){
+            case "DEPOSITO":
+                break;
+            case "REINTEGRO":
+                break;
+            default:
+                System.out.println("EN ALGÚN MOMENTO SE HA DADO UN ERROR EN LA OPERACIÓN");
+                break;
+        }
+    }
+
+    public static double obtenerCantidad(){
+        Scanner teclado = new Scanner(System.in);
+        double cantidad;
+        System.out.println("INTRODUZCA LA CANTIDAD DE LA OPERACIÓN CORRESPONDIENTE");
+        cantidad = teclado.nextDouble();
+        return cantidad;
+    }
 
 
 
