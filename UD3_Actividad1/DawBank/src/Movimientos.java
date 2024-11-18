@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 
 public class Movimientos {
 
-    private static int cont = 1;
+    private static int cont = 0;
 
     private int idMov;
     private String fecha;
@@ -21,12 +21,13 @@ public class Movimientos {
 
         //Como cada vez que se genera un movimiento el siguiente va a tener una id consecutiva ahora le tengo que
         //indicar que la id debe de aumentar
-        cont++;
+        Movimientos.cont++;
 
     }
 
-    public String getIdMov(){
-        return String.valueOf(idMov);
+    public int getIdMov(){
+
+        return idMov;
     }
 
     public String getFecha(){

@@ -35,7 +35,8 @@ public class Main {
             System.out.println("1. - DAR DE ALTA UNA CUENTA NUEVA\n"+
                                 "2. - MOSTRAR INFO DE LA CUENTA\n"+
                                 "3. - REALIZAR MOVIMIENTO SOBRE LA CUENTA\n"+
-                                "4. - SALIR");
+                                "4. - VISUALIZAR MOVIMIENTOS\n"+
+                                "5. - SALIR");
 
             //Hay que indicarlo por teclado, asi que se pide el dato necesario
             opcion = teclado.nextLine();
@@ -51,12 +52,15 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("ESTA ES LA INFORMACIÓN DE LA CUENTA EN CUESTIÓN");
-                    c.mostrarInformacion();
+                    System.out.println(c.mostrarInformacion());
                     break;
                 case "3":
                     menu2();
                     break;
                 case "4":
+                    c.mostrarMovimientos();
+                    break;
+                case "5":
                     System.out.println("NO SE OLVIDE DE VOLVER, QUEREMOS SU DINERO");
                     break;
                 default:
@@ -65,7 +69,7 @@ public class Main {
                     System.out.println();
                     break;
             }
-        }while(!"4".equals(opcion));
+        }while(!"5".equals(opcion));
     }
 
     public static void menu2(){
@@ -92,12 +96,14 @@ public class Main {
                 case "1":
                     System.out.println("REALIZAR UN DEPÓSITO EN LA CUENTA");
                     tipoOperacion = "DEPOSITO";
-                    cantidad = c.obtenerCantidad();
+                    cantidad = CuentaBancaria.obtenerCantidad();
+                    CuentaBancaria.movimiento(tipoOperacion, cantidad,c);
                     break;
                 case "2":
                     System.out.println("REALIZAR UN REINTEGRO DESDE LA CUENTA");
                     tipoOperacion = "REINTEGRO";
-                    cantidad = c.obtenerCantidad();
+                    cantidad = CuentaBancaria.obtenerCantidad();
+                    CuentaBancaria.movimiento(tipoOperacion, cantidad,c);
                     break;
                 case "3":
                     System.out.println("HASTA EL SIGUIENTE SABLAZO.... DIGO... MOVIMIENTO");

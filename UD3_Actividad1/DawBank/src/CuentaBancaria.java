@@ -34,6 +34,10 @@ public class CuentaBancaria {
         return saldo;
     }
 
+    private void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
     public void incrementarSaldo(double saldo) {
         this.saldo += saldo;
     }
@@ -80,13 +84,44 @@ public class CuentaBancaria {
         return titular;
     }
 
-    public static void movimiento(String tipo, double cantidad){
+    public static void movimiento(String tipo, double cantidad, CuentaBancaria c){
         Movimientos m = new Movimientos();
+
 
         switch(tipo){
             case "DEPOSITO":
+                if (cantidad > 0) {
+                    if(cantidad > 3000){
+                        System.out.println("INGRESO POR ENCIMA DE LOS LIMITES. AVISAR A HACIENDA");
+                    }
+                    m = new Movimientos(tipo, cantidad);
+                    c.movimientos[m.getIdMov()] = m;
+                    c.setSaldo(c.getSaldo() + cantidad);
+
+                    System.out.println("OPERACIÓN REALIZADA");
+
+                    if(c.getSaldo() < 0 && c.getSaldo() > -51){
+                        System.out.println("AVISO. SALDO NEGATIVO");
+                    }
+                } else {
+                    System.out.println("NO SE PUEDEN HACER INGRESOS DE VALOR 0 O NEGATIVOS");
+                }
                 break;
             case "REINTEGRO":
+                if (cantidad > 0) {
+                    if((c.getSaldo() - cantidad) < -50){
+                        System.out.println("REINTEGRO NO PERMITIDO. CUENTA AL DESCUBIERTO POR ENCIMA DEL LIMITE");
+
+                    }else{
+                        m = new Movimientos(tipo, cantidad);
+                        c.movimientos[m.getIdMov()] = m;
+                        System.out.println("OPERACIÓN REALIZADA");
+                        c.setSaldo(c.getSaldo() - cantidad);
+
+                    }
+                }else{
+                    System.out.println("NO SE PUEDEN RETIRAR CANTIDADES NEGATIVAS DE DINERO");
+                }
                 break;
             default:
                 System.out.println("EN ALGÚN MOMENTO SE HA DADO UN ERROR EN LA OPERACIÓN");
@@ -102,6 +137,18 @@ public class CuentaBancaria {
         return cantidad;
     }
 
+public void mostrarMovimientos(){
+        Movimientos m = new Movimientos();
 
+        System.out.println("ESTOS SON LOS MOVIMIENTOS ACUMULADOS EN SU CUENTA");
+        for(int i = 0; i < movimientos.length; i++){
+
+            if (movimientos[i] != null) {
+                m = movimientos[i];
+                System.out.println(m.infoMov());
+            }
+
+        }
+}
 
 }
