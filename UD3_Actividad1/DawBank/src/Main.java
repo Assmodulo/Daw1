@@ -89,7 +89,7 @@ public class Main {
         System.out.println("*****************************\n");
 
         do {
-            System.out.println("1. DEPOSITAR\n2. RETIRAR\n4. RESUMEN CORTO\n3. SALIR");
+            System.out.println("1. DEPOSITAR\n2. RETIRAR\n3. RESUMEN CORTO\n4. SALIR");
             opcion = teclado.nextLine();
 
             switch (opcion) {
