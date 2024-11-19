@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        //Dentro de main sólo voy a imprimir un texto por pantalla y llamar al método menú que es el método principal
+        //Dentro de menú, dependiendo de la opción escogida hará unas cosas u otras
 
         System.out.println("BIENVENIDO A DAWBANK. TE SANGRAMOS IGUAL QUE LOS DEMÁS, PERO MÁS MAJOS");
         System.out.println("**********************************************************************\n");
@@ -58,12 +60,15 @@ public class Main {
                     menu2();
                     break;
                 case "4":
-                    c.mostrarMovimientos();
+                    //Pasamos al submenú movimientos
+                    menuMovimientos();
                     break;
                 case "5":
+                    //Opción para salir
                     System.out.println("NO SE OLVIDE DE VOLVER, QUEREMOS SU DINERO");
                     break;
                 default:
+                    //Cuando se pulsa una opción incorrecta
                     System.out.println("A QUE ESTAMOS JUGANDO. SEA SERIO Y ELIJA UNA OPCIÓN CORRECTA");
                     System.out.println("************************************************************");
                     System.out.println();
@@ -73,7 +78,7 @@ public class Main {
     }
 
     public static void menu2(){
-        //Voy a crear un nuevo menú aquí, por lo tanto necesito las variables normales que uso otras veces para hacer
+        //Voy a crear un nuevo menú aquí, por lo tanto, necesito las variables normales que uso otras veces para hacer
         //un menu
         String opcion;
         Scanner teclado = new Scanner(System.in);
@@ -106,8 +111,9 @@ public class Main {
                     CuentaBancaria.movimiento(tipoOperacion, cantidad,c);
                     break;
                 case "3":
-                    System.out.println("HASTA EL SIGUIENTE SABLAZO.... DIGO... MOVIMIENTO");
+                    System.out.println("SE LE VA A MOSTRAR SU SALDO Y SUS 5 ÚLTIMOS MOVIMIENTOS");
                     System.out.println("*************************************************\n");
+                    c.resumenCorto();
                     break;
                 case "4":
                     System.out.println("HASTA EL SIGUIENTE SABLAZO.... DIGO... MOVIMIENTO");
@@ -120,5 +126,42 @@ public class Main {
 
         }while(!"4".equals(opcion));
 
+    }
+
+    public static void menuMovimientos(){
+
+        //Defino las variables que utilizo otras veces para navegar por menús
+        String opcion;
+        Scanner teclado = new Scanner(System.in);
+
+        //Creo la estructura del menú
+        do {
+            System.out.println("1. MOSTRAR TODOS LOS MOVIMIENTOS\n2. MOSTRAR REINTEGROS\n3. MOSTRAR INGRESOS\n4. SALIR");
+            opcion = teclado.nextLine();
+
+            switch (opcion) {
+                case "1":
+                    System.out.println("LISTADO DE TODOS LOS MOVIMIENTOS");
+                    c.mostrarMovimientos();
+                    break;
+                case "2":
+                    System.out.println("ESTOS SON LOS REINTEGROS QUE HA REALIZADO ÚLTIMAMENTE");
+                    c.mostrarReintegros();
+                    break;
+                case "3":
+                    System.out.println("ESTOS SON LOS INGRESOS QUE HA REALIZADO ÚLTIMAMENTE");
+                    System.out.println("*************************************************\n");
+                    c.mostrarIngresos();
+                    break;
+                case "4":
+                    System.out.println("SI QUIERE SABER ALGO MÁS VUELVA POR AQUÍ");
+                    System.out.println("*************************************************\n");
+                    break;
+                default:
+                    System.out.println("OPCIÓN NO VALIDA");
+                    break;
+            }
+
+        }while(!"4".equals(opcion));
     }
 }
