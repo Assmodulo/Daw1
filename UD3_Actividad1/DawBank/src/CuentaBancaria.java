@@ -11,6 +11,8 @@ public class CuentaBancaria {
     private double saldo;
     private Movimientos[] movimientos;
 
+    private static int elementosTotales = 0;
+
     public CuentaBancaria() {
 
     }
@@ -34,9 +36,6 @@ public class CuentaBancaria {
         return saldo;
     }
 
-    private void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
 
     public void incrementarSaldo(double saldo) {
         this.saldo += saldo;
@@ -96,8 +95,8 @@ public class CuentaBancaria {
                     }
                     m = new Movimientos(tipo, cantidad);
                     c.movimientos[m.getIdMov()] = m;
-                    c.setSaldo(c.getSaldo() + cantidad);
-
+                    c.incrementarSaldo(cantidad);
+                    elementosTotales++;
                     System.out.println("OPERACIÓN REALIZADA");
 
                     if(c.getSaldo() < 0 && c.getSaldo() > -51){
@@ -116,8 +115,8 @@ public class CuentaBancaria {
                         m = new Movimientos(tipo, cantidad);
                         c.movimientos[m.getIdMov()] = m;
                         System.out.println("OPERACIÓN REALIZADA");
-                        c.setSaldo(c.getSaldo() - cantidad);
-
+                        c.reducirSaldo(cantidad);
+                        elementosTotales++;
                     }
                 }else{
                     System.out.println("NO SE PUEDEN RETIRAR CANTIDADES NEGATIVAS DE DINERO");
@@ -141,13 +140,9 @@ public void mostrarMovimientos(){
         Movimientos m = new Movimientos();
 
         System.out.println("ESTOS SON LOS MOVIMIENTOS ACUMULADOS EN SU CUENTA");
-        for(int i = 0; i < movimientos.length; i++){
-
-            if (movimientos[i] != null) {
+        for(int i = 0; i <= elementosTotales; i++){
                 m = movimientos[i];
                 System.out.println(m.infoMov());
-            }
-
         }
 }
 

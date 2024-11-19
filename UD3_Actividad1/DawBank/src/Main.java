@@ -89,7 +89,7 @@ public class Main {
         System.out.println("*****************************\n");
 
         do {
-            System.out.println("1. DEPOSITAR\n2. RETIRAR\n3. SALIR");
+            System.out.println("1. DEPOSITAR\n2. RETIRAR\n4. RESUMEN CORTO\n3. SALIR");
             opcion = teclado.nextLine();
 
             switch (opcion) {
@@ -109,12 +109,16 @@ public class Main {
                     System.out.println("HASTA EL SIGUIENTE SABLAZO.... DIGO... MOVIMIENTO");
                     System.out.println("*************************************************\n");
                     break;
+                case "4":
+                    System.out.println("HASTA EL SIGUIENTE SABLAZO.... DIGO... MOVIMIENTO");
+                    System.out.println("*************************************************\n");
+                    break;
                 default:
                     System.out.println("OPCIÓN NO VALIDA");
                     break;
             }
 
-        }while(!"3".equals(opcion));
+        }while(!"4".equals(opcion));
 
     }
 }

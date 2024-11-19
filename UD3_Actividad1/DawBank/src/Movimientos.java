@@ -14,7 +14,7 @@ public class Movimientos {
     }
 
     public Movimientos(String tipo, double cantidad) {
-        this.idMov = cont;
+        this.idMov = cont +1;
         this.fecha = LocalDateTime.now().toString();
         this.tipo = tipo;
         this.cantidad = cantidad;
