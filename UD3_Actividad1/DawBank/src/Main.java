@@ -47,7 +47,7 @@ public class Main {
                 case "1":
                     String iban, titular;
                     iban = CuentaBancaria.insertarIban();
-                    titular = CuentaBancaria.insertarTitular();
+                    titular = insertarTitular();
                     c = new CuentaBancaria(iban, titular);
                     System.out.println(c.mostrarInformacion());
                     System.out.println();
