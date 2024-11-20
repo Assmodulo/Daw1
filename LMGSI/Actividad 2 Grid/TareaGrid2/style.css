@@ -1,19 +1,15 @@
-/*body{
-    background-color: black;
-    width: 95%;
+body{
+    width: 100%;
     height: 100vh;
-    border: 2px solid white;
     display:flex;
     flex-wrap: wrap;
     flex-direction: row;
-} */
+    justify-content: space-evenly;
+}
 
 .gridIzquierdo{
     width:65%;
-    height: 80vh;
-    margin:2.5%;
-    background-color: orange;
-    border:2px solid white;
+    height: 90%;
     display:grid;
     grid-template-columns: 4fr 1fr 1fr 1fr;
     grid-template-rows:1fr 1fr 1fr 1fr;
@@ -25,28 +21,37 @@
 
 }
 
-/*.gridDerecho{
-    width:20%;
-    height: 80vh;
-    margin:2.5%;
-    background-color: dodgerblue;
-    border:2px solid white;
-}*/
+.gridDerecho{
+    width:25%;
+    height: 40%;
+    background-color: lightgray;
+    display:grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+                        "total total"
+                        "tituloPequeño precio";
+}
 
 .secciones1, .secciones2, .secciones3, .secciones4 {
     text-align: center;
     border-bottom:1px solid black;
-    height: 10vh;
+    height: 100%;
     align-content: center;
     font-size:0.8em;
     font-style: italic;
 }
 
-.cantidad1{
+.secciones1{
+    text-align: left;
+    padding-left: 20px;
+}
+
+.cantidad1, .cantidad2,.cantidad3{
     display:flex;
     flex-direction: row;
-    border: 1px solid white;
     align-items: center;
+
 }
 
 button{
@@ -60,12 +65,66 @@ button{
     border:none;
 }
 
-h4{
+.producto1, .producto2, .producto3 {
+    padding-left: 25px;
+
+}
+
+h5{
+    font-style: italic;
+    font-weight: bolder;
+    font-size: 1.4em;
+    margin-bottom:-10px;
+}
+
+.referencias {
+    font-size: 0.6em;
+}
+
+.numero{
     text-align: center;
     vertical-align: central;
     width: 25px;
     height: 25px;
-    border: 1px solid white;
     margin: auto;
+    padding-top:10px;
+}
+
+
+
+.unidad1, .unidad2, .unidad3 p{
+    text-align: center;
+    align-items: center;
+    padding-top: 35%;
+}
+
+.total1, .total2, .total3 p{
+    text-align: center;
+    align-items: center;
+    padding-top: 35%;
+}
+
+.total{
+    grid-area: total;
+    width: 80%;
+    margin: auto;
+    height: 100%;
+    border-bottom:1px solid black;
+}
+
+.tituloPequeño{
+    grid-area: tituloPequeño;
+    width: 40%;
+    height: 100%;
+    text-align: left;
+    margin:auto;
+}
+
+.precio{
+    grid-area: precio;
+    width: 40%;
+    height: 100%;
+    text-align: right;
+    margin:auto;
 }
 
