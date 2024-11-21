@@ -20,13 +20,17 @@ public class Main {
 
         //Creo una variable de la clase CuentaBancaria con el constructor por defecto, luego ya iré trabajando con ella
         CuentaBancaria c = new CuentaBancaria();
+        Movimientos m = new Movimientos();
 
         System.out.println("LO PRIMERO ES CREARSE UNA CUENTA. VAMOS A SOLICITARLE UNA SERIE DE DATOS\n");
         System.out.println("PRIMERO NECESITAMOS EL IBAN. INTRODUZCA DOS LETRAS SEGUIDAS DE 22 DÍGITOS\n"
         +"SI EL FORMATO NO ES CORRECTO EL PROGRAMA SE LO PEDIRÁ OTRA VEZ");
 
         //Declaro dos variable String para almacenar el iban y el titular
-        String iban, titular;
+        String iban, titular, tMovimiento;
+
+        //Declaro una variable double para almacenar la cantidad de dinero para los movimientos
+        double cantidad;
 
 
 
@@ -81,9 +85,33 @@ public class Main {
                     System.out.println();
                     break;
                 case "5":
-                    String tMovimiento = TipoMovimiento.INGRESO.getTipo();
+                    teclado = new Scanner(System.in);
+                    System.out.println("INGRESO\n");
+                    tMovimiento = TipoMovimiento.INGRESO.getTipo();
+                    do {
+                        System.out.println("INDIQUE LA CANTIDAD QUE VA A INGRESAR. DEBE SER MAYOR QUE 0\n");
+                        cantidad = teclado.nextDouble();
+                    } while (cantidad <= 0);
                     break;
                 case "6":
+                    teclado = new Scanner(System.in);
+                    System.out.println("REINTEGRO\n");
+                    tMovimiento = TipoMovimiento.RETIRADA.getTipo();
+                    do {
+                        System.out.println("INDIQUE LA CANTIDAD QUE VA A RETIRAR\n");
+                        cantidad = teclado.nextDouble();
+                    } while (cantidad <= 0);
+                    if (saldoNegativo(cantidad, c)){
+                        System.out.println("SU OPERACIÓN VA A DEJAR SU CUENTA POR DEBAJO DE -50 EUROS");
+                        System.out.println("OPERACIÓN NO PERMITIDA\n");
+                    }else{
+                        m = new Movimientos(tMovimiento,cantidad);
+                        c.reducirSaldo(cantidad);
+                        if(c.getSaldo() < 0){
+                            System.out.println("AVISO: SALDO NEGATIVO\n");
+                        }
+
+                    }
                     break;
                 case "7":
                     break;
@@ -111,9 +139,11 @@ public class Main {
         return correcto;
     }
 
-
-
+    public static boolean saldoNegativo(double cantidad, CuentaBancaria c){
+        boolean descubierto = false;
+        if(c.getSaldo() + cantidad < -50){
+            descubierto = true;
+        }
+        return descubierto;
+    }
 }
-
-
-
