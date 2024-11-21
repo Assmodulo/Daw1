@@ -71,14 +71,12 @@ public class CuentaBancaria {
 
 
     //Creo un método para validar el patrón de un iban de una cuenta estandar
-    public static String insertarIban(){
-        Scanner teclado = new Scanner(System.in);
+    public String validarFormatoIban(){
 
         //Defino una variable de la clase pattern y un patrón, el del iban
         Pattern p = Pattern.compile("[A-Z]{2}[0-9]{22}");
         //Defino una variable de la clase Matcher
         Matcher m;
-        String iban;
 
         //Mediante un do while me aseguro de que se repita la solicitud hasta que el iban sea correcto
         do{
