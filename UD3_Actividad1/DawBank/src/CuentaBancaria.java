@@ -64,48 +64,12 @@ public class CuentaBancaria {
 
         String info = "Nº Cuenta : " + getIban() + "\n"+
                 "Titular: " + getTitular() + "\n" +
-                "Saldo: " + getSaldo();
+                "Saldo: " + getSaldo() + "\n";
+
 
         return info;
     }
 
-
-    //Creo un método para validar el patrón de un iban de una cuenta estandar
-    public String validarFormatoIban(){
-
-        //Defino una variable de la clase pattern y un patrón, el del iban
-        Pattern p = Pattern.compile("[A-Z]{2}[0-9]{22}");
-        //Defino una variable de la clase Matcher
-        Matcher m;
-
-        //Mediante un do while me aseguro de que se repita la solicitud hasta que el iban sea correcto
-        do{
-            System.out.println("INTRODUZCA UN NÚMERO CORRECTO IBAN\nINTRODUZCA PRIMERO DOS LETRAS Y LUEGO 22 DÍGITOS\n"+
-                    "SI EL FORMATO NO ES CORRECTO EL PROGRAMA SE LO VOLVERÁ A PEDIR");
-            iban = teclado.nextLine();
-            //El bucle se repite mientras no sea cierto que el iban sigue el patron indicado
-        }while(!p.matcher(iban).matches());
-
-        //Si el patrón es correcto lo indico po pantalla
-        System.out.println("IBAN INTRODUCIDO CORRECTO");
-
-        //Devuelvo el valor del iban
-        return iban;
-    }
-
-
-    //Creo otro método para insertar el nombre del titular, para que todo quede dentro de un método en vez de estar todo
-    //el código en el menú
-    public String insertarTitular(){
-        Scanner teclado = new Scanner(System.in);
-        String titular;
-
-        System.out.println("AHORA NECESITAREMOS EL NOMBRE DEL TITULAR DE LA CUENTA BANCARIA");
-        System.out.println("INTRODUZCA ESE DATO AHORA");
-        titular = teclado.nextLine();
-
-        return titular;
-    }
 
     public void movimiento(String tipo, double cantidad, CuentaBancaria c){
 

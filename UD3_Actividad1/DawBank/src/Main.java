@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,9 +18,7 @@ public class Main {
         //Declaro una variable String, ya que para hacer un menú, necesito una opción para evaluar
         String opcion;
 
-        //Para el menú voy a tener que crear un bucle do while que se repita constantemente hasta que se seleccione
-        //la opción de salir
-
+        //Creo una variable de la clase CuentaBancaria con el constructor por defecto, luego ya iré trabajando con ella
         CuentaBancaria c = new CuentaBancaria();
 
         System.out.println("LO PRIMERO ES CREARSE UNA CUENTA. VAMOS A SOLICITARLE UNA SERIE DE DATOS\n");
@@ -28,12 +28,21 @@ public class Main {
         //Declaro dos variable String para almacenar el iban y el titular
         String iban, titular;
 
-        boolean correcto = false;
+
 
         do{
             teclado = new Scanner(System.in);
+            System.out.println("INTRODUZCA UN IBAN CORRECTO");
+            iban = teclado.nextLine().toUpperCase();
+        }while(!validarFormatoIban(iban));
 
-        }
+        System.out.println("AHORA VAMOS A SOLICITAR EL NOMBRE DEL TITULAR");
+        teclado = new Scanner(System.in);
+        titular = teclado.nextLine().toUpperCase();
+
+        //procedo a crear la cuenta
+        c= new CuentaBancaria(iban,titular);
+        System.out.println();
 
 
         do{
@@ -53,16 +62,26 @@ public class Main {
 
             switch (opcion){
                 case "1":
-                    break;
-                case "2":
                     System.out.println("ESTA ES LA INFORMACIÓN DE LA CUENTA EN CUESTIÓN");
                     System.out.println(c.mostrarInformacion());
                     break;
+                case "2":
+                    System.out.println("ESTE ES EL IBAN DE LA CUENTA QUE SE HA CREADO");
+                    System.out.println(c.getIban());
+                    System.out.println();
+                    break;
                 case "3":
+                    System.out.println("ESTE ES EL NOMBRE DEL TITULAR DE LA CUENTA");
+                    System.out.println(c.getTitular());
+                    System.out.println();
                     break;
                 case "4":
+                    System.out.println("ESTE ES EL SALDO DE LA CUENTA ASOCIADA");
+                    System.out.println(c.getSaldo());
+                    System.out.println();
                     break;
                 case "5":
+                    String tMovimiento = TipoMovimiento.INGRESO.getTipo();
                     break;
                 case "6":
                     break;
@@ -79,8 +98,20 @@ public class Main {
                     System.out.println();
                     break;
             }
-        }while(!"5".equals(opcion));
+        }while(!"8".equals(opcion));
+
     }
+    //Creo un método para validar el patrón de un iban de una cuenta estandar
+    public static boolean validarFormatoIban(String iban){
+        boolean correcto = false;
+        //Defino una variable de la clase pattern y un patrón, el del iban
+        Pattern p = Pattern.compile("[A-Z]{2}[0-9]{22}");
+        correcto = p.matcher(iban).matches();
+
+        return correcto;
+    }
+
+
 
 }
 
