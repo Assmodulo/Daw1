@@ -38,7 +38,7 @@ public class Main {
             teclado = new Scanner(System.in);
             System.out.println("INTRODUZCA UN IBAN CORRECTO");
             iban = teclado.nextLine().toUpperCase();
-        }while(!validarFormatoIban(iban));
+        }while(!MyUtils.validarFormatoIban(iban));
 
         System.out.println("AHORA VAMOS A SOLICITAR EL NOMBRE DEL TITULAR");
         teclado = new Scanner(System.in);
@@ -87,12 +87,7 @@ public class Main {
                 case "5":
                     System.out.println("INGRESO\n");
                     tMovimiento = TipoMovimiento.INGRESO.getTipo();
-                    do {
-                        teclado = new Scanner(System.in);
-                        System.out.println("INDIQUE LA CANTIDAD QUE VA A INGRESAR. DEBE SER MAYOR QUE 0\n");
-                        cantidad = teclado.nextDouble();
-                        teclado.nextLine();
-                    } while (cantidad <= 0);
+                    cantidad = MyUtils.introducirImporte();
                     if(cantidad > 3000){
                         System.out.println("AVISO: NOTIFICAR A HACIENDA");
                     }
@@ -107,12 +102,8 @@ public class Main {
                     teclado = new Scanner(System.in);
                     System.out.println("REINTEGRO\n");
                     tMovimiento = TipoMovimiento.RETIRADA.getTipo();
-                    do {
-                        System.out.println("INDIQUE LA CANTIDAD QUE VA A RETIRAR\n");
-                        cantidad = teclado.nextDouble();
-                        teclado.nextLine();
-                    } while (cantidad <= 0);
-                    if (saldoNegativo(cantidad, c)){
+                    cantidad = MyUtils.introducirImporte();
+                    if (MyUtils.saldoNegativoNoPermitido(cantidad, c)){
                         System.out.println("SU OPERACIÓN VA A DEJAR SU CUENTA POR DEBAJO DE -50 EUROS");
                         System.out.println("OPERACIÓN NO PERMITIDA\n");
                     }else{
@@ -142,21 +133,5 @@ public class Main {
         }while(!"8".equals(opcion));
 
     }
-    //Creo un método para validar el patrón de un iban de una cuenta estandar
-    public static boolean validarFormatoIban(String iban){
-        boolean correcto = false;
-        //Defino una variable de la clase pattern y un patrón, el del iban
-        Pattern p = Pattern.compile("[A-Z]{2}[0-9]{22}");
-        correcto = p.matcher(iban).matches();
 
-        return correcto;
-    }
-
-    public static boolean saldoNegativo(double cantidad, CuentaBancaria c){
-        boolean descubierto = false;
-        if(c.getSaldo() - cantidad < -50){
-            descubierto = true;
-        }
-        return descubierto;
-    }
 }

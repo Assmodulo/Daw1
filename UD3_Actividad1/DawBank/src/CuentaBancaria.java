@@ -1,8 +1,3 @@
-//Como algunos métodos en esta clase van a necesitar datos por teclado necesito importar la clase Scanner
-
-
-
-
 public class CuentaBancaria {
 
     //Defino los atributos de la clase
@@ -12,7 +7,8 @@ public class CuentaBancaria {
     private Movimientos[] movimientos;
 
     //Defino una variable que me sirve para llevar la cuenta de los elementos totales almacenados en el array
-    //movimientos. Antes era static pero voy a probar con public a ver si sale
+    //movimientos. Antes era static pero voy a probar con public, que es propia de cada cuenta creada, que lleva la
+    //cuenta de los movimientos de cada cuenta
     public int elementosTotales = 0;
 
     //Defino un constructor por defecto para poder declarar variables del tipo CuentaBancaria
@@ -27,8 +23,10 @@ public class CuentaBancaria {
         this.titular = titular;
         //El saldo inicial siempre va a ser cero
         this.saldo = 0;
-        //Siempre va a almacenar un máximo de 100 movimientos que se guardan en este array
-        this.movimientos = new Movimientos[100];
+        /*En principio cree el array de 100, pero para probar la redimensión del array en caso de que llegue al máximo
+        Lo defino de 10
+         */
+        this.movimientos = new Movimientos[10];
         this.elementosTotales = 0;
     }
 
@@ -88,17 +86,14 @@ public class CuentaBancaria {
 
     //Este método lo he creado para checkear el número de elementos totales introducidos
     //Si ese número es igual a la length del array movimientos, crear un array auxiliar, copia los datos a ese array
-    //Despues redimensiona el array existente a su longitud actual +50 y luego vuelca el contenido de auxiliar
+    //Despues redimensiona el array existente a su longitud actual +10 y luego vuelca el contenido de auxiliar
     //de nuevo en el array original redimensionado
     private void checkArrayLength(int elementos){
         if(elementos >= this.movimientos.length - 1){
             Movimientos[] movimientosAuxiliares = new Movimientos[this.movimientos.length];
             System.arraycopy(this.movimientos, 0, movimientosAuxiliares, 0, movimientos.length);
-            this.movimientos = new Movimientos[this.movimientos.length + 50];
+            this.movimientos = new Movimientos[this.movimientos.length + 10];
             System.arraycopy(movimientosAuxiliares, 0, this.movimientos, 0, movimientosAuxiliares.length);
         }
     }
-
-
-
 }
