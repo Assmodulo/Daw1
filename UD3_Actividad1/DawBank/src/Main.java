@@ -58,8 +58,8 @@ public class Main {
                     "4. - SALDO\n"+
                     "5. - INGRESO\n"+
                     "6. - RETIRADA\n"+
-                    "5. - MOVIMIENTOS\n"+
-                    "5. - SALIR\n");
+                    "7. - MOVIMIENTOS\n"+
+                    "8. - SALIR\n");
 
             //Hay que indicarlo por teclado, asi que se pide el dato necesario
             opcion = teclado.nextLine();
@@ -85,13 +85,23 @@ public class Main {
                     System.out.println();
                     break;
                 case "5":
-                    teclado = new Scanner(System.in);
                     System.out.println("INGRESO\n");
                     tMovimiento = TipoMovimiento.INGRESO.getTipo();
                     do {
+                        teclado = new Scanner(System.in);
                         System.out.println("INDIQUE LA CANTIDAD QUE VA A INGRESAR. DEBE SER MAYOR QUE 0\n");
                         cantidad = teclado.nextDouble();
+                        teclado.nextLine();
                     } while (cantidad <= 0);
+                    if(cantidad > 3000){
+                        System.out.println("AVISO: NOTIFICAR A HACIENDA");
+                    }
+                    m = new Movimientos(tMovimiento,cantidad);
+                    c.incrementarSaldo(cantidad);
+                    if(c.getSaldo() < 0){
+                        System.out.println("AVISO: SALDO NEGATIVO\n");
+                    }
+                    c.almacenarMovimientos(m);
                     break;
                 case "6":
                     teclado = new Scanner(System.in);
@@ -100,6 +110,7 @@ public class Main {
                     do {
                         System.out.println("INDIQUE LA CANTIDAD QUE VA A RETIRAR\n");
                         cantidad = teclado.nextDouble();
+                        teclado.nextLine();
                     } while (cantidad <= 0);
                     if (saldoNegativo(cantidad, c)){
                         System.out.println("SU OPERACIÓN VA A DEJAR SU CUENTA POR DEBAJO DE -50 EUROS");
@@ -110,10 +121,12 @@ public class Main {
                         if(c.getSaldo() < 0){
                             System.out.println("AVISO: SALDO NEGATIVO\n");
                         }
-
+                        c.almacenarMovimientos(m);
                     }
                     break;
                 case "7":
+                    System.out.println("ESTE ES EL ESTRACTO DE SUS MOVIMIENTOS");
+                    c.recorrerMovimientos(m);
                     break;
                 case "8":
                     //Opción para salir
@@ -141,7 +154,7 @@ public class Main {
 
     public static boolean saldoNegativo(double cantidad, CuentaBancaria c){
         boolean descubierto = false;
-        if(c.getSaldo() + cantidad < -50){
+        if(c.getSaldo() - cantidad < -50){
             descubierto = true;
         }
         return descubierto;

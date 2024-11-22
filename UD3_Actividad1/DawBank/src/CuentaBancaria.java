@@ -1,9 +1,6 @@
 //Como algunos métodos en esta clase van a necesitar datos por teclado necesito importar la clase Scanner
 
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.Arrays;
+
 
 
 public class CuentaBancaria {
@@ -14,9 +11,9 @@ public class CuentaBancaria {
     private double saldo;
     private Movimientos[] movimientos;
 
-    //Defino una variable static que me sirve para llevar la cuenta de los elementos totales almacenados en el array
-    //movimientos
-    private static int elementosTotales = 0;
+    //Defino una variable que me sirve para llevar la cuenta de los elementos totales almacenados en el array
+    //movimientos. Antes era static pero voy a probar con public a ver si sale
+    public int elementosTotales = 0;
 
     //Defino un constructor por defecto para poder declarar variables del tipo CuentaBancaria
     public CuentaBancaria() {
@@ -32,6 +29,7 @@ public class CuentaBancaria {
         this.saldo = 0;
         //Siempre va a almacenar un máximo de 100 movimientos que se guardan en este array
         this.movimientos = new Movimientos[100];
+        this.elementosTotales = 0;
     }
 
 
@@ -58,6 +56,10 @@ public class CuentaBancaria {
         this.saldo -= saldo;
     }
 
+    private void aumentarElementos() {
+        this.elementosTotales++;
+    }
+
     //Este es el equivalente al método toString
     public String mostrarInformacion(){
         System.out.println("ESTOS SON LOS DATOS DE LA CUENTA BANCARIA EN CUESTIÓN");
@@ -71,20 +73,29 @@ public class CuentaBancaria {
     }
 
     //Metodo para almacenar los movimientos en el array
-    public void almacenarMovimientos(){
+    public void almacenarMovimientos(Movimientos m){
+        this.checkArrayLength(this.elementosTotales);
+        this.movimientos[this.elementosTotales] = m;
+        this.aumentarElementos();
+    }
 
+    public void recorrerMovimientos(Movimientos m){
+        for(int i = 0; i < this.elementosTotales; i++){
+            m = this.movimientos[i];
+            System.out.println(m.infoMov());
+        }
     }
 
     //Este método lo he creado para checkear el número de elementos totales introducidos
     //Si ese número es igual a la length del array movimientos, crear un array auxiliar, copia los datos a ese array
     //Despues redimensiona el array existente a su longitud actual +50 y luego vuelca el contenido de auxiliar
     //de nuevo en el array original redimensionado
-    private void checkArrayLength(CuentaBancaria c, int elementos){
-        if(elementos >= c.movimientos.length){
-            Movimientos[] movimientosAuxiliares = new Movimientos[c.movimientos.length];
-            System.arraycopy(c.movimientos, 0, movimientosAuxiliares, 0, movimientos.length);
-            c.movimientos = new Movimientos[c.movimientos.length + 50];
-            System.arraycopy(movimientosAuxiliares, 0, c.movimientos, 0, movimientosAuxiliares.length);
+    private void checkArrayLength(int elementos){
+        if(elementos >= this.movimientos.length - 1){
+            Movimientos[] movimientosAuxiliares = new Movimientos[this.movimientos.length];
+            System.arraycopy(this.movimientos, 0, movimientosAuxiliares, 0, movimientos.length);
+            this.movimientos = new Movimientos[this.movimientos.length + 50];
+            System.arraycopy(movimientosAuxiliares, 0, this.movimientos, 0, movimientosAuxiliares.length);
         }
     }
 
