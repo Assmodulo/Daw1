@@ -1,5 +1,8 @@
+
+/*Lo primero doy medidas al body y la propiedad de display flex. Por ultimo con justify content, indico que quiero
+que todo lo incluido dentro de body ocupe los espacios como yo quiero*/
 body{
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     display:flex;
     flex-wrap: wrap;
@@ -7,12 +10,14 @@ body{
     justify-content: space-evenly;
 }
 
+/*Defino el grid izquierdo y sus areas y tamaños, además de los valores de ancho y alto, pero esta vez en % ya que quiero
+que ocupen un espacio relativo determinado por el contenedor padre*/
 .gridIzquierdo{
     width:65%;
-    height: 90%;
+    height: 100%;
     display:grid;
     grid-template-columns: 4fr 1fr 1fr 1fr;
-    grid-template-rows:1fr 1fr 1fr 1fr;
+    grid-template-rows:1fr 2fr 2fr 2fr;
     grid-template-areas:
                         "secciones1 secciones2 secciones3 secciones4"
                         "producto1 cantidad1 unidad1 total1"
@@ -21,10 +26,11 @@ body{
 
 }
 
+/*El mismo caso que es grid izquierdo*/
 .gridDerecho{
     width:25%;
-    height: 40%;
-    background-color: lightgray;
+    height: 30%;
+    background-color: #eaeaea;
     display:grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -33,6 +39,8 @@ body{
                         "tituloPequeño precio";
 }
 
+/*Defino los parametros comunes a todos los divs de la clase secciones. También dentro indico el tamaño y estilo de la
+fuente de los elementos dentro de el e indico que quiero que quede centrado*/
 .secciones1, .secciones2, .secciones3, .secciones4 {
     text-align: center;
     border-bottom:1px solid black;
@@ -42,66 +50,105 @@ body{
     font-style: italic;
 }
 
+/*Sección 1 debe de llevar algún ajuste especial por su tamaño de 4fr, para que el texto quede donde yo quiero*/
 .secciones1{
+    grid-area: secciones1;
     text-align: left;
-    padding-left: 20px;
+    padding-left: 10%;
 }
 
+/*Como en el caso de secciones voy cogiendo cada parte, agrupándolas y modificando sus características comunes. Esto
+lo haré con todas las diferentes secciones*/
 .cantidad1, .cantidad2,.cantidad3{
+    /*En este caso el display dentro es flex por el hecho de que hay dos botones y un parrafo, para que se muestren en la
+    misma linea*/
     display:flex;
     flex-direction: row;
     align-items: center;
-
+    /*El border color en rgb para poder modificar la opacidad*/
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    /*Me aseguro de que todo en su interior quede centrado verticalmente*/
+    align-content: center;
 }
 
+/*Juego con las medidas de los botones hasta que quedan como en el ejemplo*/
 button{
     text-align: center;
-    vertical-align: center;
-    width: 25px;
-    height: 25px;
+    width: 20%;
+    height: 20%;
     margin: auto;
     border-radius: 50%;
     background-color:transparent;
     border:none;
 }
 
+/*Lo mismo que en partes anteriores pero con las secciones de productos*/
 .producto1, .producto2, .producto3 {
-    padding-left: 25px;
-
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    align-content: center;
 }
 
+/*Quizá debi adjudicarles una clase, pero al no incluir más h5 no lo creí conveniente. Lo modifico hasta que queda como
+yo quiero. También con referencias que viene después*/
 h5{
     font-style: italic;
     font-weight: bolder;
     font-size: 1.4em;
-    margin-bottom:-10px;
+    margin-bottom:-2%;
+    padding-left: 10%;
 }
 
 .referencias {
+    padding-left: 10%;
     font-size: 0.6em;
 }
 
+/*Este es el parrafo entre los botones, voy jugando todo con medidas relativas hasta que queda más o menos como yo quiero*/
 .numero{
     text-align: center;
-    vertical-align: central;
-    width: 25px;
-    height: 25px;
+    align-content: center;
+    width: 25%;
+    height: 20%;
     margin: auto;
-    padding-top:10px;
+    border-radius: 15%;
+    border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
+/*Repetimos lo anterior*/
+.unidad1, .unidad2, .unidad3{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    align-content: center;
+}
 
-
+/*Modifico simplemente para que los textos se centren*/
 .unidad1, .unidad2, .unidad3 p{
     text-align: center;
-    align-items: center;
-    padding-top: 35%;
+}
+
+/*Más de lo mismo*/
+.total1, .total2, .total3{
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    align-content: center;
 }
 
 .total1, .total2, .total3 p{
     text-align: center;
-    align-items: center;
-    padding-top: 35%;
+}
+
+/*Empiezo a jugar con el grid derecho hasta que va quedando como yo quiero, más o menos. También modifico las diferentes
+secciones, de la misma forma que he hecho con apartados anteriores*/
+.gridDerecho{
+    align-content: center;
+    margin-top: 6%;
+    height: 30%;
 }
 
 .total{
@@ -109,22 +156,27 @@ h5{
     width: 80%;
     margin: auto;
     height: 100%;
-    border-bottom:1px solid black;
+    border-bottom:1px solid rgb(0, 0, 0,0.4);
+    align-content: center;
 }
 
 .tituloPequeño{
     grid-area: tituloPequeño;
     width: 40%;
-    height: 100%;
+    height: 90%;
     text-align: left;
-    margin:auto;
+    align-content: center;
+    margin: auto;
 }
 
 .precio{
     grid-area: precio;
     width: 40%;
-    height: 100%;
+    height: 90%;
     text-align: right;
-    margin:auto;
+    font-size: 0.7em;
+    margin: auto;
+    align-content: center;
 }
-
+/*Después de modificarlo todo y que quedase más o menos como yo quería, hice una prueba en inspeccionar, con diferentes
+dispositivos y fui viendo como quedaba. En vertical no muy allá, pero en horizontal parece que bien*/
