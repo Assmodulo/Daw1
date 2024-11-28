@@ -14,7 +14,8 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String dni, String nombre, String direccion, LocalDate fechaNacimiento) {
+    public Cliente(String dni, String nombre, String direccion, LocalDate fechaNacimiento, int numSocio) {
+        this.numSocio = MyUtils.formatoCodigo("C", numSocio + 1);
         this.dni = dni;
         this.nombre = nombre;
         this.direccion = direccion;

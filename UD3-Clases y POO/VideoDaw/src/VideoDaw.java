@@ -4,8 +4,8 @@ public class VideoDaw {
     private String cif;
     private String direccion;
     private LocalDate fechaAlta;
-    private Pelicula[] peliculasRegistradas;
-    private Cliente[] clienteRegistrados;
+    private Pelicula[] peliculassRegistradas;
+    private Cliente[] clientesRegistrados;
 
     //Variables contadores para manejar los arrays y para crear los códigos
     private int peliculasTotales = 0, clientesTotales = 0;
@@ -17,8 +17,8 @@ public class VideoDaw {
         this.cif = cif;
         this.direccion = direccion;
         this.fechaAlta = LocalDate.now();
-        peliculasRegistradas = new Pelicula[10];
-        clienteRegistrados = new Cliente[10];
+        peliculassRegistradas = new Pelicula[10];
+        clientesRegistrados = new Cliente[10];
     }
 
     public String getCif() {
@@ -43,5 +43,15 @@ public class VideoDaw {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public void guardarDatosCliente(Cliente cliente) {
+        clientesRegistrados[clientesTotales] = cliente;
+        clientesTotales++;
+    }
+
+    public void guardarDatosPelicula(Pelicula pelicula) {
+        peliculassRegistradas[peliculasTotales] = pelicula;
+        peliculasTotales++;
     }
 }

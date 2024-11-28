@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class GestionVideoDaw {
@@ -37,8 +38,26 @@ public class GestionVideoDaw {
                     //Creo el objeto, le paso videoclub.getPeliculasTotales para que se cree así el código de registro
                     //de la película
                     pelicula = new Pelicula(titulo, MyUtils.asignarGenero(), videoclub.getPeliculasTotales());
+                    videoclub.guardarDatosPelicula(pelicula);
                     break;
                 case "3":
+                    System.out.println("REGISTRANDO CLIENTE");
+                    String dni, nombre, direccion;
+                    LocalDate fechaNacim;
+                    System.out.println();
+                    do{
+                        System.out.println("AHORA LE VAMOS A SOLICITAR SU DNI");
+                        dni = MyUtils.formatoDni();
+                        for(int i; i < videoclub.c)
+                    }
+                    System.out.println("AHORA NECESITAMOS SU NOMBRE");
+                    nombre = teclado.nextLine();
+                    System.out.println("AHORA NECESITAMOS SU DIRECCION");
+                    direccion = teclado.nextLine();
+                    System.out.println("AHORA NECESITAMOS SU FECHA DE NACIMIENTO");
+                    fechaNacim = MyUtils.insertarFPorTeclado();
+                    cliente = new Cliente(dni, nombre, direccion, fechaNacim,videoclub.getClientesTotales());
+                    videoclub.guardarDatosCliente(cliente);
                     break;
                 case "4":
                     break;

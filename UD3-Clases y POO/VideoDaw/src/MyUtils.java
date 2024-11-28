@@ -12,23 +12,18 @@ public class MyUtils {
     private static DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yy");
     private static DateTimeFormatter formateador2 = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss");
 
-    public static String formatoCodigo(int numero) {
+    private static String[] letrasDni = {"T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S",
+            "Q","V","H","L","C","K","E"};
+
+    public static String formatoCodigo(String letra, int numero) {
         //En principio creo que se puede generar el código de forma automática, ya que no especifica nada el enunciado
         //del ejercicio
         String codigo;
         DecimalFormat df = new DecimalFormat("0000");
-        codigo = "P-" + df.format(numero);
+        codigo = letra + df.format(numero);
         return codigo;
     }
 
-    public static String formatoCodigoSocio(int numero) {
-        //En principio creo que se puede generar el código de forma automática, ya que no especifica nada el enunciado
-        //del ejercicio
-        String codigo;
-        DecimalFormat df = new DecimalFormat("0000");
-        codigo = "P-" + df.format(numero);
-        return codigo;
-    }
 
     public static String formatearFecha(LocalDate fecha) {
 
@@ -114,5 +109,40 @@ public class MyUtils {
             }
         } while (!salir);
         return genero;
+    }
+
+    public static String formatoDni(){
+        Pattern patron = Pattern.compile("[0-9]{8}");
+        Matcher match;
+        Scanner sc = new Scanner(System.in);
+        String dni;
+
+        do {
+            System.out.println("INTRODUZCA SU NIE");
+            dni = sc.nextLine();
+            match = patron.matcher(dni);
+        } while (!match.matches());
+
+        int dniCalculo = Integer.parseInt(dni);
+        dni = dni + letrasDni[dniCalculo%23];
+        System.out.println("ESTE ES US DNI " + dni);
+        return dni;
+    }
+
+    public static LocalDate insertarFPorTeclado(){
+        LocalDate fecha;
+        Pattern patronFecha = Pattern.compile("[0-9]{1,2}/[0-9]{1,2}/[0-9]{1,2}");
+        Matcher match;
+        String fechaTeclado;
+        sc = new Scanner(System.in);
+        do{
+            System.out.println("INSERTE LA FECHA CON EL SIGUIENTE FORMATO:\n" +
+                    "DD/MM/AA");
+            fechaTeclado = sc.nextLine();
+            match = patronFecha.matcher(fechaTeclado);
+        }while(!match.matches());
+        fecha = LocalDate.parse(fechaTeclado, formateador);
+
+        return fecha;
     }
 }

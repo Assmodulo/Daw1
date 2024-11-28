@@ -21,7 +21,7 @@ public class Pelicula {
     //Genero un constructor con los atributos que creo que voy a necesitar
     //Numero codigo que paso por argumento será el valor de peliculas totales de videoBank + 1
     public Pelicula(String titulo, String genero, int numeroCodigo) {
-        this.cod = MyUtils.formatoCodigo(numeroCodigo + 1);
+        this.cod = MyUtils.formatoCodigo("P", numeroCodigo + 1);
         this.titulo = titulo;
         this.genero = genero;
         this.fechaRegistro = LocalDate.now();
