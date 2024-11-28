@@ -45,11 +45,12 @@ public class GestionVideoDaw {
                     String dni, nombre, direccion;
                     LocalDate fechaNacim;
                     System.out.println();
+                    //Ahora con este do while, comprobaré el dni con los dni de los clientes ya guardados y cuando
+                    //el método vea que ese dni no existe nos dejará proseguir con la introducción de los datos
+                    System.out.println("AHORA LE VAMOS A SOLICITAR SU DNI");
                     do{
-                        System.out.println("AHORA LE VAMOS A SOLICITAR SU DNI");
                         dni = MyUtils.formatoDni();
-                        for(int i; i < videoclub.c)
-                    }
+                    }while(videoclub.comprobarClientes(dni));
                     System.out.println("AHORA NECESITAMOS SU NOMBRE");
                     nombre = teclado.nextLine();
                     System.out.println("AHORA NECESITAMOS SU DIRECCION");

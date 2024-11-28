@@ -42,7 +42,7 @@ public class MyUtils {
         String cif;
         do {
             System.out.println("INTRODUZCA UN VALOR VÁLIDO PARA EL CIF: UNA LETRA Y OCHO DÍGITOS");
-            cif = sc.nextLine();
+            cif = sc.nextLine().toUpperCase();
             match = patron.matcher(cif);
         } while (!match.matches());
         System.out.println("CIF INTRODUCIDO CORRECTO");

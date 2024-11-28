@@ -54,4 +54,22 @@ public class VideoDaw {
         peliculassRegistradas[peliculasTotales] = pelicula;
         peliculasTotales++;
     }
+
+    //Método para comprobar si un cliente ya existe
+    public boolean comprobarClientes(String dni){
+        boolean existe = false;
+        Cliente c = new Cliente();
+        //Evaluo que clientesTotales sea distinto de cero, poque si es igual a 0 quiere decir que no has insertado
+        //ningún cliente, si es distinto de cero, recorro el array
+        if(clientesTotales != 0){
+            for(int i = 0; i < clientesTotales; i++){
+                c = clientesRegistrados[i];
+                if(dni.equals(c.getDni())){
+                    existe = true;
+                    System.out.println("EL CLIENTE YA HA SIDO CREADO CON ANTERIORIDAD");
+                }
+            }
+        }
+        return existe;
+    }
 }
