@@ -37,9 +37,6 @@ header h1 {
     font-size: 2rem;
 }
 
-button{
-    visibility: hidden;
-}
 
 .menu {
     list-style: none;
@@ -141,6 +138,9 @@ footer {
     padding: 1rem 0;
 }
 
+/*La mayoria de las cosas las he conseguido, creo, pero el probelma es el menú desplegable
+He intentado jugar con las diferentes posiciones, ya sea relative, fixed, o la que sea, con display, etc, y no he
+conseguido que funciones de ninguna de las formas. Paso el ratón por encima de Más y no pasa nada.*/
 @media(max-width: 768px){
     html{
         display:grid;
@@ -155,19 +155,23 @@ footer {
         height: auto;
     }
 
-    nav span{
-        visibility: visible;
-    }
-
-    nav span:hover .menu{
-        visibility: visible;
-    }
 
     .menu{
         flex-direction: column;
         align-items: center;
         width: 100%;
-        visibility: hidden;
+    }
+
+    .desplegable{
+        cursor: pointer;
+    }
+    .menu-desplegable{
+        position: fixed;
+
+    }
+    .desplegable:hover .menu-desplegable{
+        display: block;
+        background-color: black;
     }
 
     .diseno-grid{
