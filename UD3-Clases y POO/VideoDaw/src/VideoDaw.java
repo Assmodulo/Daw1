@@ -72,4 +72,28 @@ public class VideoDaw {
         }
         return existe;
     }
+
+    //Metodo para recorrer el catálogo de películas disponibles para alquiler de este videoclub en concreto
+    public String peliculasAlquiler(VideoDaw v){
+        String listadoPeliculasDisponibles = "";
+        Pelicula p;
+        for(int i = 0; i < this.peliculasTotales; i++){
+            if(!this.peliculassRegistradas[i].isAlquilada()){
+                p = this.peliculassRegistradas[i];
+                listadoPeliculasDisponibles = listadoPeliculasDisponibles+ "\n" + p.getTitulo();
+            }
+        }
+        return listadoPeliculasDisponibles;
+    }
+
+    //Metodo para recorrer el catálogo de cliente dados de alta de este videoclub en concreto
+    public String clientesDadosAlta(VideoDaw v){
+        String clientesAlta = "";
+        Cliente c;
+        for(int i = 0; i < this.clientesTotales; i++){
+                c = this.clientesRegistrados[i];
+                clientesAlta = clientesAlta + "\n" + c.getNumSocio() + "- -" + c.getNombre();
+        }
+        return clientesAlta;
+    }
 }

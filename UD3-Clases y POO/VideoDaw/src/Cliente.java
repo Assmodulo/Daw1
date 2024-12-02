@@ -7,7 +7,7 @@ public class Cliente {
     private String direccion;
     private LocalDate fechaNacimiento;
     private LocalDate fechaBaja;
-    private Pelicula[] peliculas = new Pelicula[10];
+    private Pelicula[] peliculasAlquiladas;
 
     private static int cantidadPeliculas = 0;
 
@@ -20,6 +20,7 @@ public class Cliente {
         this.nombre = nombre;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
+        this.peliculasAlquiladas = new Pelicula[10];
     }
 
     public String getDni() {

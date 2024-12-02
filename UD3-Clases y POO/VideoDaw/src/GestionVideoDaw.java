@@ -61,6 +61,11 @@ public class GestionVideoDaw {
                     videoclub.guardarDatosCliente(cliente);
                     break;
                 case "4":
+                    System.out.println("ESTE ES EL LISTADO DE CLIENTES");
+                    String listadoClientes = videoclub.clientesDadosAlta(videoclub);
+                    System.out.println(listadoClientes);
+                    System.out.println("SELECCIONE EL SOCIO QUE VA A ALQUILAR INDICANDO SU CÓDIGO COMPLETO");
+                    String clienteSeleccionado;
                     break;
                 case "5":
                     break;
