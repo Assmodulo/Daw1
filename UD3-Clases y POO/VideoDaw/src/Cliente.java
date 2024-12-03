@@ -54,4 +54,9 @@ public class Cliente {
     public void setFechaBaja(LocalDate fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
+
+    public String mostrarDatosCliente(){
+        return "Nombre: " + this.getNombre() + "Num.Socio: " + this.getNumSocio() + "Dni: " + this.getDni() +
+                "Dirección: " + this.getDireccion() + "F. Nacimiento: " + this.getFechaNacimiento();
+    }
 }

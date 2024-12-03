@@ -145,4 +145,15 @@ public class MyUtils {
 
         return fecha;
     }
+
+    public static boolean validarEleccionSocio(String codigo){
+        boolean correcto = false;
+        Pattern patronCodigo = Pattern.compile("[0-9]{4}");
+        Matcher match;
+        match = patronCodigo.matcher(codigo);
+        if(match.matches()){
+            correcto = true;
+        }
+        return correcto;
+    }
 }

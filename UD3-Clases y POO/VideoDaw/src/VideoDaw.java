@@ -74,7 +74,7 @@ public class VideoDaw {
     }
 
     //Metodo para recorrer el catálogo de películas disponibles para alquiler de este videoclub en concreto
-    public String peliculasAlquiler(VideoDaw v){
+    public String peliculasAlquiler(){
         String listadoPeliculasDisponibles = "";
         Pelicula p;
         for(int i = 0; i < this.peliculasTotales; i++){
@@ -87,13 +87,35 @@ public class VideoDaw {
     }
 
     //Metodo para recorrer el catálogo de cliente dados de alta de este videoclub en concreto
-    public String clientesDadosAlta(VideoDaw v){
+    public String clientesDadosAlta(){
         String clientesAlta = "";
         Cliente c;
         for(int i = 0; i < this.clientesTotales; i++){
-                c = this.clientesRegistrados[i];
-                clientesAlta = clientesAlta + "\n" + c.getNumSocio() + "- -" + c.getNombre();
+            c = this.clientesRegistrados[i];
+            clientesAlta = clientesAlta + "\n" + c.getNumSocio() + "- -" + c.getNombre();
         }
         return clientesAlta;
+    }
+
+    //Metodo para devolver el cliente al seleccionarlo de entre todos los posibles
+    public Cliente devolverCliente(String codigo){
+        Cliente c = null;
+        for(int i = 0; i < this.clientesTotales; i++){
+            if(this.clientesRegistrados[i].getNumSocio().equals(codigo)){
+                c = this.clientesRegistrados[i];
+            }
+        }
+        return c;
+    }
+
+    //Metodo para devolver la película al seleccionarla de entre todas las posibles
+    public Pelicula devolverPelicula(String codigo){
+        Pelicula p = null;
+        for(int i = 0; i < this.peliculasTotales; i++){
+            if(this.peliculassRegistradas[i].getCod().equals(codigo)){
+                p = this.peliculassRegistradas[i];
+            }
+        }
+        return p;
     }
 }

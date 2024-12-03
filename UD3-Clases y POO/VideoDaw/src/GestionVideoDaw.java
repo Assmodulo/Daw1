@@ -62,10 +62,25 @@ public class GestionVideoDaw {
                     break;
                 case "4":
                     System.out.println("ESTE ES EL LISTADO DE CLIENTES");
-                    String listadoClientes = videoclub.clientesDadosAlta(videoclub);
+                    String listadoClientes = videoclub.clientesDadosAlta();
                     System.out.println(listadoClientes);
-                    System.out.println("SELECCIONE EL SOCIO QUE VA A ALQUILAR INDICANDO SU CÓDIGO COMPLETO");
-                    String clienteSeleccionado;
+                    String socioSeleccionado;
+                    cliente = null;
+                    do {
+                        System.out.println("SELECCIONE EL SOCIO QUE VA A ALQUILAR INDICANDO SU CÓDIGO NUMÉRICO, SIN LETRA");
+                        socioSeleccionado = teclado.nextLine();
+                        if (MyUtils.validarEleccionSocio(socioSeleccionado)) {
+                            cliente = videoclub.devolverCliente("C" + socioSeleccionado);
+                            if(cliente == null){
+                                System.out.println("NO EXISTE EL CLIENTE");
+                            }
+                        } else {
+                            System.out.println("FORMATO DE CÓDIGO INCORRECTO");
+                        }
+                    }while(cliente == null);
+                    System.out.println(cliente.mostrarDatosCliente());
+                    System.out.println("ESTAS SON LAS PELÍCULAS DISPONIBLES EN ESTE MOMENTO");
+                    System.out.println(videoclub.peliculasAlquiler());
                     break;
                 case "5":
                     break;
