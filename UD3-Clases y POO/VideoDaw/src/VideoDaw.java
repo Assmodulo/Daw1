@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class VideoDaw {
     private String cif;
@@ -126,6 +127,14 @@ public class VideoDaw {
         return p;
     }
 
+    public void generarAlquiler(Cliente c, Pelicula p){
+        Cliente cliente = c;
+        Pelicula pelicula = p;
+        pelicula.setAlquilada(true);
+        pelicula.setFechaAlquiler(LocalDateTime.now());
+        cliente.crearAlquiler(pelicula);
+    }
+
     public String listadoPeliculasAlquiladas(){
         String listadoPeliculasAlquiladas = "";
         Pelicula p;
@@ -136,5 +145,15 @@ public class VideoDaw {
             }
         }
         return listadoPeliculasAlquiladas;
+    }
+
+    public void devolverPeliculaAlquilada(Pelicula p){
+        Pelicula pelicula = p;
+        for(int i = 0; i < this.peliculasTotales; i++){
+            if(this.peliculassRegistradas[i].equals(pelicula)){
+                pelicula.setAlquilada(false);
+                pelicula.setFechaAlquiler(null);
+            }
+        }
     }
 }

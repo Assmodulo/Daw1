@@ -172,4 +172,12 @@ public class MyUtils {
         }
         return correcto;
     }
+
+    public static boolean comprobarFechaDevolucion(LocalDateTime fecha){
+        boolean correcto = false;
+        if(LocalDateTime.now().minusHours(48).isAfter(fecha)){
+            correcto = true;
+        }
+        return correcto;
+    }
 }

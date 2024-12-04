@@ -102,17 +102,33 @@ public class GestionVideoDaw {
                         }
                     }while(pelicula == null);
                     System.out.println(pelicula.mostrarInforPelicula());
-                    pelicula.setAlquilada(true);
-                    pelicula.setFechaAlquiler(LocalDateTime.now());
+                    videoclub.generarAlquiler(cliente, pelicula);
                     System.out.println("SE HA REALIZADO EL ALQUILER DE UNA PELÍCULA");
                     break;
                 case "5":
                     System.out.println("DEVOLUCIÓN DE PELÍCULAS");
                     System.out.println(videoclub.listadoPeliculasAlquiladas());
+                    pelicula = null;
+                    peliculaSeleccionada = null;
                     if(videoclub.listadoPeliculasAlquiladas().isEmpty()){
                         System.out.println("EN ESTE MOMENTO NO HAY NINGUNA PELÍCULA ALQUILADA");
                     }else{
-                        
+                        do {
+                            System.out.println("SELECCIONE LA PELICULA QUE VA A ALQUILAR INDICANDO SU CÓDIGO NUMÉRICO, SIN LETRA");
+                            peliculaSeleccionada = teclado.nextLine();
+                            if (MyUtils.validarEleccionPelicula(peliculaSeleccionada)) {
+                                pelicula = videoclub.devolverPelicula("P" + peliculaSeleccionada);
+                                if(pelicula == null){
+                                    System.out.println("NO EXISTE EL CODIGO DE PELICULA");
+                                }
+                            } else {
+                                System.out.println("FORMATO DE CÓDIGO INCORRECTO");
+                            }
+                        }while(pelicula == null);
+                        if(MyUtils.validarEleccionPelicula(pelicula.getFechaAlquiler())){
+                            System.out.println("SE HA EXCEDIDO DEL PERIODO DE 48 HORAS");
+                        }
+                        videoclub.devolverPeliculaAlquilada(pelicula);
                     }
                     break;
                 case "6":
