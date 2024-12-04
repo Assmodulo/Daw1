@@ -1,24 +1,17 @@
+/*Cambio el background en la seccion de movil*/
 body{
-    background-color: black;
+    background-color: darkgrey;
 }
 
+/*Modifico el flex direction de la cabecera*/
 .cabecera{
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-self: center;
-    justify-content: space-between;
     background-color: red;
-    vertical-align: center;
-}
-
-.lista{
-    list-style: none;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
 }
 
+/*Cambio las propiedades del titulo para moviles*/
 .cabecera h1{
     text-align: center;
     color:white;
@@ -27,14 +20,31 @@ body{
     text-shadow:3px 3px 3px black;
 }
 
-.botones{
-    max-width: 25%;
+/*Indico simplemente el ancho del elemento*/
+.navegacion{
+    width: 100%;
 }
 
+/*La lista de botones se debe mostrar como una columna, no uso flex aquí, no hace falta. la lista ocupa el 100%
+Pero no se porque me deja un hueco a la izquierda.*/
+.lista{
+    max-width: 100%;
+    list-style: none;
+
+}
+
+/*He cambiado algo el estilo para que se vean diferentes y que ocupan el 100%*/
+.lista li{
+    background-color: goldenrod;
+    max-width: 100%;
+    text-align: center;
+}
+
+/*Mismo estilo en los botones, salvo por añadir border none para que no se vea el borde*/
 .botones button{
     background-color: rgb(0,0,0,0);
-    border:none;
-    color:white;
+    color:black;
+    border: none;
     font-family: "Baskerville Old Face";
     font-style: italic;
     font-size: 0.8rem;
@@ -48,12 +58,14 @@ body{
     box-shadow: 3px 3px 3px black;
 }
 
+/*Especificaciones del contenedor principal*/
 .contenedor_principal{
     width: 100%;
     margin-top:4%;
     margin:auto;
 }
 
+/*Indico que ahora el flex es como columna para que se vea cada elemento debajo del anterior*/
 .principal{
     display:flex;
     flex-direction: column;
@@ -61,9 +73,48 @@ body{
     margin-bottom: 4%;
 }
 
+/*La imagen que ocupe el 100% del espacio y que quede centrada*/
+.imagen_principal{
+    width: 100%;
+    height: auto;
+    margin:auto;
+}
+
+/*Cambio algo el texto*/
 .principal p{
-    color:white;
+    color:black;
     font-family: Arial;
     font-size:0.9rem;
     text-align: center;
+}
+
+/*Modifico el color de la tabla*/
+.libros{
+    color:black;
+    width: 70%;
+    margin: auto;
+}
+
+/*Cada linea se muestra como columna*/
+tr{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
+}
+
+/*Por cambiar, la galeria se muestra como grid de una sola columna con un espacio entre filas*/
+.galeria{
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 5%;
+    margin-top: 4%;
+}
+
+/*Lo que ocupa cada imagen dentro del contenedor y que queden centradas*/
+.imagen_galeria{
+    max-width: 90%;
+    height: auto;
+    margin:auto;
 }

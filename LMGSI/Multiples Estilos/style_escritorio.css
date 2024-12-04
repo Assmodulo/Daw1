@@ -1,7 +1,11 @@
+
+/*En la versión de escritorio doy un fondo negro a todo el body para que el resto de elementos resalten más*/
 body{
     background-color: black;
 }
 
+/*No quiero que la cabecera ocupe todo el ancho, asi que le doy un ancho de 50% y un margin auto para centrarlo
+indico que su contenido se centre y que su color de fondo es rojo para que contraste*/
 .cabecera{
     width: 50%;
     margin:auto;
@@ -9,6 +13,7 @@ body{
     background-color: red;
 }
 
+/*Modifico el estilo del título*/
 .cabecera h1{
     text-align: center;
     color:white;
@@ -16,6 +21,8 @@ body{
     text-shadow:3px 3px 3px black;
 }
 
+/*lista es la clase del menú de navegación. Display flex y row para que se muestren en una linea y le quito el estilo
+de lista. Space evenly para que se distribuyan uniformemente*/
 .lista{
     list-style: none;
     display:flex;
@@ -23,9 +30,12 @@ body{
     justify-content: space-evenly;
 }
 
+/*Indico que el tamaño máximo de los botones debe de ser un 25% del ancho de su contenedor*/
 .botones{
     max-width: 25%;
 }
+
+/*Juego con el estilo de los botones*/
 .botones button{
     background-color: rgb(0,0,0,0);
     border:none;
@@ -36,6 +46,7 @@ body{
     cursor: pointer;
 }
 
+/*añado algo de estilo cuando el ratón pasa por encima de los botones*/
 .botones button:hover{
     background-color: darkgreen;
     border:1px solid black;
@@ -43,11 +54,22 @@ body{
     box-shadow: 3px 3px 3px black;
 }
 
+/*Marco el ancho del contenedor principal al 100% del ancho de la página y le doy separación con el elemento
+superior*/
 .contenedor_principal{
     width: 100%;
     margin-top:4%;
 }
 
+/*La imagen va a ocupar el 100% de su espacio asigando*/
+.imagen_principal{
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+/*Aquí doy display flex y row para que la imagen y el párrafo se muestren uno a continuación del otro
+space evenly para que sea uniforme. Margin bottom para separarlo del siguiente elemento*/
 .principal{
     display:flex;
     flex-direction: row;
@@ -55,18 +77,21 @@ body{
     margin-bottom: 4%;
 }
 
+/*Juego con el estilo del parrafo*/
 .principal p{
     color:white;
     font-family: Arial;
     font-size:1.4rem;
 }
 
+/*Defino algo el estilo de la tabla*/
 .libros{
     color:white;
     width: 70%;
     margin: auto;
 }
 
+/*Defino las propiedades de cada celda*/
 th{
     font-size: 1.8em;
     font-weight: bolder;
@@ -76,6 +101,9 @@ th{
     border-collapse: collapse;
 }
 
+/*Defino las propiedades del contenedor de las imagenes. Grid para que sea una rejilla y dos columnas de 1fr para que
+las imágenes se muestren de a dos. Row gap para la separación entre filas. Margin auto para que quede todo más o menos
+centrado y una separación con el elemento superior*/
 .galeria{
     width: 100%;
     display:grid;
@@ -85,7 +113,7 @@ th{
     margin-top: 4%;
 
 }
-
+/*Cada imagen que ocupe un 70% de su espacio asignado*/
 .imagen_galeria{
     max-width: 70%;
 }

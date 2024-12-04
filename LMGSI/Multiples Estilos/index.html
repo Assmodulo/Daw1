@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Defino lo necesario en el head incluidos los dos links a los archivos css-->
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="style_escritorio.css" media="(min-width:769px)">
     <link rel="stylesheet" href="style_responsive.css" media="(max-width:768px)">
 </head>
 <body>
+<!--Dentro de body lo primero es definir un header y darle una clase-->
     <header class="cabecera">
         <h1>La Biblioteca Central</h1>
+        <!--El menú de navegación en su propia sección y en forma de lista.
+        Cada elemento de la lista es un button, a los que les doy una clase para modificarlos después-->
         <nav class="navegacion">
             <ul class="lista">
                 <li class="botones">
@@ -26,12 +30,15 @@
             </ul>
         </nav>
     </header>
-
+<!--Defino un contenedor principal en el que incluiré la imagen principal y un párrafo con algo de texto en su propia
+etiqueta con su clase propia.
+Le doy una clase para identificarlo mejor en el css-->
     <div class="contenedor_principal">
         <article class="principal">
             <img class="imagen_principal" src="imagenes/bibliotecas_09.jpg">
             <p>Lore Ipsum.<br>Imagen de una biblioteca real.<br>Con muchos libros en las estanterias</p>
         </article>
+        <!--Defino una tabla, como pedia el ejercicio y creo unos registros inventados-->
         <table class="libros">
             <tr>
                 <th>Titulo</th>
@@ -49,17 +56,17 @@
                 <td>La que manejan ellos</td>
             </tr>
             <tr>
-                <td>El diccionario de la lengua</td>
-                <td>La RAE</td>
-                <td>La que manejan ellos</td>
+                <td>El Quijote</td>
+                <td>Miguel de Cervantes</td>
+                <td>La imprenta del monasterio</td>
             </tr>
             <tr>
-                <td>El diccionario de la lengua</td>
-                <td>La RAE</td>
-                <td>La que manejan ellos</td>
+                <td>Manual de Supervivencia</td>
+                <td>La Vida Misma</td>
+                <td>Tu mismo con lo tuyo</td>
             </tr>
         </table>
-
+<!--Creo un último div, que va a contener una galería de fotos-->
         <div class="galeria">
             <img class="imagen_galeria" src="imagenes/unnamed.jpg">
             <img class="imagen_galeria" src="imagenes/Imaginary_Library.jpg">
