@@ -80,7 +80,9 @@ public class VideoDaw {
         for(int i = 0; i < this.peliculasTotales; i++){
             if(!this.peliculassRegistradas[i].isAlquilada()){
                 p = this.peliculassRegistradas[i];
-                listadoPeliculasDisponibles = listadoPeliculasDisponibles+ "\n" + p.getTitulo();
+                if(p.getFechaBaja() != null){
+                    listadoPeliculasDisponibles = listadoPeliculasDisponibles+ "\n" + p.getCod() + " " + p.getTitulo();
+                }
             }
         }
         return listadoPeliculasDisponibles;
@@ -92,7 +94,9 @@ public class VideoDaw {
         Cliente c;
         for(int i = 0; i < this.clientesTotales; i++){
             c = this.clientesRegistrados[i];
-            clientesAlta = clientesAlta + "\n" + c.getNumSocio() + "- -" + c.getNombre();
+            if(c.getFechaBaja() == null){
+                clientesAlta = clientesAlta + "\n" + c.getNumSocio() + "- -" + c.getNombre();
+            }
         }
         return clientesAlta;
     }
@@ -108,14 +112,29 @@ public class VideoDaw {
         return c;
     }
 
-    //Metodo para devolver la película al seleccionarla de entre todas las posibles
+    //Metodo para devolver la película al seleccionarla de entre todas las posibles. Es para devolver el objeto
+    //película no para el método de devolver una película al videoclub
     public Pelicula devolverPelicula(String codigo){
         Pelicula p = null;
         for(int i = 0; i < this.peliculasTotales; i++){
-            if(this.peliculassRegistradas[i].getCod().equals(codigo)){
-                p = this.peliculassRegistradas[i];
+            if(!this.peliculassRegistradas[i].isAlquilada()) {
+                if (this.peliculassRegistradas[i].getCod().equals(codigo)) {
+                    p = this.peliculassRegistradas[i];
+                }
             }
         }
         return p;
+    }
+
+    public String listadoPeliculasAlquiladas(){
+        String listadoPeliculasAlquiladas = "";
+        Pelicula p;
+        for(int i = 0; i < this.peliculasTotales; i++){
+            p = this.peliculassRegistradas[i];
+            if(p.isAlquilada()){
+                listadoPeliculasAlquiladas += "\n" + p.getCod() + " " + p.getTitulo() + " " + p.getFechaAlquiler();
+            }
+        }
+        return listadoPeliculasAlquiladas;
     }
 }

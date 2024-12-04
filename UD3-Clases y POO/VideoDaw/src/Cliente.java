@@ -47,16 +47,22 @@ public class Cliente {
         return fechaBaja;
     }
 
+    //En principio he considerado que la dirección de un cliente si podría cambiar
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public void setFechaBaja(LocalDate fechaBaja) {
-        this.fechaBaja = fechaBaja;
+    public void setFechaBaja() {
+        this.fechaBaja = LocalDate.now();
     }
 
     public String mostrarDatosCliente(){
         return "Nombre: " + this.getNombre() + "Num.Socio: " + this.getNumSocio() + "Dni: " + this.getDni() +
                 "Dirección: " + this.getDireccion() + "F. Nacimiento: " + this.getFechaNacimiento();
+    }
+
+    public void crearAlquiler(Pelicula p){
+        this.peliculasAlquiladas[cantidadPeliculas] = p;
+        cantidadPeliculas++;
     }
 }

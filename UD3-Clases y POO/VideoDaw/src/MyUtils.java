@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 public class MyUtils {
     //Esta clase es para métodos estáticos que necesite utilizar
     private static Scanner sc;
-    private static DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yy");
-    private static DateTimeFormatter formateador2 = DateTimeFormatter.ofPattern("dd/MM/yy  HH:mm:ss");
+    private static DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter formateador2 = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm:ss");
 
     private static String[] letrasDni = {"T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S",
             "Q","V","H","L","C","K","E"};
@@ -131,22 +131,38 @@ public class MyUtils {
 
     public static LocalDate insertarFPorTeclado(){
         LocalDate fecha;
-        Pattern patronFecha = Pattern.compile("[0-9]{1,2}/[0-9]{1,2}/[0-9]{1,2}");
+        Pattern patronFecha = Pattern.compile("[0-9]{2}/[0-9]{2}/[0-9]{4}");
         Matcher match;
         String fechaTeclado;
         sc = new Scanner(System.in);
         do{
             System.out.println("INSERTE LA FECHA CON EL SIGUIENTE FORMATO:\n" +
-                    "DD/MM/AA");
+                    "DD/MM/AAAA");
             fechaTeclado = sc.nextLine();
             match = patronFecha.matcher(fechaTeclado);
         }while(!match.matches());
         fecha = LocalDate.parse(fechaTeclado, formateador);
-
-        return fecha;
+        if(fecha.minusYears(18).isAfter(LocalDate.now())){
+            return fecha;
+        }
+       return null;
     }
 
+    //Metodo para validad la elección de un socio al alquilar una película
     public static boolean validarEleccionSocio(String codigo){
+        boolean correcto = false;
+        Pattern patronCodigo = Pattern.compile("[0-9]{4}");
+        Matcher match;
+        match = patronCodigo.matcher(codigo);
+        if(match.matches()){
+            correcto = true;
+        }
+        return correcto;
+    }
+
+    //Metodo para validar el código de una película cuando se quiere alquilar, es lo mismo que con socios
+    //Pero por ahora he preferido no pensar en un método para las dos
+    public static boolean validarEleccionPelicula(String codigo){
         boolean correcto = false;
         Pattern patronCodigo = Pattern.compile("[0-9]{4}");
         Matcher match;

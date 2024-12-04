@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class GestionVideoDaw {
@@ -57,8 +58,13 @@ public class GestionVideoDaw {
                     direccion = teclado.nextLine();
                     System.out.println("AHORA NECESITAMOS SU FECHA DE NACIMIENTO");
                     fechaNacim = MyUtils.insertarFPorTeclado();
-                    cliente = new Cliente(dni, nombre, direccion, fechaNacim,videoclub.getClientesTotales());
-                    videoclub.guardarDatosCliente(cliente);
+                    if(fechaNacim != null){
+                        cliente = new Cliente(dni, nombre, direccion, fechaNacim,videoclub.getClientesTotales());
+                        videoclub.guardarDatosCliente(cliente);
+                    }else{
+                        System.out.println("NO SE PUEDE DAR DE ALTA EL CLIENTE PUES ES MENOR DE EDAD");
+                    }
+
                     break;
                 case "4":
                     System.out.println("ESTE ES EL LISTADO DE CLIENTES");
@@ -81,14 +87,86 @@ public class GestionVideoDaw {
                     System.out.println(cliente.mostrarDatosCliente());
                     System.out.println("ESTAS SON LAS PELÍCULAS DISPONIBLES EN ESTE MOMENTO");
                     System.out.println(videoclub.peliculasAlquiler());
+                    String peliculaSeleccionada;
+                    pelicula = null;
+                    do {
+                        System.out.println("SELECCIONE LA PELICULA QUE VA A ALQUILAR INDICANDO SU CÓDIGO NUMÉRICO, SIN LETRA");
+                        peliculaSeleccionada = teclado.nextLine();
+                        if (MyUtils.validarEleccionPelicula(peliculaSeleccionada)) {
+                            pelicula = videoclub.devolverPelicula("P" + peliculaSeleccionada);
+                            if(pelicula == null){
+                                System.out.println("NO EXISTE EL CODIGO DE PELICULA");
+                            }
+                        } else {
+                            System.out.println("FORMATO DE CÓDIGO INCORRECTO");
+                        }
+                    }while(pelicula == null);
+                    System.out.println(pelicula.mostrarInforPelicula());
+                    pelicula.setAlquilada(true);
+                    pelicula.setFechaAlquiler(LocalDateTime.now());
+                    System.out.println("SE HA REALIZADO EL ALQUILER DE UNA PELÍCULA");
                     break;
                 case "5":
+                    System.out.println("DEVOLUCIÓN DE PELÍCULAS");
+                    System.out.println(videoclub.listadoPeliculasAlquiladas());
+                    if(videoclub.listadoPeliculasAlquiladas().isEmpty()){
+                        System.out.println("EN ESTE MOMENTO NO HAY NINGUNA PELÍCULA ALQUILADA");
+                    }else{
+                        
+                    }
                     break;
                 case "6":
+                    System.out.println("ESTE ES EL LISTADO DE CLIENTES DADOS DE ALTA AHORA MISMO");
+                    String listadoClientesAlta = videoclub.clientesDadosAlta();
+                    System.out.println(listadoClientesAlta);
+                    String socioSeleccionado2;
+                    cliente = null;
+                    if (!listadoClientesAlta.isEmpty()) {
+                        do {
+                            System.out.println("SELECCIONE EL SOCIO QUE VA A DAR DE BAJA, INTRODUCIENDO SU NUMERO DE CODIGO");
+                            socioSeleccionado2 = teclado.nextLine();
+                            if (MyUtils.validarEleccionSocio(socioSeleccionado2)) {
+                                cliente = videoclub.devolverCliente("C" + socioSeleccionado2);
+                                if(cliente == null){
+                                    System.out.println("NO EXISTE EL CLIENTE");
+                                }
+                            } else {
+                                System.out.println("FORMATO DE CÓDIGO INCORRECTO");
+                            }
+                        }while(cliente == null);
+                        System.out.println(cliente.mostrarDatosCliente());
+                        cliente.setFechaBaja();
+                    }else{
+                        System.out.println("NO SE TIENEN CLIENTES DADOS DE ALTA");
+                    }
                     break;
                 case "7":
+                    System.out.println("ESTE ES EL LISTADO DE PELICULAS REGISTRADAS AHORA MISMO");
+                    String listadoPeliculasRegistradas = videoclub.peliculasAlquiler();
+                    System.out.println(listadoPeliculasRegistradas);
+                    String peliculaSeleccionada2;
+                    pelicula = null;
+                    if (!listadoPeliculasRegistradas.isEmpty()) {
+                        do {
+                            System.out.println("SELECCIONE LA PELICULA A DAR DE BAJA, INTRODUCIENDO SU NUMERO DE CODIGO");
+                            peliculaSeleccionada2 = teclado.nextLine();
+                            if (MyUtils.validarEleccionPelicula(peliculaSeleccionada2)) {
+                                pelicula = videoclub.devolverPelicula("P" + peliculaSeleccionada2);
+                                if(pelicula == null){
+                                    System.out.println("NO EXISTE LA PELICULA");
+                                }
+                            } else {
+                                System.out.println("FORMATO DE CÓDIGO INCORRECTO");
+                            }
+                        }while(pelicula == null);
+                        System.out.println(pelicula.mostrarInforPelicula());
+                        pelicula.setFechaBaja();
+                    }else {
+                        System.out.println("NO SE TIENEN CLIENTES DADOS DE ALTA");
+                    }
                     break;
                 case "8":
+                    System.out.println("HASTA LA PROXIMA");
                     break;
                 default:
                     break;

@@ -63,8 +63,8 @@ public class Pelicula {
 
 
     //Genero los setters de los atributos que creo que se podrían modificar
-    public void setFechaBaja(LocalDate fechaBaja) {
-        this.fechaBaja = fechaBaja;
+    public void setFechaBaja() {
+        this.fechaBaja = LocalDate.now();
     }
 
     public void setFechaAlquiler(LocalDateTime fechaAlquiler) {
@@ -72,6 +72,12 @@ public class Pelicula {
     }
 
     public void setAlquilada(boolean alquilada) {
-        isAlquilada = alquilada;
+
+        this.isAlquilada = alquilada;
+    }
+
+    public String mostrarInforPelicula(){
+        return "Codigo: " + this.cod + " Titulo : " + this.titulo + " Genero : " + this.genero +
+                " Fecha Registro : " + this.fechaRegistro;
     }
 }
