@@ -1,0 +1,91 @@
+body{
+    background-color: black;
+}
+
+.cabecera{
+    width: 50%;
+    margin:auto;
+    align-content: center;
+    background-color: red;
+}
+
+.cabecera h1{
+    text-align: center;
+    color:white;
+    font-style: oblique;
+    text-shadow:3px 3px 3px black;
+}
+
+.lista{
+    list-style: none;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.botones{
+    max-width: 25%;
+}
+.botones button{
+    background-color: rgb(0,0,0,0);
+    border:none;
+    color:white;
+    font-family: "Baskerville Old Face";
+    font-style: italic;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.botones button:hover{
+    background-color: darkgreen;
+    border:1px solid black;
+    border-radius:50%;
+    box-shadow: 3px 3px 3px black;
+}
+
+.contenedor_principal{
+    width: 100%;
+    margin-top:4%;
+}
+
+.principal{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 4%;
+}
+
+.principal p{
+    color:white;
+    font-family: Arial;
+    font-size:1.4rem;
+}
+
+.libros{
+    color:white;
+    width: 70%;
+    margin: auto;
+}
+
+th{
+    font-size: 1.8em;
+    font-weight: bolder;
+    font-family: "Bookman Old Style";
+    font-style: italic;
+    border-bottom: 1px solid white;
+    border-collapse: collapse;
+}
+
+.galeria{
+    width: 100%;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 15%;
+    margin: auto;
+    margin-top: 4%;
+
+}
+
+.imagen_galeria{
+    max-width: 70%;
+}

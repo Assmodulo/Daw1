@@ -1,0 +1,69 @@
+body{
+    background-color: black;
+}
+
+.cabecera{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-between;
+    background-color: red;
+    vertical-align: center;
+}
+
+.lista{
+    list-style: none;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.cabecera h1{
+    text-align: center;
+    color:white;
+    font-size: 1.2rem;
+    font-style: oblique;
+    text-shadow:3px 3px 3px black;
+}
+
+.botones{
+    max-width: 25%;
+}
+
+.botones button{
+    background-color: rgb(0,0,0,0);
+    border:none;
+    color:white;
+    font-family: "Baskerville Old Face";
+    font-style: italic;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.botones button:hover{
+    background-color: darkgreen;
+    border:1px solid black;
+    border-radius:50%;
+    box-shadow: 3px 3px 3px black;
+}
+
+.contenedor_principal{
+    width: 100%;
+    margin-top:4%;
+    margin:auto;
+}
+
+.principal{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 4%;
+}
+
+.principal p{
+    color:white;
+    font-family: Arial;
+    font-size:0.9rem;
+    text-align: center;
+}
