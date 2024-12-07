@@ -13,10 +13,6 @@ public class Pelicula {
     private String genero;
 
 
-    //Genero un constructor por defecto porque es posible que lo necesite
-    public Pelicula() {
-
-    }
 
     //Genero un constructor con los atributos que creo que voy a necesitar
     //Numero codigo que paso por argumento será el valor de peliculas totales de videoBank + 1
@@ -38,19 +34,19 @@ public class Pelicula {
         return titulo;
     }
 
-    public String getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
 
-        return MyUtils.formatearFecha(this.fechaRegistro);
+        return this.fechaRegistro;
     }
 
-    public String getFechaBaja() {
+    public LocalDate getFechaBaja() {
 
-        return MyUtils.formatearFecha(this.fechaBaja);
+        return this.fechaBaja;
     }
 
-    public String getFechaAlquiler() {
+    public LocalDateTime getFechaAlquiler() {
 
-        return MyUtils.formatearFHora(this.fechaAlquiler);
+        return this.fechaAlquiler;
     }
 
     public boolean isAlquilada() {
@@ -78,6 +74,6 @@ public class Pelicula {
 
     public String mostrarInforPelicula(){
         return "Codigo: " + this.cod + " Titulo : " + this.titulo + " Genero : " + this.genero +
-                " Fecha Registro : " + this.fechaRegistro;
+                " Fecha Registro : " + MyUtils.formatearFecha(this.fechaRegistro);
     }
 }

@@ -12,9 +12,11 @@ public class MyUtils {
     private static DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static DateTimeFormatter formateador2 = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm:ss");
 
+    //Array para almacenar las letras del dni y hacer los calculos al introducir el nie
     private static String[] letrasDni = {"T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S",
             "Q","V","H","L","C","K","E"};
 
+    //Metodo para generar los codigos de socio y de película de forma automática y secuencial
     public static String formatoCodigo(String letra, int numero) {
         //En principio creo que se puede generar el código de forma automática, ya que no especifica nada el enunciado
         //del ejercicio
@@ -24,20 +26,42 @@ public class MyUtils {
         return codigo;
     }
 
-
+    //Formateador de fecha
     public static String formatearFecha(LocalDate fecha) {
 
         return formateador.format(fecha);
     }
 
+    //Formateador de fecha y hora
     public static String formatearFHora(LocalDateTime fecha) {
 
         return formateador2.format(fecha);
     }
 
+    //Devuelve String de las opciones del menú
+    public static String devolverOpcionesMenu(){
+        return "ELIIJA SU OPCIÓN\n1.- REGISTRAR VIDEOCLUB\n2.- REGISTRAR PELÍCULA EN VIDEOCLUB\n" +
+                "3.- REGISTRAR CLIENTE EN VIDEOCLUB\n4.- ALQUILAR PELÍCULA\n5.- DEVOLVER PELÍCULA\n" +
+                "6.- DAR DE BAJA CLIENTE\n7.- DAR DE BAJA PELÍCULA\n8.- SELECCIONAR VIDEOCLUB\n9.- SALIR";
+    }
+
+    //Metodo para validar el estado de un videoclub para las comprobaciones
+    public static String estadoVideoclub(VideoDaw videoclub){
+        String estado = "";
+        if(videoclub != null){
+            if(videoclub.getClientesTotales() == 0 || videoclub.getPeliculasTotales() == 0){
+                estado = "NO HAY CLIENTES O PELICULAS REGISTRADOS EN EL VIDEOCLUB\n" + "NO SE PUEDE REALIZAR UN ALQUILER";
+            }
+        }else{
+            estado = "NO HAY VIDEOCLUB CREADO O SELECCIONADO";
+        }
+        return estado;
+    }
+
+    //Metodo para validar el formato del CIF
     public static String obtenerCif() {
         sc = new Scanner(System.in);
-        Pattern patron = Pattern.compile("[A-Z]{1}[0-9]{8}");
+        Pattern patron = Pattern.compile("[A-Z][0-9]{8}");
         Matcher match;
         String cif;
         do {
@@ -49,77 +73,38 @@ public class MyUtils {
         return cif;
     }
 
-    public static String obtenerDireccion() {
+    //Metodo para reducir el número de llamadas al objeto de la clase scanner
+    public static String obtenerDatoSolicitado(String dato) {
         sc = new Scanner(System.in);
-        System.out.println("INDIQUE LA DIRECCIÓN DEL ESTABLECIMIENTO");
+        System.out.println("INTRODUZCA EL SIGUIENTE DATO: " + dato);
         return sc.nextLine();
     }
 
-    //Necesito un método para asignar un género a una película asi que voy a crear uno
-    public static String asignarGenero() {
-        sc = new Scanner(System.in);
-        String opcionElegida;
-        String genero = "";
-        boolean salir = false;
-        do {
-            System.out.println("LISTA DE GÉNEROS DISPONIBLES\n");
+    //Necesito un método para mostrar los generos almacenados en el enum
+    public static String listadoGeneros() {
+
+        String lista = "";
             //Muestro por pantalla el contenido del enum generos para que se vean los disponibles
             for (int i = 0; i < Generos.values().length; i++) {
-                System.out.println((i + 1) + " " + Generos.values()[i].getGenero() + " ");
+                lista += ((i + 1) + " " + Generos.values()[i].getGenero() + "\n");
             }
-            System.out.println();
-            System.out.println("ELIJA UNO DE LOS GÉNEROS DISPONIBLES");
-            opcionElegida = sc.nextLine();
-            switch (opcionElegida) {
-                case "1":
-                    genero = Generos.values()[0].getGenero();
-                    salir = true;
-                    break;
-                case "2":
-                    genero = Generos.values()[1].getGenero();
-                    salir = true;
-                    break;
-                case "3":
-                    genero = Generos.values()[2].getGenero();
-                    salir = true;
-                    break;
-                case "4":
-                    genero = Generos.values()[3].getGenero();
-                    salir = true;
-                    break;
-                case "5":
-                    genero = Generos.values()[4].getGenero();
-                    salir = true;
-                    break;
-                case "6":
-                    genero = Generos.values()[5].getGenero();
-                    salir = true;
-                    break;
-                case "7":
-                    genero = Generos.values()[6].getGenero();
-                    salir = true;
-                    break;
-                case "8":
-                    genero = Generos.values()[7].getGenero();
-                    salir = true;
-                    break;
-                default:
-                    System.out.println("OPCION NO VALIDA");
-                    break;
-            }
-        } while (!salir);
-        return genero;
+        return lista;
     }
 
+    //Metodo para devolver el genero elegido por teclado de entre las opciones del enum
+    public static String devolverGenero(int posicionEnum){
+        return Generos.values()[posicionEnum].getGenero();
+    }
+
+    //Metodo para introducir el dni por teclado y calcular la letra correspondiente. Nos devuelve el string completo
     public static String formatoDni(){
         Pattern patron = Pattern.compile("[0-9]{8}");
         Matcher match;
-        Scanner sc = new Scanner(System.in);
         String dni;
 
         do {
-            System.out.println("INTRODUZCA SU NIE");
-            dni = sc.nextLine();
+
+            dni = obtenerDatoSolicitado("NIE");
             match = patron.matcher(dni);
         } while (!match.matches());
 
@@ -129,27 +114,28 @@ public class MyUtils {
         return dni;
     }
 
+    //Metodo que valida la entrada de fecha por teclado y lo transforma en un objeto LocalDate
     public static LocalDate insertarFPorTeclado(){
         LocalDate fecha;
         Pattern patronFecha = Pattern.compile("[0-9]{2}/[0-9]{2}/[0-9]{4}");
         Matcher match;
         String fechaTeclado;
-        sc = new Scanner(System.in);
+
         do{
             System.out.println("INSERTE LA FECHA CON EL SIGUIENTE FORMATO:\n" +
                     "DD/MM/AAAA");
-            fechaTeclado = sc.nextLine();
+            fechaTeclado = obtenerDatoSolicitado("FECHA DE NACIMIENTO");
             match = patronFecha.matcher(fechaTeclado);
         }while(!match.matches());
         fecha = LocalDate.parse(fechaTeclado, formateador);
-        if(fecha.minusYears(18).isAfter(LocalDate.now())){
-            return fecha;
+        if(LocalDate.now().minusYears(18).isBefore(fecha)){
+            fecha = null;
         }
-       return null;
+       return fecha;
     }
 
-    //Metodo para validad la elección de un socio al alquilar una película
-    public static boolean validarEleccionSocio(String codigo){
+    //Metodo para validar la elección de un socio al alquilar una película
+    public static boolean validarEleccion(String codigo){
         boolean correcto = false;
         Pattern patronCodigo = Pattern.compile("[0-9]{4}");
         Matcher match;
@@ -160,24 +146,9 @@ public class MyUtils {
         return correcto;
     }
 
-    //Metodo para validar el código de una película cuando se quiere alquilar, es lo mismo que con socios
-    //Pero por ahora he preferido no pensar en un método para las dos
-    public static boolean validarEleccionPelicula(String codigo){
-        boolean correcto = false;
-        Pattern patronCodigo = Pattern.compile("[0-9]{4}");
-        Matcher match;
-        match = patronCodigo.matcher(codigo);
-        if(match.matches()){
-            correcto = true;
-        }
-        return correcto;
-    }
-
+    //Metodo que comprueba si han pasado mas de 48 horas para la devolución de una película
     public static boolean comprobarFechaDevolucion(LocalDateTime fecha){
-        boolean correcto = false;
-        if(LocalDateTime.now().minusHours(48).isAfter(fecha)){
-            correcto = true;
-        }
-        return correcto;
+
+        return LocalDateTime.now().minusHours(48).isAfter(fecha);
     }
 }

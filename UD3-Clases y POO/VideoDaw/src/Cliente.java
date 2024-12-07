@@ -9,10 +9,8 @@ public class Cliente {
     private LocalDate fechaBaja;
     private Pelicula[] peliculasAlquiladas;
 
-    private static int cantidadPeliculas = 0;
+    private int cantidadPeliculas = 0;
 
-    public Cliente() {
-    }
 
     public Cliente(String dni, String nombre, String direccion, LocalDate fechaNacimiento, int numSocio) {
         this.numSocio = MyUtils.formatoCodigo("C", numSocio + 1);
@@ -57,10 +55,11 @@ public class Cliente {
     }
 
     public String mostrarDatosCliente(){
-        return "Nombre: " + this.getNombre() + "Num.Socio: " + this.getNumSocio() + "Dni: " + this.getDni() +
-                "Dirección: " + this.getDireccion() + "F. Nacimiento: " + this.getFechaNacimiento();
+        return "Nombre: " + this.getNombre() + " Num.Socio: " + this.getNumSocio() + "\nDni: " + this.getDni() +
+                " Direccion: " + this.getDireccion() + "\nF. Nacimiento: " + MyUtils.formatearFecha(this.getFechaNacimiento());
     }
 
+    //Metodo para almacenar las películas que ha alquilado un cliente en un array
     public void crearAlquiler(Pelicula p){
         this.peliculasAlquiladas[cantidadPeliculas] = p;
         cantidadPeliculas++;

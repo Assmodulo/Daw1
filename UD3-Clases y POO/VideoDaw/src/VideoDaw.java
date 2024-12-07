@@ -46,11 +46,16 @@ public class VideoDaw {
         this.direccion = direccion;
     }
 
+    public String mostrarInfoVideoclub(){
+        return "CIF: " + this.getCif() + " Dirección: " + this.getDireccion() + " Fecha de alta: " + MyUtils.formatearFecha(this.fechaAlta);
+    }
+
+    //Metodo para almacenar un nuevo cliente y modificar el valor de su contador
     public void guardarDatosCliente(Cliente cliente) {
         clientesRegistrados[clientesTotales] = cliente;
         clientesTotales++;
     }
-
+    //Metodo para almacenar una nueva pelicula y modificar el valor de su contador
     public void guardarDatosPelicula(Pelicula pelicula) {
         peliculassRegistradas[peliculasTotales] = pelicula;
         peliculasTotales++;
@@ -59,8 +64,8 @@ public class VideoDaw {
     //Método para comprobar si un cliente ya existe
     public boolean comprobarClientes(String dni){
         boolean existe = false;
-        Cliente c = new Cliente();
-        //Evaluo que clientesTotales sea distinto de cero, poque si es igual a 0 quiere decir que no has insertado
+        Cliente c;
+        //Evaluo que clientesTotales sea distinto de cero, porque si es igual a 0 quiere decir que no has insertado
         //ningún cliente, si es distinto de cero, recorro el array
         if(clientesTotales != 0){
             for(int i = 0; i < clientesTotales; i++){
@@ -81,8 +86,8 @@ public class VideoDaw {
         for(int i = 0; i < this.peliculasTotales; i++){
             if(!this.peliculassRegistradas[i].isAlquilada()){
                 p = this.peliculassRegistradas[i];
-                if(p.getFechaBaja() != null){
-                    listadoPeliculasDisponibles = listadoPeliculasDisponibles+ "\n" + p.getCod() + " " + p.getTitulo();
+                if(p.getFechaBaja() == null){
+                    listadoPeliculasDisponibles += "\n" + p.getCod() + " " + p.getTitulo();
                 }
             }
         }
@@ -114,7 +119,7 @@ public class VideoDaw {
     }
 
     //Metodo para devolver la película al seleccionarla de entre todas las posibles. Es para devolver el objeto
-    //película no para el método de devolver una película al videoclub
+    //película no para el método de devolver una película al videoclub. Devuelve películas que no estén alquiladas.
     public Pelicula devolverPelicula(String codigo){
         Pelicula p = null;
         for(int i = 0; i < this.peliculasTotales; i++){
@@ -127,12 +132,11 @@ public class VideoDaw {
         return p;
     }
 
+    //Metodo que realiza las acciones necesarias al completar un alquiler
     public void generarAlquiler(Cliente c, Pelicula p){
-        Cliente cliente = c;
-        Pelicula pelicula = p;
-        pelicula.setAlquilada(true);
-        pelicula.setFechaAlquiler(LocalDateTime.now());
-        cliente.crearAlquiler(pelicula);
+        p.setAlquilada(true);
+        p.setFechaAlquiler(LocalDateTime.now());
+        c.crearAlquiler(p);
     }
 
     public String listadoPeliculasAlquiladas(){
@@ -147,12 +151,26 @@ public class VideoDaw {
         return listadoPeliculasAlquiladas;
     }
 
-    public void devolverPeliculaAlquilada(Pelicula p){
-        Pelicula pelicula = p;
+    //Este metodo nos permite recuperar la información de una pelicula de entre todas aquellas que están
+    //alquiladas, para devolverlas despues
+    public Pelicula seleccionarPeliculaAlquilada(String codigo){
+        Pelicula p = null;
         for(int i = 0; i < this.peliculasTotales; i++){
-            if(this.peliculassRegistradas[i].equals(pelicula)){
-                pelicula.setAlquilada(false);
-                pelicula.setFechaAlquiler(null);
+            if(this.peliculassRegistradas[i].isAlquilada()){
+                if(this.peliculassRegistradas[i].getCod().equals(codigo)){
+                    p = this.peliculassRegistradas[i];
+                }
+            }
+        }
+        return p;
+    }
+
+    //Metodo para llevar a cabo las acciones necesarias cuando se devuelve una película
+    public void devolverPeliculaAlquilada(Pelicula p){
+        for(int i = 0; i < this.peliculasTotales; i++){
+            if(this.peliculassRegistradas[i].equals(p)){
+                p.setAlquilada(false);
+                p.setFechaAlquiler(null);
             }
         }
     }
