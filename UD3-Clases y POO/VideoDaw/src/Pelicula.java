@@ -74,6 +74,6 @@ public class Pelicula {
 
     public String mostrarInforPelicula(){
         return "Codigo: " + this.cod + " Titulo : " + this.titulo + " Genero : " + this.genero +
-                " Fecha Registro : " + MyUtils.formatearFecha(this.fechaRegistro);
+                " Fecha Registro : " + MyUtils.formatearFecha(this.fechaRegistro) + " Alquilada: " + this.isAlquilada();
     }
 }

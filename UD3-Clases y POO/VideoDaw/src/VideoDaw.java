@@ -145,7 +145,7 @@ public class VideoDaw {
         for(int i = 0; i < this.peliculasTotales; i++){
             p = this.peliculassRegistradas[i];
             if(p.isAlquilada()){
-                listadoPeliculasAlquiladas += "\n" + p.getCod() + " " + p.getTitulo() + " " + p.getFechaAlquiler();
+                listadoPeliculasAlquiladas += "\n" + p.getCod() + " " + p.getTitulo() + " " + MyUtils.formatearFHora(p.getFechaAlquiler());
             }
         }
         return listadoPeliculasAlquiladas;
@@ -166,11 +166,29 @@ public class VideoDaw {
     }
 
     //Metodo para llevar a cabo las acciones necesarias cuando se devuelve una película
+    //No se me ocurrió otra forma de actualizar el dato en el array del cliente correspondiente, así que usé más fors
+    //anidados
     public void devolverPeliculaAlquilada(Pelicula p){
+        Cliente c;
+        Pelicula p2 = p; //La declaro para después de cambiar la fecha baja e isalquilada en el videoclub
+                            //tener todavia los datos para compararla con los clientes.
         for(int i = 0; i < this.peliculasTotales; i++){
             if(this.peliculassRegistradas[i].equals(p)){
                 p.setAlquilada(false);
                 p.setFechaAlquiler(null);
+                //Hago este print para comprobar las cosas al hacer pruebas
+                System.out.println(p.mostrarInforPelicula());
+            }
+        }
+        for(int i = 0; i < this.clientesTotales; i++){
+            c = this.clientesRegistrados[i];
+            for(int j = 0; j < c.getCantPeliculas(); j++){
+                if(p2.equals(c.devolverDatosPeliculaAlquilada(j))){
+                    c.devolverDatosPeliculaAlquilada(j).setAlquilada(false);
+                    c.devolverDatosPeliculaAlquilada(j).setFechaAlquiler(null);
+                    //Hago este print para comprobar las cosas al hacer pruebas
+                    System.out.println(c.devolverDatosPeliculaAlquilada(j).mostrarInforPelicula());
+                }
             }
         }
     }

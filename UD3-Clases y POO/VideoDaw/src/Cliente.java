@@ -45,6 +45,14 @@ public class Cliente {
         return fechaBaja;
     }
 
+    public int getCantPeliculas() {
+        return cantidadPeliculas;
+    }
+
+    public Pelicula devolverDatosPeliculaAlquilada(int i){
+        return this.peliculasAlquiladas[i];
+    }
+
     //En principio he considerado que la dirección de un cliente si podría cambiar
     public void setDireccion(String direccion) {
         this.direccion = direccion;

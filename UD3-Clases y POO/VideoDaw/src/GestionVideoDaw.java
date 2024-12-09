@@ -41,7 +41,7 @@ public class GestionVideoDaw {
                             opcion = MyUtils.obtenerDatoSolicitado("GENERO");
                         }while(Integer.parseInt(opcion) <= 1 && Integer.parseInt(opcion) >= Generos.values().length);
 
-                        genero = MyUtils.devolverGenero(Integer.parseInt(opcion) - 1);
+                        genero = MyUtils.devolverGenero((Integer.parseInt(opcion) - 1));
 
                         pelicula = new Pelicula(titulo, genero, videoclub.getPeliculasTotales());
                         System.out.println("NUEVA PELÍCULA GUARDADA\n" + pelicula.mostrarInforPelicula());
