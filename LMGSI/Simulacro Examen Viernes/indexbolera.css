@@ -1,0 +1,59 @@
+body{
+    background-color: black;
+}
+
+.contenedor_principal{
+    width: 95%;
+    height: 90%;
+    max-height: 95%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.contenedor_principal div{
+    width: 30%;
+    height: 90vh;
+    margin-top: 5vh;
+}
+
+.tarifas{
+    background-color: red;
+}
+
+.promociones{
+    background-color: yellow;
+}
+
+.grupos{
+    background-color: lightblue;
+}
+
+.tabla_tarifas{
+    font-family: "Bookman Old Style";
+    width:60%;
+    height: 100%;
+    margin:auto;
+
+}
+
+.tabla_tarifas tr{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    margin:5%;
+}
+
+.tabla_tarifas tr th{
+    width: 80%;
+    align-self: center;
+}
+
+.tabla_tarifas tr td{
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    border-radius: 30%;
+    background-color: white;
+    font-size: 1.2em;
+}
