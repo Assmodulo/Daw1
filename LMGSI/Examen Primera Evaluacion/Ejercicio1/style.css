@@ -1,0 +1,93 @@
+/**Comienzo definiendo atributos del body**/
+body{
+    background-image: url("fondo.jpg");
+    background-size: cover;
+}
+
+/**Vamos a darle algún cambio al header. El width no le quiero completo y con margin
+auto hago que se centre sólo
+Con justify content lo centro todo en el eje x y con vertical en el y**/
+.encabezado{
+    width: 50%;
+    margin:auto;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.titulo{
+    text-decoration: underline;
+    font-family: "Arial Black";
+    font-size: 1.0em;
+    font-weight: bolder;
+    color: white;
+    align-self: center;
+}
+
+.descripcion{
+    color:white;
+    width: 50%;
+    margin:auto;
+}
+
+.contenedor{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top:5%;
+    justify-content: space-evenly;
+    vertical-align: center;
+}
+
+.tabla_precios{
+    width: 20%;
+    height: 70vh;
+    color:white;
+    position:fixed;
+    top:15%;
+    left:0;
+
+}
+
+.precios{
+
+}
+
+.precios tr{
+    display:flex;
+    flex-direction: column;
+}
+
+.tabla_promociones{
+    width: 20%;
+    color: black;
+    position:fixed;
+    bottom:48%;
+    left:25%;
+}
+
+
+.tabla_familiares{
+    width: 20%;
+    color:black;
+    position:fixed;
+    bottom:50%;
+    right: 25%;
+
+}
+
+.tabla_especiales{
+    width: 20%;
+    color:white;
+    display:flex;
+    flex-direction: column;
+    position: fixed;
+    bottom:0;
+    right: 0;
+    vertical-align: baseline;
+}
+
+.tabla_especiales tr{
+    display: flex;
+    flex-direction: column;
+}
