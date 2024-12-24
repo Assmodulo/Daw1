@@ -86,9 +86,10 @@ CREATE TABLE alojamientos(
     CREATE TABLE clientes(
 		dni CHAR(9) UNIQUE NOT NULL,
         nombre_completo VARCHAR(25) NOT NULL,
+        f_nacim DATE NOT NULL,
         telefono CHAR(9) NOT NULL,
         direccion VARCHAR(25) NOT NULL,
-        emali VARCHAR(25) NOT NULL,
+        email VARCHAR(25) NOT NULL,
         cp_comp CHAR(5) NOT NULL,
         CONSTRAINT dni primary key (dni),
         CONSTRAINT cp_comp foreign key(cp_comp) references localidad(cp_completo)
