@@ -28,14 +28,14 @@ public class Main {
                     break;
                 case "2":
                     if(contadorMascotas > 0){
-                        System.out.println(mostrarListadoCompleto());
+
                     }else{
                         System.out.println("NO HAY REGISTRADO NINGÚN ANIMAL EN ESTOS MOMENTOS");
                     }
                     break;
                 case "3":
                     if(contadorMascotas > 0){
-
+                        System.out.println(mostrarListadoCompleto());
                     }else{
                         System.out.println("NO HAY REGISTRADO NINGÚN ANIMAL EN ESTOS MOMENTOS");
                     }
