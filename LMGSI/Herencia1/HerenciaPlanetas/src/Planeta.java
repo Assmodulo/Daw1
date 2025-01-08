@@ -5,6 +5,7 @@ public class Planeta extends Astros{
     private boolean tieneSatelites;
 
     Satelites [] satelites;
+    private int contadorSatelites = 0;
 
 
     //Defino constructor, con los datos incluidos de la clase padre
@@ -20,7 +21,9 @@ public class Planeta extends Astros{
         this.distanciaSol = distanciaSol;
         this.orbitaAlrededorSol = orbitaAlrededorSol;
         this.tieneSatelites = tieneSatelites;
-        this.satelites = new Satelites[5];
+        if(this.tieneSatelites){
+            this.satelites = new Satelites[5];
+        }
     }
 
     //Defino los getters propios de esta clase
@@ -37,6 +40,10 @@ public class Planeta extends Astros{
         return tieneSatelites;
     }
 
+    //Creo un setter simplemente para saber si se ha almacenado algún satélite
+    public int getContadorSatelites() {
+        return contadorSatelites;
+    }
 
     //Importo los métodos de la clase Padre
 
@@ -74,5 +81,11 @@ public class Planeta extends Astros{
     public String toString() {
         return super.toString() + "Distancia al Sol: " + this.distanciaSol + ", Orbita alrededor del Sol: " +
                 this.orbitaAlrededorSol + ", Tiene Satelites: " + this.tieneSatelites;
+    }
+
+    //Creo un método para almacenar un satélite en este planeta
+    public void almacenarSatelites(Satelites satelite) {
+        this.satelites[contadorSatelites] = satelite;
+        contadorSatelites++;
     }
 }
