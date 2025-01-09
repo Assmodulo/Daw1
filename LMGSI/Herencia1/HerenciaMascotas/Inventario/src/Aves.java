@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 public abstract class Aves extends Mascotas {
 
     private boolean vuela;
     private String pico;
 
-    public Aves(String nombre, String edad, String estado, String fechaNacim, boolean vuela, String pico) {
-        super(nombre, edad, estado, fechaNacim);
+    public Aves(String nombre, LocalDate fechaNacim, boolean vuela, String pico) {
+        super(nombre, fechaNacim);
         this.vuela = vuela;
         this.pico = pico;
     }
@@ -33,7 +35,7 @@ public abstract class Aves extends Mascotas {
     }
 
     @Override
-    public String getFechaNacim() {
+    public LocalDate getFechaNacim() {
         return super.getFechaNacim();
     }
 

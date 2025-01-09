@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class Gato extends Mascotas{
     private String color;
     private boolean peloLargo;
 
-    public Gato(String nombre, String edad, String estado, String fechaNacim, String color, boolean peloLargo) {
-        super(nombre, edad, estado, fechaNacim);
+    public Gato(String nombre, LocalDate fechaNacim, String color, boolean peloLargo) {
+        super(nombre, fechaNacim);
         this.color = color;
         this.peloLargo = peloLargo;
     }
@@ -32,7 +34,7 @@ public class Gato extends Mascotas{
     }
 
     @Override
-    public String getFechaNacim() {
+    public LocalDate getFechaNacim() {
         return super.getFechaNacim();
     }
 

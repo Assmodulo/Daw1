@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class Canario extends Aves{
     private String color;
     private boolean canta;
 
-    public Canario(String nombre, String edad, String estado, String fechaNacim, boolean vuela, String pico, String color, boolean canta) {
-        super(nombre, edad, estado, fechaNacim, vuela, pico);
+    public Canario(String nombre, LocalDate fechaNacim, boolean vuela, String pico, String color, boolean canta) {
+        super(nombre, fechaNacim, vuela, pico);
         this.color = color;
         this.canta = canta;
     }
@@ -42,7 +44,7 @@ public class Canario extends Aves{
     }
 
     @Override
-    public String getFechaNacim() {
+    public LocalDate getFechaNacim() {
         return super.getFechaNacim();
     }
 

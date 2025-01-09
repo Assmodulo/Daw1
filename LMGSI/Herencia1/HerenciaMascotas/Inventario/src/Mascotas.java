@@ -1,10 +1,18 @@
+import java.time.LocalDate;
+
 public abstract class Mascotas {
-    private String nombre, edad, estado, fechaNacim;
-    public Mascotas(String nombre, String edad, String estado, String fechaNacim) {
+    private String nombre, edad, estado;
+    private LocalDate fechaNacim;
+
+
+    public Mascotas(String nombre, LocalDate fechaNacim) {
         this.nombre = nombre;
-        this.edad = edad;
-        this.estado = estado;
+        this.estado = "Vivo y Feliz";
         this.fechaNacim = fechaNacim;
+        this.edad = MyUtils.calcularEdad(fechaNacim);
+    }
+
+    protected Mascotas() {
     }
 
     public String getNombre() {
@@ -19,7 +27,7 @@ public abstract class Mascotas {
         return estado;
     }
 
-    public String getFechaNacim() {
+    public LocalDate getFechaNacim() {
         return fechaNacim;
     }
 
@@ -33,7 +41,7 @@ public abstract class Mascotas {
                 "Nombre: " + this.nombre +
                 ", Edad: " + this.edad + "\n" +
                 "Estado: " + this.estado +
-                ", Fecha de Nacimiento: " + this.fechaNacim;
+                ", Fecha de Nacimiento: " + MyUtils.formatearFecha(this.fechaNacim);
     }
 
     //Creo los métodos que indica el ejercicio

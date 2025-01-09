@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class Loro extends Aves{
     private String origen;
     private boolean hable;
 
-    public Loro(String nombre, String edad, String estado, String fechaNacim, boolean vuela, String pico, String origen, boolean hable) {
-        super(nombre, edad, estado, fechaNacim, vuela, pico);
+    public Loro(String nombre, LocalDate fechaNacim, boolean vuela, String pico, String origen, boolean hable) {
+        super(nombre, fechaNacim, vuela, pico);
         this.origen = origen;
         this.hable = hable;
     }
@@ -42,7 +44,7 @@ public class Loro extends Aves{
     }
 
     @Override
-    public String getFechaNacim() {
+    public LocalDate getFechaNacim() {
         return super.getFechaNacim();
     }
 

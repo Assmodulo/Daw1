@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+
 public class Perro extends Mascotas{
     private String raza;
     private boolean pulgas;
 
-    public Perro(String nombre, String edad, String estado, String fechaNacim, String raza, boolean pulgas) {
-        super(nombre, edad, estado, fechaNacim);
+    public Perro(){}
+
+    public Perro(String nombre, LocalDate fechaNacim, String raza, boolean pulgas) {
+        super(nombre, fechaNacim);
         this.raza = raza;
         this.pulgas = pulgas;
     }
@@ -24,7 +28,7 @@ public class Perro extends Mascotas{
     }
 
     @Override
-    public String getFechaNacim() {
+    public LocalDate getFechaNacim() {
         return super.getFechaNacim();
     }
 
