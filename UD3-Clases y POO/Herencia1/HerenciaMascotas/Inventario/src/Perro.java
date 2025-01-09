@@ -6,10 +6,10 @@ public class Perro extends Mascotas{
 
     public Perro(){}
 
-    public Perro(String nombre, LocalDate fechaNacim, String raza, boolean pulgas) {
+    public Perro(String nombre, LocalDate fechaNacim, String raza) {
         super(nombre, fechaNacim);
         this.raza = raza;
-        this.pulgas = pulgas;
+        this.pulgas = false;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Perro extends Mascotas{
 
     @Override
     public String toString() {
-        return super.toString() + "\n Raza: " + raza + " Pulgas: " + pulgas;
+        return super.toString() + "\nRaza: " + raza + " Pulgas: " + pulgas;
     }
 
     @Override

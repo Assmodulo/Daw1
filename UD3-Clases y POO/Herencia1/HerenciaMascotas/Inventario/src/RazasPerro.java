@@ -1,0 +1,3 @@
+public enum RazasPerro {
+    DOGO, YORKSHIRE, BULLDOG, PITBULL, ROTWEILLER, MASTIN;
+}

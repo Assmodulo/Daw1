@@ -1,21 +1,21 @@
 import java.time.LocalDate;
 
-public class Loro extends Aves{
-    private String origen;
-    private boolean hable;
+public class Canario extends Aves{
+    private String color;
+    private boolean canta;
 
-    public Loro(String nombre, LocalDate fechaNacim, boolean vuela, String pico, String origen, boolean hable) {
-        super(nombre, fechaNacim, vuela, pico);
-        this.origen = origen;
-        this.hable = hable;
+    public Canario(String nombre, LocalDate fechaNacim, String pico, String color) {
+        super(nombre, fechaNacim, pico);
+        this.color = color;
+        this.canta = true;
     }
 
-    public String getOrigen() {
-        return origen;
+    public String getColor() {
+        return color;
     }
 
-    public boolean isHable() {
-        return hable;
+    public boolean isCanta() {
+        return canta;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Loro extends Aves{
 
     @Override
     public String toString() {
-        return super.toString() + "\nOrigen: " + origen + " Hable: " + hable;
+        return super.toString() + "\nColor: " + color + "Canta: " + canta;
     }
 
     @Override
@@ -58,7 +58,8 @@ public class Loro extends Aves{
         return super.volar();
     }
 
-    public String saludar(){
-        return "El loro " + this.getNombre() + " dice !!!Hola a todos!!!";
+    @Override
+    public void habla() {
+        System.out.println("PIO PIO PI");
     }
 }

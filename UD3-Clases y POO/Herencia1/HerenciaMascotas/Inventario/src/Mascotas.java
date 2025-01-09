@@ -4,6 +4,12 @@ public abstract class Mascotas {
     private String nombre, edad, estado;
     private LocalDate fechaNacim;
 
+    //En este ejercicio que es más que nada para probar la herencia, intento hacer todo lo más automático posible
+    //Para no tener que insertar tantos datos en el ejercicio. La edad se calcula automáticamente a partir de la fecha de
+    //nacimiento, el estado por defecto es vivo y feliz, etc.
+
+    //Se podrían añadir muchas más funciones al programa, pero lo que pide creo que es trabajar con la herencia y los métodos
+    //que he ido usando reflejan eso, que es en lo que me voy a centrar.
 
     public Mascotas(String nombre, LocalDate fechaNacim) {
         this.nombre = nombre;

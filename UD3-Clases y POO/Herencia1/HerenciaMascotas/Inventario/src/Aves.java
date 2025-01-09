@@ -5,9 +5,9 @@ public abstract class Aves extends Mascotas {
     private boolean vuela;
     private String pico;
 
-    public Aves(String nombre, LocalDate fechaNacim, boolean vuela, String pico) {
+    public Aves(String nombre, LocalDate fechaNacim, String pico) {
         super(nombre, fechaNacim);
-        this.vuela = vuela;
+        this.vuela = true;
         this.pico = pico;
     }
 
