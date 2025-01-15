@@ -2,11 +2,14 @@ public class Agenda {
     private Contacto [] agenda;
     private int contadorContactos;
 
+    //El constructor no necesita recibir parámetros
     public Agenda() {
+        //inicializo la variable y el string al crear un objeto de tipo agenda
         this.agenda = new Contacto[10];
         this.contadorContactos = 0;
     }
 
+    //Los getters, solo necesito el valor del contador y la longitud del array para alguna evaluación o comparación
     public int getContadorContactos(){
         return this.contadorContactos;
     }
@@ -14,6 +17,9 @@ public class Agenda {
     public int getLongitudArray(){
         return this.agenda.length;
     }
+
+    //Metodo para añadir un contacto que recibe un objeto por parametro y devuelve un boolean para saber si la operación
+    //ha sido correcta
     public boolean addContacto(Contacto contacto) {
         boolean add = false;
         boolean encontrado = false;
@@ -33,6 +39,7 @@ public class Agenda {
         return add;
     }
 
+    /*Metodo para eliminar un contacto. Cuando se elimina uno, llama a otro método para reorganizar el array*/
     public boolean eliminarContacto(String nombre) {
         boolean eliminado = false;
         if (this.contadorContactos > 0) {
@@ -48,6 +55,7 @@ public class Agenda {
         return eliminado;
     }
 
+    //Un método que busca si un nombre determinado existe dentro de la agenda, devulve un boolean que lo indica
     public boolean existeContacto(String nombre) {
         boolean existe = false;
         if (this.contadorContactos > 0) {
@@ -60,7 +68,8 @@ public class Agenda {
         return existe;
     }
 
-    //Para el metodo de listar contactos yo prefiero un metodo String antes que un void
+    //Para el metodo de listar contactos yo prefiero un metodo String antes que un void, devuelve un string con los contactos
+    //de la agenda
     public String listarContactos(){
         String lista = "";
         for (int i = 0; i < this.contadorContactos; i++) {
@@ -69,7 +78,7 @@ public class Agenda {
         return lista;
     }
 
-    //Un listado simple para que se muestren los nombres de los datos antes de borrar los datos
+    //Un listado simple para que se muestren solo los nombres de los contactos antes de elegir cual borrar
     public String listadoSimple(){
         String lista = "";
         for (int i = 0; i < this.contadorContactos; i++) {
@@ -78,6 +87,7 @@ public class Agenda {
         return lista;
     }
 
+    /*Metodo que nos devuelve un int, que es la posición de un contacto, cuyo nombre pasamos como parámetro*/
     public int posicionContacto(String nombre) {
         int posicion = -1;
         for (int i = 0; i < this.contadorContactos; i++) {
@@ -88,6 +98,7 @@ public class Agenda {
         return posicion;
     }
 
+    /*Metodo que recibe un int para indicar una posición del array y nos devuelve los datos completos de ese contacto*/
     public String devolverDatosPosicion(int posicion){
         return this.agenda[posicion].toString();
     }

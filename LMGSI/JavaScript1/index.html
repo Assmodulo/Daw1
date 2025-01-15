@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
+    <!--Lo primero es crear el esqueleto de la página, y con ello el head y todo lo necesario-->
     <head>
         <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="styles.css"></link>
     </head>
+    <!--Después de esto voy creando las diferentes partes de la página. Primero el header
+    Doy valores de clase que crea necesarios para el CSS e ids para el JS-->
     <header>
         <div class="titulo" id="tituloprincipal">
             <h1>COMENZANDO CON JAVASCRIPT</h1>
@@ -15,6 +19,8 @@
             </ul>
         </div>
     </header>
+    <!--En el body más de lo mismo, creo divs que a mi parecer son necesarios y les doy valores de clase y de id
+    para identificarlos más fácil en CSS y JS-->
     <body>
     <div class="seccion" id="seccion_principal">
         <section>
@@ -26,5 +32,7 @@
             <button id="restaurar">RESTAURAR</button>
         </footer>
     </body>
+    <!--Como en el ejercicio de ejemplo que se nos pasó, declaro cual es la hoja de JS al final de todo
+    para que primero cargue la página y luego el script-->
     <script src="script.js"></script>
 </html>

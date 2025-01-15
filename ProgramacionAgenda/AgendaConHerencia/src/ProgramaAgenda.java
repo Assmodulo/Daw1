@@ -1,25 +1,30 @@
-import java.util.Scanner;
+import java.util.Scanner; //Importamos Scanner pues es necesario para introducir datos
 
 public class ProgramaAgenda {
 
     public static void main(String[] args) {
-        Scanner teclado;
-        String opcion;
-        Agenda agenda = new Agenda();
-        String nombre, numero, cumpleanios, email;
-        int posicion;
+        Scanner teclado; //Defino una variable scanner, no inicializo, dejo eso para cada vez que se ejecute el bucle
+        String opcion;//Aquí se almacena la opcion elegida por teclado
+        Agenda agenda = new Agenda();//Un objeto de la clase agenda, ya que según el ejercicio sólo debe de haber una, como los inmortales
+        String nombre, numero, cumpleanios, email;//Variables del tipo string que creo voy a necesitar
+        int posicion;//Una variable de tipo int
 
+
+        //Dos variable objeto de cada una de las clase, las voy a necesitar para crear instancias
         ContactosPersonas cp;
         ContactosEmpresas ce;
 
         System.out.println("AGENDA TELEFÓNICA");
 
+        //Menú clásico
         do{
             System.out.println("SELECCIONE LO QUE QUIERE REALIZAR\n" +
                     "1.-AÑADIR CONTACTO\n2.-ELIMINAR CONTACTO\n3.-BUSCAR CONTACTO\n4.-LISTAR CONTACTOS\n5.-OBTENER POSICION" +
                     " CONTACTO\n6.-SALIR");
             teclado = new Scanner(System.in);
             opcion = teclado.nextLine();
+
+            //Evaluo opción y segun su valor se hace una cosa u otra
             switch(opcion){
                 case "1":
                         System.out.println("AÑADIR CONTACTO");
@@ -101,6 +106,8 @@ public class ProgramaAgenda {
         }while(!opcion.equals("6"));
     }
 
+    //Metodo para introducir un dato por teclado, devuelve un String
+
     public static String insertarDato(String dato){
         Scanner sc = new Scanner(System.in);
         String introducido;
@@ -110,6 +117,8 @@ public class ProgramaAgenda {
         return introducido;
     }
 
+    //Ahora que se trabaja con herencia, cuando creo un contacto puedo elegir entre dos tipos, devuelve un int
+    //según el valor del int será un tipo de contacto u otro
     public static int elegirTipoContacto(){
         Scanner sc = new Scanner(System.in);
         String opcion ="";
