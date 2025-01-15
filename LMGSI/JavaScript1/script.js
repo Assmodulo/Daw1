@@ -10,7 +10,17 @@ document.addEventListener("DOMContentLoaded", function (){
     const imagen = document.getElementById('imagen');
     const seccion = document.getElementById("seccion_principal");
     const boton = document.getElementById("restaurar");
-    
+
+    const valoresIniciales = {
+        colorParrafo : 'white',
+        textParrafo : "¿Que vamos a hacer hoy?",
+        tamanioTexto: '16px',
+        anchoImagen:'100%',
+        altoImagen: '100%',
+        colorFondoSeccion : '#5508a3',
+        anchoSeccion : '100%'
+    };
+
     function cambiarTexto() {
         parrafo.innerHTML = "Aprendiendo nuevas cosas";
     }
@@ -28,8 +38,14 @@ document.addEventListener("DOMContentLoaded", function (){
         seccion.style.width = '60%';
     }
 
+    function restaurarValoresPorDefecto(){
+        parrafo.innerHTML = valoresIniciales.textParrafo;
+        parrafo.style.fontSize = valoresIniciales.colorParrafo;
+    }
+
     //voy a declarar una escucha de evento en el párrafo
     parrafo.addEventListener("click", cambiarTexto);
     linkb.addEventListener("click", cambiarTamanioTexto);
     linka.addEventListener("click", cambiarImagenYFondo);
+    boton.addEventListener("click", restaurarValoresPorDefecto);
 });
