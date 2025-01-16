@@ -1,3 +1,6 @@
+/*La hoja de css es muy sencilla, simplemente voy dando bastante estilos y parámetros a los elementos para luego tener
+más opciones de modificar en la hoja de script*/
+
 html{
     background-color: #5508a3;
     width: 100%;
@@ -30,14 +33,10 @@ ul{
     justify-content: space-evenly;
 }
 
-a:link{
+a{
     text-decoration: none;
     color:orange;
     font-weight: bold;
-}
-
-a:visited{
-    text-decoration: double;
 }
 
 body{
@@ -48,6 +47,7 @@ body{
 .seccion{
     margin:auto;
     color: white;
+    justify-content: center;
 }
 
 .seccion p{
@@ -59,9 +59,68 @@ body{
     width:90%;
 }
 
+footer{
+    width: 50%;
+    margin:auto;
+}
+
 button{
     border: none;
     background-color: red;
     color: white;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
+/*Por el tema de la responsividad, que se pide también en el ejercicio voy a declarar una media query para pantallas
+pequeñas. Modificaré en ella solo lo necesario para que se vea bien en ese tipo de pantallas*/
+
+@media (max-width:765px){
+    html{
+        background-color: white;
+    }
+
+    body{
+        background-color:white;
+    }
+
+    header{
+        background-color: black;
+        width: 80%;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .titulo{
+        width:70%;
+        max-width: 450px;
+        margin:auto;
+        justify-content: left;
+        font-size: 10px;
+        text-decoration:none;
+        font-weight: lighter;
+        font-style: normal;
+    }
+
+    .menu_nav{
+        border: 2px solid red;
+        width: 80%;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        margin:auto;
+        color:white;
+    }
+
+    a{
+        font-size:xx-small;
+        font-weight: lighter;
+        color:white;
+
+    }
+
+    .seccion img{
+        width: 100%;
+        max-width:750px;
+    }
+}

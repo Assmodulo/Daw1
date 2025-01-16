@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function (){
         parrafo.style.color = 'red';
     }
 
-    //Con esta función cambio parametro de la imagen de fondo de la seccion
+    //Con esta función cambio parametros de la imagen de fondo de la seccion
     function cambiarImagenYFondo(){
         //Cambio varias cosas para que se note
         imagen.style.width = '50%';
@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function (){
         seccion.style.width = '60%';
     }
 
-    //Quizá no lo he hecho
+    //Quizá no lo he hecho bien del todo, o quizá haya otra forma más rápida, pero con esta función, vuelvo a poner
+    //los valores iniciales de los elementos
     function restaurarValoresPorDefecto(){
         parrafo.innerHTML = valoresIniciales.textParrafo;
         parrafo.style.fontSize = valoresIniciales.tamanioTexto;
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function (){
         seccion.style.width = valoresIniciales.anchoSeccion;
     }
 
-    //voy a declarar una escucha de evento en el párrafo
+    //voy a declarar los triggers que necesito para que se efectuen los cambios en la página.
     parrafo.addEventListener("click", cambiarTexto);
     linkb.addEventListener("click", cambiarTamanioTexto);
     linka.addEventListener("click", cambiarImagenYFondo);
