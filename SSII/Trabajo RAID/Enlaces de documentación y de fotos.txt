@@ -1,0 +1,25 @@
+https://es.wikipedia.org/wiki/RAID Wikipedia, básico sobre raid
+
+https://kb.synology.com/es-mx/DSM/help/DSM/StorageManager/storage_pool_what_is_raid?version=7//Pagina de Synology sobre raid, contiene fotos explicativas
+
+https://www.ontrack.com/es-es/blog/raid6//Explicación fuerte de RAID 6 con gráficos
+
+https://www.adrformacion.com/knowledge/administracion-de-sistemas/sistemas_de_tolerancia_a_fallos_de_discos_duros.html//Descripciones ligeras de todos los tipos de raid
+
+https://es.wikipedia.org/wiki/Disyunci%C3%B3n_exclusiva//Explicación del XOR
+
+https://www.dell.com/support/kbdoc/es-es/000128635/servidores-dell-qu%C3%A9-son-los-niveles-de-raid-y-sus-especificaciones//Página de dell
+
+https://www.tecnozero.com/servidor/tipos-de-raid-cual-elegir/ //Explicaciones Ligeras
+
+https://www.ionos.es/digitalguide/servidores/seguridad/raid-10/ //RAID 10 O 1+0
+
+https://www.mercadoit.com/blog/analisis-opinion-it/nivel-raid-10-combinando-raid-1-y-raid-0/ //Breve descripción de RAID 10 y alguna imagen
+
+https://recoverit.wondershare.es/windows-tips/what-is-raid-10.html //RAID 10
+
+https://normasapa.in/ //Normas APA de presentación de documentos
+
+https://www.ibm.com/docs/es/i/7.5?topic=concepts-raid-10 //Página de IBM sobre RAID
+
+https://www.copianube.es/raid-10/ //Descripción ligera de RAID 10 y sus ventajas
