@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Main {
 
@@ -29,13 +30,18 @@ public class Main {
             System.out.println(iterador.next());
         }
 
+        System.out.println();
+        System.out.println();
+
         //Eliminar dos objetos. Los termis que no los voy a usar, y los intercesores, que ya tengo
         listadoProductos.remove(p1);
         listadoProductos.remove(p2);
 
-        Iterator<Producto> iterador2 = listadoProductos.iterator();
-        while(iterador2.hasNext()){
-            System.out.println(iterador2.next());
+        System.out.println("ORDENAR PRODCUTOS DESPUES DE ELIMINAR 2");
+
+        iterador = listadoProductos.iterator();
+        while(iterador.hasNext()){
+            System.out.println(iterador.next());
         }
 
         //Insertar un nuevo objeto producto en mitad de la lista
@@ -43,12 +49,16 @@ public class Main {
         Producto p6 = new Producto("Impulsor Tank", 1);
         listadoProductos.add(1,p6);
 
+        System.out.println("ORDENAR PRODUCTOS DESPUES DE AÑADIR UNO EN POSICION ALEATORIA");
+
         //Vuelvo a utilizar iterator
-        Iterator<Producto> iterador3 = listadoProductos.iterator();
-        while(iterador3.hasNext()){
-            System.out.println(iterador3.next());
+        iterador = listadoProductos.iterator();
+        while(iterador.hasNext()){
+            System.out.println(iterador.next());
         }
         System.out.println();
+
+        System.out.println("MOSTRAR LA LISTA DESPUÉS DE ORDENAR LA COLECCIÓN");
 
         //Usar Sort y Compare to
         Collections.sort(listadoProductos);
@@ -58,5 +68,70 @@ public class Main {
 
         //Eliminar todos los elementos
         listadoProductos.clear();
+
+        System.out.println();
+        System.out.println();
+
+
+        //Siguiendo el ejercicio ahora creo una linkedlist
+        LinkedList <Producto> lista = new LinkedList();
+
+        //Añado los 5 productos, los mismos que cree al principio
+        lista.add(p1);
+        lista.add(p2);
+        lista.add(p3);
+        lista.add(p4);
+        lista.add(p5);
+
+        //Recorro la lista con el iterator
+        iterador = lista.iterator();
+        while(iterador.hasNext()){
+            System.out.println(iterador.next());
+        }
+
+
+        //Elimino dos registros cualquiera
+        lista.remove(p2);
+        lista.remove(p4);
+
+        System.out.println();
+        System.out.println();
+
+        //Vuelvo a recorrer simplemente para comprobar
+        iterador = lista.iterator();
+        while(iterador.hasNext()){
+            System.out.println(iterador.next());
+        }
+
+        System.out.println();
+
+        //Insertar un producto en medio de la lista, lo mismo que el ejercicio anterior
+        //uso el add con radix
+        lista.add(1,p6);
+
+        iterador = lista.iterator();
+        while(iterador.hasNext()){
+            System.out.println(iterador.next());
+        }
+
+        System.out.println();
+
+        Collections.sort(lista);
+        for(Producto p : lista){
+            System.out.println(p);
+        }
+
+        lista.clear();
+
+        System.out.println();
+
+        //Aquí simplemente uso el if por comprobar, ya el propio ide me indica que la condición va a ser siempre true
+
+        if(lista.isEmpty()){
+            System.out.println("Lista vacia");
+        }else{
+            System.out.println("Algo has hecho mal");
+        }
+
     }
 }
