@@ -77,9 +77,33 @@ update empleado set nombre = 'Helen' where nombre = 'Mary';
 
 #Cambiar la fecha en todas la filas de la tabla
 update dept_emp set fecha_hasta = '9999-02-02';
+# update dept_emp set fecha_hasta = '9999-02-02' where fecha_hasta = '9999-01-01';
 
 #Para el tercer ejercicio voy a tener que crear 2 empleados y luego insertar datos en la tabla dept_emp
 insert into empleado values (10013,'1979-08-16','Alexei','Borisnikov','M','2020-11-25'), 
 (10014,'1989-06-28','Pepe','Perez','M','2018-06-26'); 
 
 insert into dept_emp values (10013,'d010','2020-11-25','9999-02-02'),(10014,'d010','2018-06-26','9999-02-02');
+
+#Cambiar el nombre del departamento TI por Equipo de Titanes Digitales
+update departamento set nombre_departamento = 'Equipo de Titanes Digitales' where nombre_departamento = 'IT';
+
+#Mostrar todos los datos de la tabla departamento
+select * from departamento;
+
+#Mostrar solo los nombres de los departamentos
+select nombre_departamento from departamento;
+
+#Mostrar datos de empleados nacidos a partir de 1990-04-20
+select nombre, apellido, fecha_nacimiento from empleado where fecha_nacimiento >= '1990-04-20';
+
+#Mostrar datos de empleados nacidos en la decada de los 80
+#select nombre, apellido, fecha_nacimiento from empleado where fecha_nacimiento like '%198%';
+select nombre, apellido, fecha_nacimiento from empleado where fecha_nacimiento between '1980-01-01' and '1989-12-31';
+
+insert into empleado values (10015,'1984-08-16','Mujer','DePrueba','F','2020-11-25');
+#Mostrar datos de empleadas nacidas en las decadas 80 y 90
+select nombre, apellido, fecha_nacimiento from empleado where sexo = 'F' and fecha_nacimiento between '1980-01-01' and '1999-12-31';
+
+#Mostrar datos de empleados, apellidos y nombre en ese orden, cuyo apellido empiece con P
+select apellido, nombre from empleado where apellido like 'P%';

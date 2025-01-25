@@ -17,11 +17,13 @@ const soluccion1 = document.getElementById('resultado_ejercicio');
 
 
 //Ejercicio 1
+boton1.style.visibility = 'visible';
 boton1.addEventListener('click', saludo);
 function saludo(){
     parrafo1.textContent = 'Vamos a mostrar un saludo';
     soluccion1.textContent = 'Buenos dias';
 }
+
 
 //Ejercicio 2
 boton2.addEventListener('click', calcularArea);
@@ -41,7 +43,7 @@ function calcularArea(){
         soluccion1.textContent = areaCuadrado;
     }
 
-//Ejercicio 4
+//Ejercicio 4 En este no pido los valores por pantalla, ese se hace más adelante
     boton4.addEventListener('click', numeros);
 function numeros(){
     let num1 = 2;
@@ -107,7 +109,8 @@ function ordenarNumeros() {
     }
 }
 
-//Ejercicio 9
+//Ejercicio 9 Me he confundido en el orden, en este no tendría que haber pedido los número por teclado y si en el ejercico
+    // numero 12, pero bueno, lo repetiremos en el 12
     boton9.addEventListener('click', evaluarNumeros);
 function evaluarNumeros(){
         let num1 = prompt('Introduzca un número por teclado');
@@ -145,5 +148,50 @@ function numeroMayor(){
 }
 
 //Ejercicio 11
-    boton11.addEventListener('click', numeroMayor);
+    boton11.addEventListener('click', operacionesNumerosTeclado);
+
+    function operacionesNumerosTeclado(){
+        let num1 = prompt('Introduzca un número por teclado');
+        let num2 = prompt('Introduzca el segundo número');
+
+        let suma = num1 + num2;
+        let resta = num1 - num2;
+        let producto = num1 * num2;
+        let division = num1 / num2;
+
+        parrafo1.textContent = 'La suma de los dos números es ' + suma + ' y la resta es ' + resta;
+        if (num2 == 0) {
+            soluccion1.textContent = 'El producto de los dos números es ' + producto + ' y no se puede dividir un número por cero ';
+        }else{
+            soluccion1.textContent = 'El producto de los dos números es ' + producto + ' y la division es ' + division;
+        }
+    }
+
+    //Ejercicio 12
+    boton12.addEventListener('click', numeroMayorTeclado);
+    function numeroMayorTeclado() {
+        let num1 = prompt('Introduzca un número por teclado');
+        let num2 = prompt('Introduzca otro número por teclado');
+
+        parrafo1.textContent = 'Vamos a ver cual de los dos números es mayor o si son iguales';
+        if(num1 > num2){
+            soluccion1.textContent ='El numero mayor es ' + num1;
+        }if(num2 > num1){
+            soluccion1.textContent ='El numero mayor es ' + num2;
+        }else{
+            soluccion1.textContent ='Los números son iguales';
+        }
+    }
+
+    boton13.addEventListener('click',evaluarUnSoloNumero)
+    function evaluarUnSoloNumero() {
+        let num1 = prompt('Introduzca un número por teclado');
+        parrafo1.textContent = 'Vamos a evaluar el número introducido';
+        if(num1 >= 0){
+            soluccion1.textContent = num1 + ' es positivo';
+        }else{
+            soluccion1.textContent = num1 + ' es negativo';
+        }
+    }
+
 }
