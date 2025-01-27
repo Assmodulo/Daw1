@@ -1,47 +1,83 @@
+
+/*Juego y modifico un poco los estilos, nada raro*/
 body{
     width: 90vw;
-    height: 90vh;
+    height: 100vh;
     margin: auto;
+    justify-content: center;
 }
 
+/*alineo el título y nada más, sin complicarme*/
+h1{
+    text-align: center;
+    margin:auto;
+}
+
+/*Con el contenedor de los botones si juego un poco más, pero nada complicado*/
 .Contenedor{
     width: 80vw;
-    height: 80vh;
+    height: 60vh;
     margin: auto;
     text-align: center;
     background-color: blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    vertical-align: center;
 }
 
+/*Juego con el tamañó de los botones y su aspecto, les doy valor de blur hasta que se pase el ratón por encima*/
 .boton{
-    position: absolute;
-    top:50vh;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width: 30vw;
-    height:30vh;
+    width: 30%;
+    height:10%;
     background-color: orange;
-    border-radius: 50%;
+    border-radius: 25px;
     border: 2px solid black;
     box-shadow: 10px 10px 20px black;
-    font-size: x-large;
+    font-size:large;
     color:black;
-    visibility: hidden;
+    filter: blur(4px);
 }
 
+/*El estilo de uno de los párrafos donde se muestran los resultados*/
 .parrafo1{
-    position: absolute;
-    top:75vh;
-    left:50%;
-    transform:translate(-50%,-50%);
     color: white;
     font-weight: bolder;
+    text-align: center;
 }
 
+/*Lo mismo que para el otro párrafo*/
 .parrafo2{
-    position: absolute;
-    top:85vh;
-    left:50%;
-    transform:translate(-50%,-50%);
     color: white;
     font-weight: bolder;
+    text-align: center;
+}
+
+/*Cuando se pasa el ratón por encima de los botones cambian ligeramente*/
+.boton:hover{
+    background-color: yellow;
+    box-shadow: 15px 15px 15px greenyellow;
+    filter:none;
+    color: darkblue;
+    border: 3px solid darkgoldenrod;
+}
+
+/*Un poco de cambio cuando se clica en el boton*/
+.boton:active{
+    background-color: #838310;
+    transform: translateY(4px);
+    box-shadow:8px 8px 8px green;
+    color:skyblue;
+    text-shadow: 1px 1px dodgerblue;
+}
+
+
+/*El contenedor de los parrafos, para que quede alineado y diferenciado*/
+.parrafos{
+    width: 80vw;
+    height: 20vh;
+    background-color: black;
+    justify-content: center;
+    margin: auto;
 }

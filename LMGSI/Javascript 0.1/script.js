@@ -17,7 +17,11 @@ const soluccion1 = document.getElementById('resultado_ejercicio');
 
 
 //Ejercicio 1
-boton1.style.visibility = 'visible';
+
+//Para cada ejercicio, en el boton corresponidente, busco el evento que necesito, que en todos es click y llamo a la función
+//que necesito para resolver el ejercicio. Lo que no estoy seguro, es de si en el orden en el que lo he puesto, no se ejecuta
+//cada uno hasta que no se ha resuelto el anterior
+
 boton1.addEventListener('click', saludo);
 function saludo(){
     parrafo1.textContent = 'Vamos a mostrar un saludo';
