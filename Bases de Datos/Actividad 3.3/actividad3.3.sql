@@ -74,3 +74,5 @@ select  nombre, apellidos,dni, marca, modelo, taxis.matricula, num_pasajeros fro
 #Listado completo
 select marca, modelo, num_pasajeros, adaptado from taxis left join choferes on taxis.matricula = choferes.matricula UNION select dni, nombre, apellidos, direccion from taxis right join choferes on choferes.matricula = taxis.matricula;
 
+#Listado taxis y carreras
+select matricula, marca, modelo, num_pasajeros, adaptado from taxis left join carreras on matricula = taxi union select cod_carrera, origen, destino, precio, nocturna from taxis right join carreras on matricula = taxi;
