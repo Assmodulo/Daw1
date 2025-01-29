@@ -25,9 +25,7 @@ public class Coche {
 
     @Override
     public String toString() {
-        return "Coche{" +
-                "marca='" + marca + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return  "Marca: " + this.marca + '-' +
+                ", Color: " + this.color;
     }
 }

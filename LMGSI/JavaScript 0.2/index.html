@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <!--Voy definiendo las cosas básicas y comunes-->
     <head>
         <meta charset="utf-8">
-        <title>Javascript</title>
-        <link href="style.css" rel="stylesheet" type="text/css"></link>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mi primera Página</title>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <!--El cuerpo va a ser muy sencillo-->
+
     <body>
-        <script src="script.js"></script>
-        <!--Añado un h1, para el título, un contenedor para los botones y otro contenedor para los parrafos de los
-        resultados-->
-        <h1>Ejercicios Javascript</h1>
-        <div class="Contenedor">
+        <header>
+            <h1>Segundo Ejercicio JavaScript</h1>
+        </header>
+
+        <div class="contenedor_botones">
             <button class="boton" id="boton1">Ejercicio1</button>
-
             <button class="boton" id="boton2">Ejercicio2</button>
-
             <button class="boton" id="boton3">Ejercicio3</button>
-
             <button class="boton" id="boton4">Ejercicio4</button>
-
             <button class="boton" id="boton5">Ejercicio5</button>
-
             <button class="boton" id="boton6">Ejercicio6</button>
-
             <button class="boton" id="boton7">Ejercicio7</button>
-
             <button class="boton" id="boton8">Ejercicio8</button>
-
             <button class="boton" id="boton9">Ejercicio9</button>
-
             <button class="boton" id="boton10">Ejercicio10</button>
-
             <button class="boton" id="boton11">Ejercicio11</button>
-
             <button class="boton" id="boton12">Ejercicio12</button>
-
             <button class="boton" id="boton13">Ejercicio13</button>
+            <button class="boton" id="boton14">Ejercicio14</button>
         </div>
-        <!--Aquí el div de los parrafos-->
-        <div class="parrafos">
-            <p class = "parrafo1" id="enunciado_ejercicio"></p>
-            <p class = "parrafo2" id="resultado_ejercicio"></p>
-        </div>
-        <!--Indico desde que archivo se cargan las funciones de js-->
 
+        <div class="contenedor_parrafos">
+            <p class="parrafo" id="parrafo1"></p>
+            <p class="parrafo" id="parrafo2"></p>
+        </div>
+        <script src="script.js"></script>
     </body>
+
 </html>

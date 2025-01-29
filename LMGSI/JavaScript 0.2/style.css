@@ -1,0 +1,77 @@
+
+/*Juego y modifico un poco los estilos, nada raro*/
+body{
+    width: 90vw;
+    height: 100vh;
+    margin: auto;
+    justify-content: center;
+}
+
+/*alineo el título y nada más, sin complicarme*/
+h1{
+    text-align: center;
+    margin:auto;
+}
+
+/*Con el contenedor de los botones si juego un poco más, pero nada complicado*/
+.contenedor_botones{
+    width: 80vw;
+    height: 60vh;
+    margin: auto;
+    text-align: center;
+    background-color: blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    vertical-align: center;
+}
+
+/*Juego con el tamañó de los botones y su aspecto, les doy valor de blur hasta que se pase el ratón por encima*/
+.boton{
+    width: 30%;
+    height:10%;
+    background-color: orange;
+    border-radius: 25px;
+    border: 2px solid black;
+    box-shadow: 10px 10px 20px black;
+    font-size:large;
+    color:black;
+    filter: blur(4px);
+}
+
+/*El estilo de uno de los párrafos donde se muestran los resultados*/
+.parrafo{
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+}
+
+
+/*Cuando se pasa el ratón por encima de los botones cambian ligeramente*/
+.boton:hover{
+    background-color: yellow;
+    box-shadow: 15px 15px 15px greenyellow;
+    filter:none;
+    color: darkblue;
+    border: 3px solid darkgoldenrod;
+}
+
+/*Un poco de cambio cuando se clica en el boton*/
+.boton:active{
+    background-color: #838310;
+    transform: translateY(4px);
+    box-shadow:8px 8px 8px green;
+    color:skyblue;
+    text-shadow: 1px 1px dodgerblue;
+}
+
+
+/*El contenedor de los parrafos, para que quede alineado y diferenciado*/
+.contenedor_parrafos{
+    width: 80vw;
+    height: 20vh;
+    background-color: black;
+    justify-content: center;
+    margin: auto;
+}
