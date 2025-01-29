@@ -146,44 +146,90 @@ function ejercicio8() {
 }
 
 function ejercicio9() {
-    let hora = prompt('Introduzca Un valor de horas entre 0 y 23');
-    hora = parseInt(hora);
-    let minutos = prompt('Introduzca un valor de minutos entre 0 y 59');
-    minutos = parseInt(minutos);
-    let segundos = prompt('Introduzca un valor de segundos entre 0 y 59');
-    segundos = parseInt(segundos);
+    let hora = parseInt(prompt('Introduzca Un valor de horas entre 0 y 23'));
+    let minutos = parseInt(prompt('Introduzca un valor de minutos entre 0 y 59'));
+    let segundos = parseInt(prompt('Introduzca un valor de segundos entre 0 y 59'));
     parrafo1.textContent = 'Si sumamos un segundo a su hora introducida que pasará: ' + hora +':'+ minutos + ':' + segundos + '';
+
     segundos += 1;
-    if(segundos >= 60){
+    if(segundos <= 59){
+        parrafo2.textContent ='La hora final es: ' + hora +':'+ minutos +':'+ segundos;
+    }else{
         segundos = 0;
         minutos += 1;
         if(minutos >= 60){
             minutos = 0;
-            horas += 1;
-            if(horas>= 24){
-                horas = 0;
+            hora += 1;
+            if(hora >= 24){
+                hora = 0;
+
             }
         }
-    }else{
-        segundos += 1;
     }
-    parrafo2.textContent = ' ' + segundos;
+    let horaFinal ='La hora final es: ' + hora +':'+ minutos +':'+ segundos ;
+    parrafo2.textContent = horaFinal;
 }
 
 function ejercicio10() {
-
+    let leidoNegativo = false;
+    let numero = 0;
+    for (let i = 1; i <= 10; i++) {
+        numero = parseInt(prompt('Introduzca un número'));
+        if(numero < 0){
+            leidoNegativo = true;
+        }
+    }
+    parrafo1.textContent = 'Vamos a ver si el programa a leido algún número negativo';
+    if(leidoNegativo){
+        parrafo2.textContent = 'El programa ha leido al menos un número negativo';
+    }else{
+        parrafo2.textContent = 'El programa no ha leido ningún número negativo';
+    }
 }
 
 function ejercicio11() {
-
+    let numeroIntroducido = 0;
+    let contadorPositivos = 0, contadorNegativos = 0;
+    for(let i = 1; i <= 10; i++) {
+        do {
+            numeroIntroducido = parseInt(prompt('Introduzca un número cualquiera,distinto de cero'));
+            if (numeroIntroducido > 0) {
+                contadorPositivos++;
+            } else if (numeroIntroducido < 0) {
+                contadorNegativos++;
+            }else{
+                window.alert('El numero introducido tiene que ser distinto de cero');
+            }
+        } while (numeroIntroducido === 0);
+    }
+    parrafo1.textContent = 'Ahora le vamos a indicar cuantos números han sido positivos y cuantos negativos';
+    parrafo2.textContent = 'Numeros positivos: ' + contadorPositivos + " / Numeros Negativos: " + contadorNegativos;
 }
 
 function ejercicio12() {
-
+    let numeroIntroducido = 0;
+    let contadorPositivos = 0, contadorNegativos = 0;
+    do {
+        numeroIntroducido = parseInt(prompt('Introduzca un número cualquiera, 0 para salir'));
+        if(numeroIntroducido > 0){
+            contadorPositivos++;
+        }else if(numeroIntroducido < 0){
+            contadorNegativos++;
+        }
+    }while(numeroIntroducido !== 0);
+    parrafo1.textContent = 'Ahora le vamos a indicar cuantos números han sido positivos y cuantos negativos';
+    parrafo2.textContent = 'Numeros positivos: ' + contadorPositivos + " / Numeros Negativos: " + contadorNegativos;
 }
 
 function ejercicio13() {
-
+    let suma = 0, producto = 1;
+    window.alert('El programa le va a indicar la suma y el producto de los 10 primeros numeros naturales');
+    for (let i = 1; i <= 10; i++) {
+        suma += i;
+        producto *= i;
+    }
+    parrafo1.textContent = 'El valor de la suma de los 10 primeros numeros es: ' + suma;
+    parrafo2.textContent = 'El valor de el producto de los 10 primeros numeros es: ' + producto;
 }
 
 function ejercicio14() {
