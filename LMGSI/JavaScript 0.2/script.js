@@ -16,6 +16,9 @@ const boton14 = document.getElementById('boton14');
 const parrafo1 = document.getElementById('parrafo1');
 const parrafo2 = document.getElementById('parrafo2');
 
+
+//Creo los addEventListener para cada botón. Al crearlos todos juntos aquí arriba puedo clicar cada boton
+//en el orden que yo quiera, no empezando simplemente por el primero y siguiendo en orden
 boton1.addEventListener('click', ejercicio1);
 boton2.addEventListener('click', ejercicio2);
 boton3.addEventListener('click', ejercicio3);
@@ -31,6 +34,11 @@ boton12.addEventListener('click', ejercicio12);
 boton13.addEventListener('click', ejercicio13);
 boton14.addEventListener('click', ejercicio14);
 
+
+//He probado varias cosas pero no se como hacer que pase de un botón a otro. Con más tiempo veremos.
+
+
+//A partir de este punto voy creando las funciones necesarias para cada uno de los ejercicios.
 function ejercicio1() {
     let edad = prompt('Introduzca su edad');
     parrafo1.textContent = edad;
@@ -233,5 +241,25 @@ function ejercicio13() {
 }
 
 function ejercicio14() {
+    let nombreTrabajador = prompt('Indique el nombre del trabajador');
+    let horasTrabajadas = parseInt(prompt('Indique las horas que ha trabajado este mes'));
+    let precioPorHora = parseInt(prompt('Indique el precio por hora del trabajador'));
+
+    let sueldoBruto = 0;
+    if(horasTrabajadas <= 35){
+        sueldoBruto = horasTrabajadas * precioPorHora;
+    }else{
+        sueldoBruto = (35 * precioPorHora) + ((horasTrabajadas - 35) * (precioPorHora * 1.5));
+    }
+    let tasas = 0;
+    if(sueldoBruto > 500 && sueldoBruto <= 900){
+        tasas = (sueldoBruto - 500) * 0.25;
+    }if(sueldoBruto > 900){
+        tasas = ((sueldoBruto - 500) * 0.25) + ((sueldoBruto - 900) * 0.45);
+    }
+    parrafo1.textContent = 'Vamos a calcular los datos de ' + nombreTrabajador + ' con un precio por hora de ' + precioPorHora +
+     ' y ' + horasTrabajadas + ' horas trabajadas';
+
+    parrafo2.textContent = 'El salario bruto es de ' + sueldoBruto + ', las tasas son ' + tasas + ', y el sueldo neto es de ' + (sueldoBruto - tasas);
 
 }

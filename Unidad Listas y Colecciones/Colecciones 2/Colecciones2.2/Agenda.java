@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Agenda {
@@ -70,9 +71,11 @@ public class Agenda {
     }
 
 
-    //Método que devuelve un String cuyo valor es un listado de los contactos de la agenda
+    //Método que devuelve un String cuyo valor es un listado de los contactos de la agenda. En primer intento lo hice sin
+    //importar el orden, luego ya implemente el compareTo para que se ordenen por nombre
     public String visualizarAgenda(){
         String agenda = "";
+        Collections.sort(contactos);
         for(Contacto contacto: contactos) {
             agenda += contacto.toString() + "\n";
         }

@@ -14,7 +14,7 @@ public class MyUtils {
         Pattern patron = Pattern.compile("[A-Z]{1}[a-z]{1,14}");
         Matcher matcher;
         do{
-            System.out.println("Inserte el nombre del nuevo contacto con la primera letra en mayúscula");
+            System.out.println("Inserte el nombre del contacto con la primera letra en mayúscula");
             sc = new Scanner(System.in);
             nombre = sc.nextLine();
             matcher = patron.matcher(nombre);
@@ -29,7 +29,7 @@ public class MyUtils {
         Pattern patron = Pattern.compile("[0-9]{9}");
         Matcher matcher;
         do{
-            System.out.println("Inserte el telefono del nuevo contacto");
+            System.out.println("Inserte el telefono del contacto");
             sc = new Scanner(System.in);
             telefono = sc.nextLine();
             matcher = patron.matcher(telefono);
@@ -43,7 +43,7 @@ public class MyUtils {
         Pattern patron = Pattern.compile("[A-Za-z1-9_-]{6,20}[@]{1}[a-z]{4,10}[.]{1}[a-z]{2,4}");
         Matcher matcher;
         do{
-            System.out.println("Inserte el email del nuevo contacto");
+            System.out.println("Inserte el email del contacto");
             sc = new Scanner(System.in);
             email = sc.nextLine();
             matcher = patron.matcher(email);
