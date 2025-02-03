@@ -73,6 +73,11 @@ INSERT INTO `dept_emp` VALUES (10001,'d006','2021-06-26','9999-01-01'),
 (10012,'d005','2019-06-26','9999-01-01');
 
 #AÑADIMOS EL CAMPO SALARIO EN LA TABLA DEPT_EMP
-alter table dept_emp add salario decimal(6,2) not null;
+alter table dept_emp add salario decimal(8,2) not null;
+
+#He buscado si existe una forma de hacer multiples updates en una tabla, para actualizar los salarios, y creo que iría asi, voy a prober
+
+#Como no he encontrado una forma que conozca correctamente lo voy a tener que hacer uno por uno
+
 
  
