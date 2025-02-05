@@ -1,0 +1,13 @@
+.contenedor{
+    width: 90%;
+    margin: auto;
+    border: 1px solid black;
+    text-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 6px black;
+}
+
+.formulario{
+    width: 80%;
+    margin: auto;
+    justify-content: space-evenly;
+}

@@ -14,6 +14,7 @@ public class Main {
 
             for(int i = 0; i <= 5; i++ ){
                 try{
+                    teclado = new Scanner(System.in);
                     System.out.println("Inserte un valor del tipo double");
                     dobles[i] = teclado.nextDouble();
                 }catch (InputMismatchException e) {
@@ -31,11 +32,10 @@ public class Main {
                 }
                 finally {
                     System.out.println("Seguimos rellenando el array");
-                    teclado.close();
+                    //continue;
                 }
 
             }
-
 
         System.out.println("Bastante que hemos llegado hasta aquí");
     }
