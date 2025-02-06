@@ -8,7 +8,7 @@ public class Main {
         ArrayList<Gato> gatos = new ArrayList<>();
         int contadorGatos = 0;
         Scanner teclado;
-
+        Gato gato;
         String nombre;
         int edad;
 
@@ -23,6 +23,7 @@ public class Main {
                 System.out.println("Introduzca un valor numérico");
                 System.out.println(e.getMessage());
             }
+            gato = new Gato(nombre, edad);
         }while(contadorGatos < 5);
 
     }

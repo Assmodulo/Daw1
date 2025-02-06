@@ -12,10 +12,6 @@ public class Gato {
         } catch (EdadException e2) {
             System.out.println(e2.getMessage());
             System.out.println("Se le asignará a su gato una edad por defecto");
-        }finally{
-            System.out.println("Se han añadido los datos de un gato");
-            this.nombre = "Gatete";
-            this.edad = 1;
         }
     }
 

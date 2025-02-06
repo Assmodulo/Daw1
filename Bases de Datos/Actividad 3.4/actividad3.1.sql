@@ -79,5 +79,37 @@ alter table dept_emp add salario decimal(8,2) not null;
 
 #Como no he encontrado una forma que conozca correctamente lo voy a tener que hacer uno por uno
 
+update dept_emp set salario = 34000.00 where cod_empleado = '10001';
+update dept_emp set salario = 20000.00 where cod_empleado = '10002';
+update dept_emp set salario = 22000.00 where cod_empleado = '10003';
+update dept_emp set salario = 29500.00 where cod_empleado = '10004';
+update dept_emp set salario = 32000.00 where cod_empleado = '10005';
+update dept_emp set salario = 19500.00 where cod_empleado = '10006';
+update dept_emp set salario = 30000.00 where cod_empleado = '10007';
+update dept_emp set salario = 29500.00 where cod_empleado = '10008';
+update dept_emp set salario = 31250.00 where cod_empleado = '10009';
+update dept_emp set salario = 36000.00 where cod_empleado = '10010';
+update dept_emp set salario = 26000.00 where cod_empleado = '10011';
+update dept_emp set salario = 27000.00 where cod_empleado = '10012';
 
- 
+#Cuantos empleados trabajan en el departamento de calidad
+select nombre_departamento, count(dep.cod_empleado) from departamento d join 
+dept_emp dep on d.cod_departamento = dep.cod_departamento where d.nombre_departamento = 'Quality Management';
+
+#Quien es el empleado mejor pagado del departamento de desarrollo
+select e.nombre, e.apellido, d.salario from empleado e join dept_emp d on e.cod_empleado = d.cod_empleado 
+join departamento de on d.cod_departamento = de.cod_departamento 
+where de.nombre_departamento = 'Development' and d.salario = 
+(select max(d.salario) from dept_emp d join departamento de on d.cod_departamento = de.cod_departamento 
+where de.nombre_departamento = 'Development');  
+
+#nombre, apellido, y fecha de contratación del ultimo empleado contratado en producción
+select e.nombre, e.apellido, de.fecha_desde from empleado e join dept_emp de on
+e.cod_empleado = de.cod_empleado join departamento d on de.cod_departamento = d.cod_departamento
+where d.nombre_departamento ='Production' and de.fecha_desde = (
+select max(de.fecha_desde) from dept_emp de join departamento d on de.cod_departamento = d.cod_departamento
+where d.nombre_departamento ='Production');
+
+#Salario medio de los trabajadores del departamento de produccion
+select d.nombre_departamento, avg(de.salario) from departamento d join dept_emp de
+on d.cod_departamento = de.cod_departamento where d.nombre_departamento = 'Production';
