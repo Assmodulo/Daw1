@@ -1,0 +1,11 @@
+@echo off
+set FECHA_ACTUAL=%DATE%
+set HORA_ACTUAL=%TIME%
+set ANO=%FECHA_ACTUAL:~6,4%
+set MES=%FECHA_ACTUAL:~3,2%
+set DIA=%FECHA_ACTUAL:~0,2%
+set HORA=%HORA_ACTUAL:~0,2%
+set MINUTOS=%HORA_ACTUAL:~3,2%
+set SEGUNDOS=%HORA_ACTUAL:~6,2%
+XCOPY C:\Users\MV\Documents R:\MiBackup_%ANO%_%MES%_%DIA%_Hora_%HORA%_
+%MINUTOS% /s/i
