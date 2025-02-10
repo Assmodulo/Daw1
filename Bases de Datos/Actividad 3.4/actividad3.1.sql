@@ -113,3 +113,38 @@ where d.nombre_departamento ='Production');
 #Salario medio de los trabajadores del departamento de produccion
 select d.nombre_departamento, avg(de.salario) from departamento d join dept_emp de
 on d.cod_departamento = de.cod_departamento where d.nombre_departamento = 'Production';
+
+#Mostrar datos del empleado que menos gana en production. Mostrar también su salario.
+select e.nombre, e.apellido, e.sexo, de.salario from empleado e join
+dept_emp de on e.cod_empleado = de.cod_empleado join departamento d on
+d.cod_departamento = de.cod_departamento where d.nombre_departamento = 'Production'
+and de.salario =(select min(de.salario) from dept_emp de join departamento d on
+de.cod_departamento = d.cod_departamento where d.nombre_departamento = 'Production');
+
+#Mostrar datos del empleado peor pagado de cada departamento
+select d.nombre_departamento, de.salario from dept_emp de join
+departamento d on d.cod_departamento = de.cod_departamento where salario = (
+select min(salario) from dept_emp de
+join departamento on de.cod_departamento = d.cod_departamento);
+
+#calcula el salario medio por sexo
+select sexo, avg(salario) as salario_medio from dept_emp join
+empleado on dept_emp.cod_empleado = empleado.cod_empleado
+group by sexo;
+
+#Calcula el salario total de los empleados de desarrollo
+select nombre_departamento, sum(salario) as salario_total from departamento
+join dept_emp on departamento.cod_departamento = dept_emp.cod_departamento
+where nombre_departamento = 'Development';
+
+#Salario total de todos los trabajadores actuales de produccion
+select nombre_departamento, sum(salario) as salario_total from departamento
+join dept_emp on departamento.cod_departamento = dept_emp.cod_departamento
+where nombre_departamento = 'Production' and dept_emp.fecha_hasta = '9999-01-01';
+
+#Muestra el departamento con el mayor número de empleados asignados actualmente
+select nombre_departamento, count(dept_emp.cod_empleado) as total_trabajadores from dept_emp
+join departamento on dept_emp.cod_departamento = departamento.cod_departamento
+group by nombre_departamento
+order by total_trabajadores desc
+limit 1;
