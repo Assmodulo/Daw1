@@ -122,10 +122,11 @@ and de.salario =(select min(de.salario) from dept_emp de join departamento d on
 de.cod_departamento = d.cod_departamento where d.nombre_departamento = 'Production');
 
 #Mostrar datos del empleado peor pagado de cada departamento
-select d.nombre_departamento, de.salario from dept_emp de join
-departamento d on d.cod_departamento = de.cod_departamento where salario = (
-select min(salario) from dept_emp de
-join departamento on de.cod_departamento = d.cod_departamento);
+SELECT D.NOMBRE_DEPARTAMENTO, E.NOMBRE, E.APELLIDO, E.SEXO, DE.SALARIO 
+FROM DEPT_EMP DE JOIN EMPLEADO E ON DE.COD_EMPLEADO = E.COD_EMPLEADO 
+JOIN DEPARTAMENTO D ON DE.COD_DEPARTAMENTO = D.COD_DEPARTAMENTO 
+WHERE (DE.COD_DEPARTAMENTO, DE.SALARIO) IN 
+(SELECT COD_DEPARTAMENTO, MIN(SALARIO) FROM DEPT_EMP GROUP BY COD_DEPARTAMENTO);
 
 #calcula el salario medio por sexo
 select sexo, avg(salario) as salario_medio from dept_emp join
