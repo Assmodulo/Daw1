@@ -1,13 +1,20 @@
 const areaTexto = document.getElementById('areaTexto');
 const boton = document.getElementById('botonAgregar');
+const formulario = document.getElementById('formulario');
 
 const lista = document.getElementById('idlista');
 
-boton.addEventListener('click', agregarElementoLista);
+
 
 let elementos = [];
+let contadorElementos = 0;
 
-function agregarElementoLista() {
-    let elemento = document.getElementById('areaTexto').value;
-    console.log(elemento);
-}
+formulario.addEventListener('submit',function(event) {
+    event.preventDefault();
+    let actividad = areaTexto.value;
+    elementos.push(actividad);
+    areaTexto.value = '';
+    window.alert(elementos[contadorElementos - 1]);
+})
+
+
