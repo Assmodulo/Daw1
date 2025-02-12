@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const areaTexto = document.getElementById('areaTexto');
 const formulario = document.getElementById('formulario');
-const contenedorLista = document.getElementById('idlista');
+const idLista = document.getElementById('idlista');
 
 
 //Vamos a ver, muchas de las cosas que he intentado han sido siguiendo tu ejemplo. Luego he leido en profundidad un articulo
@@ -40,11 +40,12 @@ function mostrarLista(){
     //No me voy a molestar en limpiar la lista y esas cosas todavía. Por ahora tengo que ver si las cosas pitan
     elementos.forEach((elemento, indice) => {
         const elementoLista = document.createElement('li');
+        elementoLista.appendChild(<span id={indice}></span>);
         elementoLista.innerHTML = `
             <span>${elemento}</span>
             <button>Eliminar</button>
         `;//Casi ni veía las comillas esas raras en el ejemplo. No me complico, creo esto por ahora, solo básico
-    contenedorLista.appendChild(elementoLista);
+    idLista.appendChild(elementoLista);
     });
 }
 
