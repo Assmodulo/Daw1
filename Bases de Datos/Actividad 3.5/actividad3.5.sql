@@ -1482,6 +1482,26 @@ dept_manager de on d.dept_no = de.dept_no join employees e on e.emp_no = de.emp_
 join titles t on e.emp_no = t.emp_no where de.to_date = '9999-01-01';
 
 #Enumera los tres departamentos con mas empleados en la actualidad
-select d.dept_name, count(de.emp_no) as 'Num. Empleados' from departments d join
-dept_emp de on d.dept_no = de.dept_no join employees e on de.emp_no = e.emp_no 
-order by 'Num. Empleados' desc limit 3;
+select d.dept_name, count(de.emp_no) as 'Num_Empleados' from departments d join
+dept_emp de on d.dept_no = de.dept_no group by d.dept_name order by Num_Empleados desc limit 3;
+
+#Enumera a todos los empleados que han trabajado en el mismo departamento al menos dos años
+select e.first_name, e.last_name, datediff(de.to_date, de.from_date) as 'Dias Diferencia', d.dept_name as 'Years' from employees e join dept_emp de on 
+e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no where datediff(de.to_date, de.from_date) > 730 order by e.emp_no; 
+
+#Ejercicio adicional
+#Nombre y apellidos del primer empleado del departamento de ventas
+select e.first_name, e.last_name, de.from_date, d.dept_name from employees e
+join dept_emp de on e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no
+where d.dept_name = 'Sales' order by de.from_date asc limit 1;
+
+#Titulo de la mujer que más gana actualmente
+select t.title, s.salary from titles t join employees e on t.emp_no = e.emp_no
+join salaries s on e.emp_no = s.emp_no where s.to_date = '9999-01-01' and e.gender = 'F'
+order by s.salary desc limit 1;
+
+#Fecha de contratación del jefe actual de Marketing
+select d.dept_name, de.from_date from employees e join dept_manager dem on
+e.emp_no = dem.emp_no join departments d on d.dept_no = dem.dept_no join
+dept_emp de on d.dept_no = de.dept_no where d.dept_name = 'Marketing' and 
+dem.to_date = '9999-01-01';
