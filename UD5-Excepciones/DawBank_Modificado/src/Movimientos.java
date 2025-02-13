@@ -18,7 +18,7 @@ public class Movimientos {
         this.idMov = cont +1;
         this.fecha = LocalDateTime.now();
         this.tipo = tipo;
-        this.cantidad = this.setCantidad();
+        setCantidad(cantidad);
 
         //Como cada vez que se genera un movimiento el siguiente va a tener una id consecutiva ahora le tengo que
         //indicar que la id debe de aumentar

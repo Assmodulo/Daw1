@@ -115,18 +115,21 @@ public class Main {
                     teclado = new Scanner(System.in);
                     System.out.println("REINTEGRO\n");
                     tMovimiento = TipoMovimiento.RETIRADA.getTipo();
-                    cantidad = MyUtils.introducirImporte();
-                    if (MyUtils.saldoNegativoNoPermitido(cantidad, c)){
-                        System.out.println("SU OPERACIÓN VA A DEJAR SU CUENTA POR DEBAJO DE -50 EUROS");
-                        System.out.println("OPERACIÓN NO PERMITIDA\n");
-                    }else{
+                    try {
+                        cantidad = MyUtils.introducirImporte();
                         m = new Movimientos(tMovimiento,cantidad);
                         c.reducirSaldo(cantidad);
-                        if(c.getSaldo() < 0){
-                            System.out.println("AVISO: SALDO NEGATIVO\n");
-                        }
-                        c.almacenarMovimientos(m);
+                    } catch (CantidadNegativaException e) {
+                        System.out.println(e.getMessage() + e.toString());
+                    } catch (AvisarHaciendaException e) {
+                        System.out.println(e.getMessage() + e.toString());
+                    } catch (CuentaException e) {
+                        System.out.println(e.getMessage() + e.toString());
                     }
+                    if(c.getSaldo() < 0){
+                    System.out.println("AVISO: SALDO NEGATIVO\n");
+                    }
+                    c.almacenarMovimientos(m);
                     break;
                 case "7":
                     System.out.println("ESTE ES EL ESTRACTO DE SUS MOVIMIENTOS");
@@ -147,4 +150,7 @@ public class Main {
 
     }
 
+
 }
+
+
