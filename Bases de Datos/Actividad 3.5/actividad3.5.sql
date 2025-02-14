@@ -1486,8 +1486,19 @@ select d.dept_name, count(de.emp_no) as 'Num_Empleados' from departments d join
 dept_emp de on d.dept_no = de.dept_no group by d.dept_name order by Num_Empleados desc limit 3;
 
 #Enumera a todos los empleados que han trabajado en el mismo departamento al menos dos años
-select e.first_name, e.last_name, datediff(de.to_date, de.from_date) as 'Dias Diferencia', d.dept_name as 'Years' from employees e join dept_emp de on 
-e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no where datediff(de.to_date, de.from_date) > 730 order by e.emp_no; 
+select e.first_name, e.last_name, datediff(de.to_date, de.from_date) as 'Dias Diferencia', d.dept_name from employees e join dept_emp de on 
+e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no where datediff(de.to_date, de.from_date) > 730 order by e.emp_no;
+
+#Salario medio por departamento entre los empleados que actualmente trabajan en el
+select d.dept_name, avg(s.salary) from employees e join salaries s on e.emp_no = s.emp_no
+join dept_emp de on e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no 
+where de.to_date = '9999-01-01' group by d.dept_no;
+
+#Muestra el trabajador mejor pagado por detartamento de los que trabajan actualmente
+select e.first_name, e.last_name, s.salary, d.dept_name from employees e join salaries s on
+e.emp_no = s.emp_no join dept_emp de on e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no
+where de.to_date = '9999-01-01' and s.to_date = '9999-01-01';
+
 
 #Ejercicio adicional
 #Nombre y apellidos del primer empleado del departamento de ventas
