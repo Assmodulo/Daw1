@@ -6,11 +6,11 @@ public class CuentaException extends Exception {
 
     @Override
     public String getMessage() {
-        return super.getMessage();
+        return "Saldo final u operación no permitida";
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Fallo en la operativa de la cuenta";
     }
 }

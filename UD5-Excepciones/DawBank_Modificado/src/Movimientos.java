@@ -55,6 +55,6 @@ public class Movimientos {
 
     @Override
     public String toString() {
-        return "ID Mov: " + this.idMov + ", Fecha/Hora: " + this.fecha + ", Tipo: " + this.tipo + ", Cantidad: " + this.cantidad;
+        return "ID Mov: " + this.idMov + ", Fecha/Hora: " + MyUtils.formatearFHora(this.fecha) + ", Tipo: " + this.tipo + ", Cantidad: " + this.cantidad;
     }
 }

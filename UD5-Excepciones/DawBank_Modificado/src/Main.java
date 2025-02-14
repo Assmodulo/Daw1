@@ -27,7 +27,7 @@ public class Main {
         +"SI EL FORMATO NO ES CORRECTO EL PROGRAMA SE LO PEDIRÁ OTRA VEZ");
 
         //Declaro dos variable String para almacenar el iban y el titular
-        String iban, titular, tMovimiento;
+        String iban, tMovimiento;
 
         //Declaro una variable double para almacenar la cantidad de dinero para los movimientos
         double cantidad;
@@ -40,12 +40,11 @@ public class Main {
             iban = teclado.nextLine().toUpperCase();
         }while(!MyUtils.validarFormatoIban(iban));
 
-        System.out.println("AHORA VAMOS A SOLICITAR EL NOMBRE DEL TITULAR");
-        teclado = new Scanner(System.in);
-        titular = teclado.nextLine().toUpperCase();
-
+        System.out.println("VAMOS A CREAR AHORA UN CLIENTE ASOCIADO A SU CUENTA BANCARIA");
         //procedo a crear la cuenta
-        c= new CuentaBancaria(iban,titular);
+        Cliente cliente;
+        cliente = MyUtils.crearCliente();
+        c = new CuentaBancaria(iban,cliente);
         System.out.println();
 
 
@@ -86,25 +85,24 @@ public class Main {
                     break;
                 case "5":
                     System.out.println("INGRESO\n");
-                    boolean correcto = false;
                     cantidad = 0;
                     tMovimiento = TipoMovimiento.INGRESO.getTipo();
-                    do {
                         try {
                             System.out.println("INSERTE LA CUANTIA DEL MOVIMIENTO");
                             cantidad = MyUtils.introducirImporte();
                             m = new Movimientos(tMovimiento,cantidad);
-                            correcto = true;
                         } catch (CantidadNegativaException e) {
-                            System.out.println(e.getMessage() + e.toString());
+                            System.out.println(e.getMessage());
                             e.printStackTrace();
                         } catch (AvisarHaciendaException e){
-                            System.out.println(e.getMessage() + e.toString());
+                            System.out.println(e.getMessage());
                             e.printStackTrace();
-                        }finally{
-                            System.out.println("MANEJO INCORRECTO, INTENTE DE NUEVO");
                         }
-                    } while (!correcto);
+                        //El codigo que viene después no lo he dejado dentro del try por lo siguiente
+                        //Si el ingreso es superior a 3000 solo debe de saltarnos el warning, pero no debe de parar la operación
+                        //Por la forma en la que he programado introducirImporte(), siempre va a ser una cantidad positiva, así
+                        //que siempre se puede hacer el ingreso. Al final cantidadNegativaException no la lanzo nunca, por como
+                        //he programado la solicitud del importe, tengo que retirarla cuando me acuerde.
                     c.incrementarSaldo(cantidad);
                     if(c.getSaldo() < 0){
                         System.out.println("AVISO: SALDO NEGATIVO\n");
@@ -119,17 +117,17 @@ public class Main {
                         cantidad = MyUtils.introducirImporte();
                         m = new Movimientos(tMovimiento,cantidad);
                         c.reducirSaldo(cantidad);
+                        if(c.getSaldo() < 0){
+                            System.out.println("AVISO: SALDO NEGATIVO\n");
+                        }
+                        c.almacenarMovimientos(m);
                     } catch (CantidadNegativaException e) {
-                        System.out.println(e.getMessage() + e.toString());
+                        System.out.println(e.getMessage());
                     } catch (AvisarHaciendaException e) {
-                        System.out.println(e.getMessage() + e.toString());
+                        System.out.println(e.getMessage());
                     } catch (CuentaException e) {
-                        System.out.println(e.getMessage() + e.toString());
+                        System.out.println(e.getMessage());
                     }
-                    if(c.getSaldo() < 0){
-                    System.out.println("AVISO: SALDO NEGATIVO\n");
-                    }
-                    c.almacenarMovimientos(m);
                     break;
                 case "7":
                     System.out.println("ESTE ES EL ESTRACTO DE SUS MOVIMIENTOS");

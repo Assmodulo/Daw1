@@ -20,13 +20,13 @@ public abstract class Persona {
         return dni;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getFechaNacimiento() {
+        return MyUtils.formatearFecha(this.fechaNacimiento);
     }
 
     @Override
     public String toString() {
-        return  "Nombre: " + nombre + ", Dni: " + dni + ", Fecha: " + fechaNacimiento + "\n";
+        return  "Nombre: " + nombre + ", Dni: " + dni + ", Fecha: " + MyUtils.formatearFecha(fechaNacimiento) + "\n";
 
     }
 }

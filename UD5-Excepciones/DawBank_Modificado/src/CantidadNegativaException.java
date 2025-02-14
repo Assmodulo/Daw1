@@ -14,3 +14,4 @@ public class CantidadNegativaException extends Exception {
     return "Intento de operación incorrecta.";
   }
 }
+//Al final tal y como había programado la solicitud de cantidad nunca va a saltar esta exception, pero la dejo aquí

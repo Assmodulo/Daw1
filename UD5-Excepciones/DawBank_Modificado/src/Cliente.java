@@ -35,7 +35,7 @@ public class Cliente extends Persona{
     }
 
     @Override
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return super.getFechaNacimiento();
     }
 

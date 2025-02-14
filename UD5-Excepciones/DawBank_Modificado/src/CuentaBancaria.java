@@ -45,7 +45,7 @@ public class CuentaBancaria {
 
     //Este método actualiza el valor de saldo cuando hay un reintegro
     public void reducirSaldo(double saldo) throws CuentaException {
-        if((this.saldo - saldo) < -49){
+        if((this.saldo - saldo) < -50){
             throw new CuentaException();
         }else{
             this.saldo -= saldo;
@@ -60,7 +60,6 @@ public class CuentaBancaria {
                 "iban='" + iban + '\'' +
                 ", titular=" + this.titular.toString() +
                 ", saldo=" + saldo +
-                ", movimientos=" + movimientos +
                 '}';
     }
 
