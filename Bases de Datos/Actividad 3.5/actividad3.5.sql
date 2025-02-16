@@ -1467,39 +1467,81 @@ INSERT INTO `salaries` VALUES (10001,60117,'1986-06-26','1987-06-26'),
 
 
 #Mostrar cada departamento con su empleado, nombre y apellidos
-select d.dept_name, e.first_name, e.last_name from dept_emp de
-join employees e on de.emp_no = e.emp_no join departments d on
-d.dept_no = de.dept_no; 
+select d.dept_name, e.first_name, e.last_name 
+from dept_emp de
+join employees e on de.emp_no = e.emp_no 
+join departments d on d.dept_no = de.dept_no 
+where de.to_date = '9999-01-01'; 
 
 #Muestra el salario actual de cada empleado y su nombre y apellidos
 #Entiendo en este caso que al decir actual se refiere a los que la fecha_hasta esta en 9999
-select s.salary, e.first_name, e.last_name from salaries s 
-join employees e on s.emp_no = e.emp_no where s.to_date = '9999-01-01';
+select s.salary, e.first_name, e.last_name 
+from salaries s 
+join employees e on s.emp_no = e.emp_no 
+where s.to_date = '9999-01-01';
 
 #Obetner las lista completa de los jefes de departamento actuales y sus titulos
-select e.first_name, e.last_name, t.title, d.dept_name from departments d join
-dept_manager de on d.dept_no = de.dept_no join employees e on e.emp_no = de.emp_no 
-join titles t on e.emp_no = t.emp_no where de.to_date = '9999-01-01';
+select e.first_name, e.last_name, t.title, d.dept_name 
+from departments d 
+join dept_manager de on d.dept_no = de.dept_no 
+join employees e on e.emp_no = de.emp_no 
+join titles t on e.emp_no = t.emp_no 
+where de.to_date = '9999-01-01' and t.to_date = '9999-01-01';
 
 #Enumera los tres departamentos con mas empleados en la actualidad
-select d.dept_name, count(de.emp_no) as 'Num_Empleados' from departments d join
-dept_emp de on d.dept_no = de.dept_no group by d.dept_name order by Num_Empleados desc limit 3;
+select d.dept_name, count(de.emp_no) as 'Num_Empleados' 
+from departments d 
+join dept_emp de on d.dept_no = de.dept_no 
+group by d.dept_name 
+order by Num_Empleados desc 
+limit 3;
 
 #Enumera a todos los empleados que han trabajado en el mismo departamento al menos dos años
-select e.first_name, e.last_name, datediff(de.to_date, de.from_date) as 'Dias Diferencia', d.dept_name from employees e join dept_emp de on 
-e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no where datediff(de.to_date, de.from_date) > 730 order by e.emp_no;
+select e.first_name, e.last_name, datediff(de.to_date, de.from_date) as 'Dias Diferencia', d.dept_name 
+from employees e join dept_emp de on e.emp_no = de.emp_no 
+join departments d on de.dept_no = d.dept_no 
+where datediff(de.to_date, de.from_date) > 730 
+order by e.emp_no;
 
 #Salario medio por departamento entre los empleados que actualmente trabajan en el
-select d.dept_name, avg(s.salary) from employees e join salaries s on e.emp_no = s.emp_no
-join dept_emp de on e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no 
-where de.to_date = '9999-01-01' group by d.dept_no;
+select d.dept_name, avg(s.salary) 
+from employees e 
+join salaries s on e.emp_no = s.emp_no
+join dept_emp de on e.emp_no = de.emp_no 
+join departments d on de.dept_no = d.dept_no 
+where de.to_date = '9999-01-01' 
+group by d.dept_no;
 
 #Muestra el trabajador mejor pagado por detartamento de los que trabajan actualmente
-select e.first_name, e.last_name, s.salary, d.dept_name from employees e join salaries s on
-e.emp_no = s.emp_no join dept_emp de on e.emp_no = de.emp_no join departments d on de.dept_no = d.dept_no
-where de.to_date = '9999-01-01' and s.to_date = '9999-01-01';
+select e.first_name, e.last_name, s.salary, d.dept_name 
+from employees e 
+join salaries s on e.emp_no = s.emp_no 
+join dept_emp de on e.emp_no = de.emp_no 
+join departments d on de.dept_no = d.dept_no
+where (s.salary in (select max(s.salary) from salaries s 
+join dept_emp de on s.emp_no = de.emp_no 
+group by de.dept_no)) 
+and de.to_date = '9999-01-01' and s.to_date = '9999-01-01';
+
+#Muestra los datos de jefe de departamento actual con el salario más bajo
+select e.emp_no, e.birth_date, e.first_name, e.last_name, e.gender, s.salary, d.dept_name 
+from employees e
+join salaries s on e.emp_no = s.emp_no 
+join dept_manager dem on e.emp_no = dem.emp_no 
+join departments d on dem.dept_no = d.dept_no 
+where dem.to_date = '9999-01-01' and s.to_date = '9999-01-01'
+order by s.salary asc limit 1; 
+
+#Muestra los detalles del primer empleado contratado por la empresa
+select s.salary, t.title,e.emp_no, e.first_name, e.last_name, e.hire_date 
+from titles t
+join employees e on t.emp_no = e.emp_no 
+join salaries s on e.emp_no = s.emp_no
+where s.to_date = '9999-01-01' and t.to_date = '9999-01-01'
+order by e.hire_date asc limit 1;
 
 
+select * from salaries where emp_no = '10008';
 #Ejercicio adicional
 #Nombre y apellidos del primer empleado del departamento de ventas
 select e.first_name, e.last_name, de.from_date, d.dept_name from employees e

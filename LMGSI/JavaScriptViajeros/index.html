@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css"></link>
-    </head>
-
-    <body>
-        <form id="formulario">
-            <label for="tarea">Tarea</label>
-            <input type="text" id="tarea" placeholder="Introduzca una tarea"></input>
-            <button type="submit">Agregar</button>
-        </form>
-
-        <ul id="lista"></ul>
-    </body>
-    <script src="script.js"></script>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lista de Tareas del Viajero</title>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Tareas del Viajero</h1>
+    <div id="messages"></div>
+    <form id="taskForm">
+        <label for="taskInput">Nueva Tarea:</label>
+        <input type="text" id="taskInput" required>
+        <button type="submit">Agregar</button>
+    </form>
+    <ul id="taskList"></ul>
+</div>
+<script src="script.js"></script>
+</body>
 </html>
