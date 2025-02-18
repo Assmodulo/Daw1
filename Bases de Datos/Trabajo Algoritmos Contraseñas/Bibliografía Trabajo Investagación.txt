@@ -1,0 +1,12 @@
+https://supertokens-com.translate.goog/blog/password-hashing-salting?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=rq  //Hash Contraseñas
+
+https://programacion.net/articulo/algoritmos-para-encriptar-contrasenas_1070 //Algoritmos, algunas de las tecnologías
+
+https://www.muycomputer.com/2024/06/14/4-gestores-contrasenas-open-source/  //Gestores de contraseñas de código abierto
+
+https://www.ibm.com/docs/es/sdse/6.4.0?topic=security-password-encryption  //IBM contraseñas
+
+https://keepcoding.io/blog/hashing-para-contrasenas/  //Hashing para contraseñas
+
+https://es.wikipedia.org/wiki/Algoritmo_de_contrase%C3%B1a_de_un_solo_uso_basada_en_el_tiempo   //Algoritmos one time key
+
