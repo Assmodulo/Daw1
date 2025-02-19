@@ -14,21 +14,28 @@ public class Main {
         LinkedList<Producto> productos = new LinkedList<>();
         Producto p;
 
-        try(FileReader ficheroProductos = new FileReader("./resources/listado.csv");
-            BufferedReader lector = new BufferedReader(ficheroProductos);){
-            String linea = lector.readLine();
-            while(linea != null){
-                String[] datos = linea.split(",");
-                p = new Producto(datos[0],datos[1],Integer.parseInt(datos[2]), Double.parseDouble(datos[3]));
+        boolean eof = false;    //Definimos el booleano que se necesita para certificar el fin del fichero
+        try(FileInputStream fichero = new FileInputStream("./resources/Almacen.dat");
+            DataInputStream lector = new DataInputStream(fichero)){
+
+            while(!eof){
+                String c = lector.readUTF();
+                String nom = lector.readUTF();
+                int cant = lector.readInt();
+                double prec = lector.readDouble();
+                p = new Producto(c,nom,cant,prec);
                 productos.add(p);
-                linea = lector.readLine();
+
             }
-        }catch(IOException e){
-            System.out.println("Error al leer el fichero de productos");
+        }catch(EOFException e){
+            System.out.println("EOF. Se han leido todas las entradas del fichero");
             System.out.println(e.getMessage());
-        }catch(IndexOutOfBoundsException e){
-            System.out.println("El formato de los datos no está bien guardado");
+            eof = true;
+        }catch(IOException e){
+            System.out.println("Error al leer el fichero");
+            System.out.println(e.getMessage());
         }
+
 
         do{
             sc = new Scanner(System.in);
@@ -62,13 +69,16 @@ public class Main {
                     break;
                 case "4":
                     System.out.println("Opción de guardado de listado");
-                    try(FileWriter ficheroProductos = new FileWriter("./resources/listado.csv",false);
-                        BufferedWriter escritor = new BufferedWriter(ficheroProductos)){
-                        escritor.write(stringToFile(productos));
-                        escritor.newLine();
+                    try(FileOutputStream fichero = new FileOutputStream("./resources/Almacen.dat",false);
+                        DataOutputStream writer = new DataOutputStream(fichero)){
+                        for(Producto producto: productos){
+                            writer.writeUTF(producto.getCodigo());
+                            writer.writeUTF(producto.getNombre());
+                            writer.writeInt(producto.getCantidad());
+                            writer.writeDouble(producto.getPrecio());
+                        }
                     }catch(IOException e){
-                        System.out.println("Error al escribir el fichero de productos");
-                        e.getMessage();
+                        System.out.println("Error al escribir el fichero");
                     }
                     break;
                 case "5":
