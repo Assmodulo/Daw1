@@ -6,6 +6,13 @@ public abstract class Articulo {
     protected LocalDate fechaAlta;
     protected LocalDate fechaBaja;
 
+    public Articulo(String codigo, String titulo, LocalDate fechaAlta, LocalDate fechaBaja) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.fechaAlta = fechaAlta;
+        this.fechaBaja = fechaBaja;
+    }
+
     public String getCodigo() {
         return codigo;
     }

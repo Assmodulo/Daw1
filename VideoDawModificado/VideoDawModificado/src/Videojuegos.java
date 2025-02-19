@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Pelicula extends Articulo{
+public class Videojuegos extends Articulo{
     private boolean isAlquilada = false;
     private LocalDateTime fechaAlquiler;
-    private GenerosPeliculas genero;
+    private GenerosVidejuegos genero;
 
-    public Pelicula(String codigo, String titulo, LocalDate fechaAlta, LocalDate fechaBaja, GenerosPeliculas genero) {
+    public Videojuegos(String codigo, String titulo, LocalDate fechaAlta, LocalDate fechaBaja, GenerosVidejuegos genero) {
         super(codigo, titulo, fechaAlta, fechaBaja);
         this.genero = genero;
         this.isAlquilada = false;
@@ -23,7 +23,7 @@ public class Pelicula extends Articulo{
     public String isAlquilada() {
         String alquilada = "";
         if(isAlquilada){
-            alquilada = "Alquilada";
+            alquilada = "Alquilado";
         }else{
             alquilada = "Disponible";
         }
@@ -34,7 +34,7 @@ public class Pelicula extends Articulo{
         return fechaAlquiler;
     }
 
-    public GenerosPeliculas getGenero() {
+    public GenerosVidejuegos getGenero() {
         return genero;
     }
 
