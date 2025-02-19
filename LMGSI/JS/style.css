@@ -1,0 +1,40 @@
+/* Jugando con estilos sin mas para dejar la página un poco bien */
+body{
+    background-color: blue;
+    width: 90%;
+    align-items: center;
+}
+
+#cajatexto{
+    display:block;
+    width: 50%;
+    margin:auto;
+}
+
+#boton{
+    display:block;
+    margin:auto;
+    margin-top:2%;
+    width:300px;
+    border-radius: 15px;
+}
+
+#lista{
+    list-style: none;
+    list-style-type: none;
+}
+
+#lista li{
+    background-color: brown;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    margin:1% 1%;
+    opacity: 0.8;
+    box-shadow: 1px 1px 1px darkred;
+}
+
+#lista li button{
+    width: 30%;
+    margin:auto;
+}
