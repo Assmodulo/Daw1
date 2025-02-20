@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 
-public abstract class Persona {
+public abstract class Persona{
     protected String nombre;
     protected String dni;
     protected int direccion;
     protected LocalDate fechaNacimiento;
 
-    public Persona(String nombre, String dni, int direccion, LocalDate fechaNacimiento) {
+    public Persona(String nombre, String dni, int direccion, LocalDate fechaNacimiento){
         this.nombre = nombre;
         this.dni = dni;
         this.direccion = direccion;
@@ -16,6 +16,7 @@ public abstract class Persona {
     public void setDireccion(int direccion) {
         this.direccion = direccion;
     }
+
 
     public String getNombre() {
         return nombre;

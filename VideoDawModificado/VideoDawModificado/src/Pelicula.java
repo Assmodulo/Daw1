@@ -16,13 +16,19 @@ public class Pelicula extends Articulo{
         this.fechaAlquiler = LocalDateTime.now();
     }
 
-    public void setIsAlquilada() {
-        this.isAlquilada = true;
+    public void setIsAlquilada(boolean alquilada) {
+        this.isAlquilada = alquilada;
     }
 
+
+    /**
+     * Este método es para que al mostrar por pantalla el estado de un videojuego, en vez de mostrar true o false
+     * nos indique el estado
+     * @return String que indica el estado, alquilado o disponible
+     */
     public String isAlquilada() {
         String alquilada = "";
-        if(isAlquilada){
+        if(this.isAlquilada){
             alquilada = "Alquilada";
         }else{
             alquilada = "Disponible";
@@ -40,6 +46,6 @@ public class Pelicula extends Articulo{
 
     @Override
     public String toString() {
-        return super.toString() + "\n Genero: " + this.genero;
+        return super.toString() + "\n Genero: " + this.genero + ", Estado: " + this.isAlquilada();
     }
 }

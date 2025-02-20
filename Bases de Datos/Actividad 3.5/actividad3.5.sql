@@ -1558,3 +1558,30 @@ select d.dept_name, de.from_date from employees e join dept_manager dem on
 e.emp_no = dem.emp_no join departments d on d.dept_no = dem.dept_no join
 dept_emp de on d.dept_no = de.dept_no where d.dept_name = 'Marketing' and 
 dem.to_date = '9999-01-01';
+
+#Otro ejercicio adicional
+select avg(s.salary) as 'Salario Medio' 
+from salaries s 
+join employees e on s.emp_no = e.emp_no
+join dept_manager dem on e.emp_no = dem.emp_no
+where dem.to_date < '9999-01-01';
+
+select t.title, count(t.emp_no) as 'Empleados/titulo'
+from titles t
+join employees e on t.emp_no = e.emp_no
+join dept_emp de on e.emp_no = de.emp_no
+join departments d on de.dept_no = d.dept_no
+where d.dept_name = 'Sales' 
+group by t.title
+order by count(t.emp_no) desc
+limit 1;
+
+select sum(s.salary) as 'Suma Salarios', d.dept_name as 'Departamento'
+from salaries s
+join employees e on s.emp_no = e.emp_no
+join dept_emp de on e.emp_no = de.emp_no
+join departments d on de.dept_no = d.dept_no
+where de.to_date < '9999-01-01'
+group by d.dept_no
+order by sum(s.salary) asc
+limit 1;

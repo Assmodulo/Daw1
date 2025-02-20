@@ -19,10 +19,10 @@ public class Alquiler {
     @Override
     public String toString() {
         return "Alquiler{" +
-                "codSocio='" + codSocio + '\'' +
-                ", CodProducto='" + CodProducto + '\'' +
-                ", fechaAlquiler=" + fechaAlquiler +
-                ", fechaDevolucion=" + fechaDevolucion +
+                "codSocio='" + this.codSocio + '\'' +
+                ", CodProducto='" + this.CodProducto + '\'' +
+                ", fechaAlquiler=" + this.fechaAlquiler +
+                ", fechaDevolucion=" + this.fechaDevolucion +
                 '}';
     }
 }

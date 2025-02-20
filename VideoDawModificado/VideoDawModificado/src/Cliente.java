@@ -12,7 +12,7 @@ public class Cliente extends Persona {
     }
 
     public void setFechaBaja(LocalDate fechaBaja) {
-        this.fechaBaja = fechaBaja;
+        this.fechaBaja = LocalDate.now();
     }
 
     public String getCodSocio() {
@@ -28,6 +28,10 @@ public class Cliente extends Persona {
         return articulosAlquilados;
     }
 
+    /**
+     * Metodo para devolver un listado de los articulos que han sido o están siendo alquilados
+     * @return String con un listado de objetos de tipo Alquiler
+     */
     public String listadoAlquileres(){
         String listado = "";
         for(Articulo art: articulosAlquilados){
