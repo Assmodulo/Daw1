@@ -1,3 +1,7 @@
+import javax.imageio.IIOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -7,16 +11,36 @@ public class VideoDaw {
     private String cif;
     private String direccion;
     private LocalDate fechaAlta;
-    LinkedList<Cliente> socios = new LinkedList<>();
-    LinkedList<Articulo> inventarioProductos = new LinkedList<>();
-    private int contadorArticulos = 0;
-    private int contadorClientes = 0;
+    LinkedList<Cliente> socios;
+    LinkedList<Articulo> inventarioProductos;
+    private int contadorArticulos;
+    private int contadorClientes;
 
+    public VideoDaw(String cif, String direccion) throws IOException {
+        this.cif = cif;
+        this.direccion = direccion;
+        this.fechaAlta = LocalDate.now();
+        this.socios = new LinkedList<>();
+        this.inventarioProductos = new LinkedList<>();
+        this.contadorArticulos = 0;
+        this.contadorClientes = 0;
+        creacionDeFicherosRelacionado(this.cif);
+    }
+
+    /**
+     * Este constructor solo tiene la función de volver a crear el objeto después de cargar el listado de videoclubs
+     * @param cif Un string con el valor del CIF
+     * @param direccion Un String con el valor de la dirección
+     * @param fechaAlta Un objeto LocalDate con la fecha de Alta del videoclub
+     */
     public VideoDaw(String cif, String direccion, LocalDate fechaAlta) {
         this.cif = cif;
         this.direccion = direccion;
         this.fechaAlta = fechaAlta;
-
+        this.socios = new LinkedList<>();
+        this.inventarioProductos = new LinkedList<>();
+        this.contadorArticulos = 0;
+        this.contadorClientes = 0;
     }
 
     public void setDireccion(String direccion) {
@@ -43,7 +67,7 @@ public class VideoDaw {
     @Override
     public String toString() {
         return "Establecimiento: \n" +
-                "CIF: " + this.cif + ", Direccion: " + this.direccion + "\nFecha de Alta: " + this.fechaAlta;
+                "CIF: " + this.cif + ", Direccion: " + this.direccion + "\nFecha de Alta: " + MyUtils.formatearFecha(this.fechaAlta);
     }
 
     /**
@@ -53,7 +77,7 @@ public class VideoDaw {
      * @param opcion
      * @return String que muestra un listado de elementos
      */
-    public String mostrarPeliculasRegistradas(String opcion){
+    public String mostrarProductosRegistradas(String opcion){
         String listado="";
 
         switch(opcion){
@@ -93,5 +117,39 @@ public class VideoDaw {
             }
         }
         return listado;
+    }
+
+    /**
+     * Metodo para almacenar un Objeto Cliente en la colección correspondiente
+     * @param cliente Un objeto de la clase cliente que se va a almacenar
+     */
+    public void addCliente(Cliente cliente){
+        this.socios.add(cliente);
+        this.contadorClientes++;
+    }
+
+    /**
+     * Metodo para almacenar un Objeto Pelicula o un Objeto Videojuegos en la colección correspondiente
+     * @param articulo Un objeto de la clase Pelicula o de la clase Videjuegos
+     */
+    public void addArticulo(Articulo articulo){
+        this.inventarioProductos.add(articulo);
+        this.contadorArticulos++;
+    }
+
+    /**
+     * Método para crear los ficheros de almacenamiento de datos de forma automática al crear un objeto de la clase Videodaw
+     * @param cif String con el valor del cif del objeto para poder identificar correctamente a que videoclub pertenece
+     */
+    private void creacionDeFicherosRelacionado(String cif) throws IOException {
+        String ficheroArticulos = cif + "articulos.csv";
+        String ficheroClientes = cif + "clientes.csv";
+
+        File fichArticulos = new File("./resources",ficheroArticulos);
+        File fichClientes = new File("./resources",ficheroClientes);
+
+        fichArticulos.createNewFile();
+        fichClientes.createNewFile();
+
     }
 }

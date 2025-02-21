@@ -1500,7 +1500,7 @@ limit 3;
 select e.first_name, e.last_name, datediff(de.to_date, de.from_date) as 'Dias Diferencia', d.dept_name 
 from employees e join dept_emp de on e.emp_no = de.emp_no 
 join departments d on de.dept_no = d.dept_no 
-where datediff(de.to_date, de.from_date) > 730 
+where datediff(de.to_date, de.from_date) > 730 and datediff(de.to_date, curdate()) > 730
 order by e.emp_no;
 
 #Salario medio por departamento entre los empleados que actualmente trabajan en el
