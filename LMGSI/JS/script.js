@@ -69,7 +69,8 @@ borrarLista.addEventListener('click',()=>{
 
 
 function eliminarFila(){
-
+    //En esta he intentado de todo, pero no me ha salido nada
+    //La dejo aquí con caracter informativo
 };
 
 
