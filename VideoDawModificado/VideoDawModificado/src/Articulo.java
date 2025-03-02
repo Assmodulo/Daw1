@@ -6,11 +6,11 @@ public abstract class Articulo {
     protected LocalDate fechaAlta;
     protected LocalDate fechaBaja;
 
-    public Articulo(String codigo, String titulo, LocalDate fechaAlta, LocalDate fechaBaja) {
+    public Articulo(String codigo, String titulo) {
         this.codigo = codigo;
         this.titulo = titulo;
-        this.fechaAlta = fechaAlta;
-        this.fechaBaja = fechaBaja;
+        this.fechaAlta = LocalDate.now();
+        this.fechaBaja = null;
     }
 
     public String getCodigo() {
@@ -19,6 +19,10 @@ public abstract class Articulo {
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public void setFechaBaja(LocalDate fechaBaja) {
+        this.fechaBaja = fechaBaja;
     }
 
     public LocalDate getFechaAlta() {
@@ -32,6 +36,6 @@ public abstract class Articulo {
     @Override
     public String toString() {
         return  "Codigo: " + this.codigo + ", Titulo: " + this.titulo + ",\n" +
-                "Fecha de Alta: " + this.fechaAlta + ", Fecha de Baja: " + this.fechaBaja;
+                "Fecha de Alta: " + MyUtils.formatearFecha(this.fechaAlta) + ", Fecha de Baja: " + this.fechaBaja;
     }
 }

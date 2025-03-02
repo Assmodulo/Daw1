@@ -3,17 +3,17 @@ import java.time.LocalDate;
 public abstract class Persona{
     protected String nombre;
     protected String dni;
-    protected int direccion;
+    protected String direccion;
     protected LocalDate fechaNacimiento;
 
-    public Persona(String nombre, String dni, int direccion, LocalDate fechaNacimiento){
+    public Persona(String nombre, String dni, String direccion, LocalDate fechaNacimiento){
         this.nombre = nombre;
         this.dni = dni;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setDireccion(int direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
@@ -26,7 +26,7 @@ public abstract class Persona{
         return dni;
     }
 
-    public int getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
@@ -36,7 +36,7 @@ public abstract class Persona{
 
     @Override
     public String toString() {
-        return  "Nombre: " + nombre + ", Dni: " + dni + "\n" +
-                "Direccion: " + direccion + ", Fecha de Nacimiento: " + fechaNacimiento;
+        return  "Nombre: " + this.nombre + ", Dni: " + this.dni + "\n" +
+                "Direccion: " + this.direccion + ", Fecha de Nacimiento: " + MyUtils.formatearFecha(this.fechaNacimiento);
     }
 }

@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 
+
 public class Alquiler {
     private String codSocio;
     private String CodProducto;
@@ -13,7 +14,28 @@ public class Alquiler {
     }
 
     public void setFechaDevolucion(){
-        this.fechaDevolucion = LocalDateTime.now();
+        if(LocalDateTime.now().minusHours(48).isAfter(this.fechaAlquiler)){
+            this.fechaDevolucion = LocalDateTime.now();
+            throw new ExcedidoTiempoAlquilerException();
+        }else{
+            this.fechaDevolucion = LocalDateTime.now();
+        }
+    }
+
+    public String getCodSocio() {
+        return codSocio;
+    }
+
+    public String getCodProducto() {
+        return CodProducto;
+    }
+
+    public LocalDateTime getFechaAlquiler() {
+        return fechaAlquiler;
+    }
+
+    public LocalDateTime getFechaDevolucion() {
+        return fechaDevolucion;
     }
 
     @Override

@@ -6,14 +6,44 @@ public class Pelicula extends Articulo{
     private LocalDateTime fechaAlquiler;
     private GenerosPeliculas genero;
 
-    public Pelicula(String codigo, String titulo, LocalDate fechaAlta, LocalDate fechaBaja, GenerosPeliculas genero) {
-        super(codigo, titulo, fechaAlta, fechaBaja);
+    /**
+     * Constructor básico para la creación de Peliculas mediante el programa normal
+     * @param codigo un String con el valor del codigo generado de forma automática y secuencial
+     * @param titulo un String con el valor de título de la película
+     * @param genero El resultado de elegir en un Enum el género de una película
+     */
+    public Pelicula(String codigo, String titulo, GenerosPeliculas genero) {
+        super(codigo, titulo);
         this.genero = genero;
         this.isAlquilada = false;
+        this.fechaAlta = LocalDate.now();
+        this.fechaBaja = null;
     }
 
-    public void setFechaAlquiler() {
-        this.fechaAlquiler = LocalDateTime.now();
+    /**
+     * Constructor creado para volver a generar los objetos al cargarse desde el fichero correspondiente
+     * @param codigo String generado automáticamente
+     * @param titulo String con el titulo de la película
+     * @param genero Elemento de un Enum con los posibles generos de una película
+     * @param fechaAlata Objeto LocalDate que indica la fecha de alta de un videoclub
+     * @param fechaBaja Objeto LocalDate que indica la fecha de baja de un videoclub
+     * @param fechaAlquiler Objeto LocalDateTime para indicar las ultima fecha en la que se ha alquilado un articulo
+     * @param isAlquilada Boolean que indica si una película está alquilada o no
+     */
+    public Pelicula(String codigo, String titulo, GenerosPeliculas genero, LocalDate fechaAlata, LocalDate fechaBaja,
+                    LocalDateTime fechaAlquiler,boolean isAlquilada) {
+        super(codigo, titulo);
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.fechaAlta = fechaAlata;
+        this.fechaBaja = fechaBaja;
+        this.isAlquilada = isAlquilada;
+
+    }
+
+    public void setFechaAlquiler(LocalDateTime fecha) {
+        this.fechaAlquiler = fecha;
     }
 
     public void setIsAlquilada(boolean alquilada) {

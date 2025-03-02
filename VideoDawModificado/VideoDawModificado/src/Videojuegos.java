@@ -6,14 +6,39 @@ public class Videojuegos extends Articulo{
     private LocalDateTime fechaAlquiler;
     private GenerosVidejuegos genero;
 
-    public Videojuegos(String codigo, String titulo, LocalDate fechaAlta, LocalDate fechaBaja, GenerosVidejuegos genero) {
-        super(codigo, titulo, fechaAlta, fechaBaja);
+    public Videojuegos(String codigo, String titulo, GenerosVidejuegos genero) {
+        super(codigo, titulo);
         this.genero = genero;
         this.isAlquilada = false;
+        this.fechaAlta = LocalDate.now();
+        this.fechaBaja = null;
     }
 
-    public void setFechaAlquiler() {
-        this.fechaAlquiler = LocalDateTime.now();
+    /**
+     * Constructor creado para volver a generar los objetos al cargarse desde el fichero correspondiente
+     * @param codigo String generado automáticamente
+     * @param titulo String con el titulo de la película
+     * @param genero Elemento de un Enum con los posibles generos de una película
+     * @param fechaAlata Objeto LocalDate que indica la fecha de alta de un videoclub
+     * @param fechaBaja Objeto LocalDate que indica la fecha de baja de un videoclub
+     * @param fechaAlquiler Objeto LocalDateTime para indicar las ultima fecha en la que se ha alquilado un articulo
+     * @param isAlquilada Boolean que indica si una película está alquilada o no
+     */
+    public Videojuegos(String codigo, String titulo, GenerosVidejuegos genero, LocalDate fechaAlata, LocalDate fechaBaja,
+                    LocalDateTime fechaAlquiler,boolean isAlquilada) {
+        super(codigo, titulo);
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.genero = genero;
+        this.fechaAlta = fechaAlata;
+        this.fechaBaja = fechaBaja;
+        this.fechaAlquiler = fechaAlquiler;
+        this.isAlquilada = isAlquilada;
+
+    }
+
+    public void setFechaAlquiler(LocalDateTime fechaAlquiler) {
+        this.fechaAlquiler = fechaAlquiler;
     }
 
     public void setIsAlquilada(boolean alquilada) {

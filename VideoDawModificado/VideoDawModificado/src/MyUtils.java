@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public class MyUtils {
 
     private static Scanner sc;
-    private static DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    public static DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     /**
      * Array para calcular de forma automática la letra del dni al introducirlo
@@ -23,15 +23,15 @@ public class MyUtils {
      * @return String, con el valor del nombre
      */
     public static String insertarNombre(){
-        sc = new Scanner(System.in);
         String nombre = "";
         Pattern patronNombre = Pattern.compile("[A-Z a-z]{8,25}");
         Matcher match;
         do{
+            sc = new Scanner(System.in);
             System.out.println("Ingrese el nombre de la persona");
             nombre = sc.nextLine();
             match = patronNombre.matcher(nombre);
-        }while(match.matches());
+        }while(!match.matches());
         return nombre.toUpperCase();
     }
 
@@ -50,7 +50,7 @@ public class MyUtils {
             System.out.println("Introduzca los dígitos que componen su dni, sin la letra");
             dni = sc.nextLine();
             match = formatoDni.matcher(dni);
-        }while(match.matches());
+        }while(!match.matches());
         int numero = Integer.parseInt(dni);
         dni = dni + letrasDni[numero % 23];
         return dni;
@@ -66,10 +66,10 @@ public class MyUtils {
         Pattern patronDireccion = Pattern.compile("[A-Z a-z]{8,25}[0-9]{0,3}");
         Matcher match;
         do{
-            System.out.println("Ingrese la dirección del usuario");
+            System.out.println("Ingrese la dirección solicitada");
             direccion = sc.nextLine();
             match = patronDireccion.matcher(direccion);
-        }while(match.matches());
+        }while(!match.matches());
         return direccion.toUpperCase();
     }
 
@@ -84,7 +84,7 @@ public class MyUtils {
                     "DD/MM/AAAA");
             fecha = sc.nextLine();
             match = patronFecha.matcher(fecha);
-        }while(match.matches());
+        }while(!match.matches());
 
         LocalDate fechaNacimiento = LocalDate.parse(fecha, formatoFecha);
 
@@ -108,15 +108,15 @@ public class MyUtils {
      */
     public static String insertarCif(){
         sc = new Scanner(System.in);
-        Pattern formatoCif = Pattern.compile("[A-Z a-z][0-9]{8}");
+        Pattern formatoCif = Pattern.compile("[a-z][0-9]{8}");
         Matcher match;
         String cif = "";
         do{
             System.out.println("Inserte el CIF del videoclub");
             cif = sc.nextLine();
             match = formatoCif.matcher(cif);
-        }while(match.matches());
-        return cif;
+        }while(!match.matches());
+        return cif.toUpperCase();
     }
 
     /**
@@ -137,4 +137,60 @@ public class MyUtils {
         return formatoFechaHora.format(date);
     }
 
+    /**
+     * Método para elegir los distintos géneros de artículos, tanto si son películas como videojuegos
+     * @param opcion este int nos indicará si va a ser un listado de películas o videojuegos
+     *
+     * @return un listado, de videojuegos o películas, según la opción que se manda como parámetro
+     */
+    public static String listadoGeneros(int opcion) {
+
+        String lista = "Elija uno de los siguiente géneros\n";
+
+        switch(opcion){
+            case 1:
+                //Muestro por pantalla el contenido del enum generospeliculas para que se vean los disponibles
+                for (int i = 0; i < GenerosPeliculas.values().length; i++) {
+                    lista += ((i + 1) + " " + GenerosPeliculas.values()[i] + "\n");
+                }
+                break;
+            case 2:
+                //Muestro por pantalla el contenido del enum generospeliculas para que se vean los disponibles
+                for (int i = 0; i < GenerosVidejuegos.values().length; i++) {
+                    lista += ((i + 1) + " " + GenerosVidejuegos.values()[i] + "\n");
+                }
+                break;
+        }
+
+        return lista;
+    }
+
+    /**
+     * Método que nos devuelve el genero de una película para crear un objeto de tipo Película
+     * @param posicionEnum Recibe un int que nos indicará la posición del enum que necesitamos
+     * @return un objeto de tipo GeneroPelicula del enum que tenemos creado
+     */
+    public static GenerosPeliculas devolverGeneroP(int posicionEnum){
+        return GenerosPeliculas.values()[posicionEnum];
+    }
+
+    /**
+     * Método que nos devuelve el genero concreto de un videojuego para crear un objeto de tipo videojuego
+     * @param posicionEnum Recibe un int que nos indicará la posición del enum que necesitamos
+     * @return un objeto de tipo GeneroVideojuegos que tenemos creado
+     */
+    public static GenerosVidejuegos devolverGeneroV(int posicionEnum){
+        return GenerosVidejuegos.values()[posicionEnum];
+    }
+
+    /**
+     * Método que genera todos los códigos necesarios en el programa de forma automática
+     * @param letra Una letra que nos va a indicar el tipo de elemento
+     * @param numero Un número que pasará por el decimal format para que nos quede de una forma determinada
+     * @return Un string con el valor del código en cuestión
+     */
+    public static String generadorCodigos(String letra, int numero){
+        DecimalFormat df = new DecimalFormat("0000");
+        return letra + df.format(numero + 1);
+    }
 }
