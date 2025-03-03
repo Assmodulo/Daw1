@@ -151,7 +151,6 @@ public class Main {
                             p.setFechaAlquiler(LocalDateTime.now());
                             a = new Alquiler(c.getCodSocio(),p.getCodigo());
                             video.almacenarAlquiler(a);
-                            c.almacenarAlquileres(a);
                         }else if(tipo.equals("V")){
                             System.out.println(video.mostrarProductosRegistrados(2));
                             codigoElegido = seleccionElementosAlquileres(tipo);
@@ -160,7 +159,6 @@ public class Main {
                             v.setFechaAlquiler(LocalDateTime.now());
                             a = new Alquiler(c.getCodSocio(),v.getCodigo());
                             video.almacenarAlquiler(a);
-                            c.almacenarAlquileres(a);
                         }else{
                             System.out.println("No se ha podido seleccionar un artículo valido");
                         }
@@ -176,7 +174,6 @@ public class Main {
                     codigoElegido = seleccionElementosAlquileres(tipo);
                     video.seleccionArticuloDevolver(codigoElegido);
                     c = video.retornarClienteAlquiler(codigoElegido);
-                    c.actualizarDatosAlquiler(codigoElegido);
                     break;
                 case "7":
                     System.out.println("Dar de baja un cliente");
@@ -225,7 +222,7 @@ public class Main {
                     break;
                 case "9":
                     System.out.println("Listados diversos");
-                    System.out.println("Elija uno de los socios disponibles:\n" + elegirListados(video));
+                    System.out.println("Elija uno de los listados disponibles:\n" + elegirListados(video));
                     break;
                 case "0":
                     System.out.println("Saliendo del sistema");

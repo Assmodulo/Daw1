@@ -168,7 +168,6 @@ public class VideoDaw {
     public void addCliente(Cliente cliente) throws IOException {
         this.socios.add(cliente);
         this.contadorClientes++;
-        creacionDeFicherosRelacionado(this.cif);
         guardadoDatosClienteFichero(cliente);
     }
 
@@ -179,7 +178,6 @@ public class VideoDaw {
     public void addArticuloP(Pelicula pelicula) throws IOException {
         this.inventarioProductos.add(pelicula);
         this.contadorArticulos++;
-        creacionDeFicherosRelacionado(this.cif);
         guardadoDatosPeliculaFichero(pelicula);
     }
 

@@ -1,0 +1,464 @@
+#Con esto vamos creando la base de datos y nos aseguramos de que la borremos en caso
+#de que ya exista
+
+DROP DATABASE IF exists viajeros;
+CREATE DATABASE viajeros;
+
+Use viajeros;
+
+#Creo las primeras tablas, aquellas que no tienen dependencias.
+
+CREATE TABLE provincia(
+	CP char(2) NOT NULL UNIQUE,
+    nombre varchar(15) NOT NULL,
+    CONSTRAINT CP primary key (CP)
+);
+
+#Creo la tabla localidad
+CREATE table localidad(
+	cp_completo char(5) NOT NULL,
+    localidad varchar(20),
+    cp char(2) NOT NULL,
+    CONSTRAINT cp_completo primary key (cp_completo),
+    CONSTRAINT cp foreign key (cp) references provincia (CP)
+);
+
+#Creo la tabla departamento
+CREATE TABLE departamento(
+	cod_dep SMALLINT AUTO_INCREMENT UNIQUE NOT NULL,
+    departamento VARCHAR(15) NOT NULL,
+    CONSTRAINT cod_dep primary key (cod_dep)
+);
+
+#Creo la tabla empresas_vehiculos
+CREATE TABLE empresa_vehiculos(
+	cif CHAR(9) UNIQUE NOT NULL,
+    nombre_empresa VARCHAR(15) NOT NULL,
+	direccion VARCHAR(25) NOT NULL,
+    localidad VARCHAR(20) NOT NULL,
+    telefono CHAR(9) NOT NULL,
+    CONSTRAINT cif primary key (cif)
+);
+
+#Para terminar con las tablas sin dependencias, salvo que se me haya pasado alguna
+#creo la tabla paquetes
+CREATE TABLE paquetes(
+	cod_paquete CHAR(4) UNIQUE NOT NULL,
+    nombre_paquete VARCHAR(15) NOT NULL,
+    descripcion VARCHAR(30) NOT NULL,
+    direccion VARCHAR(25) NOT NULL,
+    precio DECIMAL(6,2) NOT NULL,
+    num_max_personas SMALLINT NOT NULL,
+    CONSTRAINT cod primary key (cod_paquete)
+);
+    
+#Creo la tabla alojamientos, que también es independiente.
+CREATE TABLE alojamientos(
+	cod_alojamientos CHAR(6) UNIQUE NOT NULL,
+    nombre_alojamiento VARCHAR(20) NOT NULL,
+    tipo VARCHAR (15) NOT NULL,
+    direccion VARCHAR(25) NOT NULL,
+    localidad VARCHAR(20) NOT NULL,
+    telefono CHAR(9) NOT NULL,
+    categoria VARCHAR(10),
+    CONSTRAINT cod_alojamientos primary key (cod_alojamientos)
+    );
+    
+    #Creo la tabla grupos
+    CREATE TABLE grupos(
+		id_grupo INT AUTO_INCREMENT UNIQUE NOT NULL,
+        num_personas INT NOT NULL,
+        CONSTRAINT id_grupo primary key(id_grupo)
+    );
+    
+    #Empiezo a crear tablas dependientes, en este caso la tabla sedes
+    CREATE TABLE sedes(
+		cod_sede INT auto_increment NOT NULL UNIQUE,
+        direccion VARCHAR(25) NOT NULL,
+        telefono CHAR(9) NOT NULL,
+        email VARCHAR(25) NOT NULL,
+        cp_completo CHAR(5) NOT NULL,
+        CONSTRAINT cod_sede primary key (cod_sede),
+        CONSTRAINT cp_completo foreign key (cp_completo) references localidad (cp_completo)
+    );
+    
+    #Seguimos con la tabla clientes
+    CREATE TABLE clientes(
+		dni CHAR(9) UNIQUE NOT NULL,
+        nombre_completo VARCHAR(25) NOT NULL,
+        f_nacim DATE NOT NULL,
+        telefono CHAR(9) NOT NULL,
+        direccion VARCHAR(25) NOT NULL,
+        email VARCHAR(25) NOT NULL,
+        cp_comp CHAR(5) NOT NULL,
+        CONSTRAINT dni primary key (dni),
+        CONSTRAINT cp_comp foreign key(cp_comp) references localidad(cp_completo)
+    );
+    
+    #Creando la tabla empleados
+    CREATE TABLE empleados(
+		num_matricula INT AUTO_INCREMENT UNIQUE NOT NULL,
+        dni CHAR (9) NOT NULL,
+        num_ss CHAR(12) NOT NULL,
+        nombre_completo VARCHAR(30) NOT NULL,
+        fecha_nacim DATE NOT NULL,
+        telefono CHAR(9) NOT NULL,
+        email VARCHAR(25) NOT NULL,
+        especialidad VARCHAR(15) NOT NULL,
+        cod_departamento SMALLINT NOT NULL,
+        sede INT NOT NULL,
+        CONSTRAINT num_matricula primary key(num_matricula),
+        CONSTRAINT cod_departamento foreign key(cod_departamento) references departamento(cod_dep),
+        CONSTRAINT sede foreign key(sede) references sedes(cod_sede)
+    );
+    
+    CREATE TABLE oferta(
+		sede INT NOT NULL,
+        paquete CHAR(4) NOT NULL,
+        CONSTRAINT oferta_sedes primary key(sede, paquete),
+        CONSTRAINT sedes foreign key(sede) references sedes(cod_sede),
+        CONSTRAINT paquetes foreign key(paquete) references paquetes(cod_paquete)
+    );
+    
+    #Genero la tabla componentes para resolver la relación entre clientes y grupos
+    CREATE TABLE componentes(
+		dni CHAR(9) NOT NULL,
+        id_grupo INT NOT NULL,
+        CONSTRAINT componentes primary key(dni, id_grupo),
+        CONSTRAINT miembro foreign key(dni) references clientes(dni),
+        CONSTRAINT grupo foreign key(id_grupo) references grupos(id_grupo)
+    );
+    
+    #Después de crear la tabla componentes puedo crear la tabla reservas
+    CREATE TABLE reservas(
+		cod_reserva INT AUTO_INCREMENT UNIQUE NOT NULL,
+        fecha_reserva DATE NOT NULL,
+        fecha_fin_reserva DATE,
+        precio DECIMAL(6,2) NOT NULL,
+        grupo_completo BOOLEAN default false,
+        id_grupo INT NOT NULL,
+        CONSTRAINT cod_reserva primary key(cod_reserva),
+        CONSTRAINT grupo_reserva foreign key(id_grupo) references grupos(id_grupo)
+    );
+    
+    #Creo la tabla actividad para terminar de cerrar este bloque
+    CREATE TABLE actividad(
+		cod_reserva INT NOT NULL,
+        cod_paquete CHAR(4) NOT NULL,
+        CONSTRAINT actividades primary key(cod_reserva, cod_paquete),
+        CONSTRAINT reserva foreign key (cod_reserva) references reservas(cod_reserva),
+        CONSTRAINT paquete foreign key (cod_paquete) references paquetes(cod_paquete)
+    );
+    
+    #Modifico la tabla reservas para añadir el cod_alojamiento
+    ALTER TABLE reservas ADD cod_alojamiento CHAR(6) NOT NULL;
+    ALTER TABLE reservas ADD CONSTRAINT alojamiento foreign key(cod_alojamiento) references alojamientos(cod_alojamientos);
+    
+    #Vamos con la relación entre sedes y alojamientos
+    CREATE TABLE reservas_alojamientos(
+		cod_reserva_aloja CHAR(6) UNIQUE NOT NULL,
+        fecha_inicio_reserva DATE NOT NULL,
+        fecha_fin_reserva DATE NOT NULL,
+        cod_sede INT NOT NULL,
+        cod_alojamiento CHAR(6) NOT NULL,
+        CONSTRAINT cod_reserva_aloja primary key(cod_reserva_aloja),
+        CONSTRAINT sede_reserva foreign key(cod_sede) references sedes(cod_sede),
+        CONSTRAINT alojamiento_reserva foreign key(cod_alojamiento) references alojamientos(cod_alojamientos)
+    );
+    
+    #Creo la tabla equipamientos
+    CREATE TABLE equipamiento(
+		cod_equipamiento CHAR(6) UNIQUE NOT NULL,
+        tipo_equipamiento VARCHAR(15) NOT NULL,
+        modelo VARCHAR(15) NOT NULL,
+        plazas SMALLINT,
+        cod_sede INT NOT NULL,
+        CONSTRAINT cod_equipamiento primary key(cod_equipamiento),
+        CONSTRAINT sede_propietaria foreign key(cod_sede) references sedes(cod_sede)
+    );
+    
+    #Rematamos las relaciones que tengan que ver con la tabla equipamiento
+    CREATE TABLE equipo(
+		num_equipo SMALLINT UNIQUE NOT NULL,
+        num_tecnicos SMALLINT NOT NULL default 1,
+        CONSTRAINT num_equipo primary key(num_equipo)
+    );
+    
+    CREATE TABLE miembros_equipo(
+		num_equipo SMALLINT NOT NULL,
+        num_matricula INT NOT NULL,
+        CONSTRAINT equipo primary key(num_equipo, num_matricula),
+        CONSTRAINT cod_equipo foreign key(num_equipo) references equipo(num_equipo),
+        CONSTRAINT cod_empleado foreign key(num_matricula) references empleados(num_matricula)
+    );
+    
+    #Ahora solo queda crear la tabla Ficha_revision
+    CREATE TABLE ficha_revision(
+		cod_revision CHAR(6) UNIQUE NOT NULL,
+        fecha_revision DATE NOT NULL,
+        favorable TINYINT NOT NULL,
+        num_equipo SMALLINT NOT NULL,
+        cod_equipamiento CHAR(6) NOT NULL,
+        CONSTRAINT cod_revision primary key(cod_revision),
+        CONSTRAINT equipo_encargado foreign key(num_equipo) references equipo(num_equipo),
+        CONSTRAINT equipo_revisado foreign key(cod_equipamiento) references equipamiento(cod_equipamiento)
+    );
+    
+    CREATE TABLE seguros(
+		num_poliza CHAR(6) UNIQUE NOT NULL,
+        nombre_aseguradora VARCHAR (20) NOT NULL,
+        tipo VARCHAR(12) NOT NULL,
+        precio DECIMAL(6,2) NOT NULL,
+        f_ini_poliza DATE NOT NULL,
+        f_fin_poliza DATE NOT NULL,
+        cod_sede INT NOT NULL,
+        CONSTRAINT num_poliza primary key(num_poliza),
+        CONSTRAINT sede_contrato foreign key(cod_sede) references sedes(cod_sede)
+    );
+    
+    #Como indico en el informe puedo realizar este cambio aquí para optimizar la BD y el diagrama
+    ALTER TABLE reservas ADD num_poliza CHAR(6) NOT NULL;
+    ALTER TABLE reservas ADD CONSTRAINT poliza_reserva foreign key(num_poliza) references seguros(num_poliza);
+    
+    #Vamos con la parte de vehículos
+    CREATE TABLE vehiculos(
+		matricula CHAR(7) UNIQUE NOT NULL,
+        tipo VARCHAR(15) NOT NULL,
+        plazas SMALLINT NOT NULL,
+        cif CHAR(9) NOT NULL,
+        CONSTRAINT matricula primary key(matricula),
+        CONSTRAINT identificador_fiscal foreign key(cif) references empresa_vehiculos(cif)
+    );
+    
+    CREATE TABLE alquiler_vehiculos(
+		cod_alquiler CHAR(6) UNIQUE NOT NULL,
+        f_inicio DATE NOT NULL,
+        f_fin DATE NOT NULL,
+        matricula CHAR(7) NOT NULL,
+        cod_sede INT NOT NULL,
+        num_poliza CHAR(6) NOT NULL,
+        CONSTRAINT cod_alquiler primary key(cod_alquiler),
+        CONSTRAINT matricula foreign key(matricula) references vehiculos(matricula),
+        CONSTRAINT sede_encargada foreign key(cod_sede) references sedes(cod_sede),
+        CONSTRAINT poliza_seguro foreign key(num_poliza) references seguros(num_poliza)
+    );
+    
+    #Última parte ya, creando la tabla agencias y las auxiliares o intermedias.
+    CREATE TABLE agencias(
+		cod_agencia CHAR(6) UNIQUE NOT NULL,
+        nombre VARCHAR(15) NOT NULL,
+        direccion VARCHAR(25) NOT NULL,
+        telefono CHAR(9) NOT NULL,
+        persona_contacto VARCHAR(25) NOT NULL,
+        CONSTRAINT cod_agencia primary key(cod_agencia)
+    );
+  
+	CREATE TABLE oferta_agencia(
+		cod_paquete CHAR(4) NOT NULL,
+        cod_agencia CHAR(6) NOT NULL,
+        CONSTRAINT oferta_agencias primary key(cod_paquete, cod_agencia),
+        CONSTRAINT agencia foreign key(cod_agencia) references agencias(cod_agencia),
+        CONSTRAINT paquete_agencia foreign key(cod_paquete) references paquetes(cod_paquete)
+    );
+    
+    CREATE TABLE reservas_agencias(
+		cod_agencia CHAR(6) NOT NULL,
+        cod_reserva INT NOT NULL,
+        CONSTRAINT referencia_reservas primary key(cod_agencia, cod_reserva),
+        CONSTRAINT agencia_reserva foreign key(cod_agencia) references agencias(cod_agencia),
+        CONSTRAINT reserva_externa foreign key(cod_reserva) references reservas(cod_reserva)
+    );
+    
+    #Comienzo insertando datos en las tablas
+    insert into provincia values 
+    ('39','Cantabria'),
+    ('08','Barcelona'),
+    ('28','Madrid'),
+    ('01','Alava'),
+    ('11','Cadiz'),
+    ('23','Jaen'),
+    ('37','Salamanca');
+    
+    
+    insert into localidad values
+    ('01001','Alberca Vieja','01'),
+    ('01007','Alto de Prado','01'),
+    ('39200','Reinosa','39'),
+    ('39400','Los Corrales de Buelna','39'),
+    ('39460','Cartes','39'),
+    ('11220','ValdePrado','11'),
+    ('23000','Jaen','23'),
+    ('23440','Baeza','23'),
+    ('28000','Madrid','28'),
+    ('28801','Alcalá de Henares','28'),
+    ('08000','Barcelona','08'),
+    ('08860','Casteldefels','08'),
+    ('37000','Salamanca','37');
+    
+    insert into departamento values
+    (1,'Administracion'),
+    (2,'Mantenimiento'),
+    (3,'Marketing'),
+    (4,'Monitores');
+    
+    insert into empresa_vehiculos values
+    ('11111111A','CARRENT','Calle Inventada','Madrid','645789123'),
+    ('22222222B','COGEMYCOCHEYCORRE','Poligono Los Mecánicos','Santander','666123456'),
+    ('33333333V','TRIPPROVIDER','Avda. Los Árboles','Barcelona','777789789');
+    
+    insert into paquetes values
+    ('01AB','Barranquismo1','Barranquismo inicial','Alto Los Montes',350.90,12),
+    ('01CD','Kayaks','Kayaks Principiante','Bahía Loa Ahogaos',290.50,8),
+    ('84X4','Parapente','Parapente Guíado','CumbresVentosas',675.50,6),
+    ('46BJ','Senderismo','Rutas tranquilas','ColinasSerenas',121.16,24),
+    ('86C1','Ruta Globo','Rutas Globo','Airesfrescos',1121.95,4),
+    ('12ZX','Conduccion 2','Rutas en Todoterreno Zonas Abruptas','La Cuesta Empiná',520.00,16),
+    ('6912','Paracaidismo','Saltos desde avioneta','Aerodromo Militar',945.56,4),
+    ('01AC','Barranquismo2','Barranquismo Rutas Intermedias','Alto de la Sierra',421.75,10),
+    ('46BK','Senderismo2','Marchas Avanzadas','Villa Olivos',195.80,18),
+    ('84X5','Parapente2','Parapente Libre Asistido','Aires Turbulentos',721.40,5),
+    ('R145','Rafting','Descenso Aguas Bravas','Rio Rapido',285.66,16);
+    
+    insert into alojamientos values
+    ('H0001','Hotel Royal','Hotel','Calle Principal','Los Gentios','665664663','2'),
+    ('P0002','Posada La Fonda','Posada','Avda. Las Encianas','Patios de Abajo','61234567','3'),
+    ('H0002','Hotal Magno','Hotel','Paseo las Bodegas','Las Alforjas','987654321','4'),
+    ('C0014','Camping El Fresno','Camping','Barrio El Metal','Villatranquila','123456789','2'),
+    ('HO041','Hostal Regio','Hosta','Calle Secundaria','Barrio Encinar','987456445','1');
+    
+    insert into grupos values
+    (1,4),
+    (2,6),
+    (3,11),
+    (4,5),
+    (5,7);
+    
+    insert into sedes values
+    (1,'Los Bolaos','654321123','losbolaos@viaj.es','39200'),
+    (2,'Barrio Pescadores','987654321','losbolaos@viaj.es','39460'),
+    (3,'Alameda Central','987123456','losbolaos@viaj.es','28000'),
+    (4,'Plaza España','654157542','losbolaos@viaj.es','08000'),
+    (5,'Calle Olivar','365487546','losbolaos@viaj.es','23000'),
+    (6,'Kortu Kalea','321578985','losbolaos@viaj.es','01001'),
+    (7,'Espanya Kalea','325786421','losbolaos@viaj.es','01007'),
+    (8,'Barrio Universidad','324879654','losbolaos@viaj.es','37000'),
+    (9,'Avda. Independencia','647899878','losbolaos@viaj.es','08860'),
+    (10,'Paseo Robledal','321357864','losbolaos@viaj.es','11220'),
+    (11,'Calle Fulano Perez','978456546','losbolaos@viaj.es','23440'),
+    (12,'Calle Los Leones','613214567','losbolaos@viaj.es','28801'),
+    (13,'Carretera Soria','648791212','losbolaos@viaj.es','28000'),
+    (14,'El Calçot','946547541','losbolaos@viaj.es','08000'),
+    (15,'Los íberos 2','642134785','losbolaos@viaj.es','08860');
+    
+    insert into clientes values
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','',''),
+    ('','','','','','','');
+    
+    insert into empleados values
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,),
+    (,'','','','','','','',,);
+    
+    insert into oferta values
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,''),
+    (,'');
+    
+    
+    insert into componentes values
+    ('',),
+    
+    
+    insert into reservas values
+    
