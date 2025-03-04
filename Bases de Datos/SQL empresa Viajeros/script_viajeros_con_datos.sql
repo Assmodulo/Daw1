@@ -531,23 +531,108 @@ insert into oferta_agencia values
     ('A001','1'),
     ('A003','5');
     
+    
+-- UPDATES
+
+-- Este update es para actualizar los precios según el coste de la vida
+select * from paquetes;
+update paquetes set precio = precio + (precio * 0.1) where precio <= 600.00;
+select * from paquetes;
+
+-- Este update sirve para lo mismo pero con el rango de precio de los paquetes más caros
+select * from paquetes;
+update paquetes set precio = precio + (precio * 0.05) where precio > 600.00;
+select * from paquetes;
+
+
+-- Voy a intentar hacer un update del precio de las reservas basado en la suma de los precios de los paquetes contratados en esas reservas
+select * from reservas;
+	update reservas r
+    set r.precio =
+	(select sum(listado.precio) as precio_final from
+	(select r.cod_reserva,p.precio, p.cod_paquete
+    from paquetes p
+    join actividad a on p.cod_paquete = a.cod_paquete
+    join reservas r on a.cod_reserva = r.cod_reserva) as listado
+    where listado.cod_reserva = 1
+    group by listado.cod_reserva)
+    where r.cod_reserva = 1;
+select * from reservas;
+
+	update reservas r
+    set r.precio =
+	(select sum(listado.precio) as precio_final from
+	(select r.cod_reserva,p.precio, p.cod_paquete
+    from paquetes p
+    join actividad a on p.cod_paquete = a.cod_paquete
+    join reservas r on a.cod_reserva = r.cod_reserva) as listado
+    where listado.cod_reserva = 2
+    group by listado.cod_reserva)
+    where r.cod_reserva = 2;
+select * from reservas;
+
+	update reservas r
+    set r.precio =
+	(select sum(listado.precio) as precio_final from
+	(select r.cod_reserva,p.precio, p.cod_paquete
+    from paquetes p
+    join actividad a on p.cod_paquete = a.cod_paquete
+    join reservas r on a.cod_reserva = r.cod_reserva) as listado
+    where listado.cod_reserva = 3
+    group by listado.cod_reserva)
+    where r.cod_reserva = 3;
+select * from reservas;
+
+	update reservas r
+    set r.precio =
+	(select sum(listado.precio) as precio_final from
+	(select r.cod_reserva,p.precio, p.cod_paquete
+    from paquetes p
+    join actividad a on p.cod_paquete = a.cod_paquete
+    join reservas r on a.cod_reserva = r.cod_reserva) as listado
+    where listado.cod_reserva = 4
+    group by listado.cod_reserva)
+    where r.cod_reserva = 4;
+select * from reservas;
+
+	update reservas r
+    set r.precio =
+	(select sum(listado.precio) as precio_final from
+	(select r.cod_reserva,p.precio, p.cod_paquete
+    from paquetes p
+    join actividad a on p.cod_paquete = a.cod_paquete
+    join reservas r on a.cod_reserva = r.cod_reserva) as listado
+    where listado.cod_reserva = 5
+    group by listado.cod_reserva)
+    where r.cod_reserva = 5;
+select * from reservas;
+    
+
 
 -- Contar sedes por provincia
-select p.nombre, count(s.cod_sede) as 'Sucursales'
-from provincia p
-join localidad l on p.cp = l.cp
-join sedes s on l.cp_completo = s.cp_completo 
-group by p.nombre;
+-- select p.nombre, count(s.cod_sede) as 'Sucursales'
+-- from provincia p
+-- join localidad l on p.cp = l.cp
+-- join sedes s on l.cp_completo = s.cp_completo 
+-- group by p.nombre;
 
 -- Calcular que agencia ha facturado más
-select a.nombre, r.cod_reserva, r.precio
-from agencias a
-join reservas_agencias re on a.cod_agencia = re.cod_agencia
-join reservas r on r.cod_reserva = re.cod_reserva
-where r.precio in(select max(r.precio) 
-from reservas r 
-join reservas_agencias re on r.cod_reserva = re.cod_reserva);
+-- select a.nombre, r.cod_reserva, r.precio
+-- from agencias a
+-- join reservas_agencias re on a.cod_agencia = re.cod_agencia
+-- join reservas r on r.cod_reserva = re.cod_reserva
+-- where r.precio in(select max(r.precio) 
+-- from reservas r 
+-- join reservas_agencias re on r.cod_reserva = re.cod_reserva);
 
+
+-- Calcular la suma de los paquetes que componen cada reserva
+-- select listado.cod_reserva,sum(listado.precio) from
+	-- (select r.cod_reserva,p.precio, p.cod_paquete
+    -- from paquetes p
+    -- join actividad a on p.cod_paquete = a.cod_paquete
+    -- join reservas r on a.cod_reserva = r.cod_reserva) as listado
+    -- group by listado.cod_reserva;
 
 
 
