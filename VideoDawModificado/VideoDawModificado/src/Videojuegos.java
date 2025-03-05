@@ -36,6 +36,9 @@ public class Videojuegos extends Articulo{
         this.isAlquilada = isAlquilada;
 
     }
+    public boolean getIsAlquilada() {
+        return isAlquilada;
+    }
 
     public void setFechaAlquiler(LocalDateTime fechaAlquiler) {
         this.fechaAlquiler = fechaAlquiler;

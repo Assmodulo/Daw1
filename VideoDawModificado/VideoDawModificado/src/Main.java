@@ -485,10 +485,105 @@ public class Main {
             while(datosTemporales != null){
                 String[] datos = datosTemporales.split(",");
                 video = new VideoDaw(datos[0],datos[1],LocalDate.parse(datos[2],MyUtils.formatoFecha));
+                leerFicherosPropiosVideoclub(video, videoclubs);
                 videoclubs.add(video);
                 datosTemporales = lector.readLine();
             }
         }
+    }
+
+    public static void leerFicherosPropiosVideoclub(VideoDaw video, LinkedList<VideoDaw> videoclubs) throws IOException {
+        //Declaro variables que son el nombre del fichero que me van a servir despues
+        String ficheroArticulos = video.getCif() + "_Articulos.csv";
+        String ficheroClientes = video.getCif() + "_Clientes.csv";
+        String ficheroAlquileres = video.getCif() + "_Alquileres.csv";
+
+        //Declaro variables de las diferentes clases que tengo
+        Pelicula p;
+        Videojuegos vj;
+        Cliente c;
+        Alquiler a;
+
+        //String nombre, String dni, String direccion, LocalDate fechaNacimiento, String codSocio,
+        //LocalDate fechaBaja Pongo esto aquí para saber como tengo que volver a crear el objeto
+
+        LocalDate fBaja = null;
+        LocalDateTime fDevolucion = null;
+
+        try (FileReader file = new FileReader("./resources/" + ficheroClientes)) {
+            try (FileReader file2 = new FileReader("./resources/" + ficheroArticulos)) {
+                try (FileReader file3 = new FileReader("./resources/" + ficheroAlquileres)) {
+                    try (BufferedReader lector = new BufferedReader(file)) {
+                        try (BufferedReader lector2 = new BufferedReader(file2)) {
+                            try (BufferedReader lector3 = new BufferedReader(file3)) {
+
+                                String datosTemporales = lector.readLine();
+                                while (datosTemporales != null) {
+                                    String[] datos = datosTemporales.split(",");
+                                    if (datos[5].equals("0")) {
+                                        fBaja = null;
+                                    } else {
+                                        fBaja = LocalDate.parse(datos[5], MyUtils.formatoFecha);
+                                    }
+                                    c = new Cliente(datos[0], datos[1], datos[2], LocalDate.parse(datos[3], MyUtils.formatoFecha), datos[4], fBaja);
+                                    video.socios.add(c);
+                                    datosTemporales = lector.readLine();
+                                }
+
+
+            /*String codigo, String titulo, GenerosPeliculas/Videojuegos genero, LocalDate fechaAlata, LocalDate fechaBaja,
+            LocalDateTime fechaAlquiler,boolean isAlquilada Recordatorio de como tengo que construir los objetos*/
+                                boolean alquilada = false;
+                                datosTemporales = lector2.readLine();
+                                while (datosTemporales != null) {
+                                    String[] datos = datosTemporales.split(",");
+                                    String primeraLetra = datos[0].charAt(0) + "";
+                                    if (datos[6].equals("Alquilada")) {
+                                        alquilada = true;
+                                    }
+                                    if (!datos[5].equals("0")) {
+                                        fDevolucion = LocalDateTime.parse(datos[5], MyUtils.formatoFechaHora);
+                                    }else{
+                                        fDevolucion = null;
+                                    }
+                                    if (!datos[4].equals("0")) {
+                                        fBaja = LocalDate.parse(datos[4], MyUtils.formatoFecha);
+                                    } else {
+                                        fBaja = null;
+                                    }
+                                    if (primeraLetra.equals("P")) {
+                                        p = new Pelicula(datos[0], datos[1], GenerosPeliculas.valueOf(datos[2]), LocalDate.parse(datos[3],
+                                                MyUtils.formatoFecha), fBaja, fDevolucion, alquilada);
+                                        video.inventarioProductos.add(p);
+                                    } else {
+                                        vj = new Videojuegos(datos[0], datos[1], GenerosVidejuegos.valueOf(datos[2]), LocalDate.parse(datos[3],
+                                                MyUtils.formatoFecha), fBaja, fDevolucion, alquilada);
+                                        video.inventarioProductos.add(vj);
+                                    }
+                                    datosTemporales = lector2.readLine();
+                                }
+                                fDevolucion = null;
+                                datosTemporales = lector3.readLine();
+                                while (datosTemporales != null) {
+                                    String[] datos = datosTemporales.split(",");
+                                    if(!datos[3].equals("0")) {
+                                        fDevolucion = LocalDateTime.parse(datos[3], MyUtils.formatoFechaHora);
+                                    }else{
+                                        fDevolucion = null;
+                                    }
+                                    a = new Alquiler(datos[0],datos[1],
+                                            LocalDateTime.parse(datos[2],MyUtils.formatoFechaHora),
+                                            fDevolucion);
+                                    video.listadoAlquileres.add(a);
+                                    datosTemporales = lector3.readLine();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     public static void guardarDatosPropiosVideoclub(VideoDaw video) throws IOException {
@@ -510,12 +605,7 @@ public class Main {
         //Una variable string que voy a necesitar despues
         String datosTemporales = "";
 
-        //Declaro las variables de los objetos que creo que voy a necesitar
-        Cliente c;
-        Pelicula p;
-        Videojuegos vj;
-
-        try(FileWriter file = new FileWriter(ficheroClientes);BufferedWriter escritor = new BufferedWriter(file)) {
+        try(FileWriter file = new FileWriter("./resources/" + ficheroClientes);BufferedWriter escritor = new BufferedWriter(file)) {
             for (Cliente cliente : video.socios) {
                 datosTemporales = clienteToFile(cliente);
                 escritor.write(datosTemporales);
@@ -523,7 +613,7 @@ public class Main {
             }
         }
 
-        try(FileWriter file1 = new FileWriter(ficheroArticulos);BufferedWriter escritor1 = new BufferedWriter(file1)) {
+        try(FileWriter file1 = new FileWriter("./resources/" + ficheroArticulos);BufferedWriter escritor1 = new BufferedWriter(file1)) {
             for(Articulo articulo : video.inventarioProductos){
                 if(articulo instanceof Pelicula){
                     datosTemporales = peliculaToFile((Pelicula)articulo);
@@ -536,7 +626,8 @@ public class Main {
             }
         }
 
-        try(FileWriter file2 = new FileWriter(ficheroAlquileres);BufferedWriter escritor2 = new BufferedWriter(file2)) {
+
+        try(FileWriter file2 = new FileWriter("./resources/"+ ficheroAlquileres);BufferedWriter escritor2 = new BufferedWriter(file2)) {
             for(Alquiler alquiler : video.listadoAlquileres){
                 datosTemporales = alquileresToFile(alquiler);
                 escritor2.write(datosTemporales);
@@ -546,45 +637,63 @@ public class Main {
     }
 
     public static String clienteToFile(Cliente cliente) {
+        String fechaDeBaja = "0";
+        if(cliente.getFechaBaja() != null){
+            fechaDeBaja = MyUtils.formatearFecha(cliente.getFechaBaja());
+        }
+
         return cliente.getNombre() + "," + cliente.getDni() + "," + cliente.getDireccion() + "," +
-                MyUtils.formatearFecha(cliente.getFechaNacimiento()) + "," + cliente.getCodSocio() +
-                "," + cliente.estadoCliente();
+                MyUtils.formatearFecha(cliente.getFechaNacimiento()) + "," + cliente.getCodSocio() + "," + fechaDeBaja;
+
     }
 
     public static String peliculaToFile(Pelicula pelicula) {
         String fechaAlquiler;
+        String fechaBaja;
         if(pelicula.getFechaAlquiler() == null){
-            fechaAlquiler = "";
+            fechaAlquiler = "0";
         }else{
             fechaAlquiler = MyUtils.formatearFechaHora(pelicula.getFechaAlquiler());
         }
+
+        if(pelicula.getFechaBaja() == null){
+            fechaBaja = "0";
+        }else{
+            fechaBaja = MyUtils.formatearFecha(pelicula.getFechaBaja());
+        }
         return pelicula.getCodigo() + "," + pelicula.getTitulo() + "," + pelicula.getGenero().toString() + "," +
-                MyUtils.formatearFecha(pelicula.getFechaAlta()) + "," + pelicula.estadoPelicula(pelicula.getFechaBaja())
+                MyUtils.formatearFecha(pelicula.getFechaAlta()) + "," + fechaBaja
         + "," + fechaAlquiler + "," + pelicula.isAlquilada();
     }
 
     public static String videojuegoToFile(Videojuegos videojuego) {
         String fechaAlquiler;
         if(videojuego.getFechaAlquiler() == null){
-            fechaAlquiler = "";
+            fechaAlquiler = "0";
         }else{
             fechaAlquiler = MyUtils.formatearFechaHora(videojuego.getFechaAlquiler());
         }
+        String fechaBaja;
+        if(videojuego.getFechaBaja() == null){
+            fechaBaja = "0";
+        }else{
+            fechaBaja = MyUtils.formatearFecha(videojuego.getFechaBaja());
+        }
 
         return videojuego.getCodigo() + "," + videojuego.getTitulo() + "," + videojuego.getGenero().toString() + "," +
-                MyUtils.formatearFecha(videojuego.getFechaAlta()) + "," + videojuego.estadoVideojuego(videojuego.getFechaBaja())
+                MyUtils.formatearFecha(videojuego.getFechaAlta()) + "," + fechaBaja
                 + "," + fechaAlquiler + "," + videojuego.isAlquilada();
     }
 
     public static String alquileresToFile(Alquiler alquiler) {
-        String fechaAlquiler;
+        String fecha;
         if(alquiler.getFechaDevolucion() == null){
-            fechaAlquiler = "";
+            fecha = "0";
         }else{
-            fechaAlquiler = MyUtils.formatearFechaHora(alquiler.getFechaDevolucion());
+            fecha = MyUtils.formatearFechaHora(alquiler.getFechaDevolucion());
         }
 
-        return alquiler.getCodProducto() + "," + alquiler.getCodSocio() + "," + MyUtils.formatearFechaHora(alquiler.getFechaAlquiler())
-        + "," + fechaAlquiler;
+        return alquiler.getCodSocio() + "," + alquiler.getCodProducto() + "," + MyUtils.formatearFechaHora(alquiler.getFechaAlquiler())
+        + "," + fecha;
     }
 }

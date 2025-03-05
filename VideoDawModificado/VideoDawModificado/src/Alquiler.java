@@ -3,14 +3,21 @@ import java.time.LocalDateTime;
 
 public class Alquiler {
     private String codSocio;
-    private String CodProducto;
+    private String codProducto;
     private LocalDateTime fechaAlquiler;
     private LocalDateTime fechaDevolucion;
 
     public Alquiler(String codSocio, String codProducto) {
         this.codSocio = codSocio;
-        this.CodProducto = codProducto;
+        this.codProducto = codProducto;
         this.fechaAlquiler = LocalDateTime.now();
+    }
+
+    public Alquiler(String codSocio, String codProducto, LocalDateTime fechaAlquiler, LocalDateTime fechaDevolucion) {
+        this.codSocio = codSocio;
+        this.codProducto = codProducto;
+        this.fechaAlquiler = fechaAlquiler;
+        this.fechaDevolucion = fechaDevolucion;
     }
 
     public void setFechaDevolucion(){
@@ -27,7 +34,7 @@ public class Alquiler {
     }
 
     public String getCodProducto() {
-        return CodProducto;
+        return codProducto;
     }
 
     public LocalDateTime getFechaAlquiler() {
@@ -42,7 +49,7 @@ public class Alquiler {
     public String toString() {
         return "Alquiler{" +
                 "codSocio='" + this.codSocio + '\'' +
-                ", CodProducto='" + this.CodProducto + '\'' +
+                ", CodProducto='" + this.codProducto + '\'' +
                 ", fechaAlquiler=" + this.fechaAlquiler +
                 ", fechaDevolucion=" + this.fechaDevolucion +
                 '}';

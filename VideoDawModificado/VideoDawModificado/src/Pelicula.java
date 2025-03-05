@@ -38,10 +38,13 @@ public class Pelicula extends Articulo{
         this.genero = genero;
         this.fechaAlta = fechaAlata;
         this.fechaBaja = fechaBaja;
+        this.fechaAlquiler = fechaAlquiler;
         this.isAlquilada = isAlquilada;
     }
 
-
+    public boolean getIsAlquilada() {
+        return isAlquilada;
+    }
 
     public void setFechaAlquiler(LocalDateTime fecha) {
         this.fechaAlquiler = fecha;
