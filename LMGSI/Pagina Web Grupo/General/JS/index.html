@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Factory</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+        <img src="logo-removebg-preview.png" alt="logo letras">
+        <div class="RRSS"> <img src="facebook.webp" alt="facebook"> <img src="instagram.webp" alt="instagram"> <img src="tiktok.webp" alt="tiktok"></div>
+        </div>
+        <nav>
+            <button id="cambiar_estilos">
+                
+            </button>
+            <a href="#" class="nav-limk"> Inicio </a>
+            <a href="#" class="nav-limk"> Sobre nosotros </a>
+            <a href="#" class="nav-limk"> Contacto </a>
+        </nav>
+    </header>
+    <button class="botonCompra" id="carro_compra">Carrito</button>
+    <span class="totales" id ="total">Total: </span>
+    <span class="totales" id="carrito_total"></span>
+<!--  Este div de aquí debajo es donde vamos a ir creando un carro de la compra  -->
+    <div class="carrito_compra">
+
+    </div>
+    <h1 class="parrafos_modificar"> Reserva antes de que el reloj llegue a cero, te llevaras una sorpresa </h1>
+    <p id="cuenta_regresiva"></p>
+        
+    </section>
+    <section id="somos">
+        <div class="quiensomos">
+            <h2 class="parrafos_modificar">Somos BurgerFactory</h2>
+            <p class="parrafos_modificar">Somos un nuevo sitio de hamburgesas que lleva en proceso MÁS DE DOS AÑOS, por fin podemos presentarnos como es debido,
+            las mejores hamburgesas que vas a probar están aqui, una variedad muy extensa, tanto para veganos como de carne y pollo, 
+            todo lo que busques lo vas a tener aqui. Además con la primera reserva te puedes llevar un 15% en todo lo que pidas ese dia.
+            </p>
+        </div>
+    </section>
+    
+    <h1 class="titulo">🍔 Nuestras Hamburguesas 🍔</h1>
+
+    <div class="grid-container">
+        <div class="burger-card">
+            <img src="h1.png" alt="Hamburguesa">
+            <h2>Doble Carne</h2>
+            <p>Una deliciosa hamburguesa con doble carne, queso, tomate y pepinillo</p>
+            <span class="precio">7.90</span>
+            <button class="botones_agregar" id="h1"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="h2.webp" alt="Hamburguesa">
+            <h2>Clásica</h2>
+            <p>La misma hamburgesa clásica de siempre</p>
+            <span class="precio">5.90</span>
+            <button class="botones_agregar" id="h2"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="h3.webp" alt="Hamburguesa">
+            <h2>La rompecorazones</h2>
+            <p>Esta es una hamburgesa que te puede llevar al hospital, de ahi viene su nombre</p>
+            <span class="precio">20.90</span>
+            <button class="botones_agregar" id="h3"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="h4.png" alt="Hamburguesa">
+            <h2>Carnivora 2.0</h2>
+            <p>Esta deliciosa hamburguesa tiene carne de ternera, pollo y cerdo</p>
+            <span class="precio">14.90</span>
+            <button class="botones_agregar" id="h4"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="hv5.png" alt="Hamburguesa">
+            <h2>Picante</h2>
+            <p>Esta hamburguesa es para los que les gusta el picante</p>
+            <span class="precio">8.90</span>
+            <button class="botones_agregar" id="h5"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="hv6.webp" alt="Hamburguesa">
+            <h2>La fitness</h2>
+            <p>Esta carne esta hecha a base de lentejas, ideal para las personas fitness</p>
+            <span class="precio">10.90</span>
+            <button class="botones_agregar" id="h6"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="hp7.png" alt="Hamburguesa">
+            <h2>Pollo Crispy</h2>
+            <p>Esla clásica hamburgesa de pollo Crispy</p>
+            <span class="precio">7.90</span>
+            <button class="botones_agregar" id="h7"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="hp8.png" alt="Hamburguesa">
+            <h2>Pollo Crispy 2.0</h2>
+            <p>Esta es la version 2.0 de la Crispy clásica, el doble de rica</p>
+            <span class="precio">9.90</span>
+            <button class="botones_agregar" id="h8"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="hp9.png" alt="Hamburguesa">
+            <h2>La vegaCrispy</h2>
+            <p>Para los que no comen carne, esta es la opción ideal</p>
+            <span class="precio">8.90</span>
+            <button class="botones_agregar" id="h9"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="menu10.webp" alt="Hamburguesa">
+            <h2>Menú universitario 1</h2>
+            <p></p>
+            <span class="precio">6.90</span>
+            <button class="botones_agregar" id="h10"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="menu11.webp" alt="Hamburguesa">
+            <h2>Menú universitario 2</h2>
+            <p></p>
+            <span class="precio">6.90</span>
+            <button class="botones_agregar" id="h11"> AGREGAR </button>
+        </div>
+
+        <div class="burger-card">
+            <img src="menu12.webp" alt="Hamburguesa">
+            <h2>Menú universitario 3</h2>
+            <p></p>
+            <span class="precio">6.90</span>
+            <button class="botones_agregar" id="h12"> AGREGAR </button>
+        </div>
+    </div>
+    <div class="pie_de_pagina">
+        <div class="img"></div>
+        <div class="reserva">
+            <div>
+                <section id="reserva">
+                    <div class="container">
+                        <h2>Reserva tu Mesa</h2>
+                        <form>
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name" required>
+                            
+                            <label for="people">Número de Personas:</label>
+                            <input type="number" id="people" name="people" min="1" required>
+                            
+                            <label for="date">Fecha:</label>
+                            <input type="date" id="date" name="date" required>
+                            
+                            <label for="time">Hora:</label>
+                            <input type="time" id="time" name="time" required>
+                            
+                            <label for="phone">Teléfono:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                            
+                            <label for="comments">Comentarios:</label>
+                            <textarea id="comments" name="comments" rows="3"></textarea>
+                            
+                            <button type="submit">Reservar</button>
+                        </form>
+                    </div>
+                </section>
+                </div>
+        </div>
+        <div class="contactos">
+            <section id="contacto"> 
+                <h1 class="parrafos_modificar"> Contacta con nosotros </h1>
+                <div class="contacto1"> 
+                    <h3> Numero de telefono </h3> 
+                    <p class="parrafos_modificar"> Contacta con nosotros a traves de nuestro numero de telefono con el que estamos operativos
+                    desde las 10:00 hasta las 20:00, atenderemos desde cualquier tipo de duda hasta una reserva.
+                    </p>
+                    <button> TLF: +34 640 37 52 14 </button>
+                </div>
+                <div class="contacto2"> 
+                    <h3> Correo electronico </h3>
+                    <p class="parrafos_modificar"> En caso de que no puedas contactar con nosotros a traves de nuestro numero de telefono, tenemos la posibilidad de contactar
+                        a traves de un correo electronico, en este no se podra hacer reservas pero podras resolver cualquier duda.
+                    </p>
+                    <button> CORREO: burgerfactory2025@gmail.com </button>
+                </div>
+                <div class="contacto3"></div>
+            </section>
+        </div>
+      </div>
+      
+<script src="script.js"></script>
+</body>
+</html>
