@@ -1,4 +1,6 @@
-import java.util.Date;
+
+import javax.tools.FileObject;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -16,8 +18,79 @@ public class Main {
         //Creo una LinkedList para almacenar los objetos
         LinkedList<Libro> biblioteca = new LinkedList<>();
 
-        //Declaro una variabla Libro
+        //Declaro una variable Libro
         Libro libro;
+        //Un String para la opcion del menú y aquellas necesarias para crear un objeto libro
+        String opcion, isbn, titulo, autor, fecha;
+
+        //Antes de empezar a hacer nada vamos a crear los ficheros necesarios y la estructura de directorios
+        try {
+            if (!creacionDeFicheros()) {
+                lecturaDeFicheros(biblioteca);
+            }
+        } catch (IOException e) {
+            System.out.println("Error en el manejo de ficheros");
+        }
+
+        do{
+            System.out.println(opcionesMenu() + "\n");
+            
+            sc = new Scanner(System.in);
+            opcion = sc.nextLine();
+
+            switch(opcion){
+                case "1":
+                    try {
+                        System.out.println("Registro de un nuevo libro");
+                        System.out.println("Ingrese el isbn del libro");
+                        isbn = insertarDatoIsbn();
+                        confirmarIsbn(isbn, biblioteca);
+                        System.out.println("Ingrese el título del libro");
+                        titulo = insertarDatos();
+                        System.out.println("Ingrese el autor del libro");
+                        autor = insertarDatos();
+                        System.out.println("Ingrese la fecha de publicación del libro");
+                        fecha = insertarFecha();
+                        libro = new Libro(isbn, titulo, autor, fecha);
+                        biblioteca.add(libro);
+                    } catch (IsbnYaExistenteException e) {
+                        System.out.println(e.getMessage() + " " + e);
+                    }
+                    break;
+                case "2":
+                    if (!listadoLibros(biblioteca).isEmpty()) {
+                        System.out.println(listadoLibros(biblioteca));
+                    } else {
+                        System.out.println("No hay libros para mostrar");
+                    }
+                    break;
+                case "3":
+                    System.out.println("Eliminar libros por ISBN");
+                    if (!listadoLibros(biblioteca).isEmpty()) {
+                        System.out.println(listadoLibros(biblioteca));
+                        System.out.println("Introduzca el isbn del libro que quiere eliminar");
+                        isbn = insertarDatoIsbn();
+                        if(eliminarLibroPorIsbn(isbn, biblioteca)){
+                            System.out.println("Libro eliminado de nuestra biblioteca");
+                        }else{
+                            System.out.println("Libro no eliminado");
+                        }
+                    } else {
+                        System.out.println("No existen libros en nuestra biblioteca");
+                    }
+                    break;
+                case "4":
+                    System.out.println("Guardado de datos en almacenamiento local");
+                    almacenamientoDeDatos(biblioteca);
+                    break;
+                case "5":
+                    break;
+                default:
+                    System.out.println("Opción no valida");
+                    break;
+            }
+
+        }while(!opcion.equals("5"));
     }
 
     public static String opcionesMenu(){
@@ -42,7 +115,7 @@ public class Main {
     }
 
     public static String insertarDatoIsbn(){
-        Pattern patron = Pattern.compile("[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{4}-[0-9]{1}");
+        Pattern patron = Pattern.compile("[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{4}-[0-9]");
         Matcher match;
         String isbn;
         do{
@@ -54,6 +127,14 @@ public class Main {
             match = patron.matcher(isbn);
         }while(!match.matches());
         return isbn;
+    }
+
+    public static void confirmarIsbn(String isbn, LinkedList<Libro> biblioteca) throws IsbnYaExistenteException{
+        for(Libro libro : biblioteca){
+            if(libro.getIsbn().equals(isbn)){
+                throw new IsbnYaExistenteException();
+            }
+        }
     }
 
     public static String insertarFecha(){
@@ -69,5 +150,66 @@ public class Main {
             match = patron.matcher(fecha);
         }while(!match.matches());
         return fecha;
+    }
+
+    public static String insertarDatos(){
+        sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+
+    public static String listadoLibros(LinkedList<Libro> biblioteca){
+        String listado = "Este es el listado de libros en nuestra biblioteca";
+        for(Libro libro : biblioteca){
+            listado += libro + "\n";
+        }
+        return listado;
+    }
+
+    public static boolean eliminarLibroPorIsbn(String isbn, LinkedList<Libro> biblioteca){
+        boolean eliminado = false;
+        Libro l = null;
+        for(Libro libro : biblioteca){
+            if(libro.getIsbn().equals(isbn)){
+                l = libro;
+                eliminado = true;
+            }
+        }
+        if(eliminado){
+            biblioteca.remove(l);
+        }
+        return eliminado;
+    }
+
+    public static boolean creacionDeFicheros() throws IOException {
+        File fichero = new File("./resources/","Biblioteca.dat");
+        File directorio = new File("./resources/");
+        directorio.mkdir();
+        return fichero.createNewFile();
+    }
+
+    public static void lecturaDeFicheros(LinkedList<Libro> biblioteca) throws IOException {
+        int bitsRestantes = 0;
+        try(FileInputStream fichero = new FileInputStream("./resources/Biblioteca.dat");
+            ObjectInputStream objeto = new ObjectInputStream(fichero);){
+            bitsRestantes = fichero.available();
+            while(bitsRestantes > 0){
+                Libro libro = (Libro) objeto.readObject();
+                biblioteca.add(libro);
+                bitsRestantes = fichero.available();
+            }
+        }catch (IOException | ClassNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void almacenamientoDeDatos(LinkedList<Libro> biblioteca){
+        try(FileOutputStream fichero = new FileOutputStream("./resources/Biblioteca.dat");
+        ObjectOutputStream escritor = new ObjectOutputStream(fichero)){
+            for(Libro libro : biblioteca){
+                escritor.writeObject(libro);
+            }
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

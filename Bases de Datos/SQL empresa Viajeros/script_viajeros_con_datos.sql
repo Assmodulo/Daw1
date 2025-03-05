@@ -536,17 +536,18 @@ insert into oferta_agencia values
 
 -- Este update es para actualizar los precios según el coste de la vida
 select * from paquetes;
-update paquetes set precio = precio + (precio * 0.1) where precio <= 600.00;
+update paquetes p, paquetes p1 set p.precio = p.precio * 1.1, p1.precio = p1.precio * 1.05 where p.precio <= 600.00 and p1.precio > 600;
 select * from paquetes;
 
 -- Este update sirve para lo mismo pero con el rango de precio de los paquetes más caros
-select * from paquetes;
-update paquetes set precio = precio + (precio * 0.05) where precio > 600.00;
-select * from paquetes;
+-- select * from paquetes;
+-- update paquetes set precio = precio + (precio * 0.05) where precio > 600.00;
+-- select * from paquetes;
 
 
 -- Voy a intentar hacer un update del precio de las reservas basado en la suma de los precios de los paquetes contratados en esas reservas
 select * from reservas;
+
 	update reservas r
     set r.precio =
 	(select sum(listado.precio) as precio_final from
@@ -557,6 +558,7 @@ select * from reservas;
     where listado.cod_reserva = 1
     group by listado.cod_reserva)
     where r.cod_reserva = 1;
+    
 select * from reservas;
 
 	update reservas r
@@ -606,33 +608,83 @@ select * from reservas;
     group by listado.cod_reserva)
     where r.cod_reserva = 5;
 select * from reservas;
-    
 
+-- Una de las agencias colaboradoras ha decidido dejar de vender el paquete viaje en globo porque le da poca salida
+-- Y ha decidido cambiarlo por el otro paquete de parapente y expecializarse en ello
+select * from oferta_agencia;
+
+update oferta_agencia oa set oa.cod_paquete = '84X5' where oa.cod_paquete = '86C1' and oa.cod_agencia = 'A002';
+
+select * from oferta_agencia;
+
+-- Cambiar el nombre de departamento de mantenimiento y la descripción en la tabla trabajadores y corregir un error en la tabla empleados por el cual un empleado
+-- de mantenimiento tenia una descripción que no concuerda
+
+select * from departamento d join empleados e on d.cod_dep = e.cod_departamento where d.cod_dep = 2;
+
+update departamento d, empleados e 
+set d.departamento = 'Dep. Técnico', e.especialidad = 'Tecnico Mantenimiento' 
+where d.departamento = 'Mantenimiento' and e.especialidad in ('Mantenimiento' , 'Guía de Senderismo');
+
+select * from departamento d join empleados e on d.cod_dep = e.cod_departamento where d.cod_dep = 2;
+
+
+-- Una de las reservas ha decidido quedarse más días de lo planeado inicialmente sobre la marcha por lo que debemos de cambiar la fecha
+-- y aumentar el precio en un 25%
+select * from reservas;
+
+update reservas r set r.fecha_fin_reserva = adddate(r.fecha_fin_reserva,interval 5 day), r.precio = precio * 1.25 where r.cod_reserva = 4;
+
+select * from reservas;
 
 -- Contar sedes por provincia
--- select p.nombre, count(s.cod_sede) as 'Sucursales'
--- from provincia p
--- join localidad l on p.cp = l.cp
--- join sedes s on l.cp_completo = s.cp_completo 
--- group by p.nombre;
+select p.nombre, count(s.cod_sede) as 'Sucursales'
+from provincia p
+join localidad l on p.cp = l.cp
+join sedes s on l.cp_completo = s.cp_completo 
+group by p.nombre;
 
 -- Calcular que agencia ha facturado más
--- select a.nombre, r.cod_reserva, r.precio
--- from agencias a
--- join reservas_agencias re on a.cod_agencia = re.cod_agencia
--- join reservas r on r.cod_reserva = re.cod_reserva
--- where r.precio in(select max(r.precio) 
--- from reservas r 
--- join reservas_agencias re on r.cod_reserva = re.cod_reserva);
+select a.nombre, r.cod_reserva, r.precio
+from agencias a
+join reservas_agencias re on a.cod_agencia = re.cod_agencia
+join reservas r on r.cod_reserva = re.cod_reserva
+where r.precio in(select max(r.precio) 
+from reservas r 
+join reservas_agencias re on r.cod_reserva = re.cod_reserva);
 
 
 -- Calcular la suma de los paquetes que componen cada reserva
--- select listado.cod_reserva,sum(listado.precio) from
-	-- (select r.cod_reserva,p.precio, p.cod_paquete
-    -- from paquetes p
-    -- join actividad a on p.cod_paquete = a.cod_paquete
-    -- join reservas r on a.cod_reserva = r.cod_reserva) as listado
-    -- group by listado.cod_reserva;
+select listado.cod_reserva,sum(listado.precio) from
+(select r.cod_reserva,p.precio, p.cod_paquete
+from paquetes p
+join actividad a on p.cod_paquete = a.cod_paquete
+join reservas r on a.cod_reserva = r.cod_reserva) as listado
+group by listado.cod_reserva;
+
+-- Calcular el numero medio de componentes de los grupos que reservan
+
+select avg(g.num_personas) from grupos g;
+
+-- Queremos conocer cuantos clientes han contratado cada paquete ordenados de mayor a menor
+
+select listado.nombre_paquete as 'Paquete', count(listado.nombre_completo) as 'Clientes' from
+(select p.nombre_paquete, c.nombre_completo from clientes c 
+join componentes co on c.dni = co.dni
+join grupos g on co.id_grupo = g.id_grupo
+join reservas r on r.id_grupo = g.id_grupo
+join actividad a on r.cod_reserva = a.cod_reserva
+join paquetes p on p.cod_paquete = a.cod_paquete)as listado
+group by listado.nombre_paquete
+order by count(listado.nombre_completo) desc;
+
+-- Seleccionar los paquetes que no se han venido nunca
+select p.cod_paquete, p.nombre_paquete from paquetes p
+where not exists
+(select a.cod_paquete
+from actividad a
+where p.cod_paquete = a.cod_paquete);
+
 
 
 

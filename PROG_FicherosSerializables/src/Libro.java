@@ -31,12 +31,6 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return """
-                Libro:
-                ISBN:$isbn
-                Title:$titulo
-                Autor:$autor
-                Fecha Publicación:$fechaPublicacion
-                """;
+        return "Libro\nIsbn: " + this.getIsbn() +"\nTitulo: " + this.getAutor() + "\nAutor: " + this.getAutor() + "\nFechaPublicacion: " + this.getFechaPublicacion();
     }
 }
