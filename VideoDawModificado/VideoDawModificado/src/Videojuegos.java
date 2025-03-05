@@ -60,6 +60,16 @@ public class Videojuegos extends Articulo{
         return alquilada;
     }
 
+    public String estadoVideojuego(LocalDate date) {
+        String estado = "";
+        if(this.fechaBaja != null){
+            estado = "Dada de Baja";
+        }else{
+            estado = "Articulo en Activo";
+        }
+        return estado;
+    }
+
     public LocalDateTime getFechaAlquiler() {
         return fechaAlquiler;
     }

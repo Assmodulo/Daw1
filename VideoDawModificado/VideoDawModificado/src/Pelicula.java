@@ -39,8 +39,9 @@ public class Pelicula extends Articulo{
         this.fechaAlta = fechaAlata;
         this.fechaBaja = fechaBaja;
         this.isAlquilada = isAlquilada;
-
     }
+
+
 
     public void setFechaAlquiler(LocalDateTime fecha) {
         this.fechaAlquiler = fecha;
@@ -64,6 +65,16 @@ public class Pelicula extends Articulo{
             alquilada = "Disponible";
         }
         return alquilada;
+    }
+
+    public String estadoPelicula(LocalDate date) {
+        String estado = "";
+        if(this.fechaBaja != null){
+            estado = "Dada de Baja";
+        }else{
+            estado = "Articulo en Activo";
+        }
+        return estado;
     }
 
     public LocalDateTime getFechaAlquiler() {

@@ -14,7 +14,7 @@ public class VideoDaw {
     private int contadorArticulos;
     private int contadorClientes;
 
-    public VideoDaw(String cif, String direccion) throws IOException {
+    public VideoDaw(String cif, String direccion){
         this.cif = cif;
         this.direccion = direccion;
         this.fechaAlta = LocalDate.now();
@@ -23,7 +23,6 @@ public class VideoDaw {
         this.listadoAlquileres = new LinkedList<>();
         this.contadorArticulos = 0;
         this.contadorClientes = 0;
-        creacionDeFicherosRelacionado(this.cif);
     }
 
     /**
@@ -43,9 +42,6 @@ public class VideoDaw {
         this.contadorClientes = 0;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public String getCif() {
         return cif;
@@ -165,20 +161,18 @@ public class VideoDaw {
      * Metodo para almacenar un Objeto Cliente en la colección correspondiente
      * @param cliente Un objeto de la clase cliente que se va a almacenar
      */
-    public void addCliente(Cliente cliente) throws IOException {
+    public void addCliente(Cliente cliente){
         this.socios.add(cliente);
         this.contadorClientes++;
-        guardadoDatosClienteFichero(cliente);
     }
 
     /**
      * Metodo para almacenar un Objeto Pelicula
      * @param pelicula Un objeto de la clase Pelicula
      */
-    public void addArticuloP(Pelicula pelicula) throws IOException {
+    public void addArticuloP(Pelicula pelicula){
         this.inventarioProductos.add(pelicula);
         this.contadorArticulos++;
-        guardadoDatosPeliculaFichero(pelicula);
     }
 
     /**
@@ -323,86 +317,6 @@ public class VideoDaw {
                 MyUtils.formatearFecha(videojuego.getFechaAlta()) + "," + fechaBaja + "," + fechaAlquiler + "," + videojuego.isAlquilada();
     }
 
-    /**
-     * Mensaje para leer los datos de los ficheros correspondiente a un videoclub al inicio del programa
-     * @return Un booleano que nos informa de si los archivos han sido cargados o no
-     */
-    public boolean leerDatosdeFicherosPropios(){
-        boolean cargado = false;
-        String ficheroArticulos = this.cif + "_articulos.csv";
-        String ficheroClientes = this.cif + "_clientes.csv";
-
-        Pelicula p;
-        Videojuegos v;
-        Cliente c;
-
-        try(FileReader fichero = new FileReader("./resources/" + ficheroArticulos);
-            BufferedReader lector = new BufferedReader(fichero)){
-            String linea = lector.readLine();
-            LocalDate fechaBaja;
-            LocalDateTime fechaAlquiler;
-            boolean isAlquilada;
-            while (linea != null) {
-                String[] datos = linea.split(",");
-                if(datos[4].equals("0")){
-                    fechaBaja = null;
-                }else{
-                    fechaBaja = LocalDate.parse(datos[4], MyUtils.formatoFecha);
-                }
-
-                if(datos[5].equals("0")){
-                    fechaAlquiler = null;
-                }else{
-                    fechaAlquiler = LocalDateTime.parse(datos[5],MyUtils.formatoFechaHora);
-                }
-
-                if(datos[6].equals("Alquilada")){
-                    isAlquilada = true;
-                }else{
-                    isAlquilada = false;
-                }
-                if(datos[0].charAt(0) == 'P'){
-                    p = new Pelicula(datos[0],datos[1],GenerosPeliculas.valueOf(datos[2]),
-                            LocalDate.parse(datos[3],MyUtils.formatoFecha),fechaBaja,fechaAlquiler,isAlquilada);
-                    this.inventarioProductos.add(p);
-                    this.contadorArticulos++;
-                }else if(datos[0].charAt(0) == 'V'){
-                    v = new Videojuegos(datos[0],datos[1],GenerosVidejuegos.valueOf(datos[2]),
-                            LocalDate.parse(datos[3],MyUtils.formatoFecha),fechaBaja,fechaAlquiler,isAlquilada);
-                    this.inventarioProductos.add(v);
-                    this.contadorArticulos++;
-                }
-                linea = lector.readLine();
-            }
-            cargado = true;
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-        }
-
-        try(FileReader ficheroC = new FileReader("./resources/" + ficheroClientes);
-            BufferedReader lector = new BufferedReader(ficheroC)){
-            LocalDate fechaBaja;
-            String linea = lector.readLine();
-            while(linea != null){
-                String[] datos = linea.split(",");
-                if(datos[5].equals("0")){
-                    fechaBaja = null;
-                }else{
-                    fechaBaja = LocalDate.parse(datos[5], MyUtils.formatoFecha);
-                }
-                c = new Cliente(datos[0],datos[1],datos[2],LocalDate.parse(datos[3],MyUtils.formatoFecha),datos[4],
-                        fechaBaja);
-                this.socios.add(c);
-                this.contadorClientes++;
-                linea = lector.readLine();
-            }
-
-        } catch (IOException e) {
-            System.out.println("Problemas de manejo de ficheros");
-        }
-
-        return cargado;
-    }
 
     /**
      * Método que busca un cliente por el código y si lo encuentra Actualiza su fecha de baja. Podría haber creado una Exception
@@ -410,84 +324,39 @@ public class VideoDaw {
      * @param codigo Un dato de tipo String que es el elemento comparador para buscar el cliente
      * @return Un valor booleano el cual será false si no se ha encontrado, o true si se ha actualizado la fecha de baja
      */
-    public boolean eliminarCliente(String codigo) throws IOException {
+    public boolean eliminarCliente(String codigo) {
         boolean actualizado = false;
         for(Cliente c : this.socios){
             if(c.getCodSocio().equals(codigo)){
                 c.setFechaBaja(LocalDate.now());
                 actualizado = true;
-                reescrituraFicheroClientesTrasEliminacion();
             }
         }
 
         return actualizado;
     }
 
-    /**
-     * Método que reescribe el fichero de clientes, con el append igual a false, después de eliminar un  cliente
-     * @throws IOException Posible Exception en el manejo de ficheros
-     */
-    private void reescrituraFicheroClientesTrasEliminacion() throws IOException {
-        String ficheroClientes = this.cif + "_clientes.csv";
-        String cadenaDatos;
 
-
-        try(FileWriter fichero = new FileWriter("./resources/" + ficheroClientes,false);
-            BufferedWriter escritorClientes = new BufferedWriter(fichero)){
-            for (Cliente cliente : this.socios) {
-                cadenaDatos = clienteToFile(cliente);
-                escritorClientes.write(cadenaDatos);
-                escritorClientes.newLine();
-            }
-        }
-    }
 
     /**
      * Método que da de baja un artículo de nuestro inventario
      * @param codigoEliminar El código del artículo que se va a dar de baja
      * @return Un valor booleano que nos indicará si la operación se ha podido realizar o no
      */
-    public boolean eliminarArticuloInventario(String codigoEliminar) throws IOException {
+    public boolean eliminarArticuloInventario(String codigoEliminar){
         Pelicula p = null;
         Videojuegos v = null;
         boolean actualizado = false;
 
         for(Articulo a : this.inventarioProductos){
             if (a.getCodigo().equals(codigoEliminar)) {
-                a.setFechaBaja(LocalDate.now());
-                actualizado = true;
-                reescrituraFicheroArticulosTrasEliminacion();
+               a.setFechaBaja(LocalDate.now());
+               actualizado = true;
             }
         }
         return actualizado;
     }
 
-    /**
-     * Método que reescribe el fichero de articulos, con el append igual a false, después de eliminar un articulo
-     * @throws IOException Posible Exception en el manejo de ficheros
-     */
-    private void reescrituraFicheroArticulosTrasEliminacion() throws IOException {
-        String ficheroArticulos = this.cif + "_articulos.csv";
-        String cadenaDatos;
-        Videojuegos v = null;
-        Pelicula p = null;
-
-
-        try(FileWriter fichero = new FileWriter("./resources/" + ficheroArticulos,false);
-            BufferedWriter escritorArticulos = new BufferedWriter(fichero)){
-            for (Articulo a : this.inventarioProductos) {
-                if (a instanceof Videojuegos) {
-                    v = (Videojuegos) a;
-                    cadenaDatos = videojuegoToFile(v);
-                } else {
-                    p = (Pelicula) a;
-                    cadenaDatos = peliculaToFile(p);
-                }
-                escritorArticulos.write(cadenaDatos);
-                escritorArticulos.newLine();
-            }
-        }
-    }
 
     /**
      * Metodo que nos devuelve un cliente valido para alquilar un articulo
@@ -561,12 +430,6 @@ public class VideoDaw {
      */
     public void almacenarAlquiler(Alquiler alquiler){
         this.listadoAlquileres.add(alquiler);
-        almacenarNuevoAlquiler(alquiler);
-        try {
-            reescrituraFicheroArticulosTrasEliminacion();
-        } catch (IOException e) {
-            System.out.println("Error al tratar el fichero de Articulos");
-        }
     }
 
     private void almacenarNuevoAlquiler(Alquiler alquiler){
@@ -603,12 +466,6 @@ public class VideoDaw {
             if(codigo.equals(alquiler.getCodProducto())){
                 alquiler.setFechaDevolucion();
                 recuperarObjetoArticuloAlquilada(alquiler.getCodProducto());
-                actualizarFicheroAlquileres();
-                try {
-                    reescrituraFicheroArticulosTrasEliminacion();
-                } catch (IOException e) {
-                    System.out.println("Error al tratar el fichero de Articulos");
-                }
             }
         }
     }
@@ -625,24 +482,6 @@ public class VideoDaw {
                 }
             }
         }
-        try {
-            reescrituraFicheroArticulosTrasEliminacion();
-        } catch (IOException e) {
-            System.out.println("Error al tratar el fichero de Articulos");
-        }
     }
 
-    public void actualizarFicheroAlquileres(){
-        String alquilerToFile;
-        try(FileWriter ficheroAlquileres = new FileWriter("./resources/" + this.cif + "_alquileres.csv",false);
-        BufferedWriter escritor = new BufferedWriter(ficheroAlquileres)){
-            for(Alquiler alquiler : this.listadoAlquileres){
-                alquilerToFile = alquilerToFile(alquiler);
-                escritor.write(alquilerToFile);
-                escritor.newLine();
-            }
-        }catch (IOException e){
-            System.out.println("Error al actualizar el alquiler");
-        }
-    }
 }

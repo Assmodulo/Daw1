@@ -30,25 +30,16 @@ public class Main {
         //Defino una variable numérica para los casos en los que me venga mejor un int para elegir una opcion
         int opcionNumerica = 0;
 
-        //Antes de comenzar a hacer nada hay que asegurarse, por si es la primera vez que arranca el programa, de que se
-        //cree la estructura de directorios y ficheros necesaria
+        //Siempre al inicio del programa se carga el método creación ficheros para que se puedan realizar todas las
+        //acciones posteriores
 
         try {
             creacionFichero();
+            leerFicheroVideoclub(listadovideoclubs);
         } catch (IOException e) {
-            System.out.println("Error al crear fichero");
+            System.out.println("Error al crear el fichero");
         }
 
-        //Después de esto me tengo que asegurar de que por si acaso se lean los datos de ficheros existentes, en este caso
-        //el listado de videoclubs almacenados
-        if (leerDatosdeFichero(listadovideoclubs)) {
-            System.out.println("Se han cargado datos de videoclubs previamente guardados");
-        } else {
-            System.out.println("No se han podido cargar archivos. Bien por inexistencia, o no había elementos guardados");
-        }
-
-        //Creo un método que lea todos los ficheros correspondientes a todos los videoclubs, ese método está en videodaw
-        System.out.println(lecturaFicherosVideoclubs(listadovideoclubs));
 
         System.out.println("Bienvenidos a la maravillosa franquicia de videoclubs VideoDaw");
 
@@ -66,16 +57,12 @@ public class Main {
             switch(opcion){
                 case "1":
                     System.out.println("Creación de videoclub");
-                    try {
                         if (creacionVideoDaw(listadovideoclubs)) {
                             System.out.println("Nuevo videoclub creado en la franquicia");
                         }else{
                             System.out.println("No se puede crear un nuevo videoclub. Posiblemente ha introducido un cif que ya" +
                                     "existe o se han encontrado problemas para guardar los datos en el fichero correctamente");
                         }
-                    } catch (IOException e) {
-                        System.out.println("Error al crear un nuevo Videoclub");
-                    }
                     break;
                 case "2":
                     System.out.println("Selección de videoclub");
@@ -102,11 +89,7 @@ public class Main {
                         switch(opcionNumerica){
                             case 1:
                                 p = creacionDeArticuloPelicula(video);
-                                try {
-                                    video.addArticuloP(p);
-                                } catch (IOException e) {
-                                    System.out.println("Ha surgido un problema al guardar los datos del articulo en fichero");
-                                }
+                                video.addArticuloP(p);
                                 break;
                             case 2:
                                 v = creacionDeArticuloVideojuego(video);
@@ -126,8 +109,6 @@ public class Main {
                         video.addCliente(c);
                     } catch (ClienteExistenteException e) {
                         System.out.println(e);
-                    }catch (IOException e){
-                        System.out.println("Problemas en el manejo de ficheros");
                     }catch (FechaPosteriorActualException e1){
                         System.out.println(e1.toString());
                     }catch(MenorDeEdadException e2){
@@ -180,17 +161,13 @@ public class Main {
                     System.out.println("Listado de socios actuales\n" + video.mostrarSociosVideoclub());
                     System.out.println("Introduzca la parte numérica del código de socio que quiere dar de baja");
                     String codigoEliminar = seleccionElementosAlquileres("C");
-                    try {
-                        if (video.eliminarCliente(codigoEliminar)) {
+                    if (video.eliminarCliente(codigoEliminar)) {
                             System.out.println("Estado del socio actualizado");
                         } else {
                             System.out.println("No se ha podido actualizar la baja de" +
                                     " el socio pues no se ha encontrado un elemento con ese" +
                                     "código de socio");
                         }
-                    } catch (IOException e) {
-                        System.out.println("Problemas en el manejo de ficheros para eliminar el cliente");
-                    }
                     break;
                 case "8":
                     System.out.println("Dar de baja un articulo del inventario");
@@ -198,7 +175,7 @@ public class Main {
 
                     letra = getLetra();
 
-                    try {
+
                         if(letra.equals("P")){
                             System.out.println(video.mostrarProductosRegistrados(1));
                             codigoEliminar = seleccionElementosAlquileres(letra);
@@ -216,28 +193,30 @@ public class Main {
                                 System.out.println("No se ha podido encontrar un producto con el codigo indicado");
                             }
                         }
-                    } catch (IOException e) {
-                        System.out.println("Problemas al actualizar el fichero de artículos");
-                    }
                     break;
                 case "9":
                     System.out.println("Listados diversos");
                     System.out.println("Elija uno de los listados disponibles:\n" + elegirListados(video));
                     break;
                 case "0":
+                    try {
+                        guardadoDatosFicheros(listadovideoclubs);
+                    } catch (IOException e) {
+                        System.out.println("Error en el manejo de ficheros");
+                    }
                     System.out.println("Saliendo del sistema");
                     break;
             }
         }while(!opcion.equals("0"));
 
-
     }
+
 
     /**
      * Método que nos permite elegir entre Película y Videoclub
      * @return La letra inical del código de producto
      */
-    private static String getLetra() {
+    public static String getLetra() {
         String letra;
         do{
             sc = new Scanner(System.in);
@@ -267,34 +246,6 @@ public class Main {
                 0.- Salir""";
     }
 
-    /**
-     * Metodo para cargar los datos de un fichero para almacenarlos en el listado de videoclubs
-     * @param listadovideoclubs Una colección de objetos Videoclub
-     * @return Un booleano que nos indica si se ha podido leer un archivo o no
-     */
-    static Boolean leerDatosdeFichero(LinkedList<VideoDaw> listadovideoclubs){
-        boolean ficheroLeido = true;
-        VideoDaw v;
-
-        try(FileReader ficheroVideoclubs = new FileReader("./resources/ListadoVideoclubs.csv");
-        BufferedReader lector = new BufferedReader(ficheroVideoclubs)){
-            String linea = lector.readLine();
-            while (linea != null) {
-                String[] datos = linea.split(",");
-                v = new VideoDaw(datos[0],datos[1],LocalDate.parse(datos[2],MyUtils.formatoFecha));
-                listadovideoclubs.add(v);
-                linea = lector.readLine();
-            }
-        }catch (FileNotFoundException e){
-            System.out.println("No se encontro el fichero");
-            ficheroLeido = false;
-        }catch (IOException e){
-            System.out.println("Error al leer el fichero");
-            ficheroLeido = false;
-        }
-        return ficheroLeido;
-    }
-
 
     /**
      * Método que recoge las operaciones necesarias para crear un nuevo videoclub y valida que no existe un videoclub
@@ -303,7 +254,7 @@ public class Main {
      * @return el valor de un booleano para indicar si se ha creado o no un videoclub
      * @throws IOException en el caso de encontrar errores a la hora de trabajar con ficheros
      */
-    public static boolean creacionVideoDaw(LinkedList<VideoDaw> listadovideoclubs) throws IOException {
+    public static boolean creacionVideoDaw(LinkedList<VideoDaw> listadovideoclubs){
         boolean creado = false, encontrado = false;
         VideoDaw nuevoV;
 
@@ -320,46 +271,8 @@ public class Main {
             nuevoV = new VideoDaw(cif,direccion);
             creado = true;
             listadovideoclubs.add(nuevoV);
-            String datosParaFichero = videoclubToFile(nuevoV);
-            almacenarNuevoVidoclub(datosParaFichero);
         }
         return creado;
-    }
-
-    /**
-     * Metodo que transforma los datos de un objeto VideoDaw recien creado para almacenarlos en el fichero
-     * @param v Objeto de tipo VideoDaw
-     * @return String con los datos preparados para su almacenamiento en un fichero
-     */
-    public static String videoclubToFile(VideoDaw v){
-        return v.getCif() + "," + v.getDireccion() + "," + MyUtils.formatearFecha(v.getFechaAlta());
-    }
-
-    /**
-     * Método que recién creado un nuevo objeto VideoDaw de forma correcta almacena los datos en un fichero
-     * @param cadenaDatos String con los datos del nuevo videoclub preparados para guardar en el fichero
-     * @throws IOException Lanza exception del tipo IO
-     */
-    public static void almacenarNuevoVidoclub(String cadenaDatos) throws IOException {
-        try(FileWriter ficheroVideoclubs = new FileWriter("./resources/ListadoVideoclubs.csv",true);
-        BufferedWriter escritorVideoclubs = new BufferedWriter(ficheroVideoclubs)){
-            escritorVideoclubs.write(cadenaDatos);
-            escritorVideoclubs.newLine();
-        }
-    }
-
-    /**
-     * Método que dada la primera vez que se ejecuta el programa crea la estructura necesaria para el almacenamiento de
-     * ficheros
-     * @throws IOException al trabajar con ficheros puede lanzar una IOException
-     */
-    public static void creacionFichero() throws IOException {
-        String nombreFichero = "ListadoVideoclubs.csv";
-        String nombreDirectorio = "./resources";
-        File directorio = new File(nombreDirectorio);
-        File fichero = new File(directorio,nombreFichero);
-        directorio.mkdir();
-        fichero.createNewFile();
     }
 
     /**
@@ -450,21 +363,6 @@ public class Main {
     }
 
     /**
-     * Metodo que recorre la colección de Videoclubs y va cargando todos sus archivos al inicio del programa
-     * @param listadovideoclubs Coleccion que almacena todos los videoclubs creados
-     * @return String con mensaje de confirmacion
-     */
-    public static String lecturaFicherosVideoclubs(LinkedList<VideoDaw> listadovideoclubs){
-        String confirmacion="Listado de datos de videoclubs que se han cargado\n";
-        for(VideoDaw v : listadovideoclubs){
-            v.leerDatosdeFicherosPropios();
-            confirmacion += v.getCif() + "\n";
-        }
-        confirmacion += "\nArchivos del videoclub cargados.";
-        return confirmacion;
-    }
-
-    /**
      * Metodo que seguimos para crear un nuevo Cliente en el videoclub
      * @param v Un objeto de tipo VideoDaw
      * @return un Objeto de tipo Cliente
@@ -478,11 +376,7 @@ public class Main {
         String direccion = MyUtils.insertarDireccion();
         LocalDate fnacim = MyUtils.insertarFecha();
         String codigo = MyUtils.generadorCodigos("C", v.getContadorClientes());
-        try {
-            cliente = new Cliente(nombre,dni,direccion,fnacim,codigo);
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+        cliente = new Cliente(nombre,dni,direccion,fnacim,codigo);
         return cliente;
     }
 
@@ -543,5 +437,154 @@ public class Main {
         codigoElegido += sc.nextLine();
 
         return codigoElegido;
+    }
+
+    /**
+     * Método que dada la primera vez que se ejecuta el programa crea la estructura necesaria para el almacenamiento de
+     * ficheros. Al inicio del programa siempres se llama a este método para comprobar que está creada la estructura
+     * de ficheros.
+     * @throws IOException al trabajar con ficheros puede lanzar una IOException
+     */
+    public static void creacionFichero() throws IOException {
+        String nombreFichero = "ListadoVideoclubs.csv";
+        String nombreDirectorio = "./resources";
+        File directorio = new File(nombreDirectorio);
+        File fichero = new File(directorio,nombreFichero);
+        directorio.mkdir();
+        fichero.createNewFile();
+    }
+
+    public static void guardadoDatosFicheros(LinkedList<VideoDaw> videoclubs) throws IOException {
+
+            try(FileWriter file = new FileWriter("./resources/ListadoVideoclubs.csv",false);
+            BufferedWriter escritor = new BufferedWriter(file)) {
+                for(VideoDaw video : videoclubs){
+                    String datosTemporales = videoclubToFile(video);
+                    guardarDatosPropiosVideoclub(video);
+                    escritor.write(datosTemporales);
+                    escritor.newLine();
+                }
+        }
+    }
+
+    /**
+     * Metodo que transforma los datos de un objeto VideoDaw recien creado para almacenarlos en el fichero
+     * @param v Objeto de tipo VideoDaw
+     * @return String con los datos preparados para su almacenamiento en un fichero
+     */
+    public static String videoclubToFile(VideoDaw v){
+        return v.getCif() + "," + v.getDireccion() + "," + MyUtils.formatearFecha(v.getFechaAlta());
+    }
+
+    public static void leerFicheroVideoclub(LinkedList<VideoDaw> videoclubs) throws IOException {
+        VideoDaw video = null;
+
+        try(FileReader file = new FileReader("./resources/ListadoVideoclubs.csv");
+        BufferedReader lector = new BufferedReader(file)) {
+            String datosTemporales = lector.readLine();
+            while(datosTemporales != null){
+                String[] datos = datosTemporales.split(",");
+                video = new VideoDaw(datos[0],datos[1],LocalDate.parse(datos[2],MyUtils.formatoFecha));
+                videoclubs.add(video);
+                datosTemporales = lector.readLine();
+            }
+        }
+    }
+
+    public static void guardarDatosPropiosVideoclub(VideoDaw video) throws IOException {
+
+        //Declaro variables que son el nombre del fichero que me van a servir despues
+        String ficheroArticulos = video.getCif() + "_Articulos.csv";
+        String ficheroClientes = video.getCif() + "_Clientes.csv";
+        String ficheroAlquileres = video.getCif() + "_Alquileres.csv";
+
+        //Creo nuevos objetos File que me van a servir después para crear estos ficheros en caso de que
+        //No existan
+        File fich1 = new File(ficheroArticulos);
+        File fich2 = new File(ficheroClientes);
+        File fich3 = new File(ficheroAlquileres);
+        fich1.createNewFile();
+        fich2.createNewFile();
+        fich3.createNewFile();
+
+        //Una variable string que voy a necesitar despues
+        String datosTemporales = "";
+
+        //Declaro las variables de los objetos que creo que voy a necesitar
+        Cliente c;
+        Pelicula p;
+        Videojuegos vj;
+
+        try(FileWriter file = new FileWriter(ficheroClientes);BufferedWriter escritor = new BufferedWriter(file)) {
+            for (Cliente cliente : video.socios) {
+                datosTemporales = clienteToFile(cliente);
+                escritor.write(datosTemporales);
+                escritor.newLine();
+            }
+        }
+
+        try(FileWriter file1 = new FileWriter(ficheroArticulos);BufferedWriter escritor1 = new BufferedWriter(file1)) {
+            for(Articulo articulo : video.inventarioProductos){
+                if(articulo instanceof Pelicula){
+                    datosTemporales = peliculaToFile((Pelicula)articulo);
+                    escritor1.write(datosTemporales);
+                }else{
+                    datosTemporales = videojuegoToFile((Videojuegos)articulo);
+                    escritor1.write(datosTemporales);
+                }
+                escritor1.newLine();
+            }
+        }
+
+        try(FileWriter file2 = new FileWriter(ficheroAlquileres);BufferedWriter escritor2 = new BufferedWriter(file2)) {
+            for(Alquiler alquiler : video.listadoAlquileres){
+                datosTemporales = alquileresToFile(alquiler);
+                escritor2.write(datosTemporales);
+                escritor2.newLine();
+            }
+        }
+    }
+
+    public static String clienteToFile(Cliente cliente) {
+        return cliente.getNombre() + "," + cliente.getDni() + "," + cliente.getDireccion() + "," +
+                MyUtils.formatearFecha(cliente.getFechaNacimiento()) + "," + cliente.getCodSocio() +
+                "," + cliente.estadoCliente();
+    }
+
+    public static String peliculaToFile(Pelicula pelicula) {
+        String fechaAlquiler;
+        if(pelicula.getFechaAlquiler() == null){
+            fechaAlquiler = "";
+        }else{
+            fechaAlquiler = MyUtils.formatearFechaHora(pelicula.getFechaAlquiler());
+        }
+        return pelicula.getCodigo() + "," + pelicula.getTitulo() + "," + pelicula.getGenero().toString() + "," +
+                MyUtils.formatearFecha(pelicula.getFechaAlta()) + "," + pelicula.estadoPelicula(pelicula.getFechaBaja())
+        + "," + fechaAlquiler + "," + pelicula.isAlquilada();
+    }
+
+    public static String videojuegoToFile(Videojuegos videojuego) {
+        String fechaAlquiler;
+        if(videojuego.getFechaAlquiler() == null){
+            fechaAlquiler = "";
+        }else{
+            fechaAlquiler = MyUtils.formatearFechaHora(videojuego.getFechaAlquiler());
+        }
+
+        return videojuego.getCodigo() + "," + videojuego.getTitulo() + "," + videojuego.getGenero().toString() + "," +
+                MyUtils.formatearFecha(videojuego.getFechaAlta()) + "," + videojuego.estadoVideojuego(videojuego.getFechaBaja())
+                + "," + fechaAlquiler + "," + videojuego.isAlquilada();
+    }
+
+    public static String alquileresToFile(Alquiler alquiler) {
+        String fechaAlquiler;
+        if(alquiler.getFechaDevolucion() == null){
+            fechaAlquiler = "";
+        }else{
+            fechaAlquiler = MyUtils.formatearFechaHora(alquiler.getFechaDevolucion());
+        }
+
+        return alquiler.getCodProducto() + "," + alquiler.getCodSocio() + "," + MyUtils.formatearFechaHora(alquiler.getFechaAlquiler())
+        + "," + fechaAlquiler;
     }
 }

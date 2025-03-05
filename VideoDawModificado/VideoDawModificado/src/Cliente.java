@@ -2,12 +2,12 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-public class Cliente extends Persona implements Serializable {
+public class Cliente extends Persona {
 
     private String codSocio;
     private LocalDate fechaBaja;
 
-    public Cliente(String nombre, String dni, String direccion, LocalDate fechaNacimiento, String codSocio)throws IOException {
+    public Cliente(String nombre, String dni, String direccion, LocalDate fechaNacimiento, String codSocio){
         super(nombre, dni, direccion, fechaNacimiento);
         this.codSocio = codSocio;
         this.fechaBaja = null;
