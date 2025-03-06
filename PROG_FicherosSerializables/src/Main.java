@@ -57,6 +57,7 @@ public class Main {
                         autor = insertarDatos();
                         System.out.println("Ingrese la fecha de publicación del libro");
                         fecha = insertarFecha();
+                        validarFecha(fecha);
                         libro = new Libro(isbn, titulo, autor, fecha);
                         biblioteca.add(libro);
                     } catch (IsbnYaExistenteException e) {
