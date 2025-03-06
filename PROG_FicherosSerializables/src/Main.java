@@ -1,6 +1,9 @@
 
 import javax.tools.FileObject;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -21,7 +24,10 @@ public class Main {
         //Declaro una variable Libro
         Libro libro;
         //Un String para la opcion del menú y aquellas necesarias para crear un objeto libro
-        String opcion, isbn, titulo, autor, fecha;
+        String opcion, isbn, titulo, autor, fecha,listado;
+
+        //Una variable int para las opciones numéricas
+        int opcionNumerica = 0;
 
         //Antes de empezar a hacer nada vamos a crear los ficheros necesarios y la estructura de directorios
         try {
@@ -55,13 +61,26 @@ public class Main {
                         biblioteca.add(libro);
                     } catch (IsbnYaExistenteException e) {
                         System.out.println(e.getMessage() + " " + e);
+                    } catch (FechaNoValidaException e){
+                        System.out.println(e.getMessage() + " " + e);
                     }
                     break;
                 case "2":
-                    if (!listadoLibros(biblioteca).isEmpty()) {
-                        System.out.println(listadoLibros(biblioteca));
-                    } else {
-                        System.out.println("No hay libros para mostrar");
+                    System.out.println("Elija el término de búsqueda:\n" + opcionesMenuListados());
+                    do{
+                        sc = new Scanner(System.in);
+                        try{
+                            opcionNumerica = sc.nextInt();
+                        }catch(InputMismatchException e){
+                            System.out.println("Introduzca un valor numérico");
+                        }
+                    }while(opcionNumerica < 1 || opcionNumerica > 4);
+                    System.out.println("Inserte el dato que se le solicita");
+                    listado = devolverListados(opcionNumerica,biblioteca);
+                    if(listado.isEmpty()){
+                        System.out.println("El libro no existe");
+                    }else{
+                        System.out.println(listado);
                     }
                     break;
                 case "3":
@@ -98,7 +117,7 @@ public class Main {
                 Elija una de las siguientes opciones:
                 1.-Crear y registrar libro en la biblioteca
                 2.-Mostrar libros existente
-                2.-Eliminar libro por ISBN
+                3.-Eliminar libro por ISBN
                 4.-Guardar libros en el fichero
                 5.-Salir
                 """;
@@ -152,9 +171,16 @@ public class Main {
         return fecha;
     }
 
+    public static void validarFecha(String fecha) throws FechaNoValidaException{
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if(LocalDate.parse(fecha,formatter).isAfter(LocalDate.now())){
+            throw new FechaNoValidaException();
+        }
+    }
+
     public static String insertarDatos(){
         sc = new Scanner(System.in);
-        return sc.nextLine();
+        return sc.nextLine().toUpperCase();
     }
 
     public static String listadoLibros(LinkedList<Libro> biblioteca){
@@ -212,4 +238,74 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
+
+    public static String devolverListados(int opcion, LinkedList<Libro> biblioteca){
+        String listado = "";
+        String dato = "";
+        sc = new Scanner(System.in);
+        switch(opcion){
+            case 1:
+                System.out.println("ISBN");
+                dato = insertarDatoIsbn();
+                listado = listadoISBN(dato,biblioteca);
+                break;
+            case 2:
+                System.out.println("TITULO");
+                dato = insertarDatos();
+                listado = listadoTitulo(dato,biblioteca);
+                break;
+            case 3:
+                System.out.println("AUTOR");
+                dato = insertarDatos();
+                listado = listadoAutor(dato,biblioteca);
+                break;
+            case 4:
+                System.out.println("FECHA DE PUBLICACIÓN");
+                dato = insertarFecha();
+                listado = listadoFecha(dato,biblioteca);
+                break;
+        }
+        return listado;
+    }
+
+    public static String listadoISBN(String isbn, LinkedList<Libro> biblioteca){
+        String listado = "Este es el resultado de su búsqueda:\n";
+        for(Libro libro : biblioteca){
+            if(libro.getIsbn().equals(isbn)){
+                listado += libro + "\n";
+            }
+        }
+        return listado;
+    }
+
+    public static String listadoTitulo(String titulo, LinkedList<Libro> biblioteca){
+        String listado = "Este es el resultado de su búsqueda:\n";
+        for(Libro libro : biblioteca){
+            if(libro.getTitulo().equals(titulo)){
+                listado += libro + "\n";
+            }
+        }
+        return listado;
+    }
+
+    public static String listadoAutor(String autor, LinkedList<Libro> biblioteca){
+        String listado = "Este es el resultado de su búsqueda:\n";
+        for(Libro libro : biblioteca){
+            if(libro.getAutor().equals(autor)){
+                listado += libro + "\n";
+            }
+        }
+        return listado;
+    }
+
+    public static String listadoFecha(String fecha, LinkedList<Libro> biblioteca){
+        String listado = "Este es el resultado de su búsqueda:\n";
+        for(Libro libro : biblioteca){
+            if(libro.getFechaPublicacion().equals(fecha)){
+                listado += libro + "\n";
+            }
+        }
+        return listado;
+    }
+
 }
