@@ -1,4 +1,4 @@
-public class ExcedidoTiempoAlquilerException extends RuntimeException {
+public class ExcedidoTiempoAlquilerException extends Exception {
     public ExcedidoTiempoAlquilerException() {
 
 

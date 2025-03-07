@@ -20,7 +20,7 @@ public class Alquiler {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public void setFechaDevolucion(){
+    public void setFechaDevolucion() throws ExcedidoTiempoAlquilerException{
         if(LocalDateTime.now().minusHours(48).isAfter(this.fechaAlquiler)){
             this.fechaDevolucion = LocalDateTime.now();
             throw new ExcedidoTiempoAlquilerException();

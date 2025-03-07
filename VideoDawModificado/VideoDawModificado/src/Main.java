@@ -510,7 +510,81 @@ public class Main {
         LocalDate fBaja = null;
         LocalDateTime fDevolucion = null;
 
-        try (FileReader file = new FileReader("./resources/" + ficheroClientes)) {
+        try(FileReader file = new FileReader("./resources/" + ficheroClientes);
+            FileReader file2 = new FileReader("./resources/" + ficheroArticulos);
+            FileReader file3 = new FileReader("./resources/" + ficheroAlquileres);
+            BufferedReader lector = new BufferedReader(file);
+            BufferedReader lector2 = new BufferedReader(file2);
+            BufferedReader lector3 = new BufferedReader(file3);
+            ){
+
+            String datosTemporales = lector.readLine();
+            while (datosTemporales != null) {
+                String[] datos = datosTemporales.split(",");
+                if (datos[5].equals("0")) {
+                    fBaja = null;
+                } else {
+                    fBaja = LocalDate.parse(datos[5], MyUtils.formatoFecha);
+                }
+                c = new Cliente(datos[0], datos[1], datos[2], LocalDate.parse(datos[3], MyUtils.formatoFecha), datos[4], fBaja);
+                video.socios.add(c);
+                datosTemporales = lector.readLine();
+            }
+
+
+            /*String codigo, String titulo, GenerosPeliculas/Videojuegos genero, LocalDate fechaAlata, LocalDate fechaBaja,
+            LocalDateTime fechaAlquiler,boolean isAlquilada Recordatorio de como tengo que construir los objetos*/
+            boolean alquilada = false;
+            datosTemporales = lector2.readLine();
+            while (datosTemporales != null) {
+                String[] datos = datosTemporales.split(",");
+                String primeraLetra = datos[0].charAt(0) + "";
+                if (datos[6].equals("Alquilada")) {
+                    alquilada = true;
+                }
+                if (!datos[5].equals("0")) {
+                    fDevolucion = LocalDateTime.parse(datos[5], MyUtils.formatoFechaHora);
+                }else{
+                    fDevolucion = null;
+                }
+                if (!datos[4].equals("0")) {
+                    fBaja = LocalDate.parse(datos[4], MyUtils.formatoFecha);
+                } else {
+                    fBaja = null;
+                }
+                if (primeraLetra.equals("P")) {
+                    p = new Pelicula(datos[0], datos[1], GenerosPeliculas.valueOf(datos[2]), LocalDate.parse(datos[3],
+                            MyUtils.formatoFecha), fBaja, fDevolucion, alquilada);
+                    video.inventarioProductos.add(p);
+                } else {
+                    vj = new Videojuegos(datos[0], datos[1], GenerosVidejuegos.valueOf(datos[2]), LocalDate.parse(datos[3],
+                            MyUtils.formatoFecha), fBaja, fDevolucion, alquilada);
+                    video.inventarioProductos.add(vj);
+                }
+                datosTemporales = lector2.readLine();
+            }
+            fDevolucion = null;
+            datosTemporales = lector3.readLine();
+            while (datosTemporales != null) {
+                String[] datos = datosTemporales.split(",");
+                if (!datos[3].equals("0")) {
+                    fDevolucion = LocalDateTime.parse(datos[3], MyUtils.formatoFechaHora);
+                } else {
+                    fDevolucion = null;
+                }
+                a = new Alquiler(datos[0], datos[1],
+                        LocalDateTime.parse(datos[2], MyUtils.formatoFechaHora),
+                        fDevolucion);
+                video.listadoAlquileres.add(a);
+                datosTemporales = lector3.readLine();
+
+
+            }
+        } catch (Exception e) {
+
+        }
+
+        /*try (FileReader file = new FileReader("./resources/" + ficheroClientes)) {
             try (FileReader file2 = new FileReader("./resources/" + ficheroArticulos)) {
                 try (FileReader file3 = new FileReader("./resources/" + ficheroAlquileres)) {
                     try (BufferedReader lector = new BufferedReader(file)) {
@@ -531,8 +605,8 @@ public class Main {
                                 }
 
 
-            /*String codigo, String titulo, GenerosPeliculas/Videojuegos genero, LocalDate fechaAlata, LocalDate fechaBaja,
-            LocalDateTime fechaAlquiler,boolean isAlquilada Recordatorio de como tengo que construir los objetos*/
+            String codigo, String titulo, GenerosPeliculas/Videojuegos genero, LocalDate fechaAlata, LocalDate fechaBaja,
+            LocalDateTime fechaAlquiler,boolean isAlquilada Recordatorio de como tengo que construir los objetos
                                 boolean alquilada = false;
                                 datosTemporales = lector2.readLine();
                                 while (datosTemporales != null) {
@@ -582,7 +656,7 @@ public class Main {
                     }
                 }
             }
-        }
+        }*/
 
     }
 
