@@ -1,16 +1,17 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Libro implements Serializable {
     private String isbn;
     private String titulo;
     private String autor;
-    private String fechaPublicacion;
+    private LocalDate fechaPublicacion;
 
     public Libro(String isbn, String titulo, String autor, String fechaPublicacion) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
-        this.fechaPublicacion = fechaPublicacion;
+        this.fechaPublicacion = Main.tranformarFechar(fechaPublicacion);
     }
 
     public String getIsbn() {

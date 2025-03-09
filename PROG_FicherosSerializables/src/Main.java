@@ -179,6 +179,11 @@ public class Main {
         }
     }
 
+    public static LocalDate tranformarFechar(String fecha){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(fecha, formatter);
+    }
+
     public static String insertarDatos(){
         sc = new Scanner(System.in);
         return sc.nextLine().toUpperCase();
