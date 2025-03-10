@@ -2,10 +2,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Libro implements Serializable {
+    private static final long serialVersionUID = 8085897440139735073L;
     private String isbn;
     private String titulo;
     private String autor;
     private LocalDate fechaPublicacion;
+
+
 
     public Libro(String isbn, String titulo, String autor, String fechaPublicacion) {
         this.isbn = isbn;
@@ -27,7 +30,7 @@ public class Libro implements Serializable {
     }
 
     public String getFechaPublicacion() {
-        return fechaPublicacion;
+        return fechaPublicacion.toString();
     }
 
     @Override

@@ -104,13 +104,16 @@ public class Main {
                     almacenamientoDeDatos(biblioteca);
                     break;
                 case "5":
+                    System.out.println(listadoLibros(biblioteca));
+                    break;
+                case "6":
                     break;
                 default:
                     System.out.println("Opción no valida");
                     break;
             }
 
-        }while(!opcion.equals("5"));
+        }while(!opcion.equals("6"));
     }
 
     public static String opcionesMenu(){
@@ -120,7 +123,8 @@ public class Main {
                 2.-Mostrar libros existente
                 3.-Eliminar libro por ISBN
                 4.-Guardar libros en el fichero
-                5.-Salir
+                5.-Listado de Libros
+                6.-Salir
                 """;
     }
 
@@ -186,6 +190,7 @@ public class Main {
 
     public static String insertarDatos(){
         sc = new Scanner(System.in);
+        System.out.println();
         return sc.nextLine().toUpperCase();
     }
 

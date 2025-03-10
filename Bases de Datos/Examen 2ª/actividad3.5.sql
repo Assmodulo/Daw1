@@ -1586,6 +1586,8 @@ group by d.dept_no
 order by sum(s.salary) asc
 limit 1;
 
+#Ejercicios del examen de la segunda evaluación
+
 create table homenaje(
 	cod_homenaje char(4) unique not null,
     lugar varchar(20) not null,
@@ -1596,6 +1598,7 @@ create table homenaje(
     constraint cod_empleado foreign key (cod_empleado) references employees(emp_no)
 );
 
+-- Insert de los datos del ejercicio 1
 insert into homenaje values
 ('H001','lallaa','2024-02-10','Reloj de oro','10001'),
 ('H002','yoyoyo','2024-02-10','Reloj de oro','10002'),
@@ -1603,16 +1606,21 @@ insert into homenaje values
 ('H004','elelel','2024-02-10','Pin de Oro','10004'),
 ('H005','mimimim','2024-02-10','Dinero','10005');
 
+
+-- Se borra el primer insert que coincide con el del primer empleado
 delete from homenaje where cod_empleado = '10001';
 
+-- Update del atributo lugar de todos los inserts para que sea santander
 update homenaje set lugar ='Santander';
 
 select * from homenaje;
 
+-- Seleccionar todos los empleados que han recibido un homenaje y su regalo
 select e.first_name, e.last_name, e.hire_date, h.regalo
 from employees e
 join homenaje h on e.emp_no = h.cod_empleado;
 
+-- Indica el gerente de cada departamento y su salario actual
 select e.first_name, e.last_name, d.dept_name, s.salary
 from employees e
 join dept_manager dem on e.emp_no = dem.emp_no
@@ -1621,6 +1629,8 @@ join dept_emp de on de.emp_no = e.emp_no
 join departments d on d.dept_no = de.dept_no
 where dem.to_date = '9999-01-01' and s.to_date = '9999-01-01';
 
+
+-- Muestra la evolución del primer empleado contratado
 SELECT e.first_name, e.last_name, s.salary, d.dept_name 
 FROM employees e 
 join dept_emp de on e.emp_no = de.emp_no
@@ -1629,7 +1639,7 @@ join salaries s on s.emp_no = e.emp_no
 where e.hire_date = (select min(e.hire_date)
 from employees e);
 
-
+-- Salario medio de todos los empleados en cuyo título aparece la palabra senior
 select avg(s.salary) as 'Salario medio Seniors'
 from departments d
 join dept_emp de on d.dept_no = de.dept_no
@@ -1638,9 +1648,14 @@ join salaries s on e.emp_no = s.emp_no
 join titles t on e.emp_no = t.emp_no
 where s.to_date = '9999-01-01' and t.title like '%Senior%' and t.to_date = '9999-01-01';
 
+
+-- Se añade un atributo a la tabla homenaje
 alter table homenaje add presentador int;
+
+-- Se indica que ese atributo es una fk que referencia a la tabla employees
 alter table homenaje add constraint presentador foreign key (presentador) references employees (emp_no);
 
+-- Se indica que el presentador es siempre el empleado mas antiguo de la empresa
 update homenaje set presentador =
 (select e.emp_no
 from employees e
@@ -1649,12 +1664,15 @@ limit 1);
 
 select * from homenaje;
 
+
+-- Se muestran los datos de todos los empleados, y los datos del regalo y del presentador en el caso de que lo hayan tenido
 select e.first_name, e.last_name, h.presentador, h.regalo
 from employees e
 left join
 homenaje h on e.emp_no = h.cod_empleado;
 
 
+-- Muestra los datos de todos los empleados y los de su jefe de departamente en caso de que lo tuviesen
 select e.first_name, e.last_name, j.first_name, j.last_name
 from employees AS e
 join dept_emp de on e.emp_no = de.emp_no
@@ -1667,4 +1685,98 @@ on de.dept_no = j.dept_no
 where de.to_date = '9999-01-01'
 order by de.dept_no;
 
+#Examen B de la segunda evaluación
+
+-- Se crea la tabla
+create table induccion(
+	cod_induccion int not null,
+    lugar varchar(25) not null,
+    fecha date not null,
+    regalo ENUM ('Botella de vino','Toalla de playa','Bufanda') not null,
+    organizador int not null,
+    constraint cod_induccion primary key (cod_induccion),
+    constraint organizador foreign key (organizador) references employees(emp_no)
+);
+
+insert into induccion values
+(1,'Restaurante','2025-01-01','Botella de vino',10001),
+(2,'Hotel','2025-01-01','Toalla de playa',10002),
+(3,'Salon de actos','2025-01-01','Bufanda',10003),
+(4,'Hotel','2025-01-01','Toalla de playa',10004),
+(5,'Salon de actos','2025-01-01','Toalla de playa',10005);
+
+select * from induccion;
+
+delete from induccion where organizador = '10005';
+
+select * from induccion;
+
+update induccion set lugar = 'Potes';
+
+select * from induccion;
+-- Mostrar datos de empleados que hayan pasado por la induccion, su fecha de contratación y su regalo.
+select e.first_name, e.last_name, e.hire_date, i.regalo
+from employees e
+join induccion i on e.emp_no = i.organizador;
+
+-- Obtener el salario medio de los empleados cuyo título actual contenga la palabra engineer
+select avg(s.salary)
+from salaries s 
+join employees e on s.emp_no = e.emp_no
+join titles t on e.emp_no = t.emp_no
+where t.title like '%Engineer%' and t.to_date = '9999-01-01';
+
+-- Obtener los datos de todos aquellos empleados que ya no son gerentes
+
+select e.first_name, e.last_name, s.salary
+from employees e
+join salaries s on e.emp_no = s.emp_no
+join dept_manager dem on e.emp_no = dem.emp_no
+where dem.to_date  < '9999-01-01' and s.to_date = '9999-01-01';
+
+
+-- Muestra el salario y la evolución del departamento del último empleado contratado
+select e.first_name, e.last_name, s.salary, d.dept_name
+from employees e 
+join dept_emp de on e.emp_no = de.emp_no
+join departments d on d.dept_no = de.dept_no
+join salaries s on e.emp_no = s.emp_no
+where e.hire_date = (select max(e.hire_date)
+from employees e);
+
+-- Muestra el nombre y el salario actual de aquellos empleados que lleven más de dos años con el mismo salario
+select e.first_name, e.last_name, s.salary
+from employees e
+join salaries s on e.emp_no = s.emp_no
+where datediff(s.to_date, s.from_date) > 730 and datediff(s.to_date, curdate()) > 730;
+
+-- Enumera los nombres y salarios de los empleados que han tenido más de un salario
+
+
+select e.first_name, e.last_name, s.salary
+from employees e
+join salaries s on e.emp_no = s.emp_no;
+
+
+
+-- Implementar cambios en la base de datos
+
+alter table induccion add facilitador int;
+
+select * from induccion;
+
+alter table induccion add constraint facilitador foreign key (facilitador) references employees (emp_no);
+
+update induccion set facilitador = 
+(select e.emp_no 
+from employees e 
+join dept_emp de on e.emp_no = de.emp_no
+where e.birth_date = (select max(e.birth_date) from employees e) and de.to_date = '9999-01-01');
+
+select * from induccion;
+
+select e.first_name, e.last_name, i.regalo, i.facilitador
+from employees e 
+left join
+induccion i on e.emp_no = i.organizador;
 
