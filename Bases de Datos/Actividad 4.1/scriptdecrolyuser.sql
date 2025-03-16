@@ -3,10 +3,20 @@ use DAW_PR4_1;
 select * from alumnos;
 
 # Update sobre el atributo f_nacimiento
-UPDATE alumno SET f_nacimiento='1990-04-20' WHERE nombre='Jose';
+UPDATE alumnos SET f_nacimiento='1990-04-20' WHERE nombre='Jose';
 
 
-UPDATE alumno SET apellido='Alonso' WHERE nombre='Maria';
+UPDATE alumnos SET apellidos ='Alonso' WHERE nombre='Maria';
+
+select * from alumnos;
+
+INSERT INTO alumnos VALUES ('Fernando', 'Alonso', '1981-07-29');
 
 
-INSERT INTO alumno VALUES ('Fernando', 'Alonso', '1981-07-29');
+select * from alumnos;
+
+create user 'alumno' identified by 'alumno';
+
+create role usuarios;
+
+grant usuarios to decroly, alumno;

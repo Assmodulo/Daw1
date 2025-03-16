@@ -1,4 +1,6 @@
-public class Producto {
+import java.util.Comparator;
+
+public class Producto{
 
     //Atributos Objetos Producto
     private String referencia;
@@ -26,11 +28,6 @@ public class Producto {
         this.aplicarDto = false;
     }
 
-    /*
-        Según lo que yo entiendo, necesito crear más constructores, un tipo para cada tipo de fichero
-        Un constructor que sea para los datos que tengo en el archivo CSV y otro para los datos que tengo
-        en el archivo DAT
-     */
 
     //Constructor para los datos de un archivo CSV
     public Producto(String referencia, String nombre, String descripcion, String tipo){
@@ -38,33 +35,6 @@ public class Producto {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tipo = tipo;
-    }
-
-    //Constructor para los datos de un archivo DAT
-    public Producto(int cantidad, double precio, int descuento, int iva, boolean aplicarDto) {
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.descuento = descuento;
-        this.iva = iva;
-        this.aplicarDto = aplicarDto;
-    }
-
-
-
-    //Este seria el constructor para crear los objetos completos después de combinar los datos existentes
-    //en los dos ficheros
-
-    public Producto(String referencia, String nombre, String descripcion, String tipo, int cantidad, double precio,
-                    int descuento, int iva, boolean aplicarDto) {
-        this.referencia = referencia;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.tipo = tipo;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.descuento = descuento;
-        this.iva = iva;
-        this.aplicarDto = aplicarDto;
     }
 
 
@@ -143,15 +113,15 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto " +
-                ",referencia " + referencia + '\'' +
-                ", nombre " + nombre + '\'' +
-                ", descripcion " + descripcion + '\'' +
-                ", tipo " + tipo + '\'' +
-                ", cantidad " + cantidad +
-                ", precio " + precio +
-                ", descuento " + descuento +
-                ", iva " + iva +
-                ", aplicarDto " + aplicarDto;
+        return "PRODUCTO\n " +
+                ",REFERENCIA: " + referencia  +
+                ", NOMBRE: " + nombre +
+                ", DESCRIPCIÓN: " + descripcion +
+                ", TIPO: " + tipo + "\n" +
+                ", CANTIDAD: " + cantidad +
+                ", PRECIO: " + precio + "€" + "\n" +
+                ", DESCUENTO: " + descuento + "%" +
+                ", IVA: " + iva + "%" +
+                ", APLICAR DTO.: " + aplicarDto;
     }
 }
