@@ -1,5 +1,6 @@
 drop database if exists DAW_PR4_1;
-drop user if exists decroly;
+drop user if exists decroly, alumno;
+drop role if exists usuarios;
 create database DAW_PR4_1;
 
 
@@ -26,3 +27,16 @@ grant update (f_nacimiento) on DAW_PR4_1.alumnos to decroly;
 
 #Volvemos a modificar los permisos de decroly
 grant all privileges on *.* to decroly;
+
+create role usuarios;
+
+create user 'alumno' identified by 'alumno';
+
+
+grant usuarios to decroly, alumno;
+
+grant all privileges on daw_pr4_1.* to usuarios;
+
+revoke usuarios from alumno;
+
+show grants for decroly;

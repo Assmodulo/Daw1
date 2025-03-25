@@ -1,4 +1,5 @@
 use DAW_PR4_1;
+drop user if exists alumno;
 
 select * from alumnos;
 
@@ -14,9 +15,3 @@ INSERT INTO alumnos VALUES ('Fernando', 'Alonso', '1981-07-29');
 
 
 select * from alumnos;
-
-create user 'alumno' identified by 'alumno';
-
-create role usuarios;
-
-grant usuarios to decroly, alumno;
