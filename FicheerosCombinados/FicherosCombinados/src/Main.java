@@ -212,9 +212,9 @@ public class Main {
         lista.sort(new ComparadorReferencia());
 
         try(FileWriter fichero = new FileWriter(direccionCsv,false);
-        BufferedWriter escritor1 = new BufferedWriter(fichero);
+            BufferedWriter escritor1 = new BufferedWriter(fichero);
             FileOutputStream fichero2 = new FileOutputStream(direccionBinario,false);
-        DataOutputStream escritor2 = new DataOutputStream(fichero2)
+            DataOutputStream escritor2 = new DataOutputStream(fichero2)
         ){
             for(Producto p : lista){
                 escritor1.write(p.getReferencia() + "/" + p.getNombre() + "/" + p.getDescripcion() +
