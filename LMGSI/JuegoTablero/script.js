@@ -1,14 +1,19 @@
 
 const dado = document.querySelectorAll(".dado");
+const tablero = document.querySelector(".tablero");
+const casillas = document.querySelectorAll(".casilla");
+const ficha1 = document.getElementById("jugador1");
 
-dado.forEach((dado) => {
+dado.forEach((dado,index) => {
     dado.addEventListener("click", tiraDado);
 });
+
+posicionInicial();
 
 function tiraDado(){
     event.preventDefault();
     let caraActual = 0;
-    let numeroAleatorio = Math.floor(Math.random() * 25 + 10);
+    let numeroAleatorio = Math.floor(Math.random() * 60 + 30);
     console.log(numeroAleatorio);
     let iteracion = 0;
 
@@ -25,7 +30,17 @@ function tiraDado(){
             if(iteracion === numeroAleatorio){
                 clearInterval(intervalo);
             }
-        }, 250);
+        }, 100);
+        return caraActual;
+}
+
+function posicionInicial(){
+    let casillaInicial = document.getElementById("1");
+    let numeroCasilla = parseInt(casillaInicial.id);
+    console.log('La casilla inicial es ' + numeroCasilla);
+    casillaInicial.appendChild(ficha1);
+    ficha1.style.gridRowStart="1";
+    ficha1.style.gridColumnStart="2";
 }
 
 

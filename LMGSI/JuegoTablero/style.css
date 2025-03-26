@@ -11,6 +11,7 @@
     top: 50%;
     transform:translateY(-50%);
     box-shadow: 2px 2px 6px black;
+    box-sizing:border-box;
 }
 
 .dado div{
@@ -140,4 +141,65 @@
 #punto21{
     grid-column-start: 4;
     grid-row-start: 5;
+}
+
+.tablero{
+    background-color:white;
+    height: 90vh;
+    width: 85%;
+    margin-left:215px;
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    animation: colorDeFondo 6s infinite;
+}
+
+.casilla{
+    background-color:white;
+    width: 100%;
+    height: 100%;
+    border:1px solid black;
+    border-radius: 35px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr) ;
+    gap:0;
+}
+
+@keyframes colorDeFondo {
+    0%{
+        background-color: darkviolet;
+    }
+    20%{
+        background-color: blueviolet;
+    }
+    40%{
+        background-color: purple;
+    }
+    60%{
+        background-color: darkred;
+    }
+    80%{
+        background-color: red;
+    }
+    100%{
+        background-color: lightcoral;
+    }
+
+}
+
+.casilla p{
+    color:black;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    text-align: center;
+}
+
+.ficha{
+    background-color:black;
+    height:50px;
+    width:50px;
+    border-radius:50%;
+    margin-left:50px;
 }
