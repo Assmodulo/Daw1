@@ -1834,3 +1834,27 @@ create user alejandro@localhost identified by '1234';
 grant select on Resumen_Salarios to alejandro@localhost;
 grant select on Jefes_Departamento to alejandro@localhost;
 grant select on Contratados95 to alejandro@localhost;
+
+-- Enumera todos los empleados que ya no son gerentes
+select e.first_name, e.last_name, s.salary
+from employees e
+join salaries s on e.emp_no = s.emp_no
+join dept_manager de on e.emp_no = de.emp_no
+where s.to_date = '9999-01-01' and de.to_date < '9999-01-01';
+
+-- Enumero todos los empleados que nunca han cambiado de departamento
+select e.first_name, e.last_name
+from employees e
+join dept_emp de on e.emp_no = de.emp_no
+where e.hire_date = de.from_date and de.to_date = '9999-01-01'
+order by e.first_name;
+
+-- Muestra el empleado mejor pagado actualmente por año de nacimiento
+
+select e.first_name, e.last_name, date_format(e.birth_date, '%Y') as 'Año', max(s.salary)
+from employees e
+join salaries s on e.emp_no = s.emp_no
+where s.to_date = '9999-01-01' and e.birth_date in (
+select date_format(e.birth_date, '%Y') as 'Fecha'
+from employees group by Fecha)
+group by Año;
