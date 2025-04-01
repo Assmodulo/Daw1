@@ -1,0 +1,7 @@
+https://www.nakivo.com/es/blog/types-of-network-topology-explained/
+
+https://openwebinars.net/blog/topologia-de-redes-informaticas/#tipos-de-topolog%C3%ADas-de-red-l%C3%B3gicas
+
+https://es.wikipedia.org/wiki/Redes_definidas_por_software //redes sdn, por si acaso
+
+https://es.wikipedia.org/wiki/Topolog%C3%ADa_h%C3%ADbrida //wikipedia, pequeña definición
