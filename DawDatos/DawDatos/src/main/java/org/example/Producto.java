@@ -19,7 +19,7 @@ public class Producto implements Serializable {
 
 
     public Producto(int id, String referencia, String nombre, String descripcion, int idTipo, int cantidad,
-                    double precio, int descuento, int iva) {
+                    double precio, int descuento, int iva, boolean aplicarDescuento) {
         this.id = id;
         this.referencia = referencia;
         this.nombre = nombre;
@@ -29,6 +29,7 @@ public class Producto implements Serializable {
         this.precio = precio;
         this.descuento = descuento;
         this.iva = iva;
+        this.aplicarDescuento = aplicarDescuento;
     }
 
 

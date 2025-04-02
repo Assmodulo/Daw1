@@ -1,29 +1,37 @@
 drop database if exists dawdata;
 create database dawdata;
 
+use dawdata;
+
 drop user if exists developer@localhost;
 create user developer@localhost identified by '1234';
 
 grant all privileges on dawdata to developer@localhost;
 
-use dawdata;
+grant select on dawdata to developer@localhost;
+
+show grants for developer@localhost;
+
+
 
 create table tipos(
 	id smallint auto_increment not null,
-    tipo enum ('EN_PREPARACION', 'PREPARADO', 'ENVIADO', 'EN_REPARTO', 'CANCELADO', 'DESCATALOGADO')
+    tipo enum ('EN_PREPARACION', 'PREPARADO', 'ENVIADO', 'EN_REPARTO', 'CANCELADO', 'DESCATALOGADO'),
+    constraint id primary key(id)
 );
 
 create table productos(
 	id smallint auto_increment not null,
     referencia char(9) not null,
     nombre varchar(50) not null,
-    descriptcion varchar(50) not null,
+    descriptcion varchar(100) not null,
     id_tipo smallint not null,
     cantidad int not null,
     precio decimal(6,2) not null,
     descuento int not null,
     iva int not null,
-    aplicar_iva boolean not null
+    aplicar_iva boolean not null,
+    constraint id primary key (id)
 );
 
 insert into tipos values
@@ -54,6 +62,5 @@ insert into productos values
 (17,'YWE-92143','Fitness Smartwatch','Multifunctional smartwatch for fitness tracking.',4,18,99.99,22,7,true),
 (18,'UPZ-22824','Ribbed Knit Dress','A fitted ribbed knit dress that hugs your curves perfectly.',3,12,59.99,12,7,true),
 (19,'FIG-61158','Lemon Dill Salmon','"Salmon fillets seasoned with lemon and dill, perfect for grilling."',6,18,9.99,15,21,true);
-
 
 

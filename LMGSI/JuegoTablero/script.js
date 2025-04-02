@@ -21,11 +21,12 @@ estadoJugador1 = {
 
 posicionInicial();
 
-juego();
+turno();
+
 
 function tiraDado(){
     let caraActual = 0;
-    let numeroAleatorio = Math.floor(Math.random() * 60 + 30);
+    let numeroAleatorio = Math.floor(Math.random() * (30-15) + 16);
     console.log(numeroAleatorio);
     let iteracion = 0;
 
@@ -61,14 +62,41 @@ function posicionInicial(){
 }
 
 
-function juego(){
-
+function turno(){
 
         if (estadoJugador1.turnoActivo === true) {
-            let casillaActual = casillas[estadoFicha1.posicion];
-            let tirada = tiraDado();
-            console.log('El valor de la tirada es ' + tirada);
-            estadoJugador1.turnoActivo = false;
+            tiraDado();
+            setTimeout(movimientoFicha,3500);
         }
+}
+
+function movimientoFicha(){
+    let casillaActual = casillas[estadoFicha1.posicion];
+    let casillaObjetivo;
+    console.log(casillaActual);
+    let valorInicial = parseInt(casillaActual.id);
+    console.log(valorInicial);
+    let valor = obtenerValor();
+    console.log(valor);
+
+
+    for(let i = 1; i <= valor; i++) {
+        casillaActual.removeChild(ficha1);
+        casillaObjetivo = casillas[estadoFicha1.posicion + 1];
+        casillaObjetivo.appendChild(ficha1);
+        casillaActual = casillaObjetivo;
+        estadoFicha1.posicion++;
+    }
+
+}
+
+function obtenerValor(){
+    let valorDado;
+    dado.forEach((cara)=>{
+        if(cara.style.zIndex === '2'){
+            valorDado = parseInt(cara.getAttribute('valor'));
+        }
+    });
+    return valorDado;
 }
 
