@@ -1851,10 +1851,47 @@ order by e.first_name;
 
 -- Muestra el empleado mejor pagado actualmente por año de nacimiento
 
-select e.first_name, e.last_name, date_format(e.birth_date, '%Y') as 'Año', max(s.salary)
+select e.first_name, e.last_name, date_format(e.birth_date, '%Y') as 'Año', s.salary
 from employees e
 join salaries s on e.emp_no = s.emp_no
-where s.to_date = '9999-01-01' and e.birth_date in (
-select date_format(e.birth_date, '%Y') as 'Fecha'
-from employees group by Fecha)
-group by Año;
+where s.to_date = '9999-01-01' and s.salary = (
+select max(s2.salary) from
+salaries s2
+join employees e2 on s2.emp_no = e2.emp_no
+where s2.salary = s.salary)
+order by Año asc;
+
+-- Ejercicio adicional consultas 03-04-2025
+
+-- Muestra la evolución de los títulos del actual jefe de marketing
+
+select e.first_name, e.last_name, t.title, d.dept_name
+from employees e
+join dept_emp de on e.emp_no = de.emp_no
+join departments d on de.dept_no = d.dept_no
+join dept_manager dem on e.emp_no = dem.emp_no
+join titles t on t.emp_no = e.emp_no
+where d.dept_name = 'Marketing' and dem.to_date = '9999-01-01';
+
+-- Muestra el título de cada jefe actual de departamento
+
+select e.first_name, e.last_name, t.title, d.dept_name
+from employees e
+join titles t on e.emp_no = t.emp_no
+join dept_manager dem on e.emp_no = dem.emp_no
+join departments d on dem.dept_no = d.dept_no
+where t.to_date = '9999-01-01' and dem.to_date = '9999-01-01';
+
+-- Muestra el salario de la mujer más joven de cada departamento
+
+select e.first_name, e.last_name,e.gender, e.birth_date, s.salary, d.dept_name
+from employees e
+join salaries s on e.emp_no = s.emp_no
+join dept_emp de on e.emp_no = de.emp_no
+join departments d on de.dept_no = d.dept_no
+where e.birth_date = (
+select max(e2.birth_date)
+from employees e2
+where e2.birth_date = e.birth_date)
+and de.to_date = '9999-01-01' and s.to_date = '9999-01-01' and e.gender = 'F'
+order by d.dept_name;
