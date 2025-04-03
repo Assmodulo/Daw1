@@ -6,9 +6,11 @@ use dawdata;
 drop user if exists developer@localhost;
 create user developer@localhost identified by '1234';
 
-grant all privileges on dawdata to developer@localhost;
+grant all privileges on dawdata.tipos to developer@localhost;
+grant all privileges on dawdata.productos to developer@localhost;
 
-grant select on dawdata to developer@localhost;
+grant select on dawdata.tipos to developer@localhost;
+grant select on dawdata.productos to developer@localhost;
 
 show grants for developer@localhost;
 
