@@ -1889,9 +1889,11 @@ from employees e
 join salaries s on e.emp_no = s.emp_no
 join dept_emp de on e.emp_no = de.emp_no
 join departments d on de.dept_no = d.dept_no
-where e.birth_date = (
+where s.to_date = '9999-01-01' and e.birth_date = (
 select max(e2.birth_date)
 from employees e2
-where e2.birth_date = e.birth_date)
-and de.to_date = '9999-01-01' and s.to_date = '9999-01-01' and e.gender = 'F'
+join dept_emp de2 on e2.emp_no = de2.emp_no
+join departments d2 on de2.dept_no = d2.dept_no
+where de.dept_no = de2.dept_no
+and de2.to_date = '9999-01-01' and e2.gender = 'F')
 order by d.dept_name;
