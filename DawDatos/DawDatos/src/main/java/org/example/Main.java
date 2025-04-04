@@ -5,8 +5,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,10 +19,16 @@ public class Main {
 
         DBManagement db = new DBManagement();
 
+        List<Producto> listado = new LinkedList<>();
+
         Scanner sc;
 
+        String dato;
+
         String opcion = "";
-        int opcionNumerica;
+        int opcionNumerica = -1, resultadoQuery = -1;
+
+        Tipo t = null;
 
         do{
 
@@ -33,7 +43,7 @@ public class Main {
 
                     System.out.println("Mostrar todos los productos en la base de datos");
 
-                    List<Producto> listado = db.obtenerTodosProductos();
+                    listado = db.obtenerTodosProductos();
 
                     for (Producto producto : listado) {
                         System.out.println(producto);
@@ -44,18 +54,90 @@ public class Main {
                 case "2":
 
                     System.out.println("Buscar producto por referencia");
+
+                    dato = solicitarReferencia();
+
+                    listado = db.buscarPorReferencia(dato);
+
+                    if (listado.isEmpty()) {
+                        System.out.println("No existe el referencia");
+                    }else{
+                        for (Producto producto : listado) {
+                            System.out.println(producto);
+                        }
+                    }
+
                     break;
                 case "3":
+
+                    System.out.println("Buscar productos por Tipo");
+
+                    opcionNumerica = seleccionarTipoProductos();
+
+                    listado = db.buscarPorIdTipo(opcionNumerica);
+
+                    if (listado.isEmpty()) {
+                        System.out.println("No existen datos que coincidan con el tipo solicitado");
+                    }else{
+                        for (Producto producto : listado) {
+                            System.out.println(producto);
+                        }
+                    }
+
                     break;
                 case "4":
+
+                    System.out.println("Buscar productos por la cantidad de los mismos");
+
+                    do{
+                        try {
+                            opcionNumerica = sc.nextInt();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Ingrese un numero mayor que cero" + e.getMessage());
+                        }
+                    }while(opcionNumerica < 0);
+
+                    System.out.println();
+
+                    listado = db.buscarPorCantidad(opcionNumerica);
+
+                    if (listado.isEmpty()) {
+                        System.out.println("No existe el referencia");
+                    }else{
+                        for (Producto producto : listado) {
+                            System.out.println(producto);
+                        }
+                    }
                     break;
                 case "5":
                     break;
                 case "6":
+
+                    System.out.println("Eliminar producto por referencia");
+
+                    dato = solicitarReferencia();
+
+                    listado = db.buscarPorReferencia(dato);
+
+                    if (listado.isEmpty()) {
+                        System.out.println("No existe el producto buscado con la referencia indicada. No hace falta eliminar");
+                    }else{
+                        resultadoQuery = db.eliminarPorReferencia(dato);
+                        if (resultadoQuery == -1) {
+                            System.out.println("No se ha podido eliminar el producto solicitado");
+                        }else{
+                            System.out.println("Se han eliminado " + resultadoQuery + " producto/s");
+                        }
+                    }
                     break;
                 case "7":
                     break;
                 case "8":
+
+                    System.out.println("Creación de un nuevo registro para la clase y tabla Tipo");
+
+                    t = creacionNuevoTipo();
+
                     break;
                 case "9":
                     break;
@@ -111,5 +193,50 @@ public class Main {
                    8. Insertar un nuevo tipo de producto.
                    9. Salir.
                 """;
+    }
+
+    public static String solicitarReferencia(){
+        String referencia = "";
+        Scanner teclado;
+
+        Pattern patron = Pattern.compile("[A-Z]{3}-[0-9]{5}");
+        Matcher m;
+
+        do{
+            teclado = new Scanner(System.in);
+            System.out.println("Ingrese la referencia a buscar con el siguiente formato" +
+                    "AAA-00000");
+            referencia = teclado.nextLine();
+
+            m = patron.matcher(referencia);
+
+        }while(!m.matches());
+
+        return referencia;
+    }
+
+    public static int seleccionarTipoProductos() {
+        int opcion = -1;
+        Scanner teclado;
+
+
+        for(int i = 0; i < Tipos.values().length; i++){
+            System.out.println( (i + 1) + " " + Tipos.values()[i]);
+        }
+
+        System.out.println();
+
+        do {
+            teclado = new Scanner(System.in);
+            System.out.println("Seleccione la categoria de tipo del producto");
+            try {
+                opcion = teclado.nextInt();
+                opcion--;
+            } catch (InputMismatchException e) {
+                System.out.println("Tipo de eleccion no valida" + e.getMessage());
+            }
+        } while (opcion < 0 || opcion > Tipos.values().length - 1);
+
+        return opcion;
     }
 }
