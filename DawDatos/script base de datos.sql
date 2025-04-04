@@ -6,13 +6,6 @@ use dawdata;
 drop user if exists developer@localhost;
 create user developer@localhost identified by '1234';
 
-grant all privileges on dawdata.tipos to developer@localhost;
-grant all privileges on dawdata.productos to developer@localhost;
-
-grant select on dawdata.tipos to developer@localhost;
-grant select on dawdata.productos to developer@localhost;
-
-show grants for developer@localhost;
 
 
 
@@ -66,3 +59,10 @@ insert into productos values
 (19,'FIG-61158','Lemon Dill Salmon','"Salmon fillets seasoned with lemon and dill, perfect for grilling."',6,18,9.99,15,21,true);
 
 
+grant all privileges on dawdata.tipos to developer@localhost;
+grant all privileges on dawdata.productos to developer@localhost;
+
+grant select on tipos to developer@localhost;
+grant select on productos to developer@localhost;
+
+show grants for developer@localhost;
