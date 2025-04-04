@@ -189,4 +189,61 @@ public class DBManagement {
 
         return rowsAffected;
     }
+
+    public int insertarNuevoProducto(Producto producto){
+        String MyStatement = "INSERT INTO productos (referencia, nombre, descripcion, id_tipo, cantidad," +
+                "precio, descuento, iva, aplicar_dto) VALUES(?,?,?,?,?,?,?,?,?)";
+
+        int rowsAffected = -1;
+
+        try(Connection con = SQLDBMan.getConnection();
+        PreparedStatement statement = con.prepareStatement(MyStatement)){
+
+            statement.setString(1, producto.getReferencia());
+            statement.setString(2, producto.getNombre());
+            statement.setString(3, producto.getDescripcion());
+            statement.setInt(4,producto.getIdTipo());
+            statement.setInt(5,producto.getCantidad());
+            statement.setDouble(6,producto.getPrecio());
+            statement.setInt(7,producto.getDescuento());
+            statement.setInt(8,producto.getIva());
+            statement.setBoolean(9,producto.isAplicarDescuento());
+
+            rowsAffected = statement.executeUpdate();
+
+        }catch (Exception e){
+            System.out.println("Error al insertar un producto de la BD " + e.getMessage());
+        }
+
+        return rowsAffected;
+    }
+
+    public int modificarRegistro(Producto producto){
+
+        String MyStatement = """
+                update productos set descripcion = ?
+                , cantidad = ?, precio = ?
+                , descuento = ?, aplicar_dto = ?
+                 where referencia = ?""";
+
+        int rowsAffected = -1;
+
+        try(Connection con = SQLDBMan.getConnection(); PreparedStatement statement = con.prepareStatement(MyStatement)){
+
+            statement.setString(1, producto.getDescripcion());
+            statement.setInt(2, producto.getCantidad());
+            statement.setDouble(3, producto.getPrecio());
+            statement.setInt(4, producto.getDescuento());
+            statement.setBoolean(5, producto.isAplicarDescuento());
+            statement.setString(6, producto.getReferencia());
+
+            rowsAffected = statement.executeUpdate();
+
+
+        }catch (Exception e){
+            System.out.println("Error al modificar un producto de la BD " + e.getMessage());
+        }
+
+        return rowsAffected;
+    }
 }

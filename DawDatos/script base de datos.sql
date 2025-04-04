@@ -6,6 +6,11 @@ use dawdata;
 drop user if exists developer@localhost;
 create user developer@localhost identified by '1234';
 
+grant all privileges on dawdata.productos to developer@localhost;
+
+grant all privileges on dawdata.tipos to developer@localhost;
+
+show grants for developer@localhost;
 
 
 
@@ -19,13 +24,13 @@ create table productos(
 	id smallint auto_increment not null,
     referencia char(9) not null,
     nombre varchar(50) not null,
-    descriptcion varchar(100) not null,
+    descripcion varchar(100) not null,
     id_tipo smallint not null,
     cantidad int not null,
     precio decimal(6,2) not null,
     descuento int not null,
     iva int not null,
-    aplicar_iva boolean not null,
+    aplicar_dto boolean not null,
     constraint id primary key (id)
 );
 
@@ -58,11 +63,4 @@ insert into productos values
 (18,'UPZ-22824','Ribbed Knit Dress','A fitted ribbed knit dress that hugs your curves perfectly.',3,12,59.99,12,7,true),
 (19,'FIG-61158','Lemon Dill Salmon','"Salmon fillets seasoned with lemon and dill, perfect for grilling."',6,18,9.99,15,21,true);
 
-
-grant all privileges on dawdata.tipos to developer@localhost;
-grant all privileges on dawdata.productos to developer@localhost;
-
-grant select on tipos to developer@localhost;
-grant select on productos to developer@localhost;
-
-show grants for developer@localhost;
+select * from productos;

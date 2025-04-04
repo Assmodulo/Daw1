@@ -32,6 +32,20 @@ public class Producto implements Serializable {
         this.aplicarDescuento = aplicarDescuento;
     }
 
+    //Constructor sin la id, para luego insertarlo en la base de datos
+    public Producto( String referencia, String nombre, String descripcion, int idTipo, int cantidad,
+                     double precio, int descuento, int iva, boolean aplicarDescuento){
+        this.referencia = referencia;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.idTipo = idTipo;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.descuento = descuento;
+        this.iva = iva;
+        this.aplicarDescuento = aplicarDescuento;
+    }
+
 
     //Defino los setters que creo que podrían llegar a ser necesarios
 

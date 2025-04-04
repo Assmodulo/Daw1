@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class Main {
         int opcionNumerica = -1, resultadoQuery = -1;
 
         Tipo t = null;
+
+        Producto p = null;
 
         do{
 
@@ -110,6 +113,14 @@ public class Main {
                     }
                     break;
                 case "5":
+
+                    System.out.println("Insertar un nuevo producto");
+
+                    if(insertarNuevoProducto()){
+                        System.out.println("Nuevo producto insertado en la tabla");
+                    }else{
+                        System.out.println("No se ha podido insertar ningún producto nuevo");
+                    }
                     break;
                 case "6":
 
@@ -131,12 +142,40 @@ public class Main {
                     }
                     break;
                 case "7":
+
+                    System.out.println("Actualizar datos de un producto: " +
+                            "Descripción, Cantidad, Precio, Descuento, Aplicar Descuento");
+
+                    listado = db.obtenerTodosProductos();
+
+                    for (Producto producto : listado) {
+                        System.out.println(producto.getReferencia() + " " +producto.getNombre());
+                    }
+
+                    System.out.println();
+                    dato = solicitarReferencia();
+
+                    listado.clear();
+
+                    listado = db.buscarPorReferencia(dato);
+                    if (listado.isEmpty()) {
+                        System.out.println("No existe el referencia");
+                    }else{
+                        for (Producto producto : listado) {
+                            p = producto;
+                            if(modificarDatosProducto(p) > 0){
+                                System.out.println("Producto modificado correctamente");
+                            }else{
+                                System.out.println("No se ha podido modificar el producto de forma correcta");
+                            }
+                        }
+                    }
                     break;
                 case "8":
 
                     System.out.println("Creación de un nuevo registro para la clase y tabla Tipo");
 
-                    t = creacionNuevoTipo();
+                    //t = creacionNuevoTipo();
 
                     break;
                 case "9":
@@ -238,5 +277,257 @@ public class Main {
         } while (opcion < 0 || opcion > Tipos.values().length - 1);
 
         return opcion;
+    }
+
+    public static boolean insertarNuevoProducto(){
+
+        String referencia, nombre, descripcion;
+        int idTipo, cantidad, descuento, iva, filasAfectadas = -1;
+        double precio;
+        boolean insertadoCorrecto = false, aplicarIva = false;
+
+        List<Producto> listado = new LinkedList<>();
+
+        DBManagement db = new DBManagement();
+
+        Producto p = null;
+
+        System.out.println("Introduzca los datos según se le van solicitando");
+
+        referencia = solicitarReferencia();
+
+        listado = db.buscarPorReferencia(referencia);
+
+        if(listado.isEmpty()){
+            nombre = solicitarNombre();
+            descripcion = solicitarDescripcion();
+            idTipo = seleccionarTipoProductos();
+            cantidad = solicitarCantidad();
+            precio = solicitarPrecio();
+            descuento = solicitarDescuento();
+            iva = solicitarIva();
+
+            p = new Producto(referencia, nombre, descripcion, idTipo, cantidad, precio, descuento, iva, aplicarIva);
+
+            filasAfectadas = db.insertarNuevoProducto(p);
+        }else{
+            System.out.println("La referencia ya existe. No se puede insertar un nuevo producto con esa referencia");
+        }
+
+        if(filasAfectadas > 0){
+            insertadoCorrecto = true;
+        }
+
+        return insertadoCorrecto;
+    }
+
+    public static String solicitarNombre(){
+        Scanner teclado;
+
+        Pattern patron = Pattern.compile("[A-Z a-z0-9]{10,49}");
+        Matcher m;
+        String nombre = "";
+
+        do{
+
+            System.out.println("Inserte el nombre con un mínimo de 10 y un máximo de 50 caracteres");
+
+            teclado = new Scanner(System.in);
+
+            nombre = teclado.nextLine();
+
+            m = patron.matcher(nombre);
+
+        }while(!m.matches());
+
+        return nombre;
+    }
+
+    public static String solicitarDescripcion(){
+        Scanner teclado;
+        String descripcion = "";
+
+        Pattern patron = Pattern.compile("[A-Z][A-z a-z-/.0-9]{10,99}");
+        Matcher m;
+
+        do{
+            System.out.println("Introduzca la descripción del producto con un máximo de 100 caracteres");
+
+            teclado = new Scanner(System.in);
+
+            descripcion = teclado.nextLine();
+
+            m = patron.matcher(descripcion);
+
+        }while(!m.matches());
+
+        return descripcion;
+    }
+
+    public static int solicitarCantidad(){
+        Scanner teclado;
+        int cantidad = 0;
+
+        do{
+            System.out.println("Introduzca la cantidad del producto. Debe de ser mayor que cero");
+            teclado = new Scanner(System.in);
+
+            try{
+                cantidad = teclado.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("Formato de la cantidad no válido." + e.getMessage());
+            }
+
+        }while(cantidad <= 0);
+        return cantidad;
+    }
+
+    public static double solicitarPrecio(){
+        Scanner teclado;
+        double precio = 0;
+
+        DecimalFormat df = new DecimalFormat("####,##");
+
+        do{
+
+            System.out.println("Inserte el valor de precio unitario con el siguiente formato: ####,##");
+
+            teclado = new Scanner(System.in);
+
+            try {
+                precio = teclado.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("Error en el formato del precio introducico " + e.getMessage());
+            }
+        }while(precio <= 0);
+
+        String precioFinal = df.format(precio);
+
+        precio = Double.parseDouble(precioFinal);
+
+        return precio;
+    }
+
+    public static int solicitarDescuento(){
+        int descuento = -1;
+        Scanner teclado;
+
+        do{
+
+            System.out.println("Inserte el valor del descuento. Como no nos gusta rebajar debe de estar comprendido" +
+                    "entre 0 y 40% (y ya estamos perdiendo dinero)");
+
+            teclado = new Scanner(System.in);
+
+            try{
+                descuento = teclado.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("Opción para una cantidad incorrecta " + e.getMessage());
+            }
+
+        }while (descuento <0 || descuento > 40);
+
+        return descuento;
+    }
+
+    public static int solicitarIva(){
+        int iva = 0;
+        String opcion;
+        Scanner teclado;
+
+        do{
+
+            System.out.println("Elija el iva correspondiente a su producto");
+
+            System.out.println("""
+                        1. 7%
+                        2. 11%
+                        3. 21%
+                        """);
+
+            teclado = new Scanner(System.in);
+
+            opcion = teclado.nextLine();
+
+            switch(opcion){
+
+                case "1":
+                    iva = 7;
+                    break;
+                case "2":
+                    iva = 11;
+                    break;
+                case "3":
+                    iva = 21;
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta");
+                    break;
+            }
+
+        }while(!opcion.equals("1") && !opcion.equals("2") && !opcion.equals("3"));
+
+        return iva;
+    }
+
+    public static int modificarDatosProducto(Producto producto){
+        int rowsAfected = -1;
+
+        DBManagement db = new DBManagement();
+
+        String descripcion;
+        int cantidad, descuento;
+        double precio;
+        boolean aplicarDto;
+
+        descripcion = solicitarDescripcion();
+
+        cantidad = solicitarCantidad();
+
+        descuento = solicitarDescuento();
+
+        precio = solicitarPrecio();
+
+        aplicarDto = activarDto(producto);
+
+        producto.setDescripcion(descripcion);
+        producto.setCantidad(cantidad);
+        producto.setDescuento(descuento);
+        producto.setPrecio(precio);
+        producto.setAplicarDescuento(aplicarDto);
+
+
+        rowsAfected = db.modificarRegistro(producto);
+
+
+        return rowsAfected;
+    }
+
+    public static boolean activarDto(Producto producto){
+        Scanner teclado;
+        String opcion;
+        boolean aplicarDto = producto.isAplicarDescuento();
+
+        do{
+
+            System.out.println("El estado de aplicar el descuento de su producto es: " + aplicarDto);
+            System.out.println("""
+                    Indique si quiere cambiar esto?
+                    1. Aplicar Descuento
+                    2. No Aplicar Descuento
+                    """);
+
+            teclado = new Scanner(System.in);
+
+            opcion = teclado.nextLine();
+
+            if(opcion.equals("1")){
+                aplicarDto = true;
+            }else if(opcion.equals("2")){
+                aplicarDto = false;
+            }
+        }while(!opcion.equals("1") && !opcion.equals("2"));
+
+        return aplicarDto;
     }
 }
