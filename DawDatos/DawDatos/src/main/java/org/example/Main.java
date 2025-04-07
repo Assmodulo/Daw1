@@ -175,10 +175,16 @@ public class Main {
 
                     System.out.println("Creación de un nuevo registro para la clase y tabla Tipo");
 
-                    //t = creacionNuevoTipo();
+                    if(creacionNuevoTipo() > 0){
+                        System.out.println("Nuevo tipo insertado en la base de datos");
+                    }else{
+                        System.out.println("No se ha podido insertar un nuevo tipo en la bd. Bien por fallo, bien por" +
+                                " duplicidad del tipo");
+                    }
 
                     break;
                 case "9":
+                    System.out.println("Saliendo de la base de datos");
                     break;
                 default:
                     break;
@@ -258,23 +264,30 @@ public class Main {
         int opcion = -1;
         Scanner teclado;
 
+        DBManagement db = new DBManagement();
 
-        for(int i = 0; i < Tipos.values().length; i++){
-            System.out.println( (i + 1) + " " + Tipos.values()[i]);
-        }
+        List<Tipo> tipos = db.obtenerTipos();
+
+
+
 
         System.out.println();
 
         do {
             teclado = new Scanner(System.in);
             System.out.println("Seleccione la categoria de tipo del producto");
+
+            for(Tipo tipo : tipos){
+                System.out.println(tipo);
+            }
+
             try {
                 opcion = teclado.nextInt();
-                opcion--;
+
             } catch (InputMismatchException e) {
                 System.out.println("Tipo de eleccion no valida" + e.getMessage());
             }
-        } while (opcion < 0 || opcion > Tipos.values().length - 1);
+        } while (opcion < 1 || opcion > tipos.size());
 
         return opcion;
     }
@@ -529,5 +542,35 @@ public class Main {
         }while(!opcion.equals("1") && !opcion.equals("2"));
 
         return aplicarDto;
+    }
+
+    public static int creacionNuevoTipo(){
+        DBManagement db = new DBManagement();
+
+        List<Tipo> tipos = db.obtenerTipos();
+
+        boolean encontrado = false;
+
+        String nuevoTipo;
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("Ingrese el nuevo tipo");
+
+        nuevoTipo = teclado.nextLine();
+
+        for(Tipo tipo : tipos){
+            if(tipo.getTipo().equals(nuevoTipo.toUpperCase())){
+                encontrado = true;
+            }
+        }
+
+        int insertado = -1;
+
+        if(!encontrado){
+            insertado = db.creacionNuevoTipo(nuevoTipo);
+        }
+
+        return insertado;
     }
 }

@@ -1,6 +1,7 @@
 package org.example;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -172,15 +173,15 @@ public class DBManagement {
 
     public int crearNuevoTipoProducto(Tipo tipo){
 
-        String MyStatement = "INSERT INTO tipos VALUES(?,?)";
+        String MyStatement = "INSERT INTO tipos VALUES(?)";
 
         int rowsAffected = -1;
 
         try(Connection con = SQLDBMan.getConnection();
         PreparedStatement statement = con.prepareStatement(MyStatement)){
 
-            statement.setInt(1, tipo.getTip0Id());
-            statement.setString(2,tipo.getTipo().toString());
+
+            statement.setString(1,tipo.getTipo().toString());
             rowsAffected = statement.executeUpdate();
 
         }catch (Exception e){
@@ -242,6 +243,57 @@ public class DBManagement {
 
         }catch (Exception e){
             System.out.println("Error al modificar un producto de la BD " + e.getMessage());
+        }
+
+        return rowsAffected;
+    }
+
+    public List<Tipo> obtenerTipos(){
+        String MyStatement = """
+                select * from tipos
+                """;
+
+        List<Tipo> tipos = new LinkedList<>();
+
+        try(Connection con = SQLDBMan.getConnection();
+        PreparedStatement statement = con.prepareStatement(MyStatement)){
+
+            ResultSet rs = statement.executeQuery(MyStatement);
+
+            while(rs.next()){
+
+                int id = rs.getInt(1);
+                String tipo = rs.getString(2);
+
+                Tipo t = new Tipo(id, tipo);
+
+                tipos.add(t);
+
+            }
+
+
+        }catch (Exception e){
+            System.out.println("Error al obtener los datos de la BD " + e.getMessage());
+        }
+
+        return tipos;
+    }
+
+    public int creacionNuevoTipo(String tipo){
+        String MyStatement = """
+                insert into tipos (tipo) values (?)
+                """;
+
+        int rowsAffected = -1;
+
+        try(Connection con = SQLDBMan.getConnection();
+            PreparedStatement statement = con.prepareStatement(MyStatement)){
+
+            statement.setString(1, tipo);
+            rowsAffected = statement.executeUpdate();
+
+        }catch (Exception e){
+                System.out.println("Error al crear un tipo de la BD " + e.getMessage());
         }
 
         return rowsAffected;
