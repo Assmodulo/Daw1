@@ -48,10 +48,15 @@ public class Main {
 
                     listado = db.obtenerTodosProductos();
 
-                    for (Producto producto : listado) {
-                        System.out.println(producto);
-                    }
+                    if(listado.isEmpty()){
+                        System.out.println("No hay productos en la base de datos");
+                    }else{
 
+                        for (Producto producto : listado) {
+                            System.out.println(producto);
+                        }
+
+                    }
 
                     break;
                 case "2":
@@ -360,7 +365,7 @@ public class Main {
         Scanner teclado;
         String descripcion = "";
 
-        Pattern patron = Pattern.compile("[A-Z][A-z a-z-/.0-9]{10,99}");
+        Pattern patron = Pattern.compile("[A-z a-z0-9]{10,99}");
         Matcher m;
 
         do{
@@ -399,24 +404,20 @@ public class Main {
         Scanner teclado;
         double precio = 0;
 
-        DecimalFormat df = new DecimalFormat("####,##");
 
         do{
 
-            System.out.println("Inserte el valor de precio unitario con el siguiente formato: ####,##");
+            System.out.println("Inserte el valor de precio unitario con el siguiente formato: #,###.##");
 
             teclado = new Scanner(System.in);
 
             try {
                 precio = teclado.nextDouble();
             } catch (InputMismatchException e) {
-                System.out.println("Error en el formato del precio introducico " + e.getMessage());
+                System.out.println("Error en el formato del precio introducido " + e.getMessage());
             }
         }while(precio <= 0);
 
-        String precioFinal = df.format(precio);
-
-        precio = Double.parseDouble(precioFinal);
 
         return precio;
     }

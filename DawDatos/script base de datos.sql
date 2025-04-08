@@ -16,7 +16,7 @@ show grants for developer@localhost;
 
 create table tipos(
 	id smallint auto_increment not null,
-    tipo enum ('EN_PREPARACION', 'PREPARADO', 'ENVIADO', 'EN_REPARTO', 'CANCELADO', 'DESCATALOGADO'),
+    tipo varchar(25),
     constraint id primary key(id)
 );
 
@@ -35,12 +35,12 @@ create table productos(
 );
 
 insert into tipos values
-(1,'EN_PREPARACION'),
-(2,'PREPARADO'),
-(3,'ENVIADO'),
-(4,'EN_REPARTO'),
-(5,'CANCELADO'),
-(6,'DESCATALOGADO');
+(1,'HOGAR'),
+(2,'OFICINA'),
+(3,'JARDIN'),
+(4,'ELECTRONICA'),
+(5,'VIDEOJUEGOS'),
+(6,'COLECCIONISMO');
 
 insert into productos values
 (1,'EQG-43584','WallArt','Abstract canvas print to enhance home decor.',4,24,45,19,11,false),
