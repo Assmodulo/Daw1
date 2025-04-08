@@ -1,3 +1,140 @@
+
+/*El body va a ser simplemente negro para que lo demás sobresalga*/
+body{
+    background-color: black;
+}
+
+/*Indico que todos los p quiero que su display sea inline-block, para que no me desplacen todo y pueda darles un valor de
+ancho*/
+p{
+    display: inline-block;
+    width: 8%;
+    color:white;
+    border:none;
+
+}
+
+
+.jugador1{
+    text-align: center;
+    position:absolute;
+    top:15%;
+    background-color:black;
+    border-radius: 15px;
+}
+
+.jugador1::after, .jugador1::before{
+    content: '';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%,-50%);
+    z-index: -2;
+    background:linear-gradient(90deg, black,darkgoldenrod, white,darkgoldenrod,black);
+    background-size:350%;
+    padding: 5px;
+    border-radius: 15px;
+    animation: neonBoton 5s ease infinite;
+}
+
+.jugador1::before{
+    filter:blur(40px);
+}
+
+.jugador2{
+    text-align: center;
+    position:absolute;
+    top:65%;
+    background-color:black;
+    border-radius: 15px;
+}
+
+.jugador2::after, .jugador2::before{
+    content: '';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%,-50%);
+    z-index: -2;
+    background:linear-gradient(90deg, black,darkblue,darkviolet,violet,white,violet,darkviolet,darkblue,black);
+    background-size:350%;
+    padding: 5px;
+    border-radius: 15px;
+    animation: neonBoton 5s ease infinite;
+}
+
+.jugador2::before{
+    filter:blur(40px);
+}
+
+.jugador_activo{
+    text-align: center;
+    position:absolute;
+    top:85%;
+    background-color:black;
+    border-radius: 15px;
+}
+
+.jugador_activo::after, .jugador_activo::before{
+    content: '';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%,-50%);
+    z-index: -2;
+    background:linear-gradient(90deg, black,darkblue,darkviolet,violet,white,violet,darkviolet,darkblue,black);
+    background-size:350%;
+    padding: 5px;
+    border-radius: 15px;
+    animation: neonBoton 5s ease infinite;
+}
+
+.jugador_activo::before{
+    filter:blur(40px);
+}
+
+.ganador{
+    text-align: center;
+    position:absolute;
+    top:75%;
+    background-color:black;
+    border-radius: 15px;
+}
+
+.ganador::after, .ganador::before{
+    content: '';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%,-50%);
+    z-index: -2;
+    background:linear-gradient(90deg, black,darkblue,darkviolet,violet,white,violet,darkviolet,darkblue,black);
+    background-size:350%;
+    padding: 5px;
+    border-radius: 15px;
+    animation: neonBoton 5s ease infinite;
+}
+
+.ganador::before{
+    filter:blur(40px);
+}
+
+
+
+
+/*Lo primero que comencé a hacer fue jugar con las caras del dado. Es lo primero que hice antes de todo lo demás, y hasta
+que no funcionó más o menos como yo queria no empecé a hacer ninguna otra cosa
+Cada cara es display grid, para luego poder colocar los puntos del dado como deberían de ser.
+Doy a todas las caras una posición absoluta para que queden todas apiladas, mas adelante juego con z-index, que me va a
+servir para determinar la cara visible y la que marca el valor de la tirada*/
 .dado{
     background-color:white;
     border: 2px solid red;
@@ -14,6 +151,55 @@
     box-sizing:border-box;
 }
 
+/*Toca jugar con el estilo del botón*/
+
+#boton_accion{
+    position:absolute;
+    top:30%;
+    width: 8%;
+    height: 45px;
+    background-color:black;
+    color:white;
+    border-radius:15px;
+    border:none;
+}
+
+/*Llevaba tiempo que habia descubierto esto y quería jugar con ello, así que probé, para darle una especie de efecto neón
+al borde del botón.*/
+#boton_accion::after, #boton_accion::before{
+    content: '';
+    position:absolute;
+    top:50%;
+    left:50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+    background:linear-gradient(90deg, black,darkred, red, white, red, darkred,black);
+    background-size:350%;
+    padding: 5px;
+    border-radius: 15px;
+    animation: neonBoton 5s ease infinite;
+}
+
+#boton_accion::before{
+    filter:blur(40px);
+}
+
+@keyframes neonBoton{
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0 50%;
+    }
+}
+
+
+/*Lo que hago aquí es definir las dimensiones de los puntos del dado*/
 .dado div{
     width: 40px;
     height: 40px;
@@ -21,6 +207,8 @@
     background-color:black;
 }
 
+/*Aquí lo que vamos haciendo es indicar la posición del z-index de cada cara, en este caso la cara del 1 la más alta
+para que de inicio se la primera visible*/
 #cara1{
     z-index: 2;
 }
@@ -44,6 +232,9 @@
     z-index: 1;
 }
 
+/*No estoy seguro de si habría una forma más corta de hacerlo, aunque ahora que hago los comentarios me imagino que
+si a los puntos que van a ocupar una misma posición, porque alguno hay, podría haberme ahorrado algunas cuantas lineas
+pero después de hecho, casi prefiero no tocar nada*/
 #punto1{
     grid-column-start: 3;
     grid-row-start: 3;
@@ -143,17 +334,21 @@
     grid-row-start: 5;
 }
 
+/*Defino ligeramente el estilo del tablero, lo mas importante es definir el grid y sus dimensiones. Quizá un pequeño gap
+quede mejor para las celdas, pero hace que no entre todo bien en la pantalla, así que prefiero que se vea todo sin tener
+que hacer scroll*/
 .tablero{
-    background-color:white;
+    background-color:black;
     height: 90vh;
     width: 85%;
     margin-left:215px;
     display:grid;
     grid-template-columns:repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    animation: colorDeFondo 6s infinite;
 }
 
+/*Defino las dimensiones de las casillas. También las marque como display grid para colocar las fichas en caso de que me
+diese por hacerlo, en principio no lo hice, en el script explico por que*/
 .casilla{
     background-color:white;
     width: 100%;
@@ -167,15 +362,8 @@
     gap:0;
 }
 
-
-
-.casilla p{
-    color:black;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    text-align: center;
-}
-
+/*Toca jugar con el estilo genérico de las dos fichas, luego según la id a cada una le doy un color diferente para que
+se vea más claro en pantalla*/
 .ficha{
     height:50px;
     width:50px;
@@ -193,6 +381,10 @@
     background-color: blue;
 }
 
+/*Estas clases que defino aquí es para marcar el color de fondo de las casillas cada vez que una ficha pasa por encima de
+ellas. FF1 si la ficha de jugador 1 ha pasado por encima. FF2 para el jugador. FFAmbas, si ambas han pasado por encima*/
+/*Para que no sea todo tan monotono, que lo mio nunca es el diseño por ahora, les doy una animación. Que el background size
+                   sea tan grande es para que se vea movimiento en esa animación*/
 .FF1{
     background:linear-gradient(45deg, red, mediumvioletred, black);
     background-size: 400% 400%;
@@ -211,6 +403,8 @@
     animation: colorDeFondo 5s ease infinite;
 }
 
+/*Aquí la animación en cuestión. Lo que hace es varia la posición del background de las casillas, así parece que hay un movimiento dentro de
+las mismas casillas*/
 @keyframes colorDeFondo {
     0%{
         background-position: 0 50%;

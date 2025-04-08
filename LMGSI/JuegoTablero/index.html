@@ -7,8 +7,20 @@
             <link rel ="stylesheet" href="style.css">
     </head>
 
+
     <body>
+
+    <!--Lo primero, he tenido que definir un botón que me permita realizar cada turno de jugador-->
         <button id="boton_accion">Lanza el Dado</button>
+
+    <!--Aquí voy a crear varios parrafos para indicar de quien es el turno activo y quien es el ganador-->
+    <p class="jugador1">JUGADOR 1</p>
+    <p class="jugador2">JUGADOR 2</p>
+    <p class="jugador_activo">ACTIVO</p>
+    <p class="ganador">GANADOR</p>
+
+    <!--A partir de aquí, lo que hago es definir un div que corresponde a cada cara del dado, dentro de ese div
+    aunque me parecen ya demasiados, voy definiendo otros tantos divs para simular los puntos de los dados-->
         <div class="dado" id="cara1">
             <div class="punto" id="punto1"></div>
         </div>
@@ -43,7 +55,12 @@
             <div class="punto" id="punto21"></div>
         </div>
 
+        <!--Otro div más, es todo lo que lleva la página, este será para almacenar las casillas, por lo que le he asignado
+        la clase tablero. Será un grid, dentro del cual cada area se corresponde con una casilla-->
         <div class="tablero">
+            <!--A cada casilla le doy la clase casilla, para trabajar en css, y luego una id, para marcar
+            el orden dentro del tablero. De primeras habia definido un p con el texto del número, pero luego era
+            bastante incómodo, así que los eliminé-->
             <div class="casilla" id="1">
 
             </div>
@@ -105,8 +122,12 @@
 
             </div>
         </div>
+
+    <!--Como me es indiferente donde estén definidos, creo dos divs para las fichas, con la clase ficha cada uno de ellos
+    pero con una id diferente, para luego diferenciarlos en javascript-->
         <div class="ficha" id="jugador1"></div>
         <div class="ficha" id="jugador2"></div>
+    <!--Por último indico el script que se va a ejecutar-->
     <script src="script.js"></script>
     </body>
 </html>
