@@ -1909,7 +1909,7 @@ begin
 	if timestampdiff(year, new.birth_date, current_date()) < 16
     then signal sqlstate '50001' set message_text = 'Vuelve al colegio pollo, que estás muy verde';
     end if;
-end $$
+end$$
 
 insert into employees values (55555,'2018-01-01','Juan', 'Lopez','M','2020-01-01');
 
@@ -1924,6 +1924,37 @@ begin
 	if new.first_name not in ('Lucia','Martin')
     then signal sqlstate '50001' set message_text = 'Tu nombre no está a la moda. Vete al registro a cambiarlo';
     end if;
-end $$
+end$$
 
 insert into employees values (55556,'2000-01-01','Juan','Lopez','M','2020-01-01');
+
+-- Elegir una de las tablas que controlan el tiempo y controlar que la fecha de fin no sea menor que la fecha de inicio
+
+delimiter $$
+drop trigger if exists fechas;
+create trigger fechas
+before insert on salaries
+for each row
+begin
+	if new.to_date < new.from_date
+		then signal sqlstate '50001' set message_text = 'La fecha de hasta de un salario no puede ser menor a la fecha desde';
+	end if;
+end$$
+
+insert into salaries values (55556, 21000, '2024-01-01', '2023-01-01');
+
+-- Comprobar que los empleados a los que se nombra jefes de departamento tengan una antigüedad mínima de 10 años
+
+use empresa;
+
+delimiter $$
+drop trigger if exists antiguedadJefes;
+create trigger antiguedadJuefes
+before insert on dept_manager
+for each row
+begin
+	if timestampdiff(year,
+		select e.hire_date from empolyees e where new.emp_no = e.emp_no), current_date()) < 10
+        then signal sqlstate '50001' set message_text = 'El trabajador debe de tener una antiguedad minima de 10 años para ser nombrado jefe de departamento';
+	end if;
+end$$
