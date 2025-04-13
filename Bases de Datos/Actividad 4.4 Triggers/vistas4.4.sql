@@ -1,10 +1,18 @@
 DROP DATABASE IF EXISTS empresa;
 CREATE DATABASE IF NOT EXISTS empresa;
+
+USE empresa;
+
 drop user if exists alejandro@localhost;
 drop user if exists deptrrhh@localhost;
 drop user if exists deptconta@localhost;
 drop role if exists administracion;
-USE empresa;
+drop trigger if exists cambioDeNombre;
+drop table if exists cambioDeLook;
+drop table if exists finDeGuardia;
+drop table if exists millonetis;
+drop table if exists antiguedadJefes;
+drop trigger if exists chaval;
 
 
 
@@ -1901,6 +1909,8 @@ grant select on evolucionSalarioTrabajadores to administracion;
 
 -- Crear un trigger que si intentamos insertar un trabajador menor de 16 nos devuelva un mensaje
 
+
+
 delimiter $$
 create trigger chaval
 before insert on employees
@@ -1916,7 +1926,6 @@ insert into employees values (55555,'2018-01-01','Juan', 'Lopez','M','2020-01-01
 -- Crear un trigger que nos devuelva un mensaje si el nombre de un trabajador nuevo no es Lucia o Martin
 
 delimiter $$
-drop trigger if exists nombre_moda;
 create trigger nombre_moda
 before insert on employees
 for each row
@@ -1931,7 +1940,6 @@ insert into employees values (55556,'2000-01-01','Juan','Lopez','M','2020-01-01'
 -- Elegir una de las tablas que controlan el tiempo y controlar que la fecha de fin no sea menor que la fecha de inicio
 
 delimiter $$
-drop trigger if exists fechas;
 create trigger fechas
 before insert on salaries
 for each row
@@ -1945,16 +1953,133 @@ insert into salaries values (55556, 21000, '2024-01-01', '2023-01-01');
 
 -- Comprobar que los empleados a los que se nombra jefes de departamento tengan una antigüedad mínima de 10 años
 
-use empresa;
+
+
+
 
 delimiter $$
-drop trigger if exists antiguedadJefes;
-create trigger antiguedadJuefes
+create trigger antiguedadJefes
 before insert on dept_manager
 for each row
 begin
-	if timestampdiff(year,
-		select e.hire_date from empolyees e where new.emp_no = e.emp_no), current_date()) < 10
-        then signal sqlstate '50001' set message_text = 'El trabajador debe de tener una antiguedad minima de 10 años para ser nombrado jefe de departamento';
+	declare t int;
+    select timestampdiff(year, e.hire_date, current_date()) into t
+    from employees e 
+    where e.emp_no = new.emp_no;
+    
+    if t < 10 then
+		signal sqlstate '50001' set message_text = 'Para ser jefe de departamento la antiguedad mínima son 10 años';
 	end if;
 end$$
+
+insert into employees values (55550, '2000-01-01', 'Martin', 'Gonzales', 'M', '2018-01-01');
+insert into dept_manager values (55550, 'd001', '2020-01-01','9999-01-01');
+
+
+
+create table millonetis(
+	emp_no int,
+    nombre varchar(50),
+    apellidos varchar(50),
+    f_nacimiento date,
+    genero enum('M','F'),
+    f_contratacion date,
+    salario int,
+    primary key (emp_no, salario),
+    foreign key (emp_no) references employees(emp_no)
+);
+
+delimiter $$
+create trigger mejorPagados
+after insert on salaries
+for each row
+begin
+	declare id, sueldo int;
+    declare nombre, apellido varchar(50);
+    declare f_nac, f_cont date;
+    declare gen char(1);
+    
+    select e.emp_no, e.birth_date, e.first_name, e.last_name, e.gender, e.hire_date
+    into id, f_nac, nombre, apellido, gen, f_cont
+    from employees e where e.emp_no = new.emp_no;
+    
+    if new.salary >= 100000 then
+		insert into millonetis values(id, nombre, apellido, f_nac,gen, f_cont, new.salary);
+	end if;
+end$$
+
+insert into employees values (60000, '1988-01-01','Lucia','Perez','F','2010-01-01');
+insert into salaries values (60000, 150000, '2010-01-01','9999-01-01');
+
+select * from millonetis;
+
+
+
+create table finDeGuardia(
+	emp_no int,
+    nombre varchar(50),
+    apellido varchar(50),
+    departamento varchar(50),
+    f_fin date,
+    primary key (emp_no, f_fin),
+    foreign key (emp_no) references employees (emp_no)
+);
+
+delimiter //
+create trigger finalDelDeber
+before update on dept_manager
+for each row
+begin
+
+	declare id int;
+    declare nombre, apellido, departamento varchar(50);
+    
+    select e.emp_no, e.first_name, e.last_name, d.dept_name
+    into id, nombre, apellido, departamento
+    from employees e 
+    join dept_manager dem on e.emp_no = dem.emp_no
+    join dept_emp de on e.emp_no = de.emp_no
+    join departments d on de.dept_no = d.dept_no
+    where e.emp_no = old.emp_no;
+    
+	if new.to_date < '9999-01-01' then
+		insert into finDeGuardia values (id, nombre, apellido, departamento, new.to_date);
+	end if;
+end//
+
+select * from dept_manager;
+
+update dept_manager set to_date = '2025-04-11' where emp_no = 10003;
+
+select * from dept_manager;
+
+select * from finDeGuardia;
+
+
+
+create table cambioDeLook(
+	dept_no char(4),
+    dept_name_viejo varchar(40),
+    dept_name_nuevo varchar(40),
+    f_cambio date,
+    primary key (dept_no, dept_name_nuevo, f_cambio),
+    foreign key (dept_no) references departments (dept_no)
+);
+
+
+
+delimiter //
+create trigger cambioDeNombre
+after update on departments
+for each row
+begin
+	insert into cambioDeLook values (old.dept_no, old.dept_name, new.dept_name, current_date());
+end//
+
+select * from departments;
+
+update departments set dept_name = 'Servicio de Quejas' where dept_no = 'd009';
+
+select * from cambioDeLook;
+
+show tables;
