@@ -17,3 +17,91 @@ https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/
 https://medium.com/@onurcem.isik/introduction-to-mvvm-architecture-5c5558c3679
 
 https://codigofacilito.com/articulos/mvc-model-view-controller-explicado
+
+
+1. ¿Qué es MVC?
+
+El Modelo-Vista-Controlador (MVC) es un patrón de diseño arquitectónico que separa una aplicación en tres componentes principales:?
+
+    Modelo: Representa la lógica de negocio y los datos de la aplicación. Se encarga de acceder a la base de datos y procesar la información.?
+
+    Vista: Es la interfaz de usuario. Muestra los datos proporcionados por el modelo y envía las acciones del usuario al controlador.?
+
+    Controlador: Actúa como intermediario entre el modelo y la vista. Procesa las entradas del usuario, actualiza el modelo y refresca la vista.?
+
+Características:
+
+    Fomenta la separación de responsabilidades, facilitando el mantenimiento y escalabilidad de la aplicación.?
+
+    Permite que diferentes desarrolladores trabajen en el modelo, la vista y el controlador de manera independiente.?
+
+Ventajas:
+
+    Mantenimiento: Al estar separados los componentes, es más sencillo realizar cambios sin afectar otras partes del sistema.?
+
+    Escalabilidad: Facilita la incorporación de nuevas funcionalidades sin complicaciones.?
+
+Desventajas:
+
+    Complejidad Inicial: Requiere una planificación detallada y puede ser más complejo de implementar al principio.?
+
+La Vista suele contener más código porque recibe directamente datos del modelo (a veces a través del controlador) y también puede incluir algo de lógica de presentación.
+
+No está 100% desacoplada del controlador ni del modelo. Puede tener funciones o condiciones para mostrar ciertos elementos, por ejemplo: if (user.isLoggedIn) { ... }.
+
+Por eso, en muchos casos la vista en MVC mezcla HTML/JS o UI con lógica condicional, y eso puede dificultar su mantenimiento si se vuelve muy compleja.
+
+Ejemplos de lenguajes o frameworks
+
+Ruby on Rails, ASP.NET MVC, Django.
+
+
+2. ¿Qué es MVVM?
+
+El Modelo-Vista-Modelo de Vista (MVVM) es otro patrón de diseño que busca separar la lógica de presentación de la interfaz de usuario. Se compone de:?
+
+    Modelo: Al igual que en MVC, representa los datos y la lógica de negocio.?
+
+    Vista: Es la interfaz de usuario que muestra los datos.?
+
+    VistaModelo: Es una abstracción de la vista que expone datos y comandos que la vista puede enlazar. Facilita la comunicación entre la vista y el modelo.?
+
+Características:
+
+    Utiliza el enlace de datos (data binding) para sincronizar automáticamente la vista con el modelo.?
+
+    Permite que diseñadores y desarrolladores trabajen de manera más independiente, ya que la lógica de presentación está desacoplada de la vista.?
+
+Ventajas:
+
+    Desacoplamiento: La vista y la lógica de presentación están separadas, lo que facilita cambios y mantenimiento.?
+
+    Pruebas: Es más sencillo realizar pruebas unitarias de la lógica de presentación.?
+
+Desventajas:
+
+    Curva de Aprendizaje: Puede ser más difícil de entender y implementar correctamente al principio.?
+
+La Vista está mucho más limpia. Su función principal es mostrar lo que el ViewModel le dice, usando data binding (enlazado de datos).
+
+Toda la lógica de presentación (como decisiones sobre qué mostrar, validaciones, estados, etc.) se mueve al ViewModel.
+
+Esto permite que la vista sea más "tonta" (en el buen sentido ??), o sea, más fácil de mantener y de cambiar sin romper la lógica.
+
+El objetivo es que modelo, vista y ViewModel estén lo más desacoplados posible. Cada uno tiene responsabilidades muy claras.
+
+Angular, react con hooks, vue.js
+
+3. Diferencias Principales entre MVC y MVVM:
+
+    Comunicación entre Componentes: En MVC, el controlador maneja las interacciones y actualiza la vista. En MVVM, la vista y el vista-modelo se comunican principalmente a través de enlace de datos, reduciendo la necesidad de código adicional.?
+
+    Complejidad y Casos de Uso: MVC es adecuado para aplicaciones más simples o cuando se requiere un control más directo sobre la interfaz. MVVM es más beneficioso en aplicaciones complejas con interfaces ricas, especialmente cuando se utiliza enlace de datos.?
+
+    Independencia de la Vista: MVVM permite un mayor grado de independencia entre la lógica de presentación y la interfaz de usuario, facilitando cambios en la vista sin afectar la lógica subyacente.?
+
+Conclusión:
+
+La elección entre MVC y MVVM depende de las necesidades específicas del proyecto. MVC puede ser más adecuado para aplicaciones con interfaces menos complejas, mientras que MVVM ofrece ventajas en aplicaciones con interfaces de usuario más dinámicas y complejas, gracias a su enfoque en el enlace de datos y la separación de responsabilidades.
+En MVC, la vista puede tener lógica de presentación y está más acoplada.
+?En MVVM, la vista es más liviana, más centrada en el diseño y mucho más desacoplada gracias al ViewModel.
