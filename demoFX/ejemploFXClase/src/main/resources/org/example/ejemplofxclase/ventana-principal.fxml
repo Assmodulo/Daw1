@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="principal" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="800.0" minWidth="800.0" prefHeight="800.0" prefWidth="800.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.example.ejemplofxclase.ControladorPrincipal">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <children>
+      <HBox fx:id="tituloArriba" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+         <effect>
+            <Blend />
+         </effect>
+         <children>
+            <Label fx:id="textoTitulo" text="Inserte Datos Nueva Persona" textAlignment="CENTER">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" valignment="BOTTOM" />
+      <HBox fx:id="cajaNombre" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelNombre" minHeight="30.0" minWidth="150.0" text="Nombre">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="tfNombre" alignment="CENTER" maxWidth="500.0" minHeight="30.0" minWidth="250.0" prefWidth="400.0" promptText="Insertar Nombre">
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaApellidos" layoutX="30.0" layoutY="332.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelApellidos" minHeight="30.0" minWidth="150.0" text="Apellidos">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="tfApellidos" alignment="CENTER" maxWidth="500.0" minHeight="30.0" minWidth="250.0" prefWidth="400.0" promptText="Insertar Apellidos">
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaEdad" layoutX="30.0" layoutY="392.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelEdad" minHeight="30.0" minWidth="150.0" text="Edad">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="tfEdad" alignment="CENTER" maxWidth="500.0" minHeight="30.0" minWidth="250.0" prefWidth="400.0" promptText="Insertar Edad">
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaTelefono" layoutX="30.0" layoutY="452.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelTelefono" minHeight="30.0" minWidth="150.0" text="Telefono">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="tfTelefono" alignment="CENTER" maxWidth="500.0" minHeight="30.0" minWidth="250.0" prefWidth="400.0" promptText="Insertar Telefono ( 9 Dígitos)">
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaTelefono1" layoutX="30.0" layoutY="498.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="labelTelefono1" minHeight="30.0" minWidth="150.0" text="Email">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="tfEmail" alignment="CENTER" maxWidth="500.0" minHeight="35.0" minWidth="250.0" prefHeight="35.0" prefWidth="400.0" promptText="Ejemplo: midireccion@miservidor.com">
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" top="35.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox fx:id="cajaBotones" alignment="BASELINE_CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="btnGuardar" minWidth="100.0" mnemonicParsing="false" onAction="#onSaveButtonAction" text="Guardar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
+               <HBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnCerrar" layoutX="10.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#onCloseButtonAction" text="Cerrar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <effect>
+                  <Glow level="0.5" />
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="15.0" left="50.0" right="50.0" top="15.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="25.0" top="15.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>
