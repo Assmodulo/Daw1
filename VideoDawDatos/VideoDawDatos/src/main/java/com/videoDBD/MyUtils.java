@@ -38,7 +38,7 @@ public class MyUtils {
                6. Eliminar Artículo por referencia en el videoclub actual.
                7. Alquilar un producto por un socio en el videoclub actual.
                8. Devolver un artículo.
-               9. Salir.
+               9. Salir y guardar variables en ficheros.
             """;
     }
 
