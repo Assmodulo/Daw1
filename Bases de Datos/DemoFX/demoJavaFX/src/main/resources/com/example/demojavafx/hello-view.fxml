@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.demojavafx.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
 
-    <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
-</VBox>
+<BorderPane
+            xmlns:fx="http://javafx.com/fxml/1">
+
+
+    <!-- Barra lateral izquierda -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #1976D2;" alignment="TOP_LEFT" prefWidth="180" padding="10">
+            <!-- Botón de Sección 1 -->
+            <TitledPane text="Sección 1" expanded="false" style="-fx-text-fill: #FFFFFF;">
+                <VBox  style="-fx-background-color: #63A4FF;" padding="5">
+                    <Button text="Insertar" fx:id="btnInsertar1" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                    <Button text="Eliminar" fx:id="btnEliminar1" style="-fx-background-color: #FFD180; -fx-text-fill: #1976D2;"/>
+                    <Button text="Modificar" fx:id="btnModificar1" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                </VBox>
+            </TitledPane>
+            <!-- Botón de Sección 2 -->
+            <TitledPane text="Sección 2" expanded="false" style="-fx-text-fill: #FFFFFF;">
+                <VBox  style="-fx-background-color: #63A4FF;" padding="5">
+                    <Button text="Insertar" fx:id="btnInsertar2" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                    <Button text="Eliminar" fx:id="btnEliminar2" style="-fx-background-color: #FFD180; -fx-text-fill: #1976D2;"/>
+                    <Button text="Modificar" fx:id="btnModificar2" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                </VBox>
+            </TitledPane>
+            <!-- Botón de Sección 3 -->
+            <TitledPane text="Sección 3" expanded="false" style="-fx-text-fill: #FFFFFF;">
+                <VBox  style="-fx-background-color: #63A4FF;" padding="5">
+                    <Button text="Insertar" fx:id="btnInsertar3" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                    <Button text="Eliminar" fx:id="btnEliminar3" style="-fx-background-color: #FFD180; -fx-text-fill: #1976D2;"/>
+                    <Button text="Modificar" fx:id="btnModificar3" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                </VBox>
+            </TitledPane>
+            <!-- Botón de Sección 4 -->
+            <TitledPane text="Sección 4" expanded="false" style="-fx-text-fill: #FFFFFF;">
+                <VBox  style="-fx-background-color: #63A4FF;" padding="5">
+                    <Button text="Insertar" fx:id="btnInsertar4" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                    <Button text="Eliminar" fx:id="btnEliminar4" style="-fx-background-color: #FFD180; -fx-text-fill: #1976D2;"/>
+                    <Button text="Modificar" fx:id="btnModificar4" style="-fx-background-color: #FF9800; -fx-text-fill: #FFFFFF;"/>
+                </VBox>
+            </TitledPane>
+        </VBox>
+    </left>
+
+    <!-- Panel central donde se mostrarán los paneles de cada acción -->
+    <center>
+        <StackPane fx:id="panelCentral" style="-fx-background-color: #F5F5F5;">
+            <!-- Aquí puedes cargar dinámicamente los paneles de Insertar, Eliminar o Modificar según la acción -->
+        </StackPane>
+    </center>
+
+</BorderPane>
+
