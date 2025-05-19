@@ -4,39 +4,156 @@
     <meta charset="UTF-8">
     <title>temu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="container justify-content-lg-start bg-orange">
+        <div class="container justify-content-lg-start bg-orange elementos-personalizados fondos-personalizados">
             <div class="row">
                 <div class="col-4 justify-content-sm-start">
-                    <img class="img-fluid" src="logo.webp" alt="">
+                    <!--Aquí tengo que ajustar el tamaño de la imagen pues se iba de madre a hacer lo que le daba la gana-->
+                    <img class="img-fluid" src="logo.webp" alt="" width="128" height="128">
                 </div>
                 <div class="col-4 placeholder-xs justify-content-start align-self-center w-25">
-                    <input class="placeholder-lg col-12" type="text" placeholder="Search">
+                    <input class="placeholder-lg col-12 placeholder-personalizado" type="text" placeholder="Search">
                 </div>
                 <div class="col-1 justify-content-center align-self-center">
-                    Sign in
+                    <a href="#">Sign in</a>
                 </div>
                 <div class="col-1 justify-content-center align-self-center">
-                    Cart
+                    <a href="#">Cart</a>
                 </div>
                 <div class="col-1 justify-content-center align-self-center">
-                    Carrito
+                    <a href="#">Carrito</a>
                 </div>
             </div>
         </div>
     </header>
 
     <div class="container text-xl-start justify-content-lg-start">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light elementos-personalizados">
             <div class="row w-100">
-                <div class="col-2 justify-content-lg-start">Categoria</div>
-                <div class="col-2 justify-content-lg-start">Categoria</div>
-                <div class="col-2 justify-content-lg-start">Categoria</div>
-                <div class="col-2 justify-content-lg-start">Categoria</div>
+                <!--No se porque en estos elementos, al darles el justify o align center no lo hace, y se queda el
+                icono a la izquierda-->
+                <div class="col-2 justify-content-center align-self-center">
+                    <a class="navbar-brand" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange"
+                             class="bi bi-pc-display-horizontal" viewBox="0 0 16 16">
+                            <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-2 justify-content-lg-start">
+                    <a class="navbar-brand" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange" class="bi bi-shop" viewBox="0 0 16 16">
+                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-2 justify-content-lg-start">
+                    <a class="navbar-brand" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange" class="bi bi-earbuds" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6.825 4.138c.596 2.141-.36 3.593-2.389 4.117a4.4 4.4 0 0 1-2.018.054c-.048-.01.9 2.778 1.522 4.61l.41 1.205a.52.52 0 0 1-.346.659l-.593.19a.55.55 0 0 1-.69-.34L.184 6.99c-.696-2.137.662-4.309 2.564-4.8 2.029-.523 3.402 0 4.076 1.948zm-.868 2.221c.43-.112.561-.993.292-1.969-.269-.975-.836-1.675-1.266-1.563s-.561.994-.292 1.969.836 1.675 1.266 1.563m3.218-2.221c-.596 2.141.36 3.593 2.389 4.117a4.4 4.4 0 0 0 2.018.054c.048-.01-.9 2.778-1.522 4.61l-.41 1.205a.52.52 0 0 0 .346.659l.593.19c.289.092.6-.06.69-.34l2.536-7.643c.696-2.137-.662-4.309-2.564-4.8-2.029-.523-3.402 0-4.076 1.948m.868 2.221c-.43-.112-.561-.993-.292-1.969.269-.975.836-1.675 1.266-1.563s.561.994.292 1.969-.836 1.675-1.266 1.563"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-2 justify-content-lg-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange" class="bi bi-phone-vibrate" viewBox="0 0 16 16">
+                        <path d="M10 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM6 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+                        <path d="M8 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2M1.599 4.058a.5.5 0 0 1 .208.676A7 7 0 0 0 1 8c0 1.18.292 2.292.807 3.266a.5.5 0 0 1-.884.468A8 8 0 0 1 0 8c0-1.347.334-2.619.923-3.734a.5.5 0 0 1 .676-.208m12.802 0a.5.5 0 0 1 .676.208A8 8 0 0 1 16 8a8 8 0 0 1-.923 3.734.5.5 0 0 1-.884-.468A7 7 0 0 0 15 8c0-1.18-.292-2.292-.807-3.266a.5.5 0 0 1 .208-.676M3.057 5.534a.5.5 0 0 1 .284.648A5 5 0 0 0 3 8c0 .642.12 1.255.34 1.818a.5.5 0 1 1-.93.364A6 6 0 0 1 2 8c0-.769.145-1.505.41-2.182a.5.5 0 0 1 .647-.284m9.886 0a.5.5 0 0 1 .648.284C13.855 6.495 14 7.231 14 8s-.145 1.505-.41 2.182a.5.5 0 0 1-.93-.364C12.88 9.255 13 8.642 13 8s-.12-1.255-.34-1.818a.5.5 0 0 1 .283-.648"/>
+                    </svg>
+                </div>
             </div>
         </nav>
+    </div>
+
+    <div class="container text-center elementos-personalizados">
+        <div class="row">
+            <div class="col-1">
+                <p class="d-inline-flex gap-1">
+                    <a data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Electronica</a>
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="#">Equipos Sonido</a></li>
+                                <li class="list-group-item"><a href="#">Tablets</a></li>
+                                <li class="list-group-item"><a href="#">Moviles</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p class="d-inline-flex gap-1">
+                    <a data-bs-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Hogar</a>
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="#">Muebles</a></li>
+                                <li class="list-group-item"><a href="#">Electrodomésticos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p class="d-inline-flex gap-1">
+                    <a data-bs-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Entretenimiento</a>
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="#">Cine y Música</a></li>
+                                <li class="list-group-item"><a href="#">Videojuegos</a></li>
+                                <li class="list-group-item"><a href="#">Consolas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="container text-center">
+                    <div class="container text-center">
+                        <div class="row">
+                            <
+                                <div class="card" style="width: 10rem;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+
+
+                                <div class="card" style="width: 10rem;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+
+
+                                <div class="card" style="width: 10rem;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                Column
+            </div>
+        </div>
     </div>
 
 

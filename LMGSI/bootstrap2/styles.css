@@ -1,0 +1,35 @@
+h1 {
+    background-color: #f0f8ff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn-custom {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.card-text {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+/*Creo esta clase que luego añadiré que es la que va a modificar la tarjeta sin tocar
+lo que ya añade bootstrap*/
+.card-custom{
+    background-color: #CCFFFF;
+    box-shadow: 2px 2px 5px cornflowerblue;
+    font-family: Georgia, serif;
+}
+
+/*Ya se que el color se parece mucho pero hay que probar y hacer lo que corresponde
+le he añadido lo de important que hablamos el otro dia por si era necesario.*/
+.btn-propia{
+    background-color: #0099CC !important;
+}
+
+.container-borde-propio{
+    border: 1px solid #0099CC !important;
+}

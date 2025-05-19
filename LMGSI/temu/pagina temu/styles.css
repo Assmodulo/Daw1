@@ -1,0 +1,17 @@
+
+/*Esta clase la creo aquí personalizada para modificar aquello que no puedo con bootstrap*/
+.elementos-personalizados{
+    border: 2px solid orange !important;
+}
+
+.fondos-personalizados{
+    background-color: orange !important;
+    color: white;
+}
+
+.placeholder-personalizado{
+    border:none;
+    color:orange !important;
+    font-weight: bolder !important;
+    border-radius: 5px;
+}
