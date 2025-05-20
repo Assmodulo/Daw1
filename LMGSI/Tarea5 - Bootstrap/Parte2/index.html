@@ -8,6 +8,8 @@
 </head>
 <body>
 
+
+<!--Parte superior con algunos elementos de navegación y una barra de búsqueda-->
 <div class="container text-center w-100">
     <div class="row border border-danger bg-primary text-light">
         <div class="col-12 align-self-center">
@@ -37,9 +39,146 @@
         </div>
 
     </div>
+
+    <!--Por algún motivo que no entiendo, da igual donde ponga text center, el h1 se centra, el botón también, pero el párrafo
+    ni de coña.
+    Al final encontre porqué. Buscando la forma de hacer un hero, o un jumbotron según he leido por ahí, que ya no existe en
+    bootstrap 5, al ver ejemplos puse también como clase en el párrafo col, que es una columna, y se quedaba solo ocupando la
+    mitad del espacio del hero banner. Esto me pasa por fiarme sin pensar en ejemplos que encuentro por reddit o por la web-->
     <div class="row align-self-center">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container py-5 text-center">
+                <h1 class="display-5 fw-bold">LA GRAN BIBLIOTECA</h1>
+                <p class="mx-4 text-center">En nuestra biblioteca encontrarás todo tipo de libros, documentos, manuales y otros textos
+                relevantes que te ayudarán en tu aventura insaciable de entretenimiento, educación y conocimiento.</p>
+                <button class="btn btn-primary btn-lg" type="button">Saber más</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Comentarios simplemente para dar aire entre secciones-->
+
+    <div class="separador-decorativo"></div>
+
+    <!--Más aire-->
+
+    <!--Como tengo que usar el css para crear estilos externos voy a aprovechar para tocar estilos de las imágenes ya que son
+    de tamaños distintos. A ver si eso sirve de algo. Me da un warning al añadir clase a la etiqueta img, pero luego funciona
+    bien lo que he indicado en css, así todas quedan igual.-->
+    <div class="row align-self-center">
+        <div class="card-group">
+            <div class="card">
+                <img class="imagen_de_carta" src="./imagenes/portada_el-senor-de-los-anillos-ne-revisada-ilustrado-por-alan-lee_j-r-r-tolkien_202409020843.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">El señor de los anillos</h5>
+                    <p class="card-text">Una de las mejores novelas de fantasía, además de uno de los mejores libros de todos los tiempos.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="imagen_de_carta" src="./imagenes/portada_conan-el-cimmerio-n-0106_robert-e-howard_202405291730.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Conan el bárbaro</h5>
+                    <p class="card-text">Las aventuras de Conan el bárbaro, el cinmerio más famoso de todos los tiempos.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img class="imagen_de_carta" src="./imagenes/portada_omnibus-cronicas-de-la-dragonlance-edicion-especial_margaret-weis-tracy-hickman_202403051245.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Crónicas de la Dragonlance</h5>
+                    <p class="card-text">Una de las sagas más emblemáticas de fantasía heroica. Basada en los reinos olvidados de Dragones y Mazmorras.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--No me voy a romper mucho la cabeza con la sección decorativa, aunque no se si te refieres a un elemento de bootstrap
+    que luego tengo que modificar-->
+
+    <div class="separador-decorativo"></div>
+
+    <!--Antes de poner el elemento decorativo, que no se ni lo que voy a poner, pongo la parte del formulario, a ver si queda bien
+    Lo que no estoy seguro es de si debería de usa mas containers y no solo ir tirando de rows, no estoy seguro, aunque con el margin
+    voy bastante bien-->
+    <div class="row align-self-center mt-5 mb-5">
+        <div class="col-4">
+            <form class="form-floating">
+                <input type="email" class="form-control" id="floatingInputValue" placeholder="name@example.com" value="test@example.com">
+                <label for="floatingInputValue">Email</label>
+            </form>
+        </div>
+
+        <div class="col-4">
+            <form class="form-floating">
+                <input type="text" class="form-control" id="floatingInputValue2" placeholder="Pepe Gutierrez" value="Pepe Gutierrez">
+                <label for="floatingInputValue2">Nombre</label>
+            </form>
+        </div>
+
+        <div class="col-4">
+            <form class="form-floating">
+                <input type="text" class="form-control" id="floatingInputValue3" placeholder="Comentario" value="Quiero más Asterix y Obelix">
+                <label for="floatingInputValue3">Sugerencia</label>
+            </form>
+        </div>
+
+        <!--Dentro de esta row, voy a probar a anidar otra, no se que tal quedará, y en ella voy a insertar el botón de enviar-->
+
+        <div class="row mt-2">
+
+            <!--Aquí probaré a usar uno de esos botones de bloque, veremos a ver que tal.-->
+            <div class="d-grid">
+                <button class="btn btn-primary" type="button">ENVIAR SUGERENCIA</button>
+            </div>
+        </div>
 
     </div>
+
+    <!--Un poco más de aire-->
+
+    <div class="separador-decorativo"></div>
+
+    <!--Más aire-->
+
+    <!--Vale, ahora viene la parte del footer. Esto lo he sacado de mdbootstrap, no se si te valdrá lo mismo o si sólo
+    quieres que lo saquemos de la página propia de bootstrap. Te voy a dejar el link a la página por si quieres revisarlo
+    https://mdbootstrap.com/docs/standard/extended/social-media-icons-footer/ Al final no he usado ese, los iconos,
+    aunque coinciden con los de bootstrap icons, no se muestran. De la otra forma tampoco se muestran. Ya ni idea.-->
+
+    <footer class="bg-body-tertiary text-center text-white">
+
+            <div class="col-md-6 mb-3">
+                <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <select class="form-select w-auto d-inline-block">
+                    <option selected>Español</option>
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 Copyright Alex:
+            <a class="text-white" href="https://mdbootstrap.com/">La Gran Biblioteca</a>
+        </div>
+    </footer>
+
+
 </div>
 
 </body>

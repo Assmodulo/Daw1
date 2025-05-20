@@ -1,0 +1,17 @@
+/*En principio esta es la clase personalizada*/
+
+.separador-decorativo {
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border-radius: 3px;
+    margin: 3rem 0;
+}
+
+
+/*Voy a tocar las imágenes aquí en vez de en bootstrap, que no me fio nada*/
+.imagen_de_carta {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}

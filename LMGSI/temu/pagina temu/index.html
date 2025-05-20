@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>temu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -34,7 +35,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light elementos-personalizados">
             <div class="row w-100">
                 <!--No se porque en estos elementos, al darles el justify o align center no lo hace, y se queda el
-                icono a la izquierda-->
+                icono a la izquierda. Miraré a ver si puedo hacer algo-->
                 <div class="col-2 justify-content-center align-self-center">
                     <a class="navbar-brand" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange"
@@ -67,14 +68,22 @@
         </nav>
     </div>
 
+    <!--VAmos a ver con la zona central como sale. Tengo que definir un nuevo container. Con sus rows y ya veré que tamaño
+    le doy a las columnas o como juego con ellas-->
     <div class="container text-center elementos-personalizados">
+        <!--Primera y única fila creo. Ya que en una sola fila, lo voy a dividir en 3 columnas, solo que en la central
+        voy a insertar un grid y veré a ver que tal sale.-->
         <div class="row">
+            <!--Le doy un tamaño de columna 1 ya que quiero que la del centro sea más grande-->
             <div class="col-1">
+                <!--Se definen los links que ban a funcionar para abrir los desplegables. Quizá si los cambio por párrafos vayan
+                mejor. Pero por ahora se van a quedar así.-->
                 <p class="d-inline-flex gap-1">
                     <a data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Electronica</a>
                 </p>
+                <!--Dentro de cada link hay una lista desplegable. Hay tres secciones. Las tres iguales.-->
                 <div class="row">
-                    <div class="col">
+                    <div class="col text-start justify-content-start">
                         <div class="collapse multi-collapse" id="multiCollapseExample1">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><a href="#">Equipos Sonido</a></li>
@@ -112,49 +121,161 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+
+            <!--Esta es la columna Central. Quiero que sea más ancha así que col-8-->
+            <div class="col-8">
                 <div class="container text-center">
                     <div class="container text-center">
+
+                        <!--Aquí el banner, quiero que la fila ocupe todo el ancho de la columna por eso el w-100-->
+                        <div class="row w-100">
+                            <!--Inserto la imagen del banner. img-fluid para que se adapte al tamaño-->
+                            <img src="GMA_Temu_Banner_v02_GV_1694197612086_hpEmbed_80x11.avif" alt="" class="img-fluid">
+                        </div>
+
+                        <!--Voy a definir dos filas más, cada una formada por tres columnas iguales, cada columna con un
+                        elemento card dentro, que van a ser los productos. Juego con los valores small para el tamaó de
+                        las letras y algo con el rm para ajustar tamaño total, pero creo que aún así no quedan todas las cards
+                        iguales. Toco tambien temas de margen para que se ajuste todo más ya que se movia todo demasiado.
+                        Las tres cartas son iguales así que no voy a explicar todo al detalle en cada una-->
                         <div class="row">
-                            <
+
+                            <div class="col m-1">
                                 <div class="card" style="width: 10rem;">
-                                    <img src="..." class="card-img-top" alt="...">
+                                    <img src="pc.jpg" class="card-img-top" alt="pc" width="550" height="200">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <h5 class="card-title small">PC</h5>
+                                        <p class="card-text text-start small">PC Gamer para disfrutar de todo en ultra</p>
+                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
                                     </div>
                                 </div>
+                            </div>
 
-
+                            <div class="col m-1">
                                 <div class="card" style="width: 10rem;">
-                                    <img src="..." class="card-img-top" alt="...">
+                                    <img src="ps5.webp" class="card-img-top" alt="..." width="550" height="200">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <h5 class="card-title small">PS5 PRO</h5>
+                                        <p class="card-text text-start small">Si se te cae el dinero del bolsillo</p>
+                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
                                     </div>
                                 </div>
+                            </div>
 
-
+                            <div class="col m-1">
                                 <div class="card" style="width: 10rem;">
-                                    <img src="..." class="card-img-top" alt="...">
+                                    <img src="switch.webp" class="card-img-top" alt="..." width="550" height="200">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <h5 class="card-title small">Nintendo Switch</h5>
+                                        <p class="card-text text-start small">Para disfrutar con toda la familia</p>
+                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
                                     </div>
                                 </div>
-                            
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col m-1">
+                                <div class="card" style="width: 10rem;">
+                                    <img src="telefono.jpg" class="card-img-top" alt="..." width="550" height="200">
+                                    <div class="card-body">
+                                        <h5 class="card-title small">Ifone</h5>
+                                        <p class="card-text text-start small">Entra en la secta del tito Jobs</p>
+                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="card m-1" style="width: 10rem;">
+                                    <img src="tablet.jpg" class="card-img-top" alt="..." width="550" height="200">
+                                    <div class="card-body">
+                                        <h5 class="card-title small">Tablet potente</h5>
+                                        <p class="card-text text-start small">Para cualquier cosa que necesites</p>
+                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="card m-1" style="width: 10rem;">
+                                    <img src="televisor.avif" class="card-img-top" alt="..." width="550" height="200">
+                                    <div class="card-body">
+                                        <h5 class="card-title small">Televisor 4k</h5>
+                                        <p class="card-text text-start small">Para que veas las balas de las pelis</p>
+                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                Column
+            <div class="col elementos-personalizados">
+                <div class="col-12 col-lg-2">
+                    <div class="card text-white bg-orange mb-3 shadow" style="max-width: 18rem;">
+                        <img src="..." class="card-img-top" alt="Producto destacado" style="object-fit: cover; height: 120px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Producto TOP</h5>
+                            <p class="card-text small">¡Oferta exclusiva! No te lo pierdas.</p>
+                            <a href="#" class="btn btn-light btn-sm">Ver más</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!--Ya no tengo muy claro que va dentro de que. O si es así como lo tengo que maquetar. El container para el producto
+    destacado me está matando. Ya he probado varios y no se que estoy haciendo mal. Por lo menos lo de subscripción a enca
+    jado bien-->
+
+    <section class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="p-4 rounded shadow bg-light">
+                    <h5>Suscríbete y recibe ofertas</h5>
+                    <form>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Tu correo electrónico" required>
+                        </div>
+                        <div class="form-check mb-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="condiciones" required>
+                            <label class="form-check-label small" for="condiciones">
+                                Acepto las condiciones de privacidad
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--El footer. Ya le encontré medio hecho y queda bien. Pero tengo que acostumbrarme a demasiados elementos de medida
+    nuevos y a muchas cosas que no se ni lo que son.-->
+
+    <footer class="bg-dark text-white mt-5 pt-4 pb-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter fs-4"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-youtube fs-4"></i></a>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white small me-3">Aviso legal</a>
+                    <a href="#" class="text-white small me-3">Política de privacidad</a>
+                    <a href="#" class="text-white small">Galletas que me estoy llevando con BootStrap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
