@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="ventana1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" styleClass="bg-warning" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.vetdawexam.Ventana1Controller">
+    <children>
+      <VBox fx:id="vboxRegistroMascota" alignment="CENTER" prefHeight="480.0" prefWidth="640.0">
+         <children>
+            <VBox prefHeight="325.0" prefWidth="640.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Pasaporte Mascota" />
+                        <TextField fx:id="tfPasaporte" prefWidth="300.0" promptText="Inserte ej: &quot;P00000000&quot; sustituya ceros por número" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Nombre Mascota">
+                           <font>
+                              <Font name="Consolas" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfNombre" prefWidth="300.0" promptText="Inserte Nombre ej: Máximo 45 caracteres, minimo 3" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Peso Mascota" />
+                        <TextField fx:id="tfPeso" prefWidth="300.0" promptText="Inserte Peso con 1 decimal ej: 10.4" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Fecha Nacimiento Mascota">
+                           <font>
+                              <Font name="Consolas" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfFnacimiento" prefWidth="300.0" promptText="Inserte Fecha Nacimiento ej: 12/12/2000" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Tipo de Mascota" />
+                        <ComboBox fx:id="cmbTipoMascota" prefWidth="150.0" promptText="Tipo de Mascotas" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label text="Seleccione uno de los propietarios" />
+            <Separator prefWidth="200.0" />
+            <ListView fx:id="listviewPropietarios" prefHeight="100.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                    <Button fx:id="btnAtras" mnemonicParsing="false" onAction="#volverPrincipal" text="Atras">
+                     <font>
+                        <Font name="Consolas" size="19.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn-danger" />
+                        <String fx:value="btn-lg" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#registrarMascotaBaseDeDatos" text="Registrar Mascota" textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="19.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="btn-large" />
+                     </styleClass>
+                  </Button>
+                  <Label fx:id="lblResultado">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+    </children>
+</Pane>
