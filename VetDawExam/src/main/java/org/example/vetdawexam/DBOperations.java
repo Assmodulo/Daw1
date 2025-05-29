@@ -164,7 +164,7 @@ public class DBOperations {
 
             statement.setString(1, propietarioDni);
 
-            ResultSet rs = statement.executeQuery(myStatement);
+            ResultSet rs = statement.executeQuery();
             while(rs.next()){
 
                 String dni = rs.getString("dni");
