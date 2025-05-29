@@ -1,0 +1,88 @@
+1. Estructura básica y configuración
+
+    Incluir la meta etiqueta viewport en el <head>:
+
+    xml
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    Enlazar correctamente el CSS y JS de Bootstrap 5 (preferiblemente desde CDN o local).
+
+    Definir si usarás .container (ancho limitado y centrado) o .container-fluid (ancho completo) y mantener coherencia en todo el proyecto.
+
+2. Organización del layout
+
+    Seguir la jerarquía correcta: .container > .row > .col-*.
+
+    Evitar anidar múltiples .container dentro de columnas o filas.
+
+    Usar filas (.row) para agrupar columnas y columnas (.col-*) para el contenido.
+
+    Definir columnas con clases responsivas según breakpoints (col-12, col-md-6, col-lg-4, etc.).
+
+    Usar g-* para controlar gutters (espacios entre columnas y filas) de forma uniforme.
+
+3. Componentes y contenido
+
+    Usar componentes Bootstrap (cards, accordion, navbar, etc.) para aprovechar estilos y funcionalidad.
+
+    En navbars, usar listas <ul> y <li> para mejorar semántica y accesibilidad.
+
+    Usar elementos semánticos (<a>, <button>, <nav>, etc.) según su función.
+
+    Quitar subrayados y ajustar estilos de enlaces con clases (text-decoration-none, text-dark, etc.).
+
+    Mantener consistencia en tamaños de texto y elementos con clases Bootstrap (small, fw-bold, text-start, etc.).
+
+4. Imágenes y multimedia
+
+    Usar la clase img-fluid para imágenes responsivas.
+
+    Evitar usar atributos width y height fijos en HTML; controlar tamaño con CSS.
+
+    Usar object-fit: cover para mantener proporción y recortar imágenes si es necesario.
+
+    Optimizar imágenes para web (tamaño y formato).
+
+    Considerar loading="lazy" para carga diferida y mejorar rendimiento.
+
+5. Responsividad y flexbox
+
+    Probar el diseño en diferentes tamaños de pantalla y ajustar clases de columnas.
+
+    Entender que .row es un flex container y .col es flex item.
+
+    Añadir d-flex a elementos cuando necesites aplicar flexbox dentro de columnas.
+
+    Usar utilidades de Bootstrap para márgenes y paddings (m-*, p-*) para controlar espacios.
+
+6. Accesibilidad (a11y)
+
+    Usar atributos aria-* en componentes interactivos (collapse, botones, navbars).
+
+    Usar roles semánticos (role="navigation", role="button", etc.).
+
+    Asegurar que los elementos interactivos sean accesibles con teclado.
+
+    Probar con lectores de pantalla y herramientas de accesibilidad.
+
+7. Código limpio y mantenimiento
+
+    Evitar estilos inline; usar clases CSS o utilidades Bootstrap.
+
+    Comentar el código para explicar estructuras complejas o decisiones.
+
+    Usar variables y personalización de Bootstrap (SASS) para mantener consistencia.
+
+    Mantener componentes reutilizables para facilitar cambios futuros.
+
+    Validar el HTML para evitar errores estructurales.
+
+8. Testing y optimización
+
+    Probar en navegadores y dispositivos reales o emuladores.
+
+    Verificar tiempos de carga y optimizar recursos.
+
+    Usar herramientas como Lighthouse para evaluar rendimiento y accesibilidad.
+
+    Revisar que el diseño se adapte correctamente a todos los breakpoints.

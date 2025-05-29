@@ -1,283 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>temu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ejemplo Layout Bootstrap 5 Mejorado</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* Clase personalizada para fondo naranja */
+        .bg-orange {
+            background-color: #ff6600;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container justify-content-lg-start bg-orange elementos-personalizados fondos-personalizados">
-            <div class="row">
-                <div class="col-4 justify-content-sm-start">
-                    <!--Aquí tengo que ajustar el tamaño de la imagen pues se iba de madre a hacer lo que le daba la gana-->
-                    <img class="img-fluid" src="logo.webp" alt="" width="128" height="128">
-                </div>
-                <div class="col-4 placeholder-xs justify-content-start align-self-center w-25">
-                    <input class="placeholder-lg col-12 placeholder-personalizado" type="text" placeholder="Search">
-                </div>
-                <div class="col-1 justify-content-center align-self-center">
-                    <a href="#">Sign in</a>
-                </div>
-                <div class="col-1 justify-content-center align-self-center">
-                    <a href="#">Cart</a>
-                </div>
-                <div class="col-1 justify-content-center align-self-center">
-                    <a href="#">Carrito</a>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <div class="container text-xl-start justify-content-lg-start">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light elementos-personalizados">
-            <div class="row w-100">
-                <!--No se porque en estos elementos, al darles el justify o align center no lo hace, y se queda el
-                icono a la izquierda. Miraré a ver si puedo hacer algo-->
-                <div class="col-2 justify-content-center align-self-center">
-                    <a class="navbar-brand" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange"
-                             class="bi bi-pc-display-horizontal" viewBox="0 0 16 16">
-                            <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="col-2 justify-content-lg-start">
-                    <a class="navbar-brand" href="#">
+<!-- NAVBAR PRINCIPAL -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Logo o marca -->
+        <a class="navbar-brand" href="#">
+            <!-- SVG o imagen logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange"
+                 class="bi bi-pc-display-horizontal" viewBox="0 0 16 16">
+                <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25"/>
+            </svg>
+        </a>
+
+        <!-- Botón hamburguesa para móviles -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarIcons" aria-controls="navbarIcons" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Iconos de navegación -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarIcons">
+            <ul class="navbar-nav">
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="#" aria-label="Shop">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange" class="bi bi-shop" viewBox="0 0 16 16">
                             <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/>
                         </svg>
                     </a>
-                </div>
-                <div class="col-2 justify-content-lg-start">
-                    <a class="navbar-brand" href="#">
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="#" aria-label="Earbuds">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange" class="bi bi-earbuds" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M6.825 4.138c.596 2.141-.36 3.593-2.389 4.117a4.4 4.4 0 0 1-2.018.054c-.048-.01.9 2.778 1.522 4.61l.41 1.205a.52.52 0 0 1-.346.659l-.593.19a.55.55 0 0 1-.69-.34L.184 6.99c-.696-2.137.662-4.309 2.564-4.8 2.029-.523 3.402 0 4.076 1.948zm-.868 2.221c.43-.112.561-.993.292-1.969-.269-.975-.836-1.675-1.266-1.563s-.561.994-.292 1.969.836 1.675 1.266 1.563m3.218-2.221c-.596 2.141.36 3.593 2.389 4.117a4.4 4.4 0 0 0 2.018.054c.048-.01-.9 2.778-1.522 4.61l-.41 1.205a.52.52 0 0 0 .346.659l.593.19c.289.092.6-.06.69-.34l2.536-7.643c.696-2.137-.662-4.309-2.564-4.8-2.029-.523-3.402 0-4.076 1.948m.868 2.221c-.43-.112-.561-.993-.292-1.969.269-.975.836-1.675 1.266-1.563s.561.994.292 1.969-.836 1.675-1.266 1.563"/>
                         </svg>
                     </a>
-                </div>
-                <div class="col-2 justify-content-lg-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange" class="bi bi-phone-vibrate" viewBox="0 0 16 16">
-                        <path d="M10 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM6 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
-                        <path d="M8 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2M1.599 4.058a.5.5 0 0 1 .208.676A7 7 0 0 0 1 8c0 1.18.292 2.292.807 3.266a.5.5 0 0 1-.884.468A8 8 0 0 1 0 8c0-1.347.334-2.619.923-3.734a.5.5 0 0 1 .676-.208m12.802 0a.5.5 0 0 1 .676.208A8 8 0 0 1 16 8a8 8 0 0 1-.923 3.734.5.5 0 0 1-.884-.468A7 7 0 0 0 15 8c0-1.18-.292-2.292-.807-3.266a.5.5 0 0 1 .208-.676M3.057 5.534a.5.5 0 0 1 .284.648A5 5 0 0 0 3 8c0 .642.12 1.255.34 1.818a.5.5 0 1 1-.93.364A6 6 0 0 1 2 8c0-.769.145-1.505.41-2.182a.5.5 0 0 1 .647-.284m9.886 0a.5.5 0 0 1 .648.284C13.855 6.495 14 7.231 14 8s-.145 1.505-.41 2.182a.5.5 0 0 1-.93-.364C12.88 9.255 13 8.642 13 8s-.12-1.255-.34-1.818a.5.5 0 0 1 .283-.648"/>
-                    </svg>
-                </div>
-            </div>
-        </nav>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="#" aria-label="Phone">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="orange" class="bi bi-phone-vibrate" viewBox="0 0 16 16">
+                            <path d="M10 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM6 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+                            <path d="M8 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2M1.599 4.058a.5.5 0 0 1 .208.676A7 7 0 0 0 1 8c0 1.18.292 2.292.807 3.266a.5.5 0 0 1-.884.468A8 8 0 0 1 0 8c0-1.347.334-2.619.923-3.734a.5.5 0 0 1 .676-.208m12.802 0a.5.5 0 0 1 .676.208A8 8 0 0 1 16 8a8 8 0 0 1-.923 3.734.5.5 0 0 1-.884-.468A7 7 0 0 0 15 8c0-1.18-.292-2.292-.807-3.266a.5.5 0 0 1 .208-.676M3.057 5.534a.5.5 0 0 1 .284.648A5 5 0 0 0 3 8c0 .642.12 1.255.34 1.818a.5.5 0 1 1-.93.364A6 6 0 0 1 2 8c0-.769.145-1.505.41-2.182a.5.5 0 0 1 .647-.284m9.886 0a.5.5 0 0 1 .648.284C13.855 6.495 14 7.231 14 8s-.145 1.505-.41 2.182a.5.5 0 0 1-.93-.364C12.88 9.255 13 8.642 13 8s-.12-1.255-.34-1.818a.5.5 0 0 1 .283-.648"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
+</nav>
 
-    <!--VAmos a ver con la zona central como sale. Tengo que definir un nuevo container. Con sus rows y ya veré que tamaño
-    le doy a las columnas o como juego con ellas-->
-    <div class="container text-center elementos-personalizados">
-        <!--Primera y única fila creo. Ya que en una sola fila, lo voy a dividir en 3 columnas, solo que en la central
-        voy a insertar un grid y veré a ver que tal sale.-->
-        <div class="row">
-            <!--Le doy un tamaño de columna 1 ya que quiero que la del centro sea más grande-->
-            <div class="col-1">
-                <!--Se definen los links que ban a funcionar para abrir los desplegables. Quizá si los cambio por párrafos vayan
-                mejor. Pero por ahora se van a quedar así.-->
-                <p class="d-inline-flex gap-1">
-                    <a data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Electronica</a>
-                </p>
-                <!--Dentro de cada link hay una lista desplegable. Hay tres secciones. Las tres iguales.-->
-                <div class="row">
-                    <div class="col text-start justify-content-start">
-                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+<!-- CONTENEDOR PRINCIPAL CON TRES COLUMNAS -->
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        <!-- COLUMNA IZQUIERDA: CATEGORÍAS -->
+        <div class="col-2">
+            <!-- Accordion con categorías -->
+            <div class="accordion" id="accordionCategorias">
+                <!-- Categoría 1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Electrónica
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionCategorias">
+                        <div class="accordion-body p-0">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#">Equipos Sonido</a></li>
-                                <li class="list-group-item"><a href="#">Tablets</a></li>
-                                <li class="list-group-item"><a href="#">Moviles</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Equipos Sonido</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Tablets</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Móviles</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <p class="d-inline-flex gap-1">
-                    <a data-bs-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Hogar</a>
-                </p>
-                <div class="row">
-                    <div class="col">
-                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+                <!-- Categoría 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Hogar
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionCategorias">
+                        <div class="accordion-body p-0">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#">Muebles</a></li>
-                                <li class="list-group-item"><a href="#">Electrodomésticos</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Muebles</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Electrodomésticos</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <p class="d-inline-flex gap-1">
-                    <a data-bs-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Entretenimiento</a>
-                </p>
-                <div class="row">
-                    <div class="col">
-                        <div class="collapse multi-collapse" id="multiCollapseExample3">
+                <!-- Categoría 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Entretenimiento
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionCategorias">
+                        <div class="accordion-body p-0">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#">Cine y Música</a></li>
-                                <li class="list-group-item"><a href="#">Videojuegos</a></li>
-                                <li class="list-group-item"><a href="#">Consolas</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Cine y Música</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Videojuegos</a></li>
+                                <li class="list-group-item"><a href="#" class="text-decoration-none text-dark">Consolas</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!--Esta es la columna Central. Quiero que sea más ancha así que col-8-->
-            <div class="col-8">
-                <div class="container text-center">
-                    <div class="container text-center">
-
-                        <!--Aquí el banner, quiero que la fila ocupe todo el ancho de la columna por eso el w-100-->
-                        <div class="row w-100">
-                            <!--Inserto la imagen del banner. img-fluid para que se adapte al tamaño-->
-                            <img src="GMA_Temu_Banner_v02_GV_1694197612086_hpEmbed_80x11.avif" alt="" class="img-fluid">
-                        </div>
-
-                        <!--Voy a definir dos filas más, cada una formada por tres columnas iguales, cada columna con un
-                        elemento card dentro, que van a ser los productos. Juego con los valores small para el tamaó de
-                        las letras y algo con el rm para ajustar tamaño total, pero creo que aún así no quedan todas las cards
-                        iguales. Toco tambien temas de margen para que se ajuste todo más ya que se movia todo demasiado.
-                        Las tres cartas son iguales así que no voy a explicar todo al detalle en cada una-->
-                        <div class="row">
-
-                            <div class="col m-1">
-                                <div class="card" style="width: 10rem;">
-                                    <img src="pc.jpg" class="card-img-top" alt="pc" width="550" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title small">PC</h5>
-                                        <p class="card-text text-start small">PC Gamer para disfrutar de todo en ultra</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col m-1">
-                                <div class="card" style="width: 10rem;">
-                                    <img src="ps5.webp" class="card-img-top" alt="..." width="550" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title small">PS5 PRO</h5>
-                                        <p class="card-text text-start small">Si se te cae el dinero del bolsillo</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col m-1">
-                                <div class="card" style="width: 10rem;">
-                                    <img src="switch.webp" class="card-img-top" alt="..." width="550" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title small">Nintendo Switch</h5>
-                                        <p class="card-text text-start small">Para disfrutar con toda la familia</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col m-1">
-                                <div class="card" style="width: 10rem;">
-                                    <img src="telefono.jpg" class="card-img-top" alt="..." width="550" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title small">Ifone</h5>
-                                        <p class="card-text text-start small">Entra en la secta del tito Jobs</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card m-1" style="width: 10rem;">
-                                    <img src="tablet.jpg" class="card-img-top" alt="..." width="550" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title small">Tablet potente</h5>
-                                        <p class="card-text text-start small">Para cualquier cosa que necesites</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card m-1" style="width: 10rem;">
-                                    <img src="televisor.avif" class="card-img-top" alt="..." width="550" height="200">
-                                    <div class="card-body">
-                                        <h5 class="card-title small">Televisor 4k</h5>
-                                        <p class="card-text text-start small">Para que veas las balas de las pelis</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Compra</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+        <!-- COLUMNA CENTRAL: BANNER Y GRID DE PRODUCTOS -->
+        <div class="col-8">
+            <!-- Banner -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <img src="GMA_Temu_Banner_v02_GV_1694197612086_hpEmbed_80x11.avif" alt="Banner" class="img-fluid w-100">
                 </div>
             </div>
-            <div class="col elementos-personalizados">
-                <div class="col-12 col-lg-2">
-                    <div class="card text-white bg-orange mb-3 shadow" style="max-width: 18rem;">
-                        <img src="..." class="card-img-top" alt="Producto destacado" style="object-fit: cover; height: 120px;">
+
+            <!-- Grid de productos -->
+            <div class="row g-3">
+                <!-- Producto 1 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="pc.jpg" class="card-img-top" alt="PC" style="height: 150px; object-fit: cover;">
                         <div class="card-body">
-                            <h5 class="card-title">Producto TOP</h5>
-                            <p class="card-text small">¡Oferta exclusiva! No te lo pierdas.</p>
-                            <a href="#" class="btn btn-light btn-sm">Ver más</a>
+                            <h5 class="card-title small">PC</h5>
+                            <p class="card-text text-start small">PC Gamer para disfrutar de todo en ultra</p>
+                            <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="ps5.webp" class="card-img-top" alt="PS5 PRO" style="height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title small">PS5 PRO</h5>
+                            <p class="card-text text-start small">Si se te cae el dinero del bolsillo</p>
+                            <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="switch.webp" class="card-img-top" alt="Nintendo Switch" style="height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title small">Nintendo Switch</h5>
+                            <p class="card-text text-start small">Para disfrutar con toda la familia</p>
+                            <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="telefono.jpg" class="card-img-top" alt="iPhone" style="height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title small">iPhone</h5>
+                            <p class="card-text text-start small">Entra en la secta del tito Jobs</p>
+                            <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 5 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="tablet.jpg" class="card-img-top" alt="Tablet potente" style="height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title small">Tablet potente</h5>
+                            <p class="card-text text-start small">Para cualquier cosa que necesites</p>
+                            <a href="#" class="btn btn-primary btn-sm">Compra</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 6 -->
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="televisor.avif" class="card-img-top" alt="Televisor 4k" style="height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title small">Televisor 4k</h5>
+                            <p class="card-text text-start small">Para que veas las balas de las pelis</p>
+                            <a href="#" class="btn btn-primary btn-sm">Compra</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- COLUMNA DERECHA: PROMOCIÓN DESTACADA -->
+        <div class="col-2">
+            <div class="card h-100 text-white bg-orange shadow d-flex flex-column justify-content-center p-3">
+                <h4 class="card-title">Oferta Especial</h4>
+                <p class="card-text">¡No te pierdas esta promoción exclusiva!</p>
+                <a href="#" class="btn btn-light mt-auto">Ver oferta</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!--Ya no tengo muy claro que va dentro de que. O si es así como lo tengo que maquetar. El container para el producto
-    destacado me está matando. Ya he probado varios y no se que estoy haciendo mal. Por lo menos lo de subscripción a enca
-    jado bien-->
+<!-- Bootstrap JS Bundle (incluye Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
-    <section class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
-                <div class="p-4 rounded shadow bg-light">
-                    <h5>Suscríbete y recibe ofertas</h5>
-                    <form>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Tu correo electrónico" required>
-                        </div>
-                        <div class="form-check mb-3 text-start">
-                            <input class="form-check-input" type="checkbox" id="condiciones" required>
-                            <label class="form-check-label small" for="condiciones">
-                                Acepto las condiciones de privacidad
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Suscribirse</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--El footer. Ya le encontré medio hecho y queda bien. Pero tengo que acostumbrarme a demasiados elementos de medida
-    nuevos y a muchas cosas que no se ni lo que son.-->
-
-    <footer class="bg-dark text-white mt-5 pt-4 pb-2">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
-                    <a href="#" class="text-white me-3"><i class="bi bi-twitter fs-4"></i></a>
-                    <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
-                    <a href="#" class="text-white me-3"><i class="bi bi-youtube fs-4"></i></a>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="#" class="text-white small me-3">Aviso legal</a>
-                    <a href="#" class="text-white small me-3">Política de privacidad</a>
-                    <a href="#" class="text-white small">Galletas que me estoy llevando con BootStrap</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Sencilla con Bootstrap 5</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    .separador-decorativo {
+      height: 10px;
+      background: linear-gradient(90deg, #f8f9fa, #0d6efd, #f8f9fa);
+      margin: 2rem 0;
+    }
+    .imagen-de-carta {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar (fuera del container para que ocupe todo el ancho) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-book"></i> Biblioteca
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Catálogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Mi cuenta</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenedor principal -->
+  <div class="container mt-4 mb-5">
+    <!-- Hero -->
+    <div class="row">
+      <div class="col-12">
+        <div class="p-5 mb-4 bg-light rounded-3">
+          <div class="container-fluid py-5 text-center">
+            <h1 class="display-5 fw-bold">LA GRAN BIBLIOTECA</h1>
+            <p class="mx-4">Encuentra todo tipo de libros y recursos para aprender y disfrutar.</p>
+            <button class="btn btn-primary btn-lg">Saber más</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Separador decorativo -->
+    <div class="separador-decorativo"></div>
+
+    <!-- Sección de tarjetas -->
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center mb-4">Libros Destacados</h2>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow">
+          <img src="https://via.placeholder.com/300x200" class="imagen-de-carta card-img-top" alt="Libro 1">
+          <div class="card-body">
+            <h5 class="card-title">El señor de los anillos</h5>
+            <p class="card-text">Una de las mejores novelas de fantasía de todos los tiempos.</p>
+            <a href="#" class="btn btn-outline-primary">Ver detalles</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow">
+          <img src="https://via.placeholder.com/300x200" class="imagen-de-carta card-img-top" alt="Libro 2">
+          <div class="card-body">
+            <h5 class="card-title">Conan el bárbaro</h5>
+            <p class="card-text">Las aventuras del cimmerio más famoso.</p>
+            <a href="#" class="btn btn-outline-primary">Ver detalles</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow">
+          <img src="https://via.placeholder.com/300x200" class="imagen-de-carta card-img-top" alt="Libro 3">
+          <div class="card-body">
+            <h5 class="card-title">Crónicas de la Dragonlance</h5>
+            <p class="card-text">Saga emblemática de fantasía heroica.</p>
+            <a href="#" class="btn btn-outline-primary">Ver detalles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Separador decorativo -->
+    <div class="separador-decorativo"></div>
+
+    <!-- Formulario -->
+    <div class="row mt-4 mb-4">
+      <div class="col-md-6 mb-3">
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Email</label>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput2" placeholder="Nombre">
+          <label for="floatingInput2">Nombre</label>
+        </div>
+      </div>
+      <div class="col-12 mb-3">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput3" placeholder="Sugerencia">
+          <label for="floatingInput3">Sugerencia</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="d-grid">
+          <button class="btn btn-primary" type="button">Enviar sugerencia</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Separador decorativo -->
+  <div class="separador-decorativo"></div>
+
+  <!-- Footer (fuera del container para que ocupe todo el ancho) -->
+  <footer class="bg-body-tertiary text-white py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-3 text-center text-md-start">
+          <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+          <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a href="#" class="btn btn-outline-dark btn-floating m-1" role="button">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </div>
+        <div class="col-md-6 mb-3 text-center text-md-end">
+          <select class="form-select w-auto d-inline-block">
+            <option selected>Español</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+          </select>
+        </div>
+      </div>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2025 Copyright: <a class="text-white" href="#">La Gran Biblioteca</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
