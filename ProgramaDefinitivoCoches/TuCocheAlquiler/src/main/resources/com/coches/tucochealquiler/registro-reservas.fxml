@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane fx:id="panelReserva" prefHeight="720" prefWidth="1080" stylesheets="@../../../styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.coches.tucochealquiler.ReservaController">
+    <VBox alignment="CENTER" layoutX="0" layoutY="0" prefHeight="720" prefWidth="1080" spacing="24">
+
+
+        <HBox alignment="CENTER" spacing="16">
+            <Label styleClass="label" stylesheets="@../../../styles.css" text="ID Reserva:" />
+            <Label fx:id="lbl_idreserva" styleClass="label" />
+        </HBox>
+
+
+        <HBox alignment="CENTER" spacing="16">
+            <Label styleClass="label" text="Cliente:" />
+            <ComboBox fx:id="cmb_cliente" prefWidth="320" promptText="Selecciona un cliente" styleClass="combo-box" />
+         <Label fx:id="lbl_errorcliente" />
+        </HBox>
+
+
+        <HBox alignment="CENTER" spacing="16">
+            <Label styleClass="label" text="Vehículo:" />
+            <ComboBox fx:id="cmb_vehiculo" prefWidth="320" promptText="Selecciona un vehículo" styleClass="combo-box" />
+         <Label fx:id="lbl_errorvehiculo" />
+        </HBox>
+
+
+        <HBox alignment="CENTER" spacing="16">
+            <Label styleClass="label" text="Parking:" />
+            <ComboBox fx:id="cmb_parking" prefWidth="320" promptText="Selecciona un parking" styleClass="combo-box" />
+         <Label fx:id="lbl_errorparking" />
+        </HBox>
+
+
+        <HBox alignment="CENTER" spacing="16">
+            <Label styleClass="label" text="Fecha inicio:" />
+            <DatePicker fx:id="dpfechaInicio" prefWidth="200" />
+         <Label fx:id="lbl_errorfecha1" />
+        </HBox>
+
+
+        <HBox alignment="CENTER" spacing="16">
+            <Label styleClass="label" text="Fecha fin:" />
+            <DatePicker fx:id="dpfechaFin" prefWidth="200" />
+         <Label fx:id="lbl_errorfecha2" />
+        </HBox>
+
+
+        <HBox alignment="CENTER" spacing="16">
+            <Label styleClass="label" text="Costo total (€):" />
+            <Label fx:id="lbl_costototal" styleClass="label" />
+        </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+               <Label fx:id="lbl_notificacion" styleClass="label" />
+         </children>
+      </HBox>
+
+
+        <HBox alignment="CENTER" spacing="24">
+            <Button fx:id="btnGuardar" onAction="#insertarReserva" styleClass="boton-accion" text="Guardar reserva" />
+         <Button fx:id="btnGuardar1" layoutX="448.0" layoutY="10.0" onAction="#volverPrincipal" styleClass="boton-accion" text="Atras" />
+        </HBox>
+
+    </VBox>
+</Pane>
