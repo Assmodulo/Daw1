@@ -148,7 +148,7 @@ public class RegistroPController implements Initializable {
     }
 
     private boolean validarValorMin(String text) {
-        return (Integer.parseInt(text) < 0 && Integer.parseInt(text) <= 59);
+        return (Integer.parseInt(text) > 0 && Integer.parseInt(text) <= 59);
     }
 
     private void errorhoraap() {
