@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="registro_vehiculos" maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coches.tucochealquiler.VehiculosController">
+    <children>
+        <VBox fx:id="vboxregistrop" maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label alignment="CENTER" text="REGISTRO NUEVO VEHÍCULO" textAlignment="CENTER">
+                            <font>
+                                <Font name="Consolas Bold Italic" size="36.0" />
+                            </font>
+                            <padding>
+                                <Insets left="30.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Label alignment="CENTER" maxWidth="150.0" minHeight="0.0" minWidth="150.0" prefWidth="150.0" stylesheets="@../../../styles.css" text="CODIGO VEHICULO" textAlignment="CENTER">
+                            <font>
+                                <Font name="Consolas" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="lbl_idvehiculo" alignment="CENTER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" stylesheets="@../../../styles.css">
+                            <font>
+                                <Font name="Consolas" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0">
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                            <children>
+                                <Label stylesheets="@../../../styles.css" text="MATRICULA">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tf_matricula" alignment="CENTER">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="TEXT" />
+                                    </cursor>
+                                </TextField>
+                                <Label fx:id="lbl_errormatricula" stylesheets="@../../../styles.css">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" layoutX="300.0" layoutY="10.0" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0">
+                            <children>
+                                <Label stylesheets="@../../../styles.css" text="MARCA">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tf_marca" alignment="CENTER">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="TEXT" />
+                                    </cursor>
+                                </TextField>
+                                <Label fx:id="lbl_errormarca" stylesheets="@../../../styles.css">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0">
+                            <children>
+                                <Label stylesheets="@../../../styles.css" text="MODELO">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tf_modelo" alignment="CENTER">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="TEXT" />
+                                    </cursor>
+                                </TextField>
+                                <Label fx:id="lbl_errormodelo" stylesheets="@../../../styles.css">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" layoutX="300.0" layoutY="10.0" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0">
+                            <children>
+                                <Label stylesheets="@../../../styles.css" text="COLOR">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tf_color" alignment="CENTER">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="TEXT" />
+                                    </cursor>
+                                </TextField>
+                                <Label fx:id="lbl_errorcolor" stylesheets="@../../../styles.css">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0">
+                            <children>
+                                <Label stylesheets="@../../../styles.css" text="TIPO VEHICULO">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                        <ComboBox fx:id="cmb_tipov" prefHeight="40.0" prefWidth="250.0" />
+                                <Label fx:id="lbl_errortipov" stylesheets="@../../../styles.css">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER_RIGHT" layoutX="300.0" layoutY="10.0" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0">
+                            <children>
+                                <Label stylesheets="@../../../styles.css" text="ESTADO VEHICULO">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                        <ComboBox fx:id="cmb_estadov" prefHeight="40.0" prefWidth="250.0" />
+                                <Label fx:id="lbl_errorestado" stylesheets="@../../../styles.css">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="410.0" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <VBox alignment="CENTER" maxWidth="500.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0">
+                            <children>
+                                <Label stylesheets="@../../../styles.css" text="SELECCIONE PARKING ASOCIADO">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox fx:id="cmb_parking" prefHeight="40.0" prefWidth="250.0" />
+                           </children>
+                                </HBox>
+                                <Label fx:id="lbl_errorparking" stylesheets="@../../../styles.css">
+                                    <font>
+                                        <Font name="Consolas" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </HBox.margin>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0">
+                    <children>
+                        <Label fx:id="lbl_notificacion" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../../../styles.css" textAlignment="CENTER">
+                            <font>
+                                <Font name="Consolas" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button fx:id="btn_guardar" mnemonicParsing="false" onAction="#registrarVehiculo" text="Guardar">
+                            <font>
+                                <Font name="Consolas" size="14.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button fx:id="btn_atras" mnemonicParsing="false" text="ATRAS" onAction="#volverPrincipal">
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <font>
+                                <Font name="Consolas" size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</Pane>

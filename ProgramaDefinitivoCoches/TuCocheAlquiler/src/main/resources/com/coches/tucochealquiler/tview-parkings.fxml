@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane fx:id="panel_tview_parkings" maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coches.tucochealquiler.ViewPController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0">
+         <children>
+            <ListView fx:id="listview_parkings" maxHeight="600.0" maxWidth="980.0" minHeight="200.0" minWidth="980.0" prefHeight="600.0" prefWidth="980.0" stylesheets="@../../../styles.css">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </ListView>
+         </children>
+      </VBox>
+   </children>
+</Pane>

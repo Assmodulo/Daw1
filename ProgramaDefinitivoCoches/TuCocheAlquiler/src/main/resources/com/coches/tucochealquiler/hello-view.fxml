@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="panel_principal" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="principal" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coches.tucochealquiler.PrincipalController">
+   <left>
+      <VBox fx:id="panel_lateral" alignment="CENTER_LEFT" prefHeight="720.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+             <Accordion fx:id="menuAccordion" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" styleClass="acordeon" stylesheets="@../../../styles.css">
+                 <panes>
+                     <TitledPane maxHeight="220.0" minHeight="220.0" prefHeight="220.0" styleClass="secprincipal" stylesheets="@../../../styles.css" text="PARKINGS">
+                         <content>
+                             <VBox maxHeight="150.0" minHeight="150.0" prefHeight="150.0" spacing="5" style="-fx-padding: 0 0 0 20;" styleClass="subseccionmenu" stylesheets="@../../../styles.css">
+                                 <Label fx:id="menu_insertarParking" onMouseClicked="#cambiarVentanaRegistroP" styleClass="submenu-label" stylesheets="@../../../styles.css" text="Insertar Parking" />
+                                 <Label fx:id="lview_parkings" onMouseClicked="#cambiarVentanaViewParkings" styleClass="submenu-label" text="Mostrar Parkings">
+                              <font>
+                                 <Font name="Consolas" size="14.0" />
+                              </font></Label>
+                             </VBox>
+                         </content>
+                     <effect>
+                        <Glow />
+                     </effect>
+                     </TitledPane>
+                     <TitledPane styleClass="secprincipal" stylesheets="@../../../styles.css" text="VEHÍCULOS">
+                         <content>
+                             <VBox spacing="5" style="-fx-padding: 0 0 0 20;" styleClass="subseccionmenu" stylesheets="@../../../styles.css">
+                                 <Label onMouseClicked="#cambiarVentanaRegistroV" styleClass="submenu-label" text="Registrar Vehículo" />
+                                 <Label onMouseClicked="#cambiarVentanaInsertarTipo" styleClass="submenu-label" text="Registrar Tipo Vehículo" />
+                             </VBox>
+                         </content>
+                     </TitledPane>
+                     <TitledPane styleClass="secprincipal" stylesheets="@../../../styles.css" text="CLIENTES">
+                         <content>
+                             <VBox maxHeight="200.0" minHeight="200.0" prefHeight="200.0" spacing="5" style="-fx-padding: 0 0 0 20;" styleClass="subseccionmenu" stylesheets="@../../../styles.css">
+                                 <Label onMouseClicked="#cambiarVentanaInsertarClientes" styleClass="submenu-label" text="Registro Clientes" />
+                             </VBox>
+                         </content>
+                     </TitledPane>
+                     <TitledPane styleClass="secprincipal" stylesheets="@../../../styles.css" text="RESERVAS">
+                         <content>
+                             <VBox spacing="5" style="-fx-padding: 0 0 0 20;" styleClass="subseccionmenu">
+                                 <Label onMouseClicked="#cambiarVentanaInsertarReservas" styleClass="submenu-label" text="Registrar Reserva" />
+                             </VBox>
+                         </content>
+                     </TitledPane>
+                 </panes>
+             </Accordion>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml" fx:controller="com.coches.tucochealquiler.DashboardController"
+            prefWidth="1080" prefHeight="720" maxWidth="1080" maxHeight="720" minWidth="1080" minHeight="720">
+    <top>
+        <HBox spacing="40" alignment="CENTER" style="-fx-padding: 15 0 15 0;" prefHeight="80" maxHeight="80" minHeight="80">
+            <VBox alignment="CENTER">
+                <Label text="Parkings" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblTotalParkings" style="-fx-font-size: 22;"/>
+            </VBox>
+            <VBox alignment="CENTER">
+                <Label text="Vehículos" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblTotalVehiculos" style="-fx-font-size: 22;"/>
+            </VBox>
+            <VBox alignment="CENTER">
+                <Label text="Clientes" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblTotalClientes" style="-fx-font-size: 22;"/>
+            </VBox>
+            <VBox alignment="CENTER">
+                <Label text="Reservas activas" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lblReservasActivas" style="-fx-font-size: 22;"/>
+            </VBox>
+        </HBox>
+    </top>
+    <center>
+        <HBox spacing="40" alignment="CENTER" prefHeight="350" maxHeight="350" minHeight="350">
+            <VBox fx:id="tarjetaProductoEstrella" alignment="CENTER" spacing="10" styleClass="dashboard-producto">
+                <Label text="Vehículo más demandado" styleClass="dashboard-producto-title"/>
+                <Label fx:id="lblMatricula" styleClass="dashboard-producto-label"/>
+                <Label fx:id="lblMarcaModelo" styleClass="dashboard-producto-label"/>
+                <Label fx:id="lblVecesAlquilado" styleClass="dashboard-producto-value"/>
+                <Label fx:id="lblIngresos" styleClass="dashboard-producto-value"/>
+            </VBox>
+            <VBox>
+                <Label text="Tipos de vehículos alquilados" style="-fx-font-weight: bold;"/>
+                <PieChart fx:id="pieTiposVehiculos" prefWidth="400" prefHeight="320" maxWidth="400" maxHeight="320" styleClass="dashboard-grafico"/>
+            </VBox>
+        </HBox>
+    </center>
+    <bottom>
+        <VBox style="-fx-padding: 10 0 10 0;">
+            <Label text="Últimas reservas" style="-fx-font-weight: bold;"/>
+            <TableView fx:id="tablaUltimasReservas" prefHeight="230" maxHeight="230" minHeight="230" prefWidth="1080" styleClass="dashboard-tabla">
+                <columns>
+                    <TableColumn fx:id="colCliente" text="Cliente" prefWidth="180"/>
+                    <TableColumn fx:id="colVehiculo" text="Vehículo" prefWidth="120"/>
+                    <TableColumn fx:id="colParking" text="Parking" prefWidth="180"/>
+                    <TableColumn fx:id="colInicio" text="Inicio" prefWidth="180"/>
+                    <TableColumn fx:id="colFin" text="Fin" prefWidth="180"/>
+                    <TableColumn fx:id="colCosto" text="Costo (€)" prefWidth="120"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </bottom>
+</BorderPane>
+
