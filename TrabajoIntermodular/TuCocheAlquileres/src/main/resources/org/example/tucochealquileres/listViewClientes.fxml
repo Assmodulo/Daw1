@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="976.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+  <columns>
+    <TableColumn fx:id="clienteId" prefWidth="75.0" text="cliente_id" />
+    <TableColumn fx:id="nombreCliente" prefWidth="75.0" text="nombre" />
+      <TableColumn fx:id="apellidosClientes" prefWidth="75.0" text="apellidos" />
+      <TableColumn fx:id="dniClientes" prefWidth="75.0" text="dni" />
+      <TableColumn prefWidth="75.0" text="email" />
+      <TableColumn prefWidth="75.0" text="telefono" />
+      <TableColumn prefWidth="75.0" text="dirección" />
+      <TableColumn prefWidth="75.0" text="ciudad" />
+      <TableColumn prefWidth="60.0" text="cp" />
+      <TableColumn prefWidth="90.0" text="fecha_registro" />
+      <TableColumn prefWidth="75.0" text="permiso_valido" />
+      <TableColumn prefWidth="75.0" text="activo" />
+      <TableColumn fx:id="fNacimientoClientes" prefWidth="75.0" text="f_nacimiento" />
+  </columns>
+</TableView>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<TilePane fx:id="menu_parkings" alignment="CENTER" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tucochealquileres.PanelLateralIzquierdoParkingsController">
+    <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="203.0">
+         <children>
+              <Button fx:id="btn_registroParking" mnemonicParsing="false" onAction="#mostrarVentanaRegistro" text="REGISTRO" />
+            <Button fx:id="btn_TablaParkings" layoutX="77.0" layoutY="98.0" mnemonicParsing="false" onAction="#mostrarVentanaTViewParkings" text="TABLA PARKINGS">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+    </children>
+</TilePane>

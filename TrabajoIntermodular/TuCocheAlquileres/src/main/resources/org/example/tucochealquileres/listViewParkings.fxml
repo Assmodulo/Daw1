@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="tview_Parkings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tucochealquileres.TviewParkingsController">
+  <columns>
+    <TableColumn fx:id="columnId" prefWidth="75.0" text="ParkingId" />
+    <TableColumn fx:id="columnNombre" prefWidth="75.0" text="Nombre" />
+      <TableColumn fx:id="columnDireccion" prefWidth="75.0" text="Direccion" />
+      <TableColumn fx:id="columnCiudad" prefWidth="75.0" text="Ciudad" />
+      <TableColumn fx:id="columnCP" prefWidth="75.0" text="CP" />
+      <TableColumn fx:id="columnCapacidad" prefWidth="75.0" text="Capacidad" />
+      <TableColumn fx:id="columnDisponibles" prefWidth="75.0" text="Plazas Disponibles" />
+      <TableColumn fx:id="columnApertura" prefWidth="75.0" text="Hora Apertura" />
+      <TableColumn fx:id="columnCierre" prefWidth="75.0" text="Hora Cierre" />
+      <TableColumn fx:id="columnActivo" prefWidth="75.0" text="Activo" />
+  </columns>
+</TableView>

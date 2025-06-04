@@ -1,0 +1,221 @@
+CREATE TABLE PlazasParking (
+    plaza_id INT PRIMARY KEY AUTO_INCREMENT,
+    parking_id INT NOT NULL,
+    numero_plaza VARCHAR(10) NOT NULL,
+    tipo VARCHAR(30) CHECK (tipo IN ('estandar', 'grande', 'discapacitados', 'electricos')),
+    estado VARCHAR(20) CHECK (estado IN ('libre', 'ocupada', 'reservada', 'mantenimiento')),
+    ubicacion VARCHAR(50),
+    FOREIGN KEY (parking_id) REFERENCES Parkings(parking_id),
+    UNIQUE (parking_id, numero_plaza)
+);
+
+
+-- Tabla para asignar plazas a las reservas
+CREATE TABLE AsignacionesPlazas (
+    asignacion_id INT PRIMARY KEY AUTO_INCREMENT,
+    reserva_id INT NOT NULL,
+    plaza_id INT NOT NULL,
+    fecha_asignacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (reserva_id) REFERENCES Reservas(reserva_id),
+    FOREIGN KEY (plaza_id) REFERENCES PlazasParking(plaza_id),
+    UNIQUE (reserva_id, plaza_id)
+);
+
+-- Tabla para los servicios adicionales disponibles
+CREATE TABLE Servicios (
+    servicio_id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(200),
+    costo DECIMAL(10, 2) NOT NULL,
+    disponible BOOLEAN DEFAULT TRUE
+);
+
+
+
+-- Tabla para los servicios contratados en cada reserva
+
+CREATE TABLE ServiciosReserva (
+    servicio_reserva_id INT PRIMARY KEY AUTO_INCREMENT,
+    reserva_id INT NOT NULL,
+    servicio_id INT NOT NULL,
+    cantidad INT DEFAULT 1,
+    costo_total DECIMAL(10, 2) NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (reserva_id) REFERENCES Reservas(reserva_id),
+    FOREIGN KEY (servicio_id) REFERENCES Servicios(servicio_id)
+);
+
+
+-- Tabla para las facturas
+CREATE TABLE Facturas (
+    factura_id INT PRIMARY KEY AUTO_INCREMENT,
+    reserva_id INT NOT NULL,
+    numero_factura VARCHAR(20) UNIQUE NOT NULL,
+    fecha_emision DATETIME DEFAULT CURRENT_TIMESTAMP,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    iva DECIMAL(10, 2) NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    pagada BOOLEAN DEFAULT FALSE,
+    fecha_pago DATETIME,
+    FOREIGN KEY (reserva_id) REFERENCES Reservas(reserva_id)
+);
+
+
+-- Tabla para los incidentes o daños
+CREATE TABLE Incidentes (
+    incidente_id INT PRIMARY KEY AUTO_INCREMENT,
+    vehiculo_id INT NOT NULL,
+    reserva_id INT,
+    empleado_id INT,
+    fecha_incidente DATETIME NOT NULL,
+    descripcion TEXT NOT NULL,
+    gravedad VARCHAR(20) CHECK (gravedad IN ('leve', 'moderada', 'grave')),
+    costo_reparacion DECIMAL(10, 2),
+    estado VARCHAR(20) CHECK (estado IN ('pendiente', 'en_proceso', 'resuelto')),
+    FOREIGN KEY (vehiculo_id) REFERENCES Vehiculos(vehiculo_id),
+    FOREIGN KEY (reserva_id) REFERENCES Reservas(reserva_id),
+    FOREIGN KEY (empleado_id) REFERENCES Empleados(empleado_id)
+);
+
+-- Tabla para los registros de mantenimiento de vehículos
+CREATE TABLE MantenimientoVehiculos (
+    mantenimiento_id INT PRIMARY KEY AUTO_INCREMENT,
+    vehiculo_id INT NOT NULL,
+    tipo_mantenimiento VARCHAR(100) NOT NULL,
+    fecha_mantenimiento DATE NOT NULL,
+    kilometraje INT NOT NULL,
+    costo DECIMAL(10, 2) NOT NULL,
+    descripcion TEXT,
+    realizado_por VARCHAR(100),
+    FOREIGN KEY (vehiculo_id) REFERENCES Vehiculos(vehiculo_id)
+);
+
+
+-- Tabla para las entradas y salidas de vehículos del parking
+CREATE TABLE MovimientosParking (
+    movimiento_id INT PRIMARY KEY AUTO_INCREMENT,
+    vehiculo_id INT NOT NULL,
+    parking_id INT NOT NULL,
+    plaza_id INT NOT NULL,
+    tipo_movimiento VARCHAR(10) CHECK (tipo_movimiento IN ('entrada', 'salida')),
+    fecha_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    empleado_id INT,
+    FOREIGN KEY (vehiculo_id) REFERENCES Vehiculos(vehiculo_id),
+    FOREIGN KEY (parking_id) REFERENCES Parkings(parking_id),
+    FOREIGN KEY (plaza_id) REFERENCES PlazasParking(plaza_id),
+    FOREIGN KEY (empleado_id) REFERENCES Empleados(empleado_id)
+);
+
+
+-- Tabla para los historiales de pagos
+CREATE TABLE HistorialPagos (
+    pago_id INT PRIMARY KEY AUTO_INCREMENT,
+    factura_id INT NOT NULL,
+    monto DECIMAL(10, 2) NOT NULL,
+    metodo_pago VARCHAR(50) NOT NULL,
+    fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP,
+    referencia_pago VARCHAR(100),
+    FOREIGN KEY (factura_id) REFERENCES Facturas(factura_id)
+);
+
+
+
+
+
+-- Creación de índices para optimizar consultas frecuentes
+CREATE INDEX idx_vehiculos_estado ON Vehiculos(estado);
+CREATE INDEX idx_reservas_estado ON Reservas(estado);
+CREATE INDEX idx_plazas_estado ON PlazasParking(estado);
+CREATE INDEX idx_fecha_reserva ON Reservas(fecha_inicio, fecha_fin);
+CREATE INDEX idx_cliente_reservas ON Reservas(cliente_id);
+CREATE INDEX idx_parking_plazas ON PlazasParking(parking_id);
+CREATE INDEX idx_facturas_pagadas ON Facturas(pagada);
+CREATE INDEX idx_movimientos_fecha ON MovimientosParking(fecha_hora);
+
+-- Crear vistas útiles para el sistema
+
+-- Vista de disponibilidad actual de vehículos
+CREATE VIEW VehiculosDisponibles AS
+SELECT v.vehiculo_id, v.matricula, v.marca, v.modelo, v.color, 
+       tv.nombre AS tipo, p.nombre AS parking_actual, pp.numero_plaza
+FROM Vehiculos v
+JOIN TiposVehiculos tv ON v.tipo_id = tv.tipo_id
+LEFT JOIN MovimientosParking mp ON v.vehiculo_id = mp.vehiculo_id
+LEFT JOIN (
+    SELECT vehiculo_id, MAX(fecha_hora) AS ultima_fecha
+    FROM MovimientosParking
+    GROUP BY vehiculo_id
+) ultimos ON mp.vehiculo_id = ultimos.vehiculo_id AND mp.fecha_hora = ultimos.ultima_fecha
+LEFT JOIN Parkings p ON mp.parking_id = p.parking_id
+LEFT JOIN PlazasParking pp ON mp.plaza_id = pp.plaza_id
+WHERE v.estado = 'disponible';
+
+-- Vista de ocupación actual de parkings
+CREATE VIEW OcupacionParkings AS
+SELECT p.parking_id, p.nombre, p.capacidad_total,
+       COUNT(CASE WHEN pp.estado = 'ocupada' THEN 1 END) AS plazas_ocupadas,
+       COUNT(CASE WHEN pp.estado = 'libre' THEN 1 END) AS plazas_libres,
+       ROUND((COUNT(CASE WHEN pp.estado = 'ocupada' THEN 1 END) / p.capacidad_total) * 100, 2) AS porcentaje_ocupacion
+FROM Parkings p
+LEFT JOIN PlazasParking pp ON p.parking_id = pp.parking_id
+GROUP BY p.parking_id, p.nombre, p.capacidad_total;
+
+-- Vista de reservas activas
+CREATE VIEW ReservasActivas AS
+SELECT r.reserva_id, c.nombre AS nombre_cliente, c.apellidos AS apellidos_cliente, 
+       v.matricula, v.marca, v.modelo, p.nombre AS parking,
+       r.fecha_inicio, r.fecha_fin, r.estado, pp.numero_plaza
+FROM Reservas r
+JOIN Clientes c ON r.cliente_id = c.cliente_id
+JOIN Vehiculos v ON r.vehiculo_id = v.vehiculo_id
+JOIN Parkings p ON r.parking_id = p.parking_id
+LEFT JOIN AsignacionesPlazas ap ON r.reserva_id = ap.reserva_id
+LEFT JOIN PlazasParking pp ON ap.plaza_id = pp.plaza_id
+WHERE r.estado IN ('confirmada', 'en_curso');
+
+-- Vista de facturación mensual
+CREATE VIEW FacturacionMensual AS
+SELECT 
+    YEAR(f.fecha_emision) AS año,
+    MONTH(f.fecha_emision) AS mes,
+    COUNT(f.factura_id) AS numero_facturas,
+    SUM(f.total) AS facturacion_total,
+    SUM(CASE WHEN f.pagada = TRUE THEN f.total ELSE 0 END) AS cobrado,
+    SUM(CASE WHEN f.pagada = FALSE THEN f.total ELSE 0 END) AS pendiente
+FROM Facturas f
+GROUP BY YEAR(f.fecha_emision), MONTH(f.fecha_emision)
+ORDER BY año DESC, mes DESC;
+
+
+
+-- Insertar tipos de vehículos
+INSERT INTO TiposVehiculos (nombre, descripcion, tarifa_adicional) VALUES
+('Compacto', 'Vehículos pequeños de bajo consumo', 0.00),
+('Sedán', 'Vehículos medianos de 4 puertas', 5.00),
+('SUV', 'Vehículos todoterreno y crossover', 10.00),
+('Furgoneta', 'Vehículos para transporte de mercancías o grupos', 15.00),
+('Lujo', 'Vehículos de alta gama', 25.00),
+('Eléctrico', 'Vehículos de propulsión eléctrica', 8.00);
+
+
+-- Insertar datos de ejemplo
+
+
+
+-- Insertar parkings
+INSERT INTO Parkings (nombre, direccion, ciudad, codigo_postal, capacidad_total, plazas_disponibles, hora_apertura, hora_cierre, tarifa_hora) VALUES
+('Parking Central', 'Calle Mayor 15', 'Madrid', '28001', 100, 100, '07:00:00', '23:00:00', 3.50),
+('Parking Norte', 'Avenida del Norte 28', 'Barcelona', '08023', 80, 80, '06:00:00', '22:00:00', 4.00),
+('Parking Sur', 'Plaza del Sur 5', 'Sevilla', '41003', 60, 60, '08:00:00', '21:00:00', 2.80),
+('Parking Este', 'Carrera del Este 43', 'Valencia', '46010', 120, 120, '07:30:00', '23:30:00', 3.20),
+('Parking Oeste', 'Paseo del Oeste 12', 'Bilbao', '48001', 90, 90, '06:30:00', '22:30:00', 3.80);
+
+-- Insertar servicios
+INSERT INTO Servicios (nombre, descripcion, costo) VALUES
+('Lavado básico', 'Lavado exterior del vehículo', 15.00),
+('Lavado completo', 'Lavado exterior e interior del vehículo', 25.00),
+('Cambio de aceite', 'Cambio de aceite y filtro', 40.00),
+('Revisión neumáticos', 'Revisión de presión y estado de neumáticos', 10.00),
+('Carga eléctrica', 'Recarga completa para vehículos eléctricos', 20.00),
+('Seguro adicional', 'Cobertura adicional para el vehículo', 12.00),
+('Asistencia en carretera', 'Servicio de asistencia 24h', 15.00);
